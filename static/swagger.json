@@ -1,0 +1,533 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ZDAI Middleware API",
+    "description": null,
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Ad Copy",
+      "description": "API part related to Ad Copy product"
+    }
+  ],
+  "paths": {
+    "/api/{userId}/ad-copy": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Ad Copy"
+        ],
+        "summary": "Get list of existing chats by the User",
+        "description": null,
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "chats": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Chat"
+                          }
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Ad Copy"
+        ],
+        "summary": "Create Chat for the User",
+        "requestBody": {
+          "content": {
+            "application/schema+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChatRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chat created",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "chat": {
+                          "$ref": "#/components/schemas/Chat"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{userId}/ad-copy/{chatId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "chatId",
+          "in": "path",
+          "description": "Chat ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Ad Copy"
+        ],
+        "summary": "Get information of existing Chat by the User",
+        "description": null,
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "chat": {
+                          "$ref": "#/components/schemas/Chat"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Ad Copy"
+        ],
+        "summary": "Close the Chat",
+        "description": null,
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{userId}/ad-copy/{chatId}/message": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "chatId",
+          "in": "path",
+          "description": "Chat ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Ad Copy"
+        ],
+        "summary": "Get Messages related to the Chat",
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Message"
+                          }
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Ad Copy"
+        ],
+        "summary": "Add Message to the Chat",
+        "requestBody": {
+          "content": {
+            "application/schema+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "$ref": "#/components/schemas/Message"
+                        },
+                        "responseMessageId": {
+                          "$ref": "#/components/schemas/Message/properties/id"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{userId}/ad-copy/{chatId}/message/{messageId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "chatId",
+          "in": "path",
+          "description": "Chat ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "messageId",
+          "in": "path",
+          "description": "Message ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Ad Copy"
+        ],
+        "summary": "Get Message by ID",
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "$ref": "#/components/schemas/Message"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Chat": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "UUID",
+            "examples": [
+              "017fe537-bb13-7c35-b52a-cb5490cce7be"
+            ]
+          },
+          "userId": {
+            "type": "integer"
+          },
+          "productId": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string",
+            "examples": [
+              "Chat title"
+            ]
+          },
+          "messages": {
+            "type": "integer",
+            "format": "int32",
+            "examples": [
+              12
+            ],
+            "description": "Number of messages in the chat",
+            "readOnly": true
+          },
+          "lastMessageId": {
+            "$ref": "#/components/schemas/Message/properties/id"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "examples": [
+              "posted"
+            ],
+            "enum": [
+              "posted",
+              "answered",
+              "closed"
+            ],
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "postedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "DateTime of the latest user message was posted to the chat",
+            "readOnly": true
+          },
+          "answeredAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "DateTime of the latest bot message was posted to the chat",
+            "readOnly": true
+          },
+          "closedAt": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "UUID",
+            "examples": [
+              "017fe537-bb13-7c35-b52a-cb5490cce7be"
+            ]
+          },
+          "chatId": {
+            "$ref": "#/components/schemas/Chat/properties/id"
+          },
+          "author": {
+            "type": "string",
+            "enum": [
+              "user",
+              "bot"
+            ]
+          },
+          "content": {
+            "type": "string",
+            "format": "text"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Response": {
+        "description": "Response container",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "error_not_found",
+              "error_bad_request",
+              "error_internal"
+            ]
+          },
+          "pid": {
+            "type": "string",
+            "description": "Process identifier that is also written to the logs",
+            "examples": [
+              "84373e88of",
+              "84430601Pf",
+              "844a4a58pb"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "description": "Contins response content"
+          },
+          "message": {
+            "type": "string",
+            "description": "Provides limited information about error happened",
+            "examples": [
+              "",
+              "Internal server error",
+              "Request is not valid",
+              "[Resource] not found"
+            ]
+          }
+        }
+      },
+      "CreateChatRequest": {
+        "type": "object",
+        "properties": {
+          "messageContent": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateMessageRequest": {
+        "type": "object",
+        "properties": {
+          "messageContent": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,1 +1,1 @@
-web gunicorn ad-copy:app
+web gunicorn run:app
