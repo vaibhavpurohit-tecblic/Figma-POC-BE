@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime, timezone
 
-from models import Chats
+from models.chats import Chats
 
 
 def get_user_chat_by_user_id(userId):

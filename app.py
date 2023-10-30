@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_swagger_ui import get_swaggerui_blueprint
 
-from config import Config
+from configs.config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)

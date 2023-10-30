@@ -3,8 +3,9 @@ from datetime import datetime, timezone
 
 import openai
 
-from config import Config
-from models import Chats, Messages
+from configs.config import Config
+from models.chats import Chats
+from models.messages import Messages
 
 openai.api_key = Config().API_KEY
 
