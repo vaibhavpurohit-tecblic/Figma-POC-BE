@@ -1,4 +1,6 @@
 <script setup>
+import SidebarTitle from "./SidebarTitle.vue";
+
 defineProps({
   title: String,
 });
@@ -20,6 +22,11 @@ defineProps({
             alt="Sidebar Logo"
             class="w-6 h-6"
           />
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <div class="flex flex-col gap-3">
+          <SidebarTitle :active="true" title="Lorem Ipsum is simple" />
         </div>
       </div>
     </div>
