@@ -33,16 +33,6 @@ defineProps({
         <div
           :class="{
             'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
-              active !== 'video-creator',
-            'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
-              active === 'video-creator',
-          }"
-        >
-          <h5 class="text-primary font-normal text-base">Video Creator</h5>
-        </div>
-        <div
-          :class="{
-            'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
               active !== 'expert-bot',
             'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
               active === 'expert-bot',
@@ -69,6 +59,7 @@ defineProps({
     </div>
     <div
       class="py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px] box-shadow-header-container"
+      v-else
     >
       <h5 class="text-primary font-normal text-base">Login</h5>
     </div>

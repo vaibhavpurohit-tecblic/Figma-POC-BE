@@ -8,7 +8,7 @@ import Header from "../components/General/Header.vue";
     <div
       class="flex-1 home-screen-background-img flex flex-col justify-center relative home-screen-blurred-container"
     >
-      <div class="container mx-auto px-5">
+      <div class="container mx-auto p-5">
         <div class="grid grid-cols-3 gap-7">
           <div class="">
             <h3 class="text-8xl text-primary font-semibold">
