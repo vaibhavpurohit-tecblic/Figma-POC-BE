@@ -106,7 +106,7 @@ import Header from "../components/General/Header.vue";
 
 .home-screen-blurred-container {
   position: absolute;
-  left: 75v w;
+  left: 75vw;
   top: 10vh;
   height: 100vh;
   width: 100vw;
