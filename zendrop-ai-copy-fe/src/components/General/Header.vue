@@ -16,10 +16,9 @@ defineProps({
         class="h-[30px] w-[200px]"
       />
     </div>
-    <div class="flex justify-end items-center gap-5">
+    <div class="flex justify-end items-center gap-5" v-if="auth">
       <div
         class="box-shadow-header-container px-3 py-2 flex gap-2 items-center"
-        v-if="auth"
       >
         <div
           :class="{
@@ -53,7 +52,7 @@ defineProps({
         </div>
       </div>
       <div
-        class="box-shadow-header-container p-1 flex pl-9 gap-3 items-center cursor-pointer"
+        class="box-shadow-header-container p-1 flex pl-9 gap-4 items-center cursor-pointer"
       >
         <p class="text-primary font-normal text-base">John Smith</p>
         <img
@@ -67,6 +66,11 @@ defineProps({
           class="rounded-full h-[45px] w-[45px]"
         />
       </div>
+    </div>
+    <div
+      class="py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px] box-shadow-header-container"
+    >
+      <h5 class="text-primary font-normal text-base">Login</h5>
     </div>
   </div>
 </template>
