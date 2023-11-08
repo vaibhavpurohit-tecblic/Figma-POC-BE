@@ -8,6 +8,8 @@ class Messages(db.Model):
     content = db.Column(db.Text)
     createdAt = db.Column(db.DateTime)
 
+    __tablename__ = 'messages'
 
-with app.app_context():
-    db.create_all()
+
+# with app.app_context():
+#     db.create_all()

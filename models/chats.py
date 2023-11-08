@@ -1,4 +1,5 @@
 from app import app, db
+from sqlalchemy.orm import relationship
 
 
 class Chats(db.Model):
@@ -14,6 +15,7 @@ class Chats(db.Model):
     lastMessageId = db.Column(db.String, db.ForeignKey('messages.id'))
     messages = db.Column(db.Integer)
 
+    __tablename__ = 'chats'
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
