@@ -20,11 +20,13 @@ import Header from "../components/General/Header.vue";
               Your AI Content Generator by Zendrop. Elevate your dropshipping
               game with this powerful tool designed to supercharge your sales.
             </p>
-            <button
-              class="text-base text-primary font-normal border border-primary rounded-[100px] w-full mt-7 py-2"
-            >
-              Create Now
-            </button>
+            <router-link to="/ad-copy">
+              <button
+                class="text-base text-primary font-normal border border-primary rounded-[100px] w-full mt-7 py-2"
+              >
+                Create Now
+              </button>
+            </router-link>
           </div>
           <div class="place-self-center">
             <div class="flex flex-col gap-4 w-full">
