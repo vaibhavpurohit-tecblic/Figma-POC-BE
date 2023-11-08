@@ -6,7 +6,7 @@ import Header from "../components/General/Header.vue";
   <div class="flex flex-col gap-3 min-h-screen overflow-hidden">
     <Header :auth="false" active="" />
     <div
-      class="flex-1 home-screen-background-img flex flex-col justify-center relative"
+      class="flex-1 home-screen-background-img flex flex-col justify-center relative home-screen-blurred-container"
     >
       <div class="container mx-auto px-5">
         <div class="grid grid-cols-3 gap-7">
@@ -93,7 +93,6 @@ import Header from "../components/General/Header.vue";
             />
           </div>
         </div>
-        <div class="home-screen-blurred-container"></div>
       </div>
     </div>
   </div>
@@ -104,7 +103,8 @@ import Header from "../components/General/Header.vue";
   background-image: url(../assets/images/AppBackground.png);
 }
 
-.home-screen-blurred-container {
+.home-screen-blurred-container::after {
+  content: "";
   position: absolute;
   left: 75vw;
   top: 10vh;
