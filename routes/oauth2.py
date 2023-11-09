@@ -40,9 +40,26 @@ def authorize():
     session['oauth_token'] = token
 
     # You can retrieve user data or make API requests here using the access token.
-    print(f"Access Token: {token}")
+    print(f"Access Token: {token['access_token']}")
 
-    return 'You are now logged in.'
+    # API endpoint to fetch user details
+    endpoint = 'https://app.staging.zendrop.com/api/oauth-user'
+
+    # Set up the headers with the Bearer token
+    headers = {'Authorization': f"Bearer {token['access_token']}"}
+
+    # Make the HTTP GET request
+    endpoint_response = requests.get(endpoint, headers=headers)
+    user_data = endpoint_response.json()
+    response = {
+        "status": "ok",
+        "data": {
+            "user": user_data
+        },
+        "message": ""
+    }
+
+    return jsonify(response)
 
 
 # Define a logout route
