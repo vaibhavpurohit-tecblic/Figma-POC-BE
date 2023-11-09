@@ -29,17 +29,18 @@ oauth.register(
 # Define the route for handling OAuth authorization
 @oauth_ai_ad_copy_bp.route('/login', methods=['GET'])
 def login():
-    print("HAHAHAA")
-    return oauth.zendrop.authorize_redirect(redirect_uri=url_for('authorized', _external=True))
+    # return oauth.zendrop.authorize_redirect(redirect_uri=url_for('oauth-ai-ad-copy.authorize', _external=True))
+    return oauth.zendrop.authorize_redirect()
 
 
 # Define the callback route for handling the OAuth response
-@oauth_ai_ad_copy_bp.route('/authorized', methods=["GET"])
-def authorized():
+@oauth_ai_ad_copy_bp.route('/authorize', methods=["GET"])
+def authorize():
     token = oauth.zendrop.authorize_access_token()
     session['oauth_token'] = token
 
     # You can retrieve user data or make API requests here using the access token.
+    print(f"Access Token: {token}")
 
     return 'You are now logged in.'
 
