@@ -2,7 +2,7 @@ import uuid
 
 from flask import Blueprint, request, jsonify
 
-from app import db
+from models.users import db
 from controllers.chat import get_user_chat_by_user_id, create_user_chat_by_user_id, get_user_chat_by_chat_id, \
     delete_user_chat_by_chat_id
 

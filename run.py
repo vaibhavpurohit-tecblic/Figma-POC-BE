@@ -9,9 +9,6 @@ app.register_blueprint(oauth2.oauth_ai_ad_copy_bp)
 app.register_blueprint(products.products_bp)
 
 
-@app.route('/', methods=['GET'])
-def index():
-    return redirect(app.config['SWAGGER_URL'])
 
 
 if __name__ == "__main__":

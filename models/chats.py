@@ -1,4 +1,4 @@
-from app import app, db
+from zdai_app import  db
 from sqlalchemy.orm import relationship
 
 

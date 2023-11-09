@@ -1,32 +1,21 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_swagger_ui import get_swaggerui_blueprint
-from flask_migrate import Migrate
+from flask import redirect
 
-from configs.config import Config
+from zdai_app import create_app
+app = create_app()
 
-app = Flask(__name__)
-app.config.from_object(Config)
+from routes import chat, message, oauth2
 
-swaggerui_blueprint = get_swaggerui_blueprint(
-    app.config['SWAGGER_URL'],
-    app.config['API_URL'],
-    config={'app_name': "ZDAI Middleware API"}
-)
+app.register_blueprint(chat.chat_bp)
+app.register_blueprint(message.message_bp)
+app.register_blueprint(oauth2.oauth_ai_ad_copy_bp)
 
-db = SQLAlchemy(app)
-# db.init_app(app)
-migrate = Migrate(app, db)
 
-with app.app_context():
-    try:
-        db.create_all()
-    except Exception as exception:
-        print("Got the following exception when attempting db.create_all() in __init__.py: " + str(exception))
-    finally:
-        print("db.create_all() in app.py was successfull - no exceptions were raised")
-    from models.chats import Chats
-    from models.messages import Messages
-    from models.users import Users
+    
+@app.route('/', methods=['GET'])
+def index():
+    return redirect(app.config['SWAGGER_URL'])
 
-app.register_blueprint(swaggerui_blueprint)
+# db = app.db
+# if __name__ == '__main__':
+#     print("hehe")
+#     app.run(debug=True)
