@@ -24,7 +24,8 @@ defineProps({
           />
         </div>
       </div>
-      <div class="flex flex-col">
+      <div class="flex flex-col gap-3">
+        <p class="text-sm text-gray-500 font-normal">Today</p>
         <div class="flex flex-col gap-3">
           <SidebarTitle :active="true" title="Lorem Ipsum is simple" />
         </div>
@@ -34,7 +35,7 @@ defineProps({
 </template>
 
 <style scoped>
-.sidebar-container {
+  .sidebar-container {
   border-radius: 21.836px;
   background: #fff;
   box-shadow: 0px 0px 8.73458px 0px rgba(110, 94, 202, 0.15);
