@@ -3,8 +3,10 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from flask_migrate import Migrate
 from app.extensions import db
 from config import Config
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config.from_object(Config)
 
 swaggerui_blueprint = get_swaggerui_blueprint(
