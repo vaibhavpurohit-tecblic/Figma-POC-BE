@@ -1,5 +1,4 @@
-from zdai_app import  db
-from sqlalchemy.orm import relationship
+from app.extensions import db
 
 
 class Chats(db.Model):
@@ -17,5 +16,5 @@ class Chats(db.Model):
 
     __tablename__ = 'chats'
 
-# with app.app_context():
-#     db.create_all()
+    def __repr__(self):
+        return f'<Chat {self.title}>'

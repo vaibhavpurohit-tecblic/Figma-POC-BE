@@ -1,4 +1,4 @@
-from zdai_app import db
+from app.extensions import db
 
 
 class Users(db.Model):
@@ -7,6 +7,5 @@ class Users(db.Model):
 
     __tablename__ = 'users'
 
-
-# with app.app_context():
-#     db.create_all()
+    def __repr__(self):
+        return f'<User {self.username}>'

@@ -2,15 +2,14 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
 
+
 class Config:
     if os.getenv("ENV") == "dev":
         print("Running dev database")
-        SQLALCHEMY_DATABASE_URI = 'postgresql://ad_copy:ad_copy@localhost/ad_copy'
-        # SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite'
+        SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost/ad_copy'
     else:
         print("Running Prod database")
         SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
-        print("iam here else",SQLALCHEMY_DATABASE_URI)
 
     if SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace("postgres://", "postgresql://", 1)

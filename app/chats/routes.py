@@ -1,15 +1,13 @@
 import uuid
+from flask import request, jsonify
 
-from flask import Blueprint, request, jsonify
-
-from models.users import db
-from controllers.chat import get_user_chat_by_user_id, create_user_chat_by_user_id, get_user_chat_by_chat_id, \
+from app.extensions import db
+from app.utils import get_user_chat_by_user_id, create_user_chat_by_user_id, get_user_chat_by_chat_id, \
     delete_user_chat_by_chat_id
+from app.chats import bp
 
-chat_bp = Blueprint('chat', __name__)
 
-
-@chat_bp.route('/api/<int:userId>/ad-copy', methods=['GET', 'POST'])
+@bp.route('/api/<int:userId>/ad-copy', methods=['GET', 'POST'])
 def method_user_chat_by_user_id(userId):
     if request.method == "GET":
         chats = get_user_chat_by_user_id(userId)
@@ -40,7 +38,7 @@ def method_user_chat_by_user_id(userId):
         return jsonify(response)
 
 
-@chat_bp.route('/api/<int:userId>/ad-copy/<chatId>', methods=['GET', 'DELETE'])
+@bp.route('/api/<int:userId>/ad-copy/<chatId>', methods=['GET', 'DELETE'])
 def method_user_chat_by_chat_id(userId, chatId):
     if request.method == "GET":
         chat = get_user_chat_by_chat_id(userId, chatId)

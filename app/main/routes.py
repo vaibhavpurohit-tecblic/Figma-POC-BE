@@ -1,14 +1,19 @@
-from flask import Flask, redirect, url_for, session, request, Blueprint, jsonify
+from flask import redirect, session, jsonify, request, Blueprint
+from app.main import bp
 from authlib.integrations.flask_client import OAuth
-from app import app
 import requests
-
-
-oauth_ai_ad_copy_bp = Blueprint('oauth-ai-ad-copy', __name__)
+from app import app
 
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 
 oauth = OAuth(app)
+
+
+@bp.route('/', methods=['GET'])
+def index():
+    return redirect(app.config['SWAGGER_URL'])
+
+
 # Define the OAuth provider configuration
 oauth.register(
     name='zendrop',
@@ -27,14 +32,14 @@ oauth.register(
 
 
 # Define the route for handling OAuth authorization
-@oauth_ai_ad_copy_bp.route('/login', methods=['GET'])
+@bp.route('/login', methods=['GET'])
 def login():
-    # return oauth.zendrop.authorize_redirect(redirect_uri=url_for('oauth-ai-ad-copy.authorize', _external=True))
+    # return oauth.zendrop.authorize_redirect(redirect_uri=url_for('bp.authorize', _external=True))
     return oauth.zendrop.authorize_redirect()
 
 
 # Define the callback route for handling the OAuth response
-@oauth_ai_ad_copy_bp.route('/authorize', methods=["GET"])
+@bp.route('/authorize', methods=["GET"])
 def authorize():
     token = oauth.zendrop.authorize_access_token()
     session['oauth_token'] = token
@@ -63,11 +68,43 @@ def authorize():
 
 
 # Define a logout route
-@oauth_ai_ad_copy_bp.route('/logout', methods=['GET'])
+@bp.route('/logout', methods=['GET'])
 def logout():
     session.pop('oauth_token', None)
     return 'You are now logged out.'
 
 
-if __name__ == '__main__':
-    app.run()
+trending_product_stub = [
+    {
+        "id": 1,
+        "product_name": "Zebronic Motherboard",
+        "supplier": "TechZone Electronics",
+        "product_cost": 89.99
+    },
+    {
+        "id": 2,
+        "product_name": "Diwali Candles",
+        "supplier": "Festive Delights",
+        "product_cost": 12.99
+    },
+    {
+        "id": 3,
+        "product_name": "POCO X5 Pro 5G",
+        "supplier": "Gadget Haven",
+        "product_cost": 299.99
+    }
+]
+
+
+@bp.route('/api/trending_products', methods=['GET', 'POST'])
+def trending_products():
+    if request.method == "GET":
+        response = {
+            "status": "ok",
+            "data": {
+                "trending_product": trending_product_stub
+            },
+            "message": ""
+        }
+
+        return jsonify(response)

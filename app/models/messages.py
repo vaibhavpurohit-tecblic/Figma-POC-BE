@@ -1,4 +1,4 @@
-from zdai_app import  db
+from app.extensions import db
 
 
 class Messages(db.Model):
@@ -10,6 +10,5 @@ class Messages(db.Model):
 
     __tablename__ = 'messages'
 
-
-# with app.app_context():
-#     db.create_all()
+    def __repr__(self):
+        return f'<Message - {self.author}>'
