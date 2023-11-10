@@ -1,7 +1,18 @@
 <script setup>
+import { onMounted } from "vue";
+import ProductListApiFunction from "../../api/ProductApis/index.js";
+
 defineProps({
   active: Boolean,
 });
+
+async function ProductListFunction() {
+  const result = await ProductListApiFunction();
+
+  console.log(result, "hello");
+}
+
+onMounted(() => ProductListFunction());
 </script>
 
 <template>

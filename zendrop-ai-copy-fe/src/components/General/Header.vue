@@ -1,8 +1,16 @@
 <script setup>
+import LoginApiFunction from "../../api/authApis/index.js";
+
 defineProps({
   auth: Boolean,
   active: String,
 });
+
+async function LoginFunction() {
+  const result = await LoginApiFunction();
+
+  console.log(result, "hello");
+}
 </script>
 
 <template>
@@ -59,6 +67,7 @@ defineProps({
     </div>
     <div
       class="py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px] box-shadow-header-container"
+      @click="LoginFunction"
       v-else
     >
       <h5 class="text-primary font-normal text-base">Login</h5>
