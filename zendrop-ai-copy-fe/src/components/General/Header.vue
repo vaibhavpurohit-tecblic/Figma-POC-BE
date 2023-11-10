@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import LoginApiFunction from "../../api/authApis/index.js";
 
 defineProps({
@@ -6,11 +7,38 @@ defineProps({
   active: String,
 });
 
-async function LoginFunction() {
-  const result = await LoginApiFunction();
+const isDropdown = ref(false);
 
+function DropdownTrigger() {
+  if (isDropdown.value) {
+    isDropdown.value = false;
+  } else {
+    isDropdown.value = true;
+  }
+}
+
+const isLoggedIn = ref(false);
+
+function IfUserLoggedInFunction() {
+  if (localStorage.getItem("zdai_token")) {
+    isLoggedIn.value = true;
+  } else {
+    isLoggedIn.value = true;
+  }
+}
+
+function LogoutFunction() {
+  isLoggedIn.value = false;
+  localStorage.removeItem("zdai_token");
+}
+
+async function LoginFunction() {
+  IfUserLoggedInFunction();
+  const result = await LoginApiFunction();
   console.log(result, "hello");
 }
+
+onMounted(() => IfUserLoggedInFunction());
 </script>
 
 <template>
@@ -24,20 +52,22 @@ async function LoginFunction() {
         class="h-[30px] w-[200px]"
       />
     </div>
-    <div class="flex justify-end items-center gap-5" v-if="auth">
+    <div class="flex justify-end items-center gap-5" v-if="isLoggedIn">
       <div
         class="box-shadow-header-container px-3 py-2 flex gap-2 items-center"
       >
-        <div
-          :class="{
-            'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
-              active !== 'ad-copy',
-            'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
-              active === 'ad-copy',
-          }"
-        >
-          <h5 class="text-primary font-normal text-base">Ad Copy</h5>
-        </div>
+        <router-link to="/ad-copy">
+          <div
+            :class="{
+              'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
+                active !== 'ad-copy',
+              'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
+                active === 'ad-copy',
+            }"
+          >
+            <h5 class="text-primary font-normal text-base">Ad Copy</h5>
+          </div>
+        </router-link>
         <div
           :class="{
             'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
@@ -49,20 +79,42 @@ async function LoginFunction() {
           <h5 class="text-primary font-normal text-base">Expert Bot</h5>
         </div>
       </div>
-      <div
-        class="box-shadow-header-container p-1 flex pl-9 gap-4 items-center cursor-pointer"
-      >
-        <p class="text-primary font-normal text-base">John Smith</p>
-        <img
-          src="../../assets/logos/downArrow.svg"
-          alt="Profile Pic"
-          class="rounded-full h-[15px] w-[15px]"
-        />
-        <img
-          src="../../assets/images/ProfilePhoto.png"
-          alt="Profile Pic"
-          class="rounded-full h-[45px] w-[45px]"
-        />
+      <div class="relative">
+        <div
+          class="box-shadow-header-container p-1 flex pl-9 gap-4 items-center cursor-pointer"
+          @click="DropdownTrigger"
+        >
+          <p class="text-primary font-normal text-base">John Smith</p>
+          <img
+            src="../../assets/logos/downArrow.svg"
+            alt="Profile Pic"
+            class="rounded-full h-[15px] w-[15px]"
+          />
+          <img
+            src="../../assets/images/ProfilePhoto.png"
+            alt="Profile Pic"
+            class="rounded-full h-[45px] w-[45px]"
+          />
+        </div>
+        <div class="absolute" v-if="isDropdown">
+          <div class="flex justify-center w-[220px]">
+            <div
+              class="flex flex-col bg-white w-[150px] rounded-b-xl shadow-lg"
+            >
+              <h5
+                class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary"
+              >
+                Settings
+              </h5>
+              <h5
+                class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary rounded-b-xl"
+                @click="LogoutFunction"
+              >
+                Logout
+              </h5>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
