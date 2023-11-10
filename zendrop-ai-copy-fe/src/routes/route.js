@@ -5,6 +5,7 @@ import AdCopy from "../view/AdCopy.vue";
 
 const routes = [
   { path: "/", component: Home },
+  { path: "/authorize", component: Home },
   { path: "/ad-copy", component: AdCopy },
 ];
 

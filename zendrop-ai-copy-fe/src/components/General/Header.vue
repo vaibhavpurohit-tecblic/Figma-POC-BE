@@ -23,13 +23,15 @@ function IfUserLoggedInFunction() {
   if (localStorage.getItem("zdai_token")) {
     isLoggedIn.value = true;
   } else {
-    isLoggedIn.value = true;
+    // isLoggedIn.value = true;
   }
 }
 
 function LogoutFunction() {
   isLoggedIn.value = false;
+  isDropdown.value = false;
   localStorage.removeItem("zdai_token");
+  window.location.href = "/";
 }
 
 async function LoginFunction() {
