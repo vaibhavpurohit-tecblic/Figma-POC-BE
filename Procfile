@@ -1,2 +1,2 @@
-web: gunicorn -w 4 app:app
-start: npm run start
+start: gunicorn -w 4 app:app
+web: npm install && npm run start
