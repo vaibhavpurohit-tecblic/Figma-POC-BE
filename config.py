@@ -1,6 +1,9 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Config:
