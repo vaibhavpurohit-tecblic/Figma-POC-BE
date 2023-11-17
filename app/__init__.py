@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from app.extensions import db
 from config import Config
 from flask_cors import CORS
+from whitenoise import WhiteNoise
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -39,6 +40,9 @@ with app.app_context():
     db.create_all()
 
 app.register_blueprint(swaggerui_blueprint)
+
+# add whitenoise
+app.wsgi_app = WhiteNoise(app.wsgi_app, root="app/static/")
 
 
 @app.route('/test/')
