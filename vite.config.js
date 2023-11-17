@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.ENV === "prod" ? "https://zdai-ad-copy-745906f359ba.herokuapp.com/" : "/",
   plugins: [vue()],
   server: {
     proxy: {
