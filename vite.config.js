@@ -11,7 +11,7 @@ export default defineConfig({
     port: isProduction ? 5173 : 4173,
     proxy: {
       "/api": {
-        target: isProduction ? herokuDomain : "http://localhost:5000",
+        target: isProduction ? `${herokuDomain}:5000` : "http://localhost:5000",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
