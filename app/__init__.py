@@ -5,6 +5,7 @@ from app.extensions import db
 from config import Config
 from flask_cors import CORS
 from whitenoise import WhiteNoise
+import os
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -52,3 +53,8 @@ def test_page():
 
 def create_app():
     return app
+
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))
+    app.run(host='0.0.0.0', port=port)
