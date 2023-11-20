@@ -1,10 +1,21 @@
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import ProductListApiFunction from "../../api/ProductApis/index.js";
 
 defineProps({
   active: Boolean,
 });
+
+const isDropdown = ref(false);
+const dropDownList = ref([]);
+
+function DropdownTrigger() {
+  if (isDropdown.value) {
+    isDropdown.value = false;
+  } else {
+    isDropdown.value = true;
+  }
+}
 
 async function ProductListFunction() {
   const result = await ProductListApiFunction();
@@ -17,20 +28,51 @@ onMounted(() => ProductListFunction());
 
 <template>
   <p class="text-gray-400 font-normal text-sm">Select Product</p>
-  <div
-    :class="{
-      'border border-secondary py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
-        active,
-      'border border-gray-500 py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
-        !active,
-    }"
-  >
-    <p class="flex-1 text-primary font-normal text-sm">Select your Product</p>
-    <img
-      src="../../assets/logos/downArrow.svg"
-      alt="Profile Pic"
-      class="rounded-full h-[15px] w-[15px]"
-    />
+  <div class="relative">
+    <div
+      :class="{
+        'border border-secondary py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
+          active,
+        'border border-gray-500 py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
+          !active,
+      }"
+      @click="DropdownTrigger"
+    >
+      <p class="flex-1 text-primary font-normal text-sm">Select your Product</p>
+      <img
+        src="../../assets/logos/downArrow.svg"
+        alt="Profile Pic"
+        class="rounded-full h-[15px] w-[15px]"
+      />
+    </div>
+    <div class="absolute z-10 w-full" v-if="isDropdown">
+      <div
+        class="border border-secondary rounded-xl py-3 px-6 bg-white"
+        v-if="dropDownList.length > 0"
+      >
+        <h5 class="text-primary font-medium">No Products Found</h5>
+      </div>
+      <div
+        class="border border-secondary rounded-xl py-2 bg-white max-h-28 overflow-y-auto"
+        v-else
+      >
+        <h5
+          class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
+        >
+          Product 1
+        </h5>
+        <h5
+          class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
+        >
+          Product 2
+        </h5>
+        <h5
+          class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
+        >
+          Product 3
+        </h5>
+      </div>
+    </div>
   </div>
   <button
     :class="{
