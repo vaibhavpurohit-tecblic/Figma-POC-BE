@@ -26,14 +26,14 @@ export default ({ mode }) => {
   console.log(process.env.DYNO?.split("run.")?.[1] || "5000");
 
   return defineConfig({
-    base: isProduction ? `${herokuDomain}/` : "/",
+    base: "/",
     plugins: [vue()],
     server: {
       port: isProduction ? process.env.PORT || 5173 : 4173,
       proxy: {
         "/api": {
           target: isProduction
-            ? "http://0.0.0.0:" + process.env.DYNO?.split("run.")?.[1] || "5000"
+            ? "http://0.0.0.0:5000"
             : "http://localhost:5000",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
