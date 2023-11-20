@@ -14,7 +14,7 @@
     <div class="flex-1">
       <textarea
         rows="3"
-        class="bg-transparent w-full focus-visible:outline-none text-primary text-base font-normal"
+        class="bg-transparent w-full focus-visible:outline-none text-primary text-base font-normal resize-none"
       />
     </div>
     <div class="self-end">
