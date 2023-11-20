@@ -22,6 +22,9 @@ export default ({ mode }) => {
   const isProduction = process.env.ENV !== "prod";
   const herokuDomain = "https://zdai-ad-copy-745906f359ba.herokuapp.com";
 
+  // console.log(process.env);
+  // console.log(process.env.DYNO?.split("run.")?.[1] || "5000");
+
   return defineConfig({
     base: "/",
     plugins: [vue()],
