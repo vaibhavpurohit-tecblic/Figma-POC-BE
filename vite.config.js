@@ -26,7 +26,7 @@ export default ({ mode }) => {
     base: isProduction ? `${herokuDomain}/` : "/",
     plugins: [vue()],
     server: {
-      port: isProduction ? 5173 : 4173,
+      port: isProduction ? process.env.PORT || 5173 : 4173,
       proxy: {
         "/api": {
           target: "http://localhost:5000",
