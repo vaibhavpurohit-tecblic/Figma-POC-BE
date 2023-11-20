@@ -8,6 +8,7 @@ defineProps({
 
 const isDropdown = ref(false);
 const dropDownList = ref([]);
+const dropDownValue = ref("");
 
 function DropdownTrigger() {
   if (isDropdown.value) {
@@ -21,6 +22,11 @@ async function ProductListFunction() {
   const result = await ProductListApiFunction();
 
   dropDownList.value = result;
+}
+
+function ProductSelectionFunction(product) {
+  dropDownValue.value = product;
+  isDropdown.value = false;
 }
 
 onMounted(() => ProductListFunction());
@@ -38,7 +44,13 @@ onMounted(() => ProductListFunction());
       }"
       @click="DropdownTrigger"
     >
-      <p class="flex-1 text-primary font-normal text-sm">Select your Product</p>
+      <p
+        class="flex-1 text-primary font-normal text-sm"
+        v-if="dropDownValue.length === 0"
+      >
+        Select your Product
+      </p>
+      <p class="flex-1 text-primary font-normal text-sm">{{ dropDownValue }}</p>
       <img
         src="../../assets/logos/downArrow.svg"
         alt="Profile Pic"
@@ -59,6 +71,7 @@ onMounted(() => ProductListFunction());
         <h5
           class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
           v-for="item in dropDownList"
+          @click="() => ProductSelectionFunction(item.product_name)"
         >
           {{ item.product_name }}
         </h5>
