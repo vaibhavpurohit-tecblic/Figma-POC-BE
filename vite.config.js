@@ -32,7 +32,7 @@ export default ({ mode }) => {
       port: isProduction ? process.env.PORT || 5173 : 4173,
       proxy: {
         "/api": {
-          target: isProduction ? "https://zdai-ad-copy-745906f359ba.herokuapp.com" : "http://localhost:5000",
+          target: "http://localhost:5000",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
