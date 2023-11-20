@@ -19,7 +19,7 @@ import vue from "@vitejs/plugin-vue";
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
 
-  const isProduction = process.env.ENV !== "prod";
+  const isProduction = process.env.ENV === "prod";
   const herokuDomain = "https://zdai-ad-copy-745906f359ba.herokuapp.com";
 
   // console.log(process.env);
