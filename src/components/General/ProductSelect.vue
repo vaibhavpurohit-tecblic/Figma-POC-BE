@@ -20,7 +20,7 @@ function DropdownTrigger() {
 async function ProductListFunction() {
   const result = await ProductListApiFunction();
 
-  console.log(result, "hello");
+  dropDownList.value = result;
 }
 
 onMounted(() => ProductListFunction());
@@ -48,7 +48,7 @@ onMounted(() => ProductListFunction());
     <div class="absolute z-10 w-full" v-if="isDropdown">
       <div
         class="border border-secondary rounded-xl py-3 px-6 bg-white"
-        v-if="dropDownList.length > 0"
+        v-if="dropDownList.length === 0"
       >
         <h5 class="text-primary font-medium">No Products Found</h5>
       </div>
@@ -58,18 +58,9 @@ onMounted(() => ProductListFunction());
       >
         <h5
           class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
+          v-for="item in dropDownList"
         >
-          Product 1
-        </h5>
-        <h5
-          class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
-        >
-          Product 2
-        </h5>
-        <h5
-          class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
-        >
-          Product 3
+          {{ item.product_name }}
         </h5>
       </div>
     </div>
