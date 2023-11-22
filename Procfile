@@ -1,3 +1,2 @@
-build: npm install
-start: flask run -h localhost -p $PORT
-web: npm run start
+start: npm run start
+web: gunicorn -w 4 -b 0.0.0.0:5000 app:app

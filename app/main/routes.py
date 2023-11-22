@@ -9,7 +9,7 @@ app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 oauth = OAuth(app)
 
 
-@bp.route('/', methods=['GET'])
+@bp.route('/docs', methods=['GET'])
 def index():
     return redirect(app.config['SWAGGER_URL'])
 
