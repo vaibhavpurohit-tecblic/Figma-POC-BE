@@ -35,7 +35,7 @@ export default ({ mode }) => {
       // port: isProduction ? process.env.PORT || 5173 : 4173,
       proxy: {
         "/api": {
-          target: "http://localhost:5000",
+          target: isProduction ? herokuDomain : "http://localhost:5000",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
