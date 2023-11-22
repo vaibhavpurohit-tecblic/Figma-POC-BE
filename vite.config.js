@@ -32,7 +32,7 @@ export default ({ mode }) => {
       assetsDir: "assets",
     },
     server: {
-      port: isProduction ? process.env.PORT || 5173 : 4173,
+      // port: isProduction ? process.env.PORT || 5173 : 4173,
       proxy: {
         "/api": {
           target: "http://localhost:5000",
