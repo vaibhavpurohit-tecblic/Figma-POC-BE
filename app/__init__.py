@@ -7,7 +7,8 @@ from whitenoise import WhiteNoise
 import os
 
 app = Flask(__name__)
-cors = CORS(app)
+# cors = CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*", "supports_credentials": True}})
 app.config.from_object(Config)
 
 swaggerui_blueprint = get_swaggerui_blueprint(

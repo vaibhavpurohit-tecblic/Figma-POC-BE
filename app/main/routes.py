@@ -41,6 +41,14 @@ def login():
 # Define the callback route for handling the OAuth response
 @bp.route('/authorize', methods=["GET"])
 def authorize():
+    # Handle the redirect and set appropriate CORS headers
+    response = redirect('https://zdai-ad-copy-745906f359ba.herokuapp.com/authorize')
+    # Set CORS headers for the redirect endpoint
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+
+
     token = oauth.zendrop.authorize_access_token()
     session['oauth_token'] = token
 
