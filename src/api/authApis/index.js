@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default async function LoginApiFunction() {
   const result = await axios
-    .get("/api/login")
+    .get("/login")
     .then((res) => {
       // const additionalHeaderValue = response.headers["additional-header"];
       // console.log("Additional Header Value:", additionalHeaderValue);
