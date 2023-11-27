@@ -23,16 +23,16 @@ db.init_app(app)
 
 # Register blueprints here
 from app.main import bp as main_bp
-
 app.register_blueprint(main_bp)
 
 from app.chats import bp as chat_bp
-
 app.register_blueprint(chat_bp)
 
 from app.messages import bp as message_bp
-
 app.register_blueprint(message_bp)
+
+from app.products import bp as product_bp
+app.register_blueprint(product_bp)
 
 from app.models.users import Users
 

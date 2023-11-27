@@ -3,6 +3,7 @@ from app.main import bp
 from authlib.integrations.flask_client import OAuth
 import requests
 from app import app
+from config import Config
 
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 
@@ -27,7 +28,8 @@ oauth.register(
     access_token_params_callback=None,
     refresh_token_url='https://account.staging.zendrop.com/oauth-server/token/refresh',
     redirect_uri='https://zdai-ad-copy-745906f359ba.herokuapp.com/authorize',
-    client_kwargs={'scope': 'read-user zendrop-academy'}
+    # client_kwargs={'scope': 'read-user zendrop-academy'}
+    client_kwargs={'scope': 'read-user zendrop-ai'}
 )
 
 
@@ -41,25 +43,25 @@ def login():
 # Define the callback route for handling the OAuth response
 @bp.route('/authorize', methods=["GET"])
 def authorize():
-    # Handle the redirect and set appropriate CORS headers
-    response = redirect('https://zdai-ad-copy-745906f359ba.herokuapp.com/authorize')
-    # Set CORS headers for the redirect endpoint
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-
+    # # Handle the redirect and set appropriate CORS headers
+    # response = redirect('https://zdai-ad-copy-745906f359ba.herokuapp.com/authorize')
+    # # Set CORS headers for the redirect endpoint
+    # response.headers['Access-Control-Allow-Origin'] = '*'
+    # response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
+    # response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
     token = oauth.zendrop.authorize_access_token()
     session['oauth_token'] = token
+    Config.API_ENDPOINT_ACCESS_TOKEN = token['access_token']
 
     # You can retrieve user data or make API requests here using the access token.
-    print(f"Access Token: {token['access_token']}")
+    print(f"Access Token: {Config.API_ENDPOINT_ACCESS_TOKEN}")
 
     # API endpoint to fetch user details
     endpoint = 'https://app.staging.zendrop.com/api/oauth-user'
 
     # Set up the headers with the Bearer token
-    headers = {'Authorization': f"Bearer {token['access_token']}"}
+    headers = {'Authorization': f"Bearer {Config.API_ENDPOINT_ACCESS_TOKEN}"}
 
     # Make the HTTP GET request
     endpoint_response = requests.get(endpoint, headers=headers)
