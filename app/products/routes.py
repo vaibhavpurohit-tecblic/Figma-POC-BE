@@ -1,4 +1,4 @@
-from flask import redirect, session, jsonify, request, Blueprint
+from flask import jsonify, request
 from app.products import bp
 import requests
 from config import Config
@@ -16,7 +16,6 @@ def import_list_products():
 
         # Make the HTTP GET request
         endpoint_response = requests.get(endpoint, headers=headers)
-        print("I am response LIST LIST ----->", endpoint_response)
         products_data = endpoint_response.json()
         response = {
             "products_data": products_data,
