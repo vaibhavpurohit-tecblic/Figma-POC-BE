@@ -36,8 +36,16 @@ function LogoutFunction() {
 
 async function LoginFunction() {
   IfUserLoggedInFunction();
-  const result = await LoginApiFunction();
-  console.log(result, "hello");
+  // const result = await LoginApiFunction();
+
+  const herokuDomain = "https://zdai-ad-copy-745906f359ba.herokuapp.com";
+
+  // Use herokuDomain in production, otherwise use localhost
+  const redirectURL = `${herokuDomain}/login`;
+  // const redirectURL = 'http://127.0.0.1:5000/login';
+
+  console.log("HAHAHAHHAHAHAH ---->", redirectURL)
+  window.location.href = redirectURL;
 }
 
 onMounted(() => IfUserLoggedInFunction());

@@ -1,8 +1,9 @@
-from flask import redirect, session, jsonify, request, Blueprint
+from flask import redirect, session, jsonify, request, Blueprint, url_for
 from app.main import bp
 from authlib.integrations.flask_client import OAuth
 import requests
 from app import app
+from config import Config
 
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 
@@ -27,14 +28,14 @@ oauth.register(
     access_token_params_callback=None,
     refresh_token_url='https://account.staging.zendrop.com/oauth-server/token/refresh',
     redirect_uri='https://zdai-ad-copy-745906f359ba.herokuapp.com/authorize',
-    client_kwargs={'scope': 'read-user zendrop-academy'}
+    client_kwargs={'scope': 'read-user zendrop-ai'}
 )
 
 
 # Define the route for handling OAuth authorization
 @bp.route('/login', methods=['GET'])
 def login():
-    # return oauth.zendrop.authorize_redirect(redirect_uri=url_for('bp.authorize', _external=True))
+    # return oauth.zendrop.authorize_redirect(redirect_uri=url_for('main.authorize', _external=True))
     return oauth.zendrop.authorize_redirect()
 
 
@@ -44,27 +45,10 @@ def authorize():
     token = oauth.zendrop.authorize_access_token()
     session['oauth_token'] = token
 
-    # You can retrieve user data or make API requests here using the access token.
-    print(f"Access Token: {token['access_token']}")
+    Config.API_ENDPOINT_ACCESS_TOKEN = token['access_token']
+    print("Authorization Successful")
 
-    # API endpoint to fetch user details
-    endpoint = 'https://app.staging.zendrop.com/api/oauth-user'
-
-    # Set up the headers with the Bearer token
-    headers = {'Authorization': f"Bearer {token['access_token']}"}
-
-    # Make the HTTP GET request
-    endpoint_response = requests.get(endpoint, headers=headers)
-    user_data = endpoint_response.json()
-    response = {
-        "status": "ok",
-        "data": {
-            "user": user_data
-        },
-        "message": ""
-    }
-
-    return jsonify(response)
+    return redirect('/')
 
 
 # Define a logout route
@@ -72,6 +56,29 @@ def authorize():
 def logout():
     session.pop('oauth_token', None)
     return 'You are now logged out.'
+
+
+@bp.route('/api/user_details', methods=["GET"])
+def fetch_user_details():
+    if request.method == "GET":
+        # API endpoint to fetch user details
+        endpoint = 'https://app.staging.zendrop.com/api/oauth-user'
+
+        # Set up the headers with the Bearer token
+        headers = {'Authorization': f"Bearer {Config.API_ENDPOINT_ACCESS_TOKEN}"}
+
+        # Make the HTTP GET request
+        endpoint_response = requests.get(endpoint, headers=headers)
+        user_data = endpoint_response.json()
+        response = {
+            "status": "ok",
+            "data": {
+                "user": user_data
+            },
+            "message": ""
+        }
+
+        return jsonify(response)
 
 
 trending_product_stub = [

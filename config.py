@@ -36,3 +36,4 @@ class Config:
     API_KEY = os.getenv("OPENAI_API_KEY")
     SWAGGER_URL = '/api/docs'
     API_URL = '/static/swagger.json'
+    API_ENDPOINT_ACCESS_TOKEN = None
