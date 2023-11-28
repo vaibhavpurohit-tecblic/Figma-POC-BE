@@ -36,8 +36,8 @@ function LogoutFunction() {
 
 async function LoginFunction() {
   IfUserLoggedInFunction();
-  const result = await LoginApiFunction();
-  console.log(result, "hello");
+  // const result = await LoginApiFunction();
+  window.location.href = 'http://127.0.0.1:5000/login';  // Change the URL accordingly
 }
 
 onMounted(() => IfUserLoggedInFunction());

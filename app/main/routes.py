@@ -1,4 +1,4 @@
-from flask import redirect, session, jsonify, request, Blueprint
+from flask import redirect, session, jsonify, request, Blueprint, url_for
 from app.main import bp
 from authlib.integrations.flask_client import OAuth
 import requests
@@ -36,20 +36,13 @@ oauth.register(
 # Define the route for handling OAuth authorization
 @bp.route('/login', methods=['GET'])
 def login():
-    # return oauth.zendrop.authorize_redirect(redirect_uri=url_for('bp.authorize', _external=True))
+    # return oauth.zendrop.authorize_redirect(redirect_uri=url_for('main.authorize', _external=True))
     return oauth.zendrop.authorize_redirect()
 
 
 # Define the callback route for handling the OAuth response
 @bp.route('/authorize', methods=["GET"])
 def authorize():
-    # # Handle the redirect and set appropriate CORS headers
-    # response = redirect('https://zdai-ad-copy-745906f359ba.herokuapp.com/authorize')
-    # # Set CORS headers for the redirect endpoint
-    # response.headers['Access-Control-Allow-Origin'] = '*'
-    # response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
-    # response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-
     token = oauth.zendrop.authorize_access_token()
     session['oauth_token'] = token
     Config.API_ENDPOINT_ACCESS_TOKEN = token['access_token']
@@ -74,7 +67,8 @@ def authorize():
         "message": ""
     }
 
-    return jsonify(response)
+    # return jsonify(response)
+    return redirect('/')
 
 
 # Define a logout route
