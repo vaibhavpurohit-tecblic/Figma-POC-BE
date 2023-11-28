@@ -44,7 +44,9 @@ def login():
 def authorize():
     token = oauth.zendrop.authorize_access_token()
     session['oauth_token'] = token
+
     Config.API_ENDPOINT_ACCESS_TOKEN = token['access_token']
+    print("Authorization Successful")
 
     return redirect('/')
 
