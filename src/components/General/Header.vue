@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import LoginApiFunction from "../../api/authApis/index.js";
+import { LogoutApiFunction } from "../../api/authApis/index.js";
 
 defineProps({
   auth: Boolean,
@@ -20,31 +20,27 @@ function DropdownTrigger() {
 const isLoggedIn = ref(false);
 
 function IfUserLoggedInFunction() {
-  if (localStorage.getItem("zdai_token")) {
+  if (document?.cookie?.split("is_login=")?.[1]) {
     isLoggedIn.value = true;
   } else {
-    // isLoggedIn.value = true;
+    isLoggedIn.value = false;
   }
 }
 
-function LogoutFunction() {
+async function LogoutFunction() {
+  document.cookie = "is_login=";
+  const result = await LogoutApiFunction();
+
   isLoggedIn.value = false;
   isDropdown.value = false;
-  localStorage.removeItem("zdai_token");
   window.location.href = "/";
 }
 
-async function LoginFunction() {
-  IfUserLoggedInFunction();
+function LoginFunction() {
   // const result = await LoginApiFunction();
 
-  const herokuDomain = "https://zdai-ad-copy-745906f359ba.herokuapp.com";
+  const redirectURL = `${window.location.origin}/login`;
 
-  // Use herokuDomain in production, otherwise use localhost
-  const redirectURL = `${herokuDomain}/login`;
-  // const redirectURL = 'http://127.0.0.1:5000/login';
-
-  console.log("HAHAHAHHAHAHAH ---->", redirectURL)
   window.location.href = redirectURL;
 }
 
@@ -56,11 +52,13 @@ onMounted(() => IfUserLoggedInFunction());
     class="container my-6 px-5 mx-auto flex justify-between gap-5 items-center"
   >
     <div class="">
-      <img
-        src="../../assets/logos/logo.svg"
-        alt="ZenDrop Logo"
-        class="h-[30px] w-[200px]"
-      />
+      <router-link to="/">
+        <img
+          src="../../assets/logos/logo.svg"
+          alt="ZenDrop Logo"
+          class="h-[30px] w-[200px] cursor-pointer"
+        />
+      </router-link>
     </div>
     <div class="flex justify-end items-center gap-5" v-if="isLoggedIn">
       <div
@@ -78,16 +76,18 @@ onMounted(() => IfUserLoggedInFunction());
             <h5 class="text-primary font-normal text-base">Ad Copy</h5>
           </div>
         </router-link>
-        <div
-          :class="{
-            'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
-              active !== 'expert-bot',
-            'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
-              active === 'expert-bot',
-          }"
-        >
-          <h5 class="text-primary font-normal text-base">Expert Bot</h5>
-        </div>
+        <router-link to="/expert-bot">
+          <div
+            :class="{
+              'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
+                active !== 'expert-bot',
+              'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
+                active === 'expert-bot',
+            }"
+          >
+            <h5 class="text-primary font-normal text-base">Expert Bot</h5>
+          </div>
+        </router-link>
       </div>
       <div class="relative">
         <div
@@ -106,7 +106,7 @@ onMounted(() => IfUserLoggedInFunction());
             class="rounded-full h-[45px] w-[45px]"
           />
         </div>
-        <div class="absolute" v-if="isDropdown">
+        <div class="absolute z-30" v-if="isDropdown">
           <div class="flex justify-center w-[220px]">
             <div
               class="flex flex-col bg-white w-[150px] rounded-b-xl shadow-lg"

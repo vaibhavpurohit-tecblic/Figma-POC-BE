@@ -4,3 +4,26 @@ body {
   font-family: "Graphik", sans-serif;
   background-color: #fff !important;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 35px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e9e7f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 35px;
+  background: #8473ee;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 35px;
+  background: #8473ee;
+}
