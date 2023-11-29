@@ -24,7 +24,7 @@ defineProps({
           />
         </div>
       </div>
-      <div class="flex flex-col gap-3 h-[calc(100vh-255px)] overflow-auto">
+      <div class="flex flex-col gap-3 h-[calc(100vh-260px)] overflow-auto">
         <p class="text-sm text-gray-500 font-normal">Today</p>
         <div class="flex flex-col gap-3">
           <SidebarTitle :active="true" title="Lorem Ipsum is simple" />

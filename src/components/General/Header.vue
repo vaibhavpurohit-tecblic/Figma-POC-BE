@@ -76,16 +76,18 @@ onMounted(() => IfUserLoggedInFunction());
             <h5 class="text-primary font-normal text-base">Ad Copy</h5>
           </div>
         </router-link>
-        <div
-          :class="{
-            'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
-              active !== 'expert-bot',
-            'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
-              active === 'expert-bot',
-          }"
-        >
-          <h5 class="text-primary font-normal text-base">Expert Bot</h5>
-        </div>
+        <router-link to="/expert-bot">
+          <div
+            :class="{
+              'py-2 px-10 border-2 cursor-pointer border-transparent hover:border-secondary rounded-[100px]':
+                active !== 'expert-bot',
+              'py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px]':
+                active === 'expert-bot',
+            }"
+          >
+            <h5 class="text-primary font-normal text-base">Expert Bot</h5>
+          </div>
+        </router-link>
       </div>
       <div class="relative">
         <div

@@ -6,13 +6,13 @@ import CustomerInputBox from "../components/General/CustomerInputBox.vue";
 </script>
 
 <template>
-  <div class="flex flex-col gap-3 min-h-screen max-h-screen">
+  <div class="flex flex-col min-h-screen max-h-screen">
     <Header :auth="true" active="ad-copy" />
     <div class="flex-1 flex gap-7 container p-5 mx-auto">
       <Sidebar title="Create New Ad Copy" />
       <div class="flex-1">
         <div class="flex flex-col justify-between gap-5 h-full">
-          <div class="h-[calc(100vh-270px)] overflow-auto">
+          <div class="h-[calc(100vh-275px)] overflow-auto">
             <div class="grid grid-cols-6">
               <div class="col-span-1"></div>
               <div class="col-span-3">
