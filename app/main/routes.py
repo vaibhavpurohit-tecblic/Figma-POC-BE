@@ -48,7 +48,11 @@ def authorize():
     Config.API_ENDPOINT_ACCESS_TOKEN = token['access_token']
     print("Authorization Successful")
 
-    return redirect('/')
+    response = redirect('/')
+    # response.set_cookie('access_token', Config.API_ENDPOINT_ACCESS_TOKEN)
+    response.set_cookie('is_login', "True")
+
+    return response
 
 
 # Define a logout route
