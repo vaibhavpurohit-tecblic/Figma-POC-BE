@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export default async function LoginApiFunction() {
+export async function LogoutApiFunction() {
   const result = await axios
-    .get("/login")
+    .get("/api/logout")
     .then((res) => {
-      console.log("Response Data:", response.data);
+      return res;
     })
     .catch((error) => {
       console.log(error, "Responce");

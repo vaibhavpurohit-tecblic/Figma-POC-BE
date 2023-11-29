@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import LoginApiFunction from "../../api/authApis/index.js";
+import { LogoutApiFunction } from "../../api/authApis/index.js";
 
 defineProps({
   auth: Boolean,
@@ -20,7 +20,6 @@ function DropdownTrigger() {
 const isLoggedIn = ref(false);
 
 function IfUserLoggedInFunction() {
-  console.log(document.cookie.split("is_login="), "cookie");
   if (document?.cookie?.split("is_login=")?.[1]) {
     isLoggedIn.value = true;
   } else {
@@ -28,15 +27,16 @@ function IfUserLoggedInFunction() {
   }
 }
 
-function LogoutFunction() {
+async function LogoutFunction() {
+  document.cookie = "is_login=";
+  const result = await LogoutApiFunction();
+
   isLoggedIn.value = false;
   isDropdown.value = false;
-  localStorage.removeItem("zdai_token");
   window.location.href = "/";
 }
 
-async function LoginFunction() {
-  IfUserLoggedInFunction();
+function LoginFunction() {
   // const result = await LoginApiFunction();
 
   const redirectURL = `${window.location.origin}/login`;
@@ -104,7 +104,7 @@ onMounted(() => IfUserLoggedInFunction());
             class="rounded-full h-[45px] w-[45px]"
           />
         </div>
-        <div class="absolute" v-if="isDropdown">
+        <div class="absolute z-30" v-if="isDropdown">
           <div class="flex justify-center w-[220px]">
             <div
               class="flex flex-col bg-white w-[150px] rounded-b-xl shadow-lg"
