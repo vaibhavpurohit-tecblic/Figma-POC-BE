@@ -59,7 +59,14 @@ def authorize():
 @bp.route('/logout', methods=['GET'])
 def logout():
     session.pop('oauth_token', None)
-    return 'You are now logged out.'
+    Config.API_ENDPOINT_ACCESS_TOKEN = None
+    print("Logout Successful")
+
+    response = redirect('/')
+    # response.set_cookie('access_token', Config.API_ENDPOINT_ACCESS_TOKEN)
+    response.delete_cookie('is_login')
+
+    return response
 
 
 @bp.route('/api/user_details', methods=["GET"])
