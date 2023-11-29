@@ -8,6 +8,7 @@ from app.chats import bp
 
 
 @bp.route('/api/<int:userId>/ad-copy', methods=['GET', 'POST'])
+@bp.route('/api/<int:userId>/expert-bot', methods=['GET', 'POST'])
 def method_user_chat_by_user_id(userId):
     if request.method == "GET":
         chats = get_user_chat_by_user_id(userId)
@@ -39,6 +40,7 @@ def method_user_chat_by_user_id(userId):
 
 
 @bp.route('/api/<int:userId>/ad-copy/<chatId>', methods=['GET', 'DELETE'])
+@bp.route('/api/<int:userId>/expert-bot/<chatId>', methods=['GET', 'DELETE'])
 def method_user_chat_by_chat_id(userId, chatId):
     if request.method == "GET":
         chat = get_user_chat_by_chat_id(userId, chatId)

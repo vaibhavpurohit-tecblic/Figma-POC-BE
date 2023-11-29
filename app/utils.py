@@ -1,12 +1,17 @@
 import uuid
+import time
 from datetime import datetime, timezone
 import openai
+from openai import OpenAI
 
 from config import Config
 from app.models.chats import Chats
 from app.models.messages import Messages
 
 openai.api_key = Config().API_KEY
+assistant_id=Config().ASSISTANT_ID
+client  = OpenAI(api_key=openai.api_key)
+EXPERT_BOT = client.beta.assistants.retrieve(assistant_id=assistant_id)
 
 
 def get_user_chat_by_user_id(userId):
@@ -105,6 +110,42 @@ def generate_ad(prompt):
 
     result = output["choices"][0]["text"]
     return result
+
+
+def generate_expert_bot_thread(prompt):
+    thread = client.beta.threads.create()
+
+    message = client.beta.threads.messages.create(
+        thread_id=thread.id,
+        role="user",
+        content=prompt
+    )
+    
+    run = client.beta.threads.runs.create(
+        thread_id=thread.id,
+        assistant_id=assistant_id,
+        instructions="Please address the user as Jane Doe. The user has a premium account."
+    )
+
+    while run.status != 'completed':
+        run = client.beta.threads.runs.retrieve(
+            thread_id=thread.id,
+            run_id=run.id
+        )
+
+        time.sleep(3)
+
+    messages = client.beta.threads.messages.list(
+        thread_id=thread.id
+    )
+
+    bot_response = ""
+
+    for msg in messages.data:
+        if msg.role == 'assistant':
+            bot_response += msg.content[0].text.value + '\n\n'
+
+    return bot_response
 
 
 def get_user_message_by_chat_id(userId, chatId):
