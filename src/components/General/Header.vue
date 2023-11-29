@@ -20,10 +20,11 @@ function DropdownTrigger() {
 const isLoggedIn = ref(false);
 
 function IfUserLoggedInFunction() {
-  if (localStorage.getItem("zdai_token")) {
+  console.log(document.cookie.split("is_login="), "cookie");
+  if (document?.cookie?.split("is_login=")?.[1]) {
     isLoggedIn.value = true;
   } else {
-    // isLoggedIn.value = true;
+    isLoggedIn.value = false;
   }
 }
 
@@ -51,11 +52,13 @@ onMounted(() => IfUserLoggedInFunction());
     class="container my-6 px-5 mx-auto flex justify-between gap-5 items-center"
   >
     <div class="">
-      <img
-        src="../../assets/logos/logo.svg"
-        alt="ZenDrop Logo"
-        class="h-[30px] w-[200px]"
-      />
+      <router-link to="/">
+        <img
+          src="../../assets/logos/logo.svg"
+          alt="ZenDrop Logo"
+          class="h-[30px] w-[200px] cursor-pointer"
+        />
+      </router-link>
     </div>
     <div class="flex justify-end items-center gap-5" v-if="isLoggedIn">
       <div
