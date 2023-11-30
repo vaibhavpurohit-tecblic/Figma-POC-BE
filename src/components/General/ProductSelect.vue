@@ -14,10 +14,12 @@ const dropDownList = ref([]);
 const dropDownValue = ref(null);
 
 function DropdownTrigger() {
-  if (isDropdown.value) {
-    isDropdown.value = false;
-  } else {
-    isDropdown.value = true;
+  if (active) {
+    if (isDropdown.value) {
+      isDropdown.value = false;
+    } else {
+      isDropdown.value = true;
+    }
   }
 }
 

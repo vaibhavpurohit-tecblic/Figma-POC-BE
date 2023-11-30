@@ -128,7 +128,7 @@ onMounted(() => CheckPropsFunction());
                   </div>
                 </div>
               </div>
-              <CustomerInputBox />
+              <CustomerInputBox active="true" />
             </div>
           </div>
         </div>
