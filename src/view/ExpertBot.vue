@@ -17,7 +17,9 @@ onMounted(() => CheckPropsFunction());
   <div class="flex flex-col min-h-screen max-h-screen">
     <Header :auth="true" active="expert-bot" />
     <div class="flex-1 flex gap-7 container p-5 mx-auto">
-      <Sidebar title="Create New Ad Copy" />
+      <div class="sidebar-container">
+        <Sidebar title="Create New Ad Copy" />
+      </div>
       <div class="flex-1">
         <div class="flex flex-col justify-between gap-5 h-full">
           <div

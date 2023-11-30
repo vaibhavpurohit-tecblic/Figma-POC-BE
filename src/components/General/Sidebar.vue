@@ -7,7 +7,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="sidebar-container py-5 px-6">
+  <div class="py-5 px-6">
     <div class="flex flex-col gap-4">
       <div class="flex gap-4">
         <div
@@ -16,7 +16,7 @@ defineProps({
           <img src="../../assets/logos/addIcon.svg" alt="" class="h-4 w-4" />
           <p class="text-base text-primary font-medium">{{ title }}</p>
         </div>
-        <div class="p-3 rounded-xl border-2 border-secondary">
+        <div class="hidden md:block p-3 rounded-xl border-2 border-secondary">
           <img
             src="../../assets/logos/sidebarIcon.svg"
             alt="Sidebar Logo"
@@ -24,7 +24,9 @@ defineProps({
           />
         </div>
       </div>
-      <div class="flex flex-col gap-3 h-[calc(100vh-260px)] overflow-auto">
+      <div
+        class="flex flex-col gap-3 h-[calc(100vh-105px)] md:h-[calc(100vh-260px)] overflow-auto"
+      >
         <p class="text-sm text-gray-500 font-normal">Today</p>
         <div class="flex flex-col gap-3">
           <SidebarTitle :active="true" title="Lorem Ipsum is simple" />
@@ -54,10 +56,4 @@ defineProps({
   </div>
 </template>
 
-<style scoped>
-.sidebar-container {
-  border-radius: 21.836px;
-  background: #fff;
-  box-shadow: 0px 0px 8.73458px 0px rgba(110, 94, 202, 0.15);
-}
-</style>
+<style scoped></style>
