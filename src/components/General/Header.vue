@@ -24,6 +24,9 @@ function IfUserLoggedInFunction() {
     isLoggedIn.value = true;
   } else {
     isLoggedIn.value = false;
+    if (window.location.pathname !== "/") {
+      window.location.href = "/";
+    }
   }
 }
 
