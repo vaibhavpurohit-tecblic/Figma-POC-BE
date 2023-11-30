@@ -1,20 +1,34 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
+
+const propsValue = ref("");
+
+function CheckPropsFunction() {
+  propsValue.value = window.location.search;
+}
+
+onMounted(() => CheckPropsFunction());
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen max-h-screen">
     <Header :auth="true" active="expert-bot" />
     <div class="flex-1 flex gap-7 container p-5 mx-auto">
-      <Sidebar title="Create New Ad Copy" />
+      <div class="sidebar-container hidden md:block">
+        <Sidebar title="New Chat" />
+      </div>
       <div class="flex-1">
         <div class="flex flex-col justify-between gap-5 h-full">
-          <div class="h-[calc(100vh-275px)] overflow-auto">
-            <div class="grid grid-cols-6 mt-5">
+          <div
+            class="h-[calc(100vh-275px)] overflow-auto"
+            v-if="propsValue.length > 0"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
               <div class="col-span-1"></div>
-              <div class="col-span-3">
+              <div class="col-span-1 md:col-span-3">
                 <div class="flex gap-4">
                   <img
                     src="../assets/images/ProfilePhoto.png"
@@ -30,7 +44,9 @@ import CustomerInputBox from "../components/General/CustomerInputBox.vue";
               </div>
               <div class="col-span-1">
                 <div class="pt-5 pl-4">
-                  <div class="flex gap-2 items-center">
+                  <div
+                    class="flex justify-end md:justify-start gap-2 items-center"
+                  >
                     <img
                       src="../assets/logos/dateIcon.svg"
                       alt=""
@@ -51,9 +67,9 @@ import CustomerInputBox from "../components/General/CustomerInputBox.vue";
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-6 mt-5">
+            <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
               <div class="col-span-1"></div>
-              <div class="col-span-3">
+              <div class="col-span-1 md:col-span-3">
                 <div class="flex gap-4">
                   <img
                     src="../assets/images/roboProfile.png"
@@ -76,10 +92,47 @@ import CustomerInputBox from "../components/General/CustomerInputBox.vue";
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-6">
+          <di class="" v-if="propsValue.length === 0"></di>
+          <div class="grid grid-cols-1 md:grid-cols-6">
             <div class="col-span-1"></div>
-            <div class="col-span-3">
-              <CustomerInputBox />
+            <div class="col-span-1 md:col-span-3">
+              <div class="" v-if="propsValue.length === 0">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                  <div class="border border-secondary rounded-xl py-3 px-6">
+                    <h5 class="text-primary font-medium text-base">
+                      Market Trend
+                    </h5>
+                    <p class="text-primary/[0.5] text-xs font-normal">
+                      Expert Bot market trends and Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="border border-secondary rounded-xl py-3 px-6">
+                    <h5 class="text-primary font-medium text-base">
+                      Market Trend
+                    </h5>
+                    <p class="text-primary/[0.5] text-xs font-normal">
+                      Expert Bot market trends and Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="border border-secondary rounded-xl py-3 px-6">
+                    <h5 class="text-primary font-medium text-base">
+                      Market Trend
+                    </h5>
+                    <p class="text-primary/[0.5] text-xs font-normal">
+                      Expert Bot market trends and Lorem Ipsum.
+                    </p>
+                  </div>
+                  <div class="border border-secondary rounded-xl py-3 px-6">
+                    <h5 class="text-primary font-medium text-base">
+                      Market Trend
+                    </h5>
+                    <p class="text-primary/[0.5] text-xs font-normal">
+                      Expert Bot market trends and Lorem Ipsum.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <CustomerInputBox active="true" />
             </div>
           </div>
         </div>

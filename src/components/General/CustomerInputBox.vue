@@ -1,8 +1,17 @@
-<script setup></script>
+<script setup>
+defineProps({
+  active: Boolean,
+});
+</script>
 
 <template>
   <div
-    class="border border-secondary rounded-xl flex gap-2 bg-secondary/[0.10] py-3 px-6"
+    :class="{
+      'border border-secondary rounded-xl flex gap-2 bg-secondary/[0.10] py-3 px-6':
+        active,
+      'border border-secondary rounded-xl flex gap-2 bg-secondary/[0.10] py-3 px-6 opacity-60':
+        !active,
+    }"
   >
     <div class="pt-1">
       <img
@@ -16,6 +25,7 @@
         rows="3"
         class="bg-transparent w-full focus-visible:outline-none text-primary text-base font-normal resize-none"
         placeholder="Type here to chat ..."
+        :disabled="!active"
       />
     </div>
     <div class="self-end">

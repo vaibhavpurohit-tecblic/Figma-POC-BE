@@ -1,5 +1,18 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import Header from "../components/General/Header.vue";
+
+const redirectLink = ref("/ad-copy");
+
+function RedirectLinkChangeFunction() {
+  if (document?.cookie?.split("is_login=")?.[1]) {
+    redirectLink.value = "/ad-copy";
+  } else {
+    redirectLink.value = "/";
+  }
+}
+
+onMounted(() => RedirectLinkChangeFunction());
 </script>
 
 <template>
@@ -20,7 +33,7 @@ import Header from "../components/General/Header.vue";
               Your AI Content Generator by Zendrop. Elevate your dropshipping
               game with this powerful tool designed to supercharge your sales.
             </p>
-            <router-link to="/ad-copy">
+            <router-link :to="redirectLink">
               <button
                 class="text-base text-primary font-normal border border-primary rounded-[100px] w-full mt-7 py-2"
               >
