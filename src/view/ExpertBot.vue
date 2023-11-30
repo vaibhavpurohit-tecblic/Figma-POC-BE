@@ -18,7 +18,7 @@ onMounted(() => CheckPropsFunction());
     <Header :auth="true" active="expert-bot" />
     <div class="flex-1 flex gap-7 container p-5 mx-auto">
       <div class="sidebar-container hidden md:block">
-        <Sidebar title="Create New Ad Copy" />
+        <Sidebar title="New Chat" />
       </div>
       <div class="flex-1">
         <div class="flex flex-col justify-between gap-5 h-full">
