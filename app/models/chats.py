@@ -11,8 +11,9 @@ class Chats(db.Model):
     postedAt = db.Column(db.DateTime)
     answeredAt = db.Column(db.DateTime)
     closedAt = db.Column(db.DateTime)
-    lastMessageId = db.Column(db.String, db.ForeignKey('messages.id'))
+    lastMessageId = db.Column(db.String)
     messages = db.Column(db.Integer)
+    product = db.Column(db.String)
 
     __tablename__ = 'chats'
 

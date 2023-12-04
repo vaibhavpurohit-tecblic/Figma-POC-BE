@@ -14,8 +14,8 @@ client  = OpenAI(api_key=openai.api_key)
 EXPERT_BOT = client.beta.assistants.retrieve(assistant_id=assistant_id)
 
 
-def get_user_chat_by_user_id(userId):
-    chats_by_user = Chats.query.filter_by(userId=userId).all()
+def get_user_chat_by_user_id(userId, product):
+    chats_by_user = Chats.query.filter_by(userId=userId, product=product).all()
     chats = []
 
     for chat in chats_by_user:
@@ -36,7 +36,7 @@ def get_user_chat_by_user_id(userId):
     return chats
 
 
-def create_user_chat_by_user_id(userId, messageContent, db):
+def create_user_chat_by_user_id(userId, messageContent, product, db):
     chat = Chats(
         id=str(uuid.uuid4()),
         userId=userId,
@@ -48,7 +48,8 @@ def create_user_chat_by_user_id(userId, messageContent, db):
         postedAt=None,
         answeredAt=None,
         closedAt=None,
-        lastMessageId=None
+        lastMessageId=None,
+        product=product
     )
 
     db.session.add(chat)
@@ -71,8 +72,8 @@ def create_user_chat_by_user_id(userId, messageContent, db):
     return chat_details
 
 
-def get_user_chat_by_chat_id(userId, chatId):
-    chat = Chats.query.filter_by(userId=userId, id=chatId).first()
+def get_user_chat_by_chat_id(userId, chatId, product):
+    chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
 
     chat_details = {
         "id": chat.id,
@@ -91,8 +92,8 @@ def get_user_chat_by_chat_id(userId, chatId):
     return chat_details
 
 
-def delete_user_chat_by_chat_id(userId, chatId, db):
-    chat = Chats.query.filter_by(userId=userId, id=chatId).first()
+def delete_user_chat_by_chat_id(userId, chatId, product, db):
+    chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
 
     chat.status = "closed"
     chat.closedAt = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -148,8 +149,8 @@ def generate_expert_bot_thread(prompt):
     return bot_response
 
 
-def get_user_message_by_chat_id(userId, chatId):
-    chat = Chats.query.filter_by(userId=userId, id=chatId).first()
+def get_user_message_by_chat_id(userId, chatId, product):
+    chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
     messages_by_chat_id = Messages.query.filter_by(chatId=chat.id).all()
     message_details = []
 
@@ -165,8 +166,8 @@ def get_user_message_by_chat_id(userId, chatId):
     return message_details
 
 
-def create_user_message_by_chat_id(userId, chatId, messageContent, result, db):
-    chat = Chats.query.filter_by(userId=userId, id=chatId).first()
+def create_user_message_by_chat_id(userId, chatId, messageContent, result, product, db):
+    chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
 
     user_message = Messages(
         id=str(uuid.uuid4()),
@@ -211,8 +212,8 @@ def create_user_message_by_chat_id(userId, chatId, messageContent, result, db):
     }
 
 
-def get_user_message_by_message_id(userId, chatId, messageId):
-    chat = Chats.query.filter_by(userId=userId, id=chatId).first()
+def get_user_message_by_message_id(userId, chatId, messageId, product):
+    chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
     message = Messages.query.filter_by(id=messageId, chatId=chat.id).first()
 
     message_details = {
