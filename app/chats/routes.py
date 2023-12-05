@@ -13,31 +13,44 @@ def method_user_chat_by_user_id(userId):
     product = 'expert-bot' if 'expert-bot' in request.url else 'ad-copy'
     
     if request.method == "GET":
-        chats = get_user_chat_by_user_id(userId, product)
+        try:
+            chats = get_user_chat_by_user_id(userId, product)
 
-        response = {
-            "status": "ok",
-            "data": {
-                "chats": chats
-            },
-            "pid": str(uuid.uuid4()),
-            "message": ""
-        }
+            response = {
+                "status": 200,
+                "data": {
+                    "chats": chats
+                },
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+            }
+        except Exception as e:
+            response = {
+                "status": 404,
+                "message": "Not Found"
+            }
 
         return jsonify(response)
     elif request.method == "POST":
         messageContent = request.get_json()['messageContent']
 
-        chat = create_user_chat_by_user_id(userId, messageContent, product, db)
+        try:
+            chat = create_user_chat_by_user_id(userId, messageContent, product, db)
 
-        response = {
-            "status": "ok",
-            "data": {
-                "chat": chat
-            },
-            "pid": str(uuid.uuid4()),
-            "message": ""
-        }
+            response = {
+                "status": 200,
+                "data": {
+                    "chat": chat
+                },
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+            }
+        except Exception as e:
+            response = {
+                "status": 405,
+                "message": "Method Not Allowed"
+            }
+
         return jsonify(response)
 
 
@@ -47,25 +60,37 @@ def method_user_chat_by_chat_id(userId, chatId):
     product = 'expert-bot' if 'expert-bot' in request.url else 'ad-copy'
 
     if request.method == "GET":
-        chat = get_user_chat_by_chat_id(userId, chatId, product)
+        try:
+            chat = get_user_chat_by_chat_id(userId, chatId, product)
 
-        response = {
-            "status": "ok",
-            "data": {
-                "chat": chat
-            },
-            "pid": str(uuid.uuid4()),
-            "message": ""
-        }
+            response = {
+                "status": 200,
+                "data": {
+                    "chat": chat
+                },
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+            }
+        except Exception as e:
+            response = {
+                "status": 404,
+                "message": "Not Found"
+            }
 
         return jsonify(response)
     elif request.method == "DELETE":
-        delete_user_chat_by_chat_id(userId, chatId, product, db)
+        try:
+            delete_user_chat_by_chat_id(userId, chatId, product, db)
 
-        response = {
-            "status": "ok",
-            "pid": str(uuid.uuid4()),
-            "message": ""
-        }
+            response = {
+                "status": 200,
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+            }
+        except Exception as e:
+            response = {
+                "status": 405,
+                "message": "Method Not Allowed"
+            }
 
         return jsonify(response)

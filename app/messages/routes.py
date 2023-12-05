@@ -13,38 +13,50 @@ def method_user_message_by_chat_id(userId, chatId):
     product = 'expert-bot' if 'expert-bot' in request.url else 'ad-copy'
 
     if request.method == "GET":
-        print("HAHA")
-        messages = get_user_message_by_chat_id(userId, chatId, product)
+        try:
+            messages = get_user_message_by_chat_id(userId, chatId, product)
 
-        response = {
-            "status": "ok",
-            "data": {
-                "messages": messages
-            },
-            "pid": str(uuid.uuid4()),
-            "message": ""
-        }
+            response = {
+                "status": 200,
+                "data": {
+                    "messages": messages
+                },
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+            }
+        except Exception as e:
+            response = {
+                "status": 404,
+                "message": "Not Found"
+            }
 
         return jsonify(response)
     elif request.method == "POST":
         messageContent = request.get_json()['messageContent']
+        prompt = "Write an ad. copy for: " + messageContent
 
-        if product == 'expert-bot':
-            result = generate_expert_bot_thread(messageContent)
-        else:
-            result = generate_ad(messageContent)
+        try:
+            if product == 'expert-bot':
+                result = generate_expert_bot_thread(prompt)
+            else:
+                result = generate_ad(prompt)
 
-        message = create_user_message_by_chat_id(userId, chatId, messageContent, result, product, db)
+            message = create_user_message_by_chat_id(userId, chatId, prompt, result, product, db)
 
-        response = {
-            "status": "ok",
-            "data": {
-                "message": message["user_message"],
-                "responseMessageId": message["responseMessageId"]
-            },
-            "pid": str(uuid.uuid4()),
-            "message": ""
-        }
+            response = {
+                "status": 200,
+                "data": {
+                    "message": message["user_message"],
+                    "responseMessageId": message["responseMessageId"]
+                },
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+            }
+        except Exception as e:
+            response = {
+                "status": 405,
+                "message": "Method Not Allowed"
+            }
 
         return jsonify(response)
 
@@ -55,15 +67,21 @@ def method_user_message_by_message_id(userId, chatId, messageId):
     product = 'expert-bot' if 'expert-bot' in request.url else 'ad-copy'
 
     if request.method == "GET":
-        message = get_user_message_by_message_id(userId, chatId, messageId, product)
+        try:
+            message = get_user_message_by_message_id(userId, chatId, messageId, product)
 
-        response = {
-            "status": "ok",
-            "data": {
-                "message": message
-            },
-            "pid": str(uuid.uuid4()),
-            "message": ""
-        }
+            response = {
+                "status": 200,
+                "data": {
+                    "message": message
+                },
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+            }
+        except Exception as e:
+            response = {
+                "status": 404,
+                "message": "Not Found"
+            }
 
         return jsonify(response)

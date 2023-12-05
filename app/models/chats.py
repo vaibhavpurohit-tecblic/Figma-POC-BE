@@ -3,7 +3,7 @@ from app.extensions import db
 
 class Chats(db.Model):
     id = db.Column(db.String, primary_key=True)
-    userId = db.Column(db.Integer)
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     productId = db.Column(db.Integer)
     title = db.Column(db.String)
     status = db.Column(db.String)
