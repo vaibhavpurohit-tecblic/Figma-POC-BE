@@ -16,13 +16,13 @@ onMounted(() => RedirectLinkChangeFunction());
 </script>
 
 <template>
-  <div class="flex flex-col gap-3 min-h-screen overflow-hidden">
+  <div class="flex flex-col gap-3 min-h-screen max-h-screen overflow-hidden">
     <Header :auth="false" active="" />
     <div
-      class="flex-1 home-screen-background-img flex flex-col justify-center relative home-screen-blurred-container"
+      class="flex-1 home-screen-background-img flex flex-col justify-center md:relative md:home-screen-blurred-container overflow-y-auto md:overflow-y-hidden overflow-x-hidden"
     >
-      <div class="container mx-auto p-5">
-        <div class="grid grid-cols-3 gap-7">
+      <div class="container mx-auto p-5 h-[calc(100vh-100px)] md:h-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
           <div class="">
             <h3 class="text-8xl text-primary font-semibold">
               Create<br />
@@ -100,7 +100,7 @@ onMounted(() => RedirectLinkChangeFunction());
               </div>
             </div>
           </div>
-          <div class="">
+          <div class="relative md:absolute robo-blurred-container">
             <img
               src="../assets/images/roboMan.png"
               alt="Robo Man"
@@ -129,5 +129,20 @@ onMounted(() => RedirectLinkChangeFunction());
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
+}
+
+@media only screen and (max-width: 500px) {
+  .robo-blurred-container::after {
+    content: "";
+    position: absolute;
+    left: 50vw;
+    top: 0;
+    height: 100%;
+    width: 100vw;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+  }
 }
 </style>
