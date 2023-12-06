@@ -9,6 +9,10 @@
     {
       "name": "Ad Copy",
       "description": "API part related to Ad Copy product"
+    },
+    {
+      "name": "Expert Bot",
+      "description": "API part related to Expert Bot"
     }
   ],
   "paths": {
@@ -335,6 +339,364 @@
       "get": {
         "tags": [
           "Ad Copy"
+        ],
+        "summary": "Get Message by ID",
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "$ref": "#/components/schemas/Message"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{userId}/expert-bot": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Expert Bot"
+        ],
+        "summary": "Get list of existing chats by the User",
+        "description": null,
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "chats": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Chat"
+                          }
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Expert Bot"
+        ],
+        "summary": "Create Chat for the User",
+        "requestBody": {
+          "content": {
+            "application/schema+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChatRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chat created",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "chat": {
+                          "$ref": "#/components/schemas/Chat"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{userId}/expert-bot/{chatId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "chatId",
+          "in": "path",
+          "description": "Chat ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Expert Bot"
+        ],
+        "summary": "Get information of existing Chat by the User",
+        "description": null,
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "chat": {
+                          "$ref": "#/components/schemas/Chat"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Expert Bot"
+        ],
+        "summary": "Close the Chat",
+        "description": null,
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{userId}/expert-bot/{chatId}/message": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "chatId",
+          "in": "path",
+          "description": "Chat ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Expert Bot"
+        ],
+        "summary": "Get Messages related to the Chat",
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "messages": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Message"
+                          }
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Expert Bot"
+        ],
+        "summary": "Add Message to the Chat",
+        "requestBody": {
+          "content": {
+            "application/schema+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMessageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Chat parameters and state",
+            "content": {
+              "application/schema+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "$ref": "#/components/schemas/Response/properties/status"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "$ref": "#/components/schemas/Message"
+                        },
+                        "responseMessageId": {
+                          "$ref": "#/components/schemas/Message/properties/id"
+                        }
+                      }
+                    },
+                    "pid": {
+                      "$ref": "#/components/schemas/Response/properties/pid"
+                    },
+                    "message": {
+                      "$ref": "#/components/schemas/Response/properties/message"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/{userId}/expert-bot/{chatId}/message/{messageId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "description": "User that initiated a request",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "chatId",
+          "in": "path",
+          "description": "Chat ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "messageId",
+          "in": "path",
+          "description": "Message ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Expert Bot"
         ],
         "summary": "Get Message by ID",
         "responses": {
