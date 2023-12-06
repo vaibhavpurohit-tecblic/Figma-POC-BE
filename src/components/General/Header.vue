@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { LogoutApiFunction } from "../../api/authApis/index.js";
+import { LogoutApiFunction } from "../../api/AuthApis/index.js";
 import Sidebar from "./Sidebar.vue";
 
 defineProps({
