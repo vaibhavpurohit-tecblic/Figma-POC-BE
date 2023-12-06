@@ -1,7 +1,30 @@
 <script setup>
+import { AdCopyChatMessagesAddApiFunction } from "../../api/AdCopyApis/index.js";
+import { ExpertBotListApiFunction } from "../../api/ExpertBotApis/index.js";
+
 defineProps({
   active: Boolean,
 });
+
+async function AdCopyChatMessagesAddFunction() {
+  const result = await AdCopyChatMessagesAddApiFunction();
+
+  console.log(result);
+}
+
+async function ExpertBotChatMessagesAddFunction() {
+  const result = await ExpertBotChatMessagesAddApiFunction();
+
+  console.log(result);
+}
+
+function SideBarDataFunction() {
+  if (window.location.pathname === "/ad-copy") {
+    AdCopyChatMessagesAddFunction();
+  } else if (window.location.pathname === "/expert-bot") {
+    ExpertBotChatMessagesAddFunction();
+  }
+}
 </script>
 
 <template>
