@@ -1,8 +1,35 @@
 <script setup>
+import { onMounted, ref } from "vue";
 import SidebarTitle from "./SidebarTitle.vue";
+import { AdCopyListApiFunction } from "../../api/AdCopyApis/index.js";
+import { ExpertBotListApiFunction } from "../../api/ExpertBotApis/index.js";
 
 defineProps({
   title: String,
+});
+
+async function AdCopyChatListFunction() {
+  const result = await AdCopyListApiFunction();
+
+  console.log(result);
+}
+
+async function ExpertBotChatListFunction() {
+  const result = await ExpertBotListApiFunction();
+
+  console.log(result);
+}
+
+function SideBarDataFunction() {
+  if (window.location.pathname === "/ad-copy") {
+    AdCopyChatListFunction();
+  } else if (window.location.pathname === "/expert-bot") {
+    ExpertBotChatListFunction();
+  }
+}
+
+onMounted(() => {
+  SideBarDataFunction();
 });
 </script>
 

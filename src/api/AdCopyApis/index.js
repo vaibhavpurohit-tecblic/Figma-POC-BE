@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function AdCopyListApiFunction() {
   const result = await axios
-    .get("")
+    .get("/api/api/" + 1 + "/ad-copy")
     .then((res) => {
       console.log(res);
     })
@@ -15,7 +15,7 @@ export async function AdCopyListApiFunction() {
 
 export async function AdCopyChatCreateApiFunction() {
   const result = await axios
-    .post("")
+    .post("/api/api/" + 1 + "/ad-copy")
     .then((res) => {
       console.log(res);
     })
@@ -28,7 +28,7 @@ export async function AdCopyChatCreateApiFunction() {
 
 export async function AdCopyChatDetailsApiFunction() {
   const result = await axios
-    .get("")
+    .get("/api/api/" + 1 + "/ad-copy" + 1)
     .then((res) => {
       console.log(res);
     })
@@ -41,7 +41,7 @@ export async function AdCopyChatDetailsApiFunction() {
 
 export async function AdCopyChatDeleteApiFunction() {
   const result = await axios
-    .delete("")
+    .delete("/api/api/" + 1 + "/ad-copy" + 1)
     .then((res) => {
       console.log(res);
     })
@@ -54,7 +54,7 @@ export async function AdCopyChatDeleteApiFunction() {
 
 export async function AdCopyChatMessagesListApiFunction() {
   const result = await axios
-    .get("")
+    .get("/api/api/" + 1 + "/ad-copy" + 1 + "/message")
     .then((res) => {
       console.log(res);
     })
@@ -67,7 +67,7 @@ export async function AdCopyChatMessagesListApiFunction() {
 
 export async function AdCopyChatMessagesAddApiFunction() {
   const result = await axios
-    .post("")
+    .post("/api/api/" + 1 + "/ad-copy" + 1 + "/message")
     .then((res) => {
       console.log(res);
     })
