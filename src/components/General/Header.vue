@@ -8,6 +8,25 @@ defineProps({
   active: String,
 });
 
+const isSidebarShow = ref(true);
+
+const isSidebarTitle = ref("");
+
+function ShowSideBarFunction() {
+  if (window.location.pathname === "/") {
+    isSidebarShow.value = false;
+  } else if (window.location.pathname === "/ad-copy") {
+    isSidebarShow.value = true;
+    isSidebarTitle.value = "Create New Ad Copy";
+  } else if (window.location.pathname === "/expert-bot") {
+    isSidebarShow.value = true;
+    isSidebarTitle.value = "New Chat";
+  } else {
+    isSidebarTitle.value = "";
+    isSidebarShow.value = true;
+  }
+}
+
 const isDropdown = ref(false);
 
 const isSidebar = ref(false);
@@ -60,15 +79,18 @@ function LoginFunction() {
   window.location.href = redirectURL;
 }
 
-onMounted(() => IfUserLoggedInFunction());
+onMounted(() => {
+  IfUserLoggedInFunction();
+  ShowSideBarFunction();
+});
 </script>
 
 <template>
   <div
     class="container my-6 px-5 mx-auto flex justify-between gap-5 items-center"
   >
-    <div class="block md:hidden">
-      <div class="" v-if="isLoggedIn">
+    <div class="block md:hidden" v-if="isLoggedIn && isSidebarShow">
+      <div class="">
         <div class="relative">
           <div
             class="p-3 rounded-xl border-2 border-secondary cursor-pointer"
@@ -86,7 +108,7 @@ onMounted(() => IfUserLoggedInFunction());
           >
             <div class="w-full flex">
               <div class="bg-white">
-                <Sidebar title="Create New Ad Copy" />
+                <Sidebar :title="isSidebarTitle" />
               </div>
               <div class="flex-1" @click="() => SideBarTrigger()"></div>
             </div>
@@ -234,6 +256,13 @@ onMounted(() => IfUserLoggedInFunction());
             </div>
           </div>
         </div>
+      </div>
+      <div
+        class="py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px] box-shadow-header-container"
+        @click="LoginFunction"
+        v-else
+      >
+        <h5 class="text-primary font-normal text-base">Login</h5>
       </div>
     </div>
   </div>
