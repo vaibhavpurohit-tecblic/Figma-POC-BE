@@ -1,5 +1,6 @@
 from flask import Flask, send_from_directory
 from flask_swagger_ui import get_swaggerui_blueprint
+from flask_migrate import Migrate
 from app.extensions import db
 from config import Config
 from flask_cors import CORS
