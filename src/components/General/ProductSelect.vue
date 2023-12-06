@@ -1,9 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import {
-  ProductListApiFunction,
-  ProductDetailsApiFunction,
-} from "../../api/ProductApis/index.js";
+import { ProductListApiFunction } from "../../api/ProductApis/index.js";
+import { AdCopyChatCreateApiFunction } from "../../api/AdCopyApis/index.js";
 
 const props = defineProps({
   active: Boolean,
@@ -35,9 +33,11 @@ function ProductSelectionFunction(product) {
 }
 
 async function ProductDetailsFunction() {
-  const result = await ProductDetailsApiFunction({
-    id: dropDownValue?.value?.product_id,
-  });
+  const result = await AdCopyChatCreateApiFunction();
+
+  // const result = await ProductDetailsApiFunction({
+  //   id: dropDownValue?.value?.product_id,
+  // });
 
   console.log(result);
 }
