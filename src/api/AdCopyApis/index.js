@@ -13,14 +13,15 @@ export async function AdCopyListApiFunction() {
   return result;
 }
 
-export async function AdCopyChatCreateApiFunction() {
+export async function AdCopyChatCreateApiFunction(data) {
   const result = await axios
-    .post("/api/" + 4 + "/ad-copy")
+    .post("/api/" + 4 + "/ad-copy", data)
     .then((res) => {
-      console.log(res);
+      return res.data.data.chat;
     })
     .catch((err) => {
       console.log(err);
+      return {};
     });
 
   return result;
@@ -28,7 +29,7 @@ export async function AdCopyChatCreateApiFunction() {
 
 export async function AdCopyChatDetailsApiFunction() {
   const result = await axios
-    .get("/api/" + 1 + "/ad-copy" + 1)
+    .get("/api/" + 4 + "/ad-copy" + 1)
     .then((res) => {
       console.log(res);
     })
@@ -41,7 +42,7 @@ export async function AdCopyChatDetailsApiFunction() {
 
 export async function AdCopyChatDeleteApiFunction() {
   const result = await axios
-    .delete("/api/" + 1 + "/ad-copy" + 1)
+    .delete("/api/" + 4 + "/ad-copy" + 1)
     .then((res) => {
       console.log(res);
     })
@@ -67,7 +68,7 @@ export async function AdCopyChatMessagesListApiFunction() {
 
 export async function AdCopyChatMessagesAddApiFunction() {
   const result = await axios
-    .post("/api/" + 1 + "/ad-copy" + 1 + "/message")
+    .post("/api/" + 4 + "/ad-copy" + 1 + "/message")
     .then((res) => {
       console.log(res);
     })

@@ -33,13 +33,11 @@ function ProductSelectionFunction(product) {
 }
 
 async function ProductDetailsFunction() {
-  const result = await AdCopyChatCreateApiFunction();
+  const result = await AdCopyChatCreateApiFunction({
+    messageContent: dropDownValue?.value?.product?.name || "",
+  });
 
-  // const result = await ProductDetailsApiFunction({
-  //   id: dropDownValue?.value?.product_id,
-  // });
-
-  console.log(result);
+  window.location.href = "/ad-copy?" + result.id;
 }
 
 onMounted(() => ProductListFunction());
