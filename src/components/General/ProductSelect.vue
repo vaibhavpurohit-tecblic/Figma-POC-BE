@@ -1,11 +1,9 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import {
-  ProductListApiFunction,
-  ProductDetailsApiFunction,
-} from "../../api/ProductApis/index.js";
+import { ProductListApiFunction } from "../../api/ProductApis/index.js";
+import { AdCopyChatCreateApiFunction } from "../../api/AdCopyApis/index.js";
 
-defineProps({
+const props = defineProps({
   active: Boolean,
 });
 
@@ -14,7 +12,7 @@ const dropDownList = ref([]);
 const dropDownValue = ref(null);
 
 function DropdownTrigger() {
-  if (active) {
+  if (props.active) {
     if (isDropdown.value) {
       isDropdown.value = false;
     } else {
@@ -35,9 +33,11 @@ function ProductSelectionFunction(product) {
 }
 
 async function ProductDetailsFunction() {
-  const result = await ProductDetailsApiFunction({
-    id: dropDownValue?.value?.product_id,
-  });
+  const result = await AdCopyChatCreateApiFunction();
+
+  // const result = await ProductDetailsApiFunction({
+  //   id: dropDownValue?.value?.product_id,
+  // });
 
   console.log(result);
 }
@@ -51,9 +51,9 @@ onMounted(() => ProductListFunction());
     <div
       :class="{
         'border border-secondary py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
-          active,
+          props.active,
         'border border-gray-500 py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
-          !active,
+          !props.active,
       }"
       @click="DropdownTrigger"
     >
@@ -95,8 +95,8 @@ onMounted(() => ProductListFunction());
   </div>
   <button
     :class="{
-      'bg-quaternary py-3 w-full mt-7 text-white rounded-xl': active,
-      ' bg-gray-500 py-3 w-full mt-7 text-white rounded-xl': !active,
+      'bg-quaternary py-3 w-full mt-7 text-white rounded-xl': props.active,
+      ' bg-gray-500 py-3 w-full mt-7 text-white rounded-xl': !props.active,
     }"
     @click="() => ProductDetailsFunction()"
   >

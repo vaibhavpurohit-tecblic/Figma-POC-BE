@@ -3,11 +3,22 @@ import { onMounted, ref } from "vue";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
+import { ExpertBotChatMessagesListApiFunction } from "../api/ExpertBotApis/index.js";
 
 const propsValue = ref("");
 
+async function ExpertBotChatMessagesListApiFunctionFunction() {
+  const result = await ExpertBotChatMessagesListApiFunction();
+
+  console.log(result);
+}
+
 function CheckPropsFunction() {
   propsValue.value = window.location.search;
+
+  if (window.location.search?.length > 0) {
+    ExpertBotChatMessagesListApiFunctionFunction();
+  }
 }
 
 onMounted(() => CheckPropsFunction());
