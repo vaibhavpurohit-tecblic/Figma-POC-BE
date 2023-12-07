@@ -23,7 +23,11 @@ async function AdCopyChatListFunction() {
 async function ExpertBotChatListFunction() {
   const result = await ExpertBotListApiFunction();
 
-  console.log(result);
+  if (result.status === 200) {
+    sideBarChatList.value = result?.data?.chats || [];
+  } else {
+    sideBarChatList.value = [];
+  }
 }
 
 function SideBarDataFunction() {

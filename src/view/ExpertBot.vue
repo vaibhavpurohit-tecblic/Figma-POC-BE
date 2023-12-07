@@ -5,12 +5,29 @@ import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
 import { ExpertBotChatMessagesListApiFunction } from "../api/ExpertBotApis/index.js";
 
+const inputLoading = ref(false);
+
+function InputLoadingStartFunction() {
+  inputLoading.value = true;
+}
+
+function InputLoadingStopFunction() {
+  inputLoading.value = false;
+  CheckPropsFunction();
+}
+
 const propsValue = ref("");
+
+const chatDetails = ref([]);
 
 async function ExpertBotChatMessagesListApiFunctionFunction() {
   const result = await ExpertBotChatMessagesListApiFunction();
 
-  console.log(result);
+  if (result.status === 200) {
+    chatDetails.value = result?.data?.messages || [];
+  } else {
+    chatDetails.value = [];
+  }
 }
 
 function CheckPropsFunction() {
@@ -37,67 +54,118 @@ onMounted(() => CheckPropsFunction());
             class="h-[calc(100vh-275px)] overflow-auto"
             v-if="propsValue.length > 0"
           >
-            <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
-              <div class="col-span-1"></div>
-              <div class="col-span-1 md:col-span-3">
-                <div class="flex gap-4">
-                  <img
-                    src="../assets/images/ProfilePhoto.png"
-                    alt=""
-                    class="h-14 w-14 rounded-full"
-                  />
-                  <div class="py-4 px-7 rounded-xl flex-1">
-                    <p class="text-primary text-sm font-normal">
-                      I dont like this, Can you provide something interesting.
-                    </p>
+            <div class="" v-for="item in chatDetails" :key="item.id">
+              <div
+                class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                v-if="item.author === 'bot'"
+              >
+                <div class="col-span-1"></div>
+                <div class="col-span-1 md:col-span-3">
+                  <div class="flex gap-4">
+                    <img
+                      src="../assets/images/roboProfile.png"
+                      alt=""
+                      class="h-14 w-14"
+                    />
+                    <div class="py-4 px-7 rounded-xl bg-tertiary flex-1">
+                      <p class="text-primary text-sm font-normal">
+                        {{ item.content }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-1">
+                  <div class="pt-5 pl-4">
+                    <div
+                      class="flex justify-end md:justify-start gap-2 items-center"
+                    >
+                      <img
+                        src="../assets/logos/dateIcon.svg"
+                        alt=""
+                        class="h-3 w-3"
+                      />
+                      <p class="text-xs font-normal text-gray-600 flex-none">
+                        {{ moment(item.createdAt).format("DD MMM YYYY") }}
+                      </p>
+                      <img
+                        src="../assets/logos/timeIcon.svg"
+                        alt=""
+                        class="h-3 w-3"
+                      />
+                      <p class="text-xs font-normal text-gray-600 flex-none">
+                        {{ moment(item.createdAt).format("hh:mm A") }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-span-1">
-                <div class="pt-5 pl-4">
-                  <div
-                    class="flex justify-end md:justify-start gap-2 items-center"
-                  >
+              <div
+                class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                v-if="item.author === 'user'"
+              >
+                <div class="col-span-1"></div>
+                <div class="col-span-1 md:col-span-3">
+                  <div class="flex gap-4">
                     <img
-                      src="../assets/logos/dateIcon.svg"
+                      src="../assets/images/ProfilePhoto.png"
                       alt=""
-                      class="h-3 w-3"
+                      class="h-14 w-14 rounded-full"
                     />
-                    <p class="text-xs font-normal text-gray-600 flex-none">
-                      24 Aug 2023
-                    </p>
-                    <img
-                      src="../assets/logos/timeIcon.svg"
-                      alt=""
-                      class="h-3 w-3"
-                    />
-                    <p class="text-xs font-normal text-gray-600 flex-none">
-                      11:34 pm
-                    </p>
+                    <div class="py-4 px-7 rounded-xl flex-1">
+                      <p class="text-primary text-sm font-normal">
+                        {{ item.content }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-1">
+                  <div class="pt-5 pl-4">
+                    <div
+                      class="flex justify-end md:justify-start gap-2 items-center"
+                    >
+                      <img
+                        src="../assets/logos/dateIcon.svg"
+                        alt=""
+                        class="h-3 w-3"
+                      />
+                      <p class="text-xs font-normal text-gray-600 flex-none">
+                        {{ moment(item.createdAt).format("DD MMM YYYY") }}
+                      </p>
+                      <img
+                        src="../assets/logos/timeIcon.svg"
+                        alt=""
+                        class="h-3 w-3"
+                      />
+                      <p class="text-xs font-normal text-gray-600 flex-none">
+                        {{ moment(item.createdAt).format("hh:mm A") }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
-              <div class="col-span-1"></div>
-              <div class="col-span-1 md:col-span-3">
-                <div class="flex gap-4">
-                  <img
-                    src="../assets/images/roboProfile.png"
-                    alt=""
-                    class="h-14 w-14"
-                  />
-                  <div
-                    class="py-4 px-7 rounded-xl bg-tertiary flex-1 flex gap-3 items-center"
-                  >
-                    <h5 class="text-primary text-base font-medium">
-                      Chat Bot is Typing
-                    </h5>
+            <div class="" v-if="inputLoading">
+              <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
+                <div class="col-span-1"></div>
+                <div class="col-span-1 md:col-span-3">
+                  <div class="flex gap-4">
                     <img
-                      src="../assets/logos/chatLoading.svg"
+                      src="../assets/images/roboProfile.png"
                       alt=""
-                      class="h-4 w-10"
+                      class="h-14 w-14"
                     />
+                    <div
+                      class="py-4 px-7 rounded-xl bg-tertiary flex-1 flex gap-3 items-center"
+                    >
+                      <h5 class="text-primary text-base font-medium">
+                        Chat Bot is Typing
+                      </h5>
+                      <img
+                        src="../assets/logos/chatLoading.svg"
+                        alt=""
+                        class="h-4 w-10"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -143,7 +211,12 @@ onMounted(() => CheckPropsFunction());
                   </div>
                 </div>
               </div>
-              <CustomerInputBox active="true" />
+              <CustomerInputBox
+                active="true"
+                :loading="inputLoading"
+                :loadingStartFunction="InputLoadingStartFunction"
+                :loadingStopFunction="InputLoadingStopFunction"
+              />
             </div>
           </div>
         </div>

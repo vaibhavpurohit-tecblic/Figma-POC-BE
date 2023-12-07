@@ -1,7 +1,10 @@
 <script setup>
 import { ref } from "vue";
 import { AdCopyChatMessagesAddApiFunction } from "../../api/AdCopyApis/index.js";
-import { ExpertBotChatMessagesAddApiFunction } from "../../api/ExpertBotApis/index.js";
+import {
+  ExpertBotChatCreateApiFunction,
+  ExpertBotChatMessagesAddApiFunction,
+} from "../../api/ExpertBotApis/index.js";
 
 const props = defineProps({
   active: Boolean,
@@ -34,11 +37,21 @@ async function AdCopyChatMessagesAddFunction() {
   }
 }
 
-async function ExpertBotChatMessagesAddFunction() {
-  const result = await ExpertBotChatMessagesAddApiFunction({
-    id: window?.location?.search?.slice(1) || "",
+async function ExpertBotChatCreateFunction() {
+  const result = await ExpertBotChatCreateApiFunction({
     messageContent: textMessage.value,
   });
+
+  if (result.status === 200) {
+    ExpertBotChatMessagesAddFunction({
+      id: result.data.chat.id,
+      messageContent: result.data.chat.title || "",
+    });
+  }
+}
+
+async function ExpertBotChatMessagesAddFunction(data) {
+  const result = await ExpertBotChatMessagesAddApiFunction(data);
 
   if (result.status === 200) {
     props.loadingStopFunction();
@@ -52,7 +65,14 @@ function SideBarDataFunction() {
     if (window.location.pathname === "/ad-copy") {
       AdCopyChatMessagesAddFunction();
     } else if (window.location.pathname === "/expert-bot") {
-      ExpertBotChatMessagesAddFunction();
+      if (window?.location?.search?.length > 0) {
+        ExpertBotChatMessagesAddFunction({
+          id: window?.location?.search?.slice(1) || "",
+          messageContent: textMessage.value,
+        });
+      } else {
+        ExpertBotChatCreateFunction();
+      }
     }
   }
 }
