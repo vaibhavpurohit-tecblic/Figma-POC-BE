@@ -1,10 +1,10 @@
 <script setup>
-import { AdCopyChatMessagesListApiFunction } from "../api/AdCopyApis/index.js";
 import { onMounted, ref } from "vue";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import ProductSelect from "../components/General/ProductSelect.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
+import { AdCopyChatMessagesListApiFunction } from "../api/AdCopyApis/index.js";
 
 const propsValue = ref("");
 
