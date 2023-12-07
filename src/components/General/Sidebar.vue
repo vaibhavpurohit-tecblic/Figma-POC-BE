@@ -8,10 +8,16 @@ defineProps({
   title: String,
 });
 
+const sideBarChatList = ref([]);
+
 async function AdCopyChatListFunction() {
   const result = await AdCopyListApiFunction();
 
-  console.log(result);
+  if (result.status === 200) {
+    sideBarChatList.value = result?.data?.chats || [];
+  } else {
+    sideBarChatList.value = [];
+  }
 }
 
 async function ExpertBotChatListFunction() {
@@ -55,28 +61,12 @@ onMounted(() => {
         class="flex flex-col gap-3 h-[calc(100vh-105px)] md:h-[calc(100vh-260px)] overflow-auto"
       >
         <p class="text-sm text-gray-500 font-normal">Today</p>
-        <div class="flex flex-col gap-3">
-          <SidebarTitle :active="true" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
-          <SidebarTitle :active="false" title="Lorem Ipsum is simple" />
+        <div
+          class="flex flex-col gap-3"
+          v-for="item in sideBarChatList"
+          :key="item.id"
+        >
+          <SidebarTitle :title="item.title" :id="item.id" />
         </div>
       </div>
     </div>

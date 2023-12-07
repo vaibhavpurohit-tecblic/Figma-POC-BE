@@ -4,10 +4,11 @@ export async function AdCopyListApiFunction() {
   const result = await axios
     .get("/api/" + 4 + "/ad-copy")
     .then((res) => {
-      console.log(res);
+      return res.data;
     })
     .catch((err) => {
       console.log(err);
+      return {};
     });
 
   return result;
@@ -17,7 +18,7 @@ export async function AdCopyChatCreateApiFunction(data) {
   const result = await axios
     .post("/api/" + 4 + "/ad-copy", data)
     .then((res) => {
-      return res.data.data.chat;
+      return res.data;
     })
     .catch((err) => {
       console.log(err);
@@ -53,27 +54,29 @@ export async function AdCopyChatDeleteApiFunction() {
   return result;
 }
 
-export async function AdCopyChatMessagesListApiFunction() {
+export async function AdCopyChatMessagesListApiFunction(data) {
   const result = await axios
-    .get("/api/" + 4 + "/ad-copy" + 1 + "/message")
+    .get("/api/" + 4 + "/ad-copy/" + data.id + "/message")
     .then((res) => {
-      console.log(res);
+      return res.data;
     })
     .catch((err) => {
       console.log(err);
+      return {};
     });
 
   return result;
 }
 
-export async function AdCopyChatMessagesAddApiFunction() {
+export async function AdCopyChatMessagesAddApiFunction(data) {
   const result = await axios
-    .post("/api/" + 4 + "/ad-copy" + 1 + "/message")
+    .post("/api/" + 4 + "/ad-copy/" + data.id + "/message", data)
     .then((res) => {
-      console.log(res);
+      return res.data;
     })
     .catch((err) => {
       console.log(err);
+      return {};
     });
 
   return result;
