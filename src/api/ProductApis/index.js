@@ -14,17 +14,3 @@ export async function ProductListApiFunction() {
 
   return result;
 }
-
-export async function ProductDetailsApiFunction({ id }) {
-  console.log(id, "ProductDetailsApiFunction");
-  const result = await axios
-    .get("/api/products/" + id)
-    .then((res) => {
-      return res?.data?.product_detail || {};
-    })
-    .catch((err) => {
-      return {};
-    });
-
-  return result;
-}
