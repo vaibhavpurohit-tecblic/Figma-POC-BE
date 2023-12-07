@@ -1,4 +1,5 @@
 <script setup>
+import { AdCopyChatMessagesListApiFunction } from "../api/AdCopyApis/index.js";
 import { onMounted, ref } from "vue";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
@@ -7,8 +8,18 @@ import CustomerInputBox from "../components/General/CustomerInputBox.vue";
 
 const propsValue = ref("");
 
+async function AdCopyChatMessagesListFunction() {
+  const result = await AdCopyChatMessagesListApiFunction();
+
+  console.log(result);
+}
+
 function CheckPropsFunction() {
   propsValue.value = window.location.search;
+
+  if (window.location.search?.length > 0) {
+    AdCopyChatMessagesListFunction();
+  }
 }
 
 onMounted(() => CheckPropsFunction());
