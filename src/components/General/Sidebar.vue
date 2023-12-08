@@ -4,12 +4,20 @@ import SidebarTitle from "./SidebarTitle.vue";
 import { AdCopyListApiFunction } from "../../api/AdCopyApis/index.js";
 import { ExpertBotListApiFunction } from "../../api/ExpertBotApis/index.js";
 
-defineProps({
+const props = defineProps({
   title: String,
-  // :sidebarClose="sidebarClose"
-  //         :SidebarCloseStartFunction="SidebarCloseStartFunction"
-  //         :SidebarCloseStopFunction="SidebarCloseStopFunction"
+  sidebarClose: Boolean,
+  SidebarCloseStartFunction: Function,
+  SidebarCloseStopFunction: Function,
 });
+
+function SideBarButtonFunction() {
+  if (props.sidebarClose) {
+    props.SidebarCloseStartFunction();
+  } else {
+    props.SidebarCloseStopFunction();
+  }
+}
 
 const sideBarChatList = ref([]);
 
@@ -61,12 +69,14 @@ onMounted(() => {
         <div
           class="rounded-xl border-2 border-secondary py-2 px-6 flex items-center gap-3 w-full cursor-pointer"
           @click="() => RedirectLinkFunction()"
+          v-if="props.sidebarClose"
         >
           <img src="../../assets/logos/addIcon.svg" alt="" class="h-4 w-4" />
-          <p class="text-base text-primary font-medium">{{ title }}</p>
+          <p class="text-base text-primary font-medium">{{ props.title }}</p>
         </div>
         <div
-          class="hidden md:block p-3 rounded-xl border-2 border-secondary flex-none"
+          class="hidden md:block p-3 rounded-xl border-2 border-secondary flex-none cursor-pointer"
+          @click="() => SideBarButtonFunction()"
         >
           <img
             src="../../assets/logos/sidebarIcon.svg"
@@ -77,6 +87,7 @@ onMounted(() => {
       </div>
       <div
         class="flex flex-col gap-3 h-[calc(100vh-105px)] md:h-[calc(100vh-260px)] overflow-auto"
+        v-if="props.sidebarClose"
       >
         <p class="text-sm text-gray-500 font-normal">Today</p>
         <div

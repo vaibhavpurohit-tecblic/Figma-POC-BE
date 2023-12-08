@@ -6,6 +6,16 @@ import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
 import { ExpertBotChatMessagesListApiFunction } from "../api/ExpertBotApis/index.js";
 
+const sidebarClose = ref(true);
+
+function SidebarCloseStartFunction() {
+  sidebarClose.value = false;
+}
+
+function SidebarCloseStopFunction() {
+  sidebarClose.value = true;
+}
+
 const inputLoading = ref(false);
 
 function InputLoadingStartFunction() {
@@ -48,8 +58,18 @@ onMounted(() => CheckPropsFunction());
   <div class="flex flex-col min-h-screen max-h-screen">
     <Header :auth="true" active="expert-bot" />
     <div class="flex-1 flex gap-7 container p-5 mx-auto">
-      <div class="sidebar-container hidden md:block">
-        <Sidebar title="New Chat" />
+      <div
+        :class="{
+          'sidebar-container hidden md:block': sidebarClose,
+          'hidden md:block': !sidebarClose,
+        }"
+      >
+        <Sidebar
+          title="New Chat"
+          :sidebarClose="sidebarClose"
+          :SidebarCloseStartFunction="SidebarCloseStartFunction"
+          :SidebarCloseStopFunction="SidebarCloseStopFunction"
+        />
       </div>
       <div class="flex-1">
         <div class="flex flex-col justify-between gap-5 h-full">

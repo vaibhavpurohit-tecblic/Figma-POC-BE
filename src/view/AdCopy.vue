@@ -9,14 +9,14 @@ import { AdCopyChatMessagesListApiFunction } from "../api/AdCopyApis/index.js";
 
 const propsValue = ref("");
 
-const sidebarClose = ref(false);
+const sidebarClose = ref(true);
 
 function SidebarCloseStartFunction() {
-  sidebarClose.value = true;
+  sidebarClose.value = false;
 }
 
 function SidebarCloseStopFunction() {
-  sidebarClose.value = false;
+  sidebarClose.value = true;
 }
 
 const dropdownLoading = ref(false);
@@ -71,7 +71,12 @@ onMounted(() => CheckPropsFunction());
   <div class="flex flex-col min-h-screen max-h-screen">
     <Header :auth="true" active="ad-copy" />
     <div class="flex-1 flex gap-7 container p-5 mx-auto">
-      <div class="sidebar-container hidden md:block">
+      <div
+        :class="{
+          'sidebar-container hidden md:block': sidebarClose,
+          'hidden md:block': !sidebarClose,
+        }"
+      >
         <Sidebar
           title="Create New Ad Copy"
           :sidebarClose="sidebarClose"
