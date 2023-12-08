@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function ExpertBotListApiFunction() {
   const result = await axios
-    .get("/api/" + 4 + "/expert-bot")
+    .get("/api/" + 5 + "/expert-bot")
     .then((res) => {
       return res.data;
     })
@@ -16,7 +16,7 @@ export async function ExpertBotListApiFunction() {
 
 export async function ExpertBotChatCreateApiFunction(data) {
   const result = await axios
-    .post("/api/" + 4 + "/expert-bot", data)
+    .post("/api/" + 5 + "/expert-bot", data)
     .then((res) => {
       return res.data;
     })
@@ -30,7 +30,7 @@ export async function ExpertBotChatCreateApiFunction(data) {
 
 export async function ExpertBotChatDetailsApiFunction() {
   const result = await axios
-    .get("/api/" + 4 + "/expert-bot" + 1)
+    .get("/api/" + 5 + "/expert-bot" + 1)
     .then((res) => {
       console.log(res);
     })
@@ -43,7 +43,7 @@ export async function ExpertBotChatDetailsApiFunction() {
 
 export async function ExpertBotChatDeleteApiFunction() {
   const result = await axios
-    .delete("/api/" + 4 + "/expert-bot" + 1)
+    .delete("/api/" + 5 + "/expert-bot" + 1)
     .then((res) => {
       console.log(res);
     })
@@ -56,7 +56,7 @@ export async function ExpertBotChatDeleteApiFunction() {
 
 export async function ExpertBotChatMessagesListApiFunction(data) {
   const result = await axios
-    .get("/api/" + 4 + "/expert-bot/" + data.id + "/message")
+    .get("/api/" + 5 + "/expert-bot/" + data.id + "/message")
     .then((res) => {
       return res.data;
     })
@@ -70,7 +70,7 @@ export async function ExpertBotChatMessagesListApiFunction(data) {
 
 export async function ExpertBotChatMessagesAddApiFunction(data) {
   const result = await axios
-    .post("/api/" + 4 + "/expert-bot/" + data.id + "/message", data)
+    .post("/api/" + 5 + "/expert-bot/" + data.id + "/message", data)
     .then((res) => {
       return res.data;
     })
