@@ -6,9 +6,20 @@ import { ExpertBotListApiFunction } from "../../api/ExpertBotApis/index.js";
 
 defineProps({
   title: String,
+  // :sidebarClose="sidebarClose"
+  //         :SidebarCloseStartFunction="SidebarCloseStartFunction"
+  //         :SidebarCloseStopFunction="SidebarCloseStopFunction"
 });
 
 const sideBarChatList = ref([]);
+
+function RedirectLinkFunction() {
+  if (window.location.pathname === "/ad-copy") {
+    window.location.href = "/ad-copy";
+  } else if (window.location.pathname === "/expert-bot") {
+    window.location.href = "/expert-bot";
+  }
+}
 
 async function AdCopyChatListFunction() {
   const result = await AdCopyListApiFunction();
@@ -48,12 +59,15 @@ onMounted(() => {
     <div class="flex flex-col gap-4">
       <div class="flex gap-4">
         <div
-          class="rounded-xl border-2 border-secondary py-2 px-6 flex items-center gap-3"
+          class="rounded-xl border-2 border-secondary py-2 px-6 flex items-center gap-3 w-full cursor-pointer"
+          @click="() => RedirectLinkFunction()"
         >
           <img src="../../assets/logos/addIcon.svg" alt="" class="h-4 w-4" />
           <p class="text-base text-primary font-medium">{{ title }}</p>
         </div>
-        <div class="hidden md:block p-3 rounded-xl border-2 border-secondary">
+        <div
+          class="hidden md:block p-3 rounded-xl border-2 border-secondary flex-none"
+        >
           <img
             src="../../assets/logos/sidebarIcon.svg"
             alt="Sidebar Logo"

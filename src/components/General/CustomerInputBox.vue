@@ -54,8 +54,12 @@ async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
   if (result.status === 200) {
-    props.loadingStopFunction();
-    textMessage.value = "";
+    if (window?.location?.search?.length > 0) {
+      props.loadingStopFunction();
+      textMessage.value = "";
+    } else {
+      window.location.href = "/expert-bot?" + result?.data?.message?.chatId;
+    }
   }
 }
 

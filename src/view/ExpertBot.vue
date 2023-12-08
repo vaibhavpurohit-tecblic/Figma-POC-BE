@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import moment from "moment";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
@@ -20,8 +21,8 @@ const propsValue = ref("");
 
 const chatDetails = ref([]);
 
-async function ExpertBotChatMessagesListApiFunctionFunction() {
-  const result = await ExpertBotChatMessagesListApiFunction();
+async function ExpertBotChatMessagesListApiFunctionFunction(data) {
+  const result = await ExpertBotChatMessagesListApiFunction(data);
 
   if (result.status === 200) {
     chatDetails.value = result?.data?.messages || [];
@@ -34,7 +35,9 @@ function CheckPropsFunction() {
   propsValue.value = window.location.search;
 
   if (window.location.search?.length > 0) {
-    ExpertBotChatMessagesListApiFunctionFunction();
+    ExpertBotChatMessagesListApiFunctionFunction({
+      id: window?.location?.search?.slice(1) || "",
+    });
   }
 }
 
