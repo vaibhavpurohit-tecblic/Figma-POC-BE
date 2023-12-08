@@ -55,11 +55,11 @@ onMounted(() => CheckPropsFunction());
         <div class="flex flex-col justify-between gap-5 h-full">
           <div
             class="h-[calc(100vh-275px)] overflow-auto"
-            v-if="propsValue.length > 0"
+            v-if="propsValue.length > 0 || inputLoading"
           >
             <div class="" v-for="item in chatDetails" :key="item.id">
               <div
-                class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                class="grid grid-cols-1 md:grid-cols-6 my-5"
                 v-if="item.author === 'bot'"
               >
                 <div class="col-span-1"></div>
@@ -103,7 +103,7 @@ onMounted(() => CheckPropsFunction());
                 </div>
               </div>
               <div
-                class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                class="grid grid-cols-1 md:grid-cols-6"
                 v-if="item.author === 'user'"
               >
                 <div class="col-span-1"></div>
@@ -174,11 +174,11 @@ onMounted(() => CheckPropsFunction());
               </div>
             </div>
           </div>
-          <di class="" v-if="propsValue.length === 0"></di>
+          <div class="" v-if="propsValue.length === 0 && !inputLoading"></div>
           <div class="grid grid-cols-1 md:grid-cols-6">
             <div class="col-span-1"></div>
             <div class="col-span-1 md:col-span-3">
-              <div class="" v-if="propsValue.length === 0">
+              <div class="" v-if="propsValue.length === 0 && !inputLoading">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div class="border border-secondary rounded-xl py-3 px-6">
                     <h5 class="text-primary font-medium text-base">

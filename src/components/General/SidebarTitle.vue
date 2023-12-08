@@ -45,7 +45,7 @@ onMounted(() => CheckIfIdMatch());
         {{ props.title }}
       </h6>
     </div>
-    <div class="flex gap-3">
+    <div class="flex gap-3 flex-none">
       <img
         src="../../assets/logos/editActive.svg"
         alt="Edit Icon"
