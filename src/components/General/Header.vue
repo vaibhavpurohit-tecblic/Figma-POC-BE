@@ -183,11 +183,6 @@ onMounted(() => {
                 class="flex flex-col bg-white w-[150px] rounded-b-xl shadow-lg"
               >
                 <h5
-                  class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary"
-                >
-                  Settings
-                </h5>
-                <h5
                   class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary rounded-b-xl"
                   @click="LogoutFunction"
                 >
@@ -246,11 +241,6 @@ onMounted(() => {
                     Expert Bot
                   </h5>
                 </router-link>
-                <h5
-                  class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary"
-                >
-                  Settings
-                </h5>
                 <h5
                   class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary rounded-b-xl"
                   @click="LogoutFunction"
