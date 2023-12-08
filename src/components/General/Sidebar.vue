@@ -75,7 +75,7 @@ onMounted(() => {
           <p class="text-base text-primary font-medium">{{ props.title }}</p>
         </div>
         <div
-          class="hidden md:block p-3 rounded-xl border-2 border-secondary flex-none cursor-pointer"
+          class="p-3 rounded-xl border-2 border-secondary flex-none cursor-pointer"
           @click="() => SideBarButtonFunction()"
         >
           <img
