@@ -107,8 +107,13 @@ onMounted(() => {
             v-if="isSidebar"
           >
             <div class="w-full flex">
-              <div class="bg-white">
-                <Sidebar :title="isSidebarTitle" />
+              <div class="bg-white w-[350px]">
+                <Sidebar
+                  :title="isSidebarTitle"
+                  :sidebarClose="isSidebar"
+                  :SidebarCloseStartFunction="SideBarTrigger"
+                  :SidebarCloseStopFunction="SideBarTrigger"
+                />
               </div>
               <div class="flex-1" @click="() => SideBarTrigger()"></div>
             </div>

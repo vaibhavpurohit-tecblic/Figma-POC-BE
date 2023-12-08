@@ -1,28 +1,83 @@
 <script setup>
+import { ref } from "vue";
 import { AdCopyChatMessagesAddApiFunction } from "../../api/AdCopyApis/index.js";
-import { ExpertBotListApiFunction } from "../../api/ExpertBotApis/index.js";
+import {
+  ExpertBotChatCreateApiFunction,
+  ExpertBotChatMessagesAddApiFunction,
+} from "../../api/ExpertBotApis/index.js";
 
-defineProps({
+const props = defineProps({
   active: Boolean,
+  loading: Boolean,
+  loadingStartFunction: Function,
+  loadingStopFunction: Function,
 });
 
-async function AdCopyChatMessagesAddFunction() {
-  const result = await AdCopyChatMessagesAddApiFunction();
+const textMessage = ref("");
 
-  console.log(result);
+function textMessageChange(e) {
+  textMessage.value = e.target.value;
 }
 
-async function ExpertBotChatMessagesAddFunction() {
-  const result = await ExpertBotChatMessagesAddApiFunction();
+function clearTextareaOnEnter(e) {
+  if (e.key === "Enter") {
+    SideBarDataFunction();
+  }
+}
 
-  console.log(result);
+async function AdCopyChatMessagesAddFunction() {
+  const result = await AdCopyChatMessagesAddApiFunction({
+    id: window?.location?.search?.slice(1) || "",
+    messageContent: textMessage.value,
+  });
+
+  if (result.status === 200) {
+    props.loadingStopFunction();
+    textMessage.value = "";
+  }
+}
+
+async function ExpertBotChatCreateFunction() {
+  const result = await ExpertBotChatCreateApiFunction({
+    messageContent: textMessage.value,
+  });
+
+  if (result.status === 200) {
+    ExpertBotChatMessagesAddFunction({
+      id: result.data.chat.id,
+      messageContent: result.data.chat.title || "",
+    });
+  }
+}
+
+async function ExpertBotChatMessagesAddFunction(data) {
+  const result = await ExpertBotChatMessagesAddApiFunction(data);
+
+  if (result.status === 200) {
+    if (window?.location?.search?.length > 0) {
+      props.loadingStopFunction();
+      textMessage.value = "";
+    } else {
+      window.location.href = "/expert-bot?" + result?.data?.message?.chatId;
+    }
+  }
 }
 
 function SideBarDataFunction() {
-  if (window.location.pathname === "/ad-copy") {
-    AdCopyChatMessagesAddFunction();
-  } else if (window.location.pathname === "/expert-bot") {
-    ExpertBotChatMessagesAddFunction();
+  if (textMessage.value.length > 0 && props.active && !props.loading) {
+    props.loadingStartFunction();
+    if (window.location.pathname === "/ad-copy") {
+      AdCopyChatMessagesAddFunction();
+    } else if (window.location.pathname === "/expert-bot") {
+      if (window?.location?.search?.length > 0) {
+        ExpertBotChatMessagesAddFunction({
+          id: window?.location?.search?.slice(1) || "",
+          messageContent: textMessage.value,
+        });
+      } else {
+        ExpertBotChatCreateFunction();
+      }
+    }
   }
 }
 </script>
@@ -31,9 +86,9 @@ function SideBarDataFunction() {
   <div
     :class="{
       'border border-secondary rounded-xl flex gap-2 bg-secondary/[0.10] py-3 px-6':
-        active,
+        props.active && !props.loading,
       'border border-secondary rounded-xl flex gap-2 bg-secondary/[0.10] py-3 px-6 opacity-60':
-        !active,
+        !props.active || props.loading,
     }"
   >
     <div class="pt-1">
@@ -48,14 +103,18 @@ function SideBarDataFunction() {
         rows="3"
         class="bg-transparent w-full focus-visible:outline-none text-primary text-base font-normal resize-none"
         placeholder="Type here to chat ..."
-        :disabled="!active"
+        :disabled="!props.active || props.loading"
+        :value="textMessage"
+        @input="textMessageChange"
+        @keydown.enter.prevent="clearTextareaOnEnter"
       />
     </div>
     <div class="self-end">
       <img
         src="../../assets/logos/textAreaEnter.svg"
         alt="Enter icon"
-        class="h-4 w-4"
+        class="h-4 w-4 cursor-pointer"
+        @click="() => SideBarDataFunction()"
       />
     </div>
   </div>
