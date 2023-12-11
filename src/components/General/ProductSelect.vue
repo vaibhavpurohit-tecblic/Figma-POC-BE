@@ -1,12 +1,16 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import { ProductListApiFunction } from "../../api/ProductApis/index.js";
 import {
-  ProductListApiFunction,
-  ProductDetailsApiFunction,
-} from "../../api/ProductApis/index.js";
+  AdCopyChatCreateApiFunction,
+  AdCopyChatMessagesAddApiFunction,
+} from "../../api/AdCopyApis/index.js";
 
-defineProps({
+const props = defineProps({
   active: Boolean,
+  loading: Boolean,
+  filledValues: String,
+  loadingFunction: Function,
 });
 
 const isDropdown = ref(false);
@@ -14,7 +18,7 @@ const dropDownList = ref([]);
 const dropDownValue = ref(null);
 
 function DropdownTrigger() {
-  if (active) {
+  if (props.active) {
     if (isDropdown.value) {
       isDropdown.value = false;
     } else {
@@ -34,12 +38,30 @@ function ProductSelectionFunction(product) {
   isDropdown.value = false;
 }
 
-async function ProductDetailsFunction() {
-  const result = await ProductDetailsApiFunction({
-    id: dropDownValue?.value?.product_id,
-  });
+async function AdCopyChatMessagesAddFunction(data) {
+  const result = await AdCopyChatMessagesAddApiFunction(data);
 
-  console.log(result);
+  console.log(result, "product");
+
+  if (result.status == 200) {
+    window.location.href = "/ad-copy?" + result?.data?.message?.chatId;
+  }
+}
+
+async function ProductDetailsFunction() {
+  if (dropDownValue.value && props.active && !props.loading) {
+    props.loadingFunction();
+    const result = await AdCopyChatCreateApiFunction({
+      messageContent: dropDownValue?.value?.product?.name || "",
+    });
+
+    if (result.status === 200) {
+      AdCopyChatMessagesAddFunction({
+        id: result.data.chat.id,
+        messageContent: result.data.chat.title || "",
+      });
+    }
+  }
 }
 
 onMounted(() => ProductListFunction());
@@ -51,20 +73,20 @@ onMounted(() => ProductListFunction());
     <div
       :class="{
         'border border-secondary py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
-          active,
+          props.active && !props.loading,
         'border border-gray-500 py-3 px-6 rounded-xl flex gap-4 justify-between items-center mt-1 cursor-pointer':
-          !active,
+          !props.active || props.loading,
       }"
       @click="DropdownTrigger"
     >
       <p
         class="flex-1 text-primary font-normal text-sm"
-        v-if="dropDownValue === null"
+        v-if="dropDownValue === null && filledValues === ''"
       >
         Select your Product
       </p>
-      <p class="flex-1 text-primary font-normal text-sm">
-        {{ dropDownValue?.product?.name || "" }}
+      <p class="flex-1 text-primary font-normal text-sm" v-else>
+        {{ dropDownValue?.product?.name || filledValues || "" }}
       </p>
       <img
         src="../../assets/logos/downArrow.svg"
@@ -95,8 +117,10 @@ onMounted(() => ProductListFunction());
   </div>
   <button
     :class="{
-      'bg-quaternary py-3 w-full mt-7 text-white rounded-xl': active,
-      ' bg-gray-500 py-3 w-full mt-7 text-white rounded-xl': !active,
+      'bg-quaternary py-3 w-full mt-7 text-white rounded-xl':
+        props.active && !props.loading,
+      ' bg-gray-500 py-3 w-full mt-7 text-white rounded-xl':
+        !props.active || props.loading,
     }"
     @click="() => ProductDetailsFunction()"
   >

@@ -1,12 +1,31 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { LogoutApiFunction } from "../../api/authApis/index.js";
+import { LogoutApiFunction } from "../../api/AuthApis/index.js";
 import Sidebar from "./Sidebar.vue";
 
 defineProps({
   auth: Boolean,
   active: String,
 });
+
+const isSidebarShow = ref(true);
+
+const isSidebarTitle = ref("");
+
+function ShowSideBarFunction() {
+  if (window.location.pathname === "/") {
+    isSidebarShow.value = false;
+  } else if (window.location.pathname === "/ad-copy") {
+    isSidebarShow.value = true;
+    isSidebarTitle.value = "Create New Ad Copy";
+  } else if (window.location.pathname === "/expert-bot") {
+    isSidebarShow.value = true;
+    isSidebarTitle.value = "New Chat";
+  } else {
+    isSidebarTitle.value = "";
+    isSidebarShow.value = true;
+  }
+}
 
 const isDropdown = ref(false);
 
@@ -60,15 +79,18 @@ function LoginFunction() {
   window.location.href = redirectURL;
 }
 
-onMounted(() => IfUserLoggedInFunction());
+onMounted(() => {
+  IfUserLoggedInFunction();
+  ShowSideBarFunction();
+});
 </script>
 
 <template>
   <div
     class="container my-6 px-5 mx-auto flex justify-between gap-5 items-center"
   >
-    <div class="block md:hidden">
-      <div class="" v-if="isLoggedIn">
+    <div class="block md:hidden" v-if="isLoggedIn && isSidebarShow">
+      <div class="">
         <div class="relative">
           <div
             class="p-3 rounded-xl border-2 border-secondary cursor-pointer"
@@ -85,8 +107,13 @@ onMounted(() => IfUserLoggedInFunction());
             v-if="isSidebar"
           >
             <div class="w-full flex">
-              <div class="bg-white">
-                <Sidebar title="Create New Ad Copy" />
+              <div class="bg-white w-[350px]">
+                <Sidebar
+                  :title="isSidebarTitle"
+                  :sidebarClose="isSidebar"
+                  :SidebarCloseStartFunction="SideBarTrigger"
+                  :SidebarCloseStopFunction="SideBarTrigger"
+                />
               </div>
               <div class="flex-1" @click="() => SideBarTrigger()"></div>
             </div>
@@ -156,11 +183,6 @@ onMounted(() => IfUserLoggedInFunction());
                 class="flex flex-col bg-white w-[150px] rounded-b-xl shadow-lg"
               >
                 <h5
-                  class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary"
-                >
-                  Settings
-                </h5>
-                <h5
                   class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary rounded-b-xl"
                   @click="LogoutFunction"
                 >
@@ -220,11 +242,6 @@ onMounted(() => IfUserLoggedInFunction());
                   </h5>
                 </router-link>
                 <h5
-                  class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary"
-                >
-                  Settings
-                </h5>
-                <h5
                   class="px-4 py-3 cursor-pointer text-sm text-primary font-normal hover:text-white hover:bg-secondary rounded-b-xl"
                   @click="LogoutFunction"
                 >
@@ -234,6 +251,13 @@ onMounted(() => IfUserLoggedInFunction());
             </div>
           </div>
         </div>
+      </div>
+      <div
+        class="py-2 px-10 border-2 cursor-pointer border-secondary rounded-[100px] box-shadow-header-container"
+        @click="LoginFunction"
+        v-else
+      >
+        <h5 class="text-primary font-normal text-base">Login</h5>
       </div>
     </div>
   </div>

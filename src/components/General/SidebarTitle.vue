@@ -1,8 +1,28 @@
 <script setup>
-defineProps({
-  active: Boolean,
+import { onMounted, ref } from "vue";
+
+const props = defineProps({
   title: String,
+  id: String,
 });
+
+const active = ref(false);
+
+function CheckIfIdMatch() {
+  if ((window?.location?.search?.slice(1) || "") === props.id) {
+    active.value = true;
+  } else {
+    active.value = false;
+  }
+}
+
+function RedirectToPage() {
+  if (!active.value) {
+    window.location.href = window.location.pathname + "?" + props.id;
+  }
+}
+
+onMounted(() => CheckIfIdMatch());
 </script>
 
 <template>
@@ -13,6 +33,7 @@ defineProps({
       'flex items-center justify-between gap-4 rounded-xl py-3 px-6 bg-secondary':
         active,
     }"
+    @click="() => RedirectToPage()"
   >
     <div class="">
       <h6
@@ -21,10 +42,10 @@ defineProps({
           'text-white text-base font-medium': active,
         }"
       >
-        {{ title }}
+        {{ props.title }}
       </h6>
     </div>
-    <div class="flex gap-3">
+    <div class="flex gap-3 flex-none">
       <img
         src="../../assets/logos/editActive.svg"
         alt="Edit Icon"

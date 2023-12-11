@@ -1,14 +1,67 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import moment from "moment";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import ProductSelect from "../components/General/ProductSelect.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
+import { AdCopyChatMessagesListApiFunction } from "../api/AdCopyApis/index.js";
 
 const propsValue = ref("");
 
+const sidebarClose = ref(true);
+
+function SidebarCloseStartFunction() {
+  sidebarClose.value = false;
+}
+
+function SidebarCloseStopFunction() {
+  sidebarClose.value = true;
+}
+
+const dropdownLoading = ref(false);
+
+function DropDownLoadingStartFunction() {
+  dropdownLoading.value = true;
+}
+
+const inputLoading = ref(false);
+
+function InputLoadingStartFunction() {
+  inputLoading.value = true;
+}
+
+function InputLoadingStopFunction() {
+  inputLoading.value = false;
+  CheckPropsFunction();
+}
+
+const initialProduct = ref("");
+
+const chatDetails = ref([]);
+
+async function AdCopyChatMessagesListFunction(data) {
+  const result = await AdCopyChatMessagesListApiFunction(data);
+
+  if (result.status === 200) {
+    initialProduct.value =
+      result?.data?.messages?.[0]?.content?.split(
+        "Write an ad. copy for:"
+      )?.[1] || "";
+    chatDetails.value = result?.data?.messages?.splice(1) || [];
+  } else {
+    chatDetails.value = [];
+  }
+}
+
 function CheckPropsFunction() {
   propsValue.value = window.location.search;
+
+  if (window?.location?.search?.length > 0) {
+    AdCopyChatMessagesListFunction({
+      id: window?.location?.search?.slice(1) || "",
+    });
+  }
 }
 
 onMounted(() => CheckPropsFunction());
@@ -18,8 +71,18 @@ onMounted(() => CheckPropsFunction());
   <div class="flex flex-col min-h-screen max-h-screen">
     <Header :auth="true" active="ad-copy" />
     <div class="flex-1 flex gap-7 container p-5 mx-auto">
-      <div class="sidebar-container hidden md:block">
-        <Sidebar title="Create New Ad Copy" />
+      <div
+        :class="{
+          'sidebar-container hidden md:block': sidebarClose,
+          'hidden md:block': !sidebarClose,
+        }"
+      >
+        <Sidebar
+          title="Create New Ad Copy"
+          :sidebarClose="sidebarClose"
+          :SidebarCloseStartFunction="SidebarCloseStartFunction"
+          :SidebarCloseStopFunction="SidebarCloseStopFunction"
+        />
       </div>
       <div class="flex-1">
         <div class="flex flex-col justify-between gap-5 h-full">
@@ -47,114 +110,110 @@ onMounted(() => CheckPropsFunction());
                       class="h-14 w-14 rounded-full"
                     />
                     <div class="flex-1">
-                      <ProductSelect :active="propsValue.length === 0" />
+                      <ProductSelect
+                        :active="propsValue.length === 0"
+                        :loading="dropdownLoading"
+                        :filledValues="initialProduct"
+                        :loadingFunction="DropDownLoadingStartFunction"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="" v-if="propsValue.length > 0">
-              <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
-                <div class="col-span-1"></div>
-                <div class="col-span-1 md:col-span-3">
-                  <div class="flex gap-4">
-                    <img
-                      src="../assets/images/roboProfile.png"
-                      alt=""
-                      class="h-14 w-14"
-                    />
-                    <div class="py-4 px-7 rounded-xl bg-tertiary flex-1">
-                      <p class="text-primary text-sm font-normal">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum."
-                      </p>
-                      <p class="text-primary text-sm font-normal">
-                        Neque porro quisquam est, qui dolorem ipsum quia dolor
-                        sit amet, consectetur, adipisci velit, sed quia non
-                        numquam eius modi tempora incidunt ut labore et.
-                      </p>
-                      <p class="text-primary text-sm font-normal">
-                        Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                      </p>
+              <div class="" v-for="item in chatDetails" :key="item.id">
+                <div
+                  class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                  v-if="item.author === 'bot'"
+                >
+                  <div class="col-span-1"></div>
+                  <div class="col-span-1 md:col-span-3">
+                    <div class="flex gap-4">
+                      <img
+                        src="../assets/images/roboProfile.png"
+                        alt=""
+                        class="h-14 w-14"
+                      />
+                      <div class="py-4 px-7 rounded-xl bg-tertiary flex-1">
+                        <p class="text-primary text-sm font-normal">
+                          {{ item.content }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-span-1">
+                    <div class="pt-5 pl-4">
+                      <div
+                        class="flex justify-end md:justify-start gap-2 items-center"
+                      >
+                        <img
+                          src="../assets/logos/dateIcon.svg"
+                          alt=""
+                          class="h-3 w-3"
+                        />
+                        <p class="text-xs font-normal text-gray-600 flex-none">
+                          {{ moment(item.createdAt).format("DD MMM YYYY") }}
+                        </p>
+                        <img
+                          src="../assets/logos/timeIcon.svg"
+                          alt=""
+                          class="h-3 w-3"
+                        />
+                        <p class="text-xs font-normal text-gray-600 flex-none">
+                          {{ moment(item.createdAt).format("hh:mm A") }}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-span-1">
-                  <div class="pt-5 pl-4">
-                    <div
-                      class="flex justify-end md:justify-start gap-2 items-center"
-                    >
+                <div
+                  class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                  v-if="item.author === 'user'"
+                >
+                  <div class="col-span-1"></div>
+                  <div class="col-span-1 md:col-span-3">
+                    <div class="flex gap-4">
                       <img
-                        src="../assets/logos/dateIcon.svg"
+                        src="../assets/images/ProfilePhoto.png"
                         alt=""
-                        class="h-3 w-3"
+                        class="h-14 w-14 rounded-full"
                       />
-                      <p class="text-xs font-normal text-gray-600 flex-none">
-                        24 Aug 2023
-                      </p>
-                      <img
-                        src="../assets/logos/timeIcon.svg"
-                        alt=""
-                        class="h-3 w-3"
-                      />
-                      <p class="text-xs font-normal text-gray-600 flex-none">
-                        11:34 pm
-                      </p>
+                      <div class="py-4 px-7 rounded-xl flex-1">
+                        <p class="text-primary text-sm font-normal">
+                          {{ item.content }}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
-                <div class="col-span-1"></div>
-                <div class="col-span-1 md:col-span-3">
-                  <div class="flex gap-4">
-                    <img
-                      src="../assets/images/ProfilePhoto.png"
-                      alt=""
-                      class="h-14 w-14 rounded-full"
-                    />
-                    <div class="py-4 px-7 rounded-xl flex-1">
-                      <p class="text-primary text-sm font-normal">
-                        I dont like this, Can you provide something interesting.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-span-1">
-                  <div class="pt-5 pl-4">
-                    <div
-                      class="flex justify-end md:justify-start gap-2 items-center"
-                    >
-                      <img
-                        src="../assets/logos/dateIcon.svg"
-                        alt=""
-                        class="h-3 w-3"
-                      />
-                      <p class="text-xs font-normal text-gray-600 flex-none">
-                        24 Aug 2023
-                      </p>
-                      <img
-                        src="../assets/logos/timeIcon.svg"
-                        alt=""
-                        class="h-3 w-3"
-                      />
-                      <p class="text-xs font-normal text-gray-600 flex-none">
-                        11:34 pm
-                      </p>
+                  <div class="col-span-1">
+                    <div class="pt-5 pl-4">
+                      <div
+                        class="flex justify-end md:justify-start gap-2 items-center"
+                      >
+                        <img
+                          src="../assets/logos/dateIcon.svg"
+                          alt=""
+                          class="h-3 w-3"
+                        />
+                        <p class="text-xs font-normal text-gray-600 flex-none">
+                          {{ moment(item.createdAt).format("DD MMM YYYY") }}
+                        </p>
+                        <img
+                          src="../assets/logos/timeIcon.svg"
+                          alt=""
+                          class="h-3 w-3"
+                        />
+                        <p class="text-xs font-normal text-gray-600 flex-none">
+                          {{ moment(item.createdAt).format("hh:mm A") }}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="" v-if="dropdownLoading || inputLoading">
               <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
                 <div class="col-span-1"></div>
                 <div class="col-span-1 md:col-span-3">
@@ -184,7 +243,12 @@ onMounted(() => CheckPropsFunction());
           <div class="grid grid-cols-1 md:grid-cols-6">
             <div class="col-span-1"></div>
             <div class="col-span-1 md:col-span-3">
-              <CustomerInputBox :active="propsValue.length > 0" />
+              <CustomerInputBox
+                :active="propsValue.length > 0"
+                :loading="inputLoading"
+                :loadingStartFunction="InputLoadingStartFunction"
+                :loadingStopFunction="InputLoadingStopFunction"
+              />
             </div>
           </div>
         </div>
