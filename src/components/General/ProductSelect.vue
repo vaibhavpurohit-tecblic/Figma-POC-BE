@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import ProductListApiFunction from "../../api/ProductApis/index.js";
+import {
+  ProductListApiFunction,
+  ProductDetailsApiFunction,
+} from "../../api/ProductApis/index.js";
 
 defineProps({
   active: Boolean,
@@ -8,13 +11,15 @@ defineProps({
 
 const isDropdown = ref(false);
 const dropDownList = ref([]);
-const dropDownValue = ref("");
+const dropDownValue = ref(null);
 
 function DropdownTrigger() {
-  if (isDropdown.value) {
-    isDropdown.value = false;
-  } else {
-    isDropdown.value = true;
+  if (active) {
+    if (isDropdown.value) {
+      isDropdown.value = false;
+    } else {
+      isDropdown.value = true;
+    }
   }
 }
 
@@ -27,6 +32,14 @@ async function ProductListFunction() {
 function ProductSelectionFunction(product) {
   dropDownValue.value = product;
   isDropdown.value = false;
+}
+
+async function ProductDetailsFunction() {
+  const result = await ProductDetailsApiFunction({
+    id: dropDownValue?.value?.product_id,
+  });
+
+  console.log(result);
 }
 
 onMounted(() => ProductListFunction());
@@ -46,11 +59,13 @@ onMounted(() => ProductListFunction());
     >
       <p
         class="flex-1 text-primary font-normal text-sm"
-        v-if="dropDownValue.length === 0"
+        v-if="dropDownValue === null"
       >
         Select your Product
       </p>
-      <p class="flex-1 text-primary font-normal text-sm">{{ dropDownValue }}</p>
+      <p class="flex-1 text-primary font-normal text-sm">
+        {{ dropDownValue?.product?.name || "" }}
+      </p>
       <img
         src="../../assets/logos/downArrow.svg"
         alt="Profile Pic"
@@ -71,9 +86,9 @@ onMounted(() => ProductListFunction());
         <h5
           class="text-primary font-medium py-2 px-6 cursor-pointer hover:bg-secondary hover:text-white"
           v-for="item in dropDownList"
-          @click="() => ProductSelectionFunction(item.product_name)"
+          @click="() => ProductSelectionFunction(item)"
         >
-          {{ item.product_name }}
+          {{ item.product.name }}
         </h5>
       </div>
     </div>
@@ -83,6 +98,7 @@ onMounted(() => ProductListFunction());
       'bg-quaternary py-3 w-full mt-7 text-white rounded-xl': active,
       ' bg-gray-500 py-3 w-full mt-7 text-white rounded-xl': !active,
     }"
+    @click="() => ProductDetailsFunction()"
   >
     Create Now
   </button>
