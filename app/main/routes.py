@@ -3,10 +3,10 @@ from app.main import bp
 from authlib.integrations.flask_client import OAuth
 import requests
 import json
-from app.models.users import Users
 from app.extensions import db
 from app import app
 from config import Config
+from app.utils import register_new_user
 
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 
@@ -56,7 +56,8 @@ def authorize():
     response.set_cookie('is_login', "True")
 
     try:
-        register_new_user()
+        user_details = json.loads(fetch_user_details().data.decode('utf-8'))['data']['user']
+        register_new_user(user_details, db)
     except Exception as e:
         return {
             "status": 401,
@@ -64,18 +65,6 @@ def authorize():
         }
 
     return response
-
-
-def register_new_user():
-    user_details = json.loads(fetch_user_details().data.decode('utf-8'))['data']['user']
-    user_id = user_details['id']
-    user_name = user_details['name']
-    user_exist = Users.query.filter_by(id=user_id).first()
-    
-    if not user_exist:
-        user = Users(id=user_id, username=user_name)
-        db.session.add(user)
-        db.session.commit()
 
 
 # Define a logout route

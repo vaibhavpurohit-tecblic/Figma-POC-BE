@@ -6,6 +6,7 @@ from openai import OpenAI
 from config import Config
 from app.models.chats import Chats
 from app.models.messages import Messages
+from app.models.users import Users
 
 client = OpenAI(api_key=Config().API_KEY)
 assistant_id=Config().ASSISTANT_ID
@@ -233,3 +234,25 @@ def get_user_message_by_message_id(userId, chatId, messageId, product):
     }
 
     return message_details
+
+
+def register_new_user(user_details, db):
+    try:
+        user_id = user_details['id']
+        user_name = user_details['name']
+        user_exist = Users.query.filter_by(id=user_id).first()
+        
+        if not user_exist:
+            user = Users(id=user_id, username=user_name)
+            db.session.add(user)
+            db.session.commit()
+
+        return {
+            "status": 200,
+            "message": "Success"
+        }
+    except Exception as e:
+        return {
+            "status": 401,
+            "message": "Unauthorized"
+        }
