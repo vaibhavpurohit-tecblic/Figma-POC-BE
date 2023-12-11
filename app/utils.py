@@ -100,49 +100,61 @@ def delete_user_chat_by_chat_id(userId, chatId, product, db):
 
 
 def generate_ad(prompt):
-    output = client.completions.create(
-        model="gpt-3.5-turbo-instruct",
-        prompt=prompt,
-        max_tokens=256,
-        temperature=0
-    )
-    result = output.choices[0].text
-    return result
+    try:
+        output = client.completions.create(
+            model="gpt-3.5-turbo-instruct",
+            prompt=prompt,
+            max_tokens=256,
+            temperature=0
+        )
+        result = output.choices[0].text
+        return result
+    except:
+        return {
+            "status": 401,
+            "message": "Unauthorized"
+        }
 
 
 def generate_expert_bot_thread(prompt):
-    thread = client.beta.threads.create()
+    try:
+        thread = client.beta.threads.create()
 
-    message = client.beta.threads.messages.create(
-        thread_id=thread.id,
-        role="user",
-        content=prompt
-    )
-    
-    run = client.beta.threads.runs.create(
-        thread_id=thread.id,
-        assistant_id=assistant_id,
-    )
-
-    while run.status != 'completed':
-        run = client.beta.threads.runs.retrieve(
+        message = client.beta.threads.messages.create(
             thread_id=thread.id,
-            run_id=run.id
+            role="user",
+            content=prompt
+        )
+        
+        run = client.beta.threads.runs.create(
+            thread_id=thread.id,
+            assistant_id=assistant_id,
         )
 
-        time.sleep(3)
+        while run.status != 'completed':
+            run = client.beta.threads.runs.retrieve(
+                thread_id=thread.id,
+                run_id=run.id
+            )
 
-    messages = client.beta.threads.messages.list(
-        thread_id=thread.id
-    )
+            time.sleep(3)
 
-    bot_response = ""
+        messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
 
-    for msg in messages.data:
-        if msg.role == 'assistant':
-            bot_response += msg.content[0].text.value + '\n\n'
+        bot_response = ""
 
-    return bot_response
+        for msg in messages.data:
+            if msg.role == 'assistant':
+                bot_response += msg.content[0].text.value
+
+        return bot_response
+    except:
+        return {
+            "status": 401,
+            "message": "Unauthorized"
+        }
 
 
 def get_user_message_by_chat_id(userId, chatId, product):
