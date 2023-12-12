@@ -1,5 +1,10 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import {
+  GetPagePath,
+  GetPageSearch,
+  RedirectPage,
+} from "../Constants/index.js";
 
 const props = defineProps({
   title: String,
@@ -9,7 +14,7 @@ const props = defineProps({
 const active = ref(false);
 
 function CheckIfIdMatch() {
-  if ((window?.location?.search?.slice(1) || "") === props.id) {
+  if (GetPageSearch() === props.id) {
     active.value = true;
   } else {
     active.value = false;
@@ -18,7 +23,7 @@ function CheckIfIdMatch() {
 
 function RedirectToPage() {
   if (!active.value) {
-    window.location.href = window.location.pathname + "?" + props.id;
+    RedirectPage(GetPagePath() + "?" + props.id);
   }
 }
 

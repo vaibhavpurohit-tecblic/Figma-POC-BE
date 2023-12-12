@@ -5,6 +5,7 @@ import {
   AdCopyChatCreateApiFunction,
   AdCopyChatMessagesAddApiFunction,
 } from "../../api/AdCopyApis/index.js";
+import { RedirectPage } from "../Constants/index.js";
 
 const props = defineProps({
   active: Boolean,
@@ -44,7 +45,7 @@ async function AdCopyChatMessagesAddFunction(data) {
   console.log(result, "product");
 
   if (result.status == 200) {
-    window.location.href = "/ad-copy?" + result?.data?.message?.chatId;
+    RedirectPage("/ad-copy?" + result?.data?.message?.chatId);
   }
 }
 

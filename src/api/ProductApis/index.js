@@ -1,4 +1,5 @@
 import axios from "axios";
+import { APIResponseFunction } from "../../components/Constants/index.js";
 
 export async function ProductListApiFunction() {
   const result = await axios
@@ -7,7 +8,7 @@ export async function ProductListApiFunction() {
       return res?.data?.products_data?.list || [];
     })
     .catch((err) => {
-      console.error(err);
+      APIResponseFunction(err);
       return [];
     });
 
