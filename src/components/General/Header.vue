@@ -1,6 +1,13 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { LogoutApiFunction } from "../../api/AuthApis/index.js";
+import {
+  GetLoginFlag,
+  ChangeLoginFlag,
+  ChangeUserIDFlag,
+  GetPagePath,
+  RedirectPage,
+} from "../Constants/index.js";
 import Sidebar from "./Sidebar.vue";
 
 defineProps({
@@ -13,12 +20,12 @@ const isSidebarShow = ref(true);
 const isSidebarTitle = ref("");
 
 function ShowSideBarFunction() {
-  if (window.location.pathname === "/") {
+  if (GetPagePath() === "/") {
     isSidebarShow.value = false;
-  } else if (window.location.pathname === "/ad-copy") {
+  } else if (GetPagePath() === "/ad-copy") {
     isSidebarShow.value = true;
     isSidebarTitle.value = "Create New Ad Copy";
-  } else if (window.location.pathname === "/expert-bot") {
+  } else if (GetPagePath() === "/expert-bot") {
     isSidebarShow.value = true;
     isSidebarTitle.value = "New Chat";
   } else {
@@ -52,31 +59,34 @@ function SideBarTrigger() {
 const isLoggedIn = ref(false);
 
 function IfUserLoggedInFunction() {
-  if (document?.cookie?.split("is_login=")?.[1]) {
+  if (GetLoginFlag()) {
+    isDropdown.value = false;
     isLoggedIn.value = true;
   } else {
+    isDropdown.value = false;
     isLoggedIn.value = false;
-    if (window.location.pathname !== "/") {
-      window.location.href = "/";
+    if (GetPagePath() !== "/") {
+      RedirectPage("/");
     }
   }
 }
 
 async function LogoutFunction() {
-  document.cookie = "is_login=";
   const result = await LogoutApiFunction();
 
-  isLoggedIn.value = false;
-  isDropdown.value = false;
-  window.location.href = "/";
+  if (result) {
+    ChangeUserIDFlag();
+    ChangeLoginFlag();
+    isLoggedIn.value = false;
+    isDropdown.value = false;
+    RedirectPage("/");
+  }
 }
 
 function LoginFunction() {
-  // const result = await LoginApiFunction();
-
   const redirectURL = `${window.location.origin}/login`;
 
-  window.location.href = redirectURL;
+  RedirectPage(redirectURL);
 }
 
 onMounted(() => {

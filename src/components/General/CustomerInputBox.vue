@@ -5,6 +5,11 @@ import {
   ExpertBotChatCreateApiFunction,
   ExpertBotChatMessagesAddApiFunction,
 } from "../../api/ExpertBotApis/index.js";
+import {
+  GetPagePath,
+  GetPageSearch,
+  RedirectPage,
+} from "../Constants/index.js";
 
 const props = defineProps({
   active: Boolean,
@@ -27,7 +32,7 @@ function clearTextareaOnEnter(e) {
 
 async function AdCopyChatMessagesAddFunction() {
   const result = await AdCopyChatMessagesAddApiFunction({
-    id: window?.location?.search?.slice(1) || "",
+    id: GetPageSearch(),
     messageContent: textMessage.value,
   });
 
@@ -54,11 +59,11 @@ async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
   if (result.status === 200) {
-    if (window?.location?.search?.length > 0) {
+    if (GetPageSearch()?.length > 0) {
       props.loadingStopFunction();
       textMessage.value = "";
     } else {
-      window.location.href = "/expert-bot?" + result?.data?.message?.chatId;
+      RedirectPage("/expert-bot?" + result?.data?.message?.chatId);
     }
   }
 }
@@ -66,12 +71,12 @@ async function ExpertBotChatMessagesAddFunction(data) {
 function SideBarDataFunction() {
   if (textMessage.value.length > 0 && props.active && !props.loading) {
     props.loadingStartFunction();
-    if (window.location.pathname === "/ad-copy") {
+    if (GetPagePath() === "/ad-copy") {
       AdCopyChatMessagesAddFunction();
-    } else if (window.location.pathname === "/expert-bot") {
-      if (window?.location?.search?.length > 0) {
+    } else if (GetPagePath() === "/expert-bot") {
+      if (GetPageSearch()?.length > 0) {
         ExpertBotChatMessagesAddFunction({
-          id: window?.location?.search?.slice(1) || "",
+          id: GetPageSearch()?.slice(1) || "",
           messageContent: textMessage.value,
         });
       } else {

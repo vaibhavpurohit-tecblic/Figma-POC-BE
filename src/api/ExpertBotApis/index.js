@@ -1,13 +1,17 @@
 import axios from "axios";
+import {
+  GetUserIDFlag,
+  APIResponseFunction,
+} from "../../components/Constants/index.js";
 
 export async function ExpertBotListApiFunction() {
   const result = await axios
-    .get("/api/" + 5 + "/expert-bot")
+    .get("/api/" + GetUserIDFlag() + "/expert-bot")
     .then((res) => {
       return res.data;
     })
     .catch((err) => {
-      console.log(err);
+      APIResponseFunction(err);
       return {};
     });
 
@@ -16,12 +20,17 @@ export async function ExpertBotListApiFunction() {
 
 export async function ExpertBotChatCreateApiFunction(data) {
   const result = await axios
-    .post("/api/" + 5 + "/expert-bot", data)
+    .post("/api/" + GetUserIDFlag() + "/expert-bot", data)
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
-      console.log(err);
+      APIResponseFunction(err);
       return {};
     });
 
@@ -30,12 +39,13 @@ export async function ExpertBotChatCreateApiFunction(data) {
 
 export async function ExpertBotChatDetailsApiFunction() {
   const result = await axios
-    .get("/api/" + 5 + "/expert-bot" + 1)
+    .get("/api/" + GetUserIDFlag() + "/expert-bot" + 1)
     .then((res) => {
-      console.log(res);
+      return res.data;
     })
     .catch((err) => {
-      console.log(err);
+      APIResponseFunction(err);
+      return {};
     });
 
   return result;
@@ -43,12 +53,13 @@ export async function ExpertBotChatDetailsApiFunction() {
 
 export async function ExpertBotChatDeleteApiFunction() {
   const result = await axios
-    .delete("/api/" + 5 + "/expert-bot" + 1)
+    .delete("/api/" + GetUserIDFlag() + "/expert-bot" + 1)
     .then((res) => {
-      console.log(res);
+      return res.data;
     })
     .catch((err) => {
-      console.log(err);
+      APIResponseFunction(err);
+      return {};
     });
 
   return result;
@@ -56,12 +67,17 @@ export async function ExpertBotChatDeleteApiFunction() {
 
 export async function ExpertBotChatMessagesListApiFunction(data) {
   const result = await axios
-    .get("/api/" + 5 + "/expert-bot/" + data.id + "/message")
+    .get("/api/" + GetUserIDFlag() + "/expert-bot/" + data.id + "/message")
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
-      console.log(err);
+      APIResponseFunction(err);
       return {};
     });
 
@@ -70,12 +86,20 @@ export async function ExpertBotChatMessagesListApiFunction(data) {
 
 export async function ExpertBotChatMessagesAddApiFunction(data) {
   const result = await axios
-    .post("/api/" + 5 + "/expert-bot/" + data.id + "/message", data)
+    .post(
+      "/api/" + GetUserIDFlag() + "/expert-bot/" + data.id + "/message",
+      data
+    )
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
-      console.log(err);
+      APIResponseFunction(err);
       return {};
     });
 

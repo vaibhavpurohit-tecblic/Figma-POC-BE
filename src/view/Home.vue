@@ -1,11 +1,12 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import { GetLoginFlag } from "../components/Constants/index.js";
 import Header from "../components/General/Header.vue";
 
 const redirectLink = ref("/ad-copy");
 
 function RedirectLinkChangeFunction() {
-  if (document?.cookie?.split("is_login=")?.[1]) {
+  if (GetLoginFlag()) {
     redirectLink.value = "/ad-copy";
   } else {
     redirectLink.value = "/";

@@ -5,6 +5,7 @@ import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
 import { ExpertBotChatMessagesListApiFunction } from "../api/ExpertBotApis/index.js";
+import { GetPageSearch } from "../components/Constants/index.js";
 
 const sidebarClose = ref(true);
 
@@ -42,11 +43,11 @@ async function ExpertBotChatMessagesListApiFunctionFunction(data) {
 }
 
 function CheckPropsFunction() {
-  propsValue.value = window.location.search;
+  propsValue.value = GetPageSearch();
 
-  if (window.location.search?.length > 0) {
+  if (GetPageSearch()?.length > 0) {
     ExpertBotChatMessagesListApiFunctionFunction({
-      id: window?.location?.search?.slice(1) || "",
+      id: GetPageSearch(),
     });
   }
 }

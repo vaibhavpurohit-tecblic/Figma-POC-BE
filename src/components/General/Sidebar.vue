@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 import SidebarTitle from "./SidebarTitle.vue";
 import { AdCopyListApiFunction } from "../../api/AdCopyApis/index.js";
 import { ExpertBotListApiFunction } from "../../api/ExpertBotApis/index.js";
+import { GetPagePath, RedirectPage } from "../Constants/index.js";
 import moment from "moment";
 
 const props = defineProps({
@@ -23,10 +24,10 @@ function SideBarButtonFunction() {
 const sideBarChatList = ref([]);
 
 function RedirectLinkFunction() {
-  if (window.location.pathname === "/ad-copy") {
-    window.location.href = "/ad-copy";
-  } else if (window.location.pathname === "/expert-bot") {
-    window.location.href = "/expert-bot";
+  if (GetPagePath() === "/ad-copy") {
+    RedirectPage("/ad-copy");
+  } else if (GetPagePath() === "/expert-bot") {
+    RedirectPage("/expert-bot");
   }
 }
 
@@ -93,9 +94,9 @@ async function ExpertBotChatListFunction() {
 }
 
 function SideBarDataFunction() {
-  if (window.location.pathname === "/ad-copy") {
+  if (GetPagePath() === "/ad-copy") {
     AdCopyChatListFunction();
-  } else if (window.location.pathname === "/expert-bot") {
+  } else if (GetPagePath() === "/expert-bot") {
     ExpertBotChatListFunction();
   }
 }
