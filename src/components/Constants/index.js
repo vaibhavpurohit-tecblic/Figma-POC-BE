@@ -42,13 +42,14 @@ export function RedirectPage(link) {
 export function APIResponseFunction(error) {
   const $toast = useToast();
 
-  console.log(error);
+  const messageConvertor = error?.message
+    ? error.message === "Request failed with status code 500"
+      ? "Server is Busy Please Try Again"
+      : error.message
+    : "Server is Busy Please Try Again";
 
-  $toast.error(
-    error?.message ? error.message : "Server is Busy Please Try Again",
-    {
-      position: "top-right",
-      duration: 2000,
-    }
-  );
+  $toast.error(messageConvertor, {
+    position: "top-right",
+    duration: 2000,
+  });
 }
