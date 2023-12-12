@@ -64,6 +64,8 @@ def authorize():
             "message": "Unauthorized"
         }
 
+    response.set_cookie('userID', str(user_details["id"]))
+
     return response
 
 
