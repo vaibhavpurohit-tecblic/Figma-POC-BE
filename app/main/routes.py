@@ -2,8 +2,11 @@ from flask import redirect, session, jsonify, request, Blueprint, url_for
 from app.main import bp
 from authlib.integrations.flask_client import OAuth
 import requests
+import json
+from app.extensions import db
 from app import app
 from config import Config
+from app.utils import register_new_user
 
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 
@@ -52,6 +55,15 @@ def authorize():
     # response.set_cookie('access_token', Config.API_ENDPOINT_ACCESS_TOKEN)
     response.set_cookie('is_login', "True")
 
+    try:
+        user_details = json.loads(fetch_user_details().data.decode('utf-8'))['data']['user']
+        register_new_user(user_details, db)
+    except Exception as e:
+        return {
+            "status": 401,
+            "message": "Unauthorized"
+        }
+
     return response
 
 
@@ -78,18 +90,26 @@ def fetch_user_details():
         # Set up the headers with the Bearer token
         headers = {'Authorization': f"Bearer {Config.API_ENDPOINT_ACCESS_TOKEN}"}
 
-        # Make the HTTP GET request
-        endpoint_response = requests.get(endpoint, headers=headers)
-        user_data = endpoint_response.json()
-        response = {
-            "status": "ok",
-            "data": {
-                "user": user_data
-            },
-            "message": ""
-        }
+        try:
+            # Make the HTTP GET request
+            endpoint_response = requests.get(endpoint, headers=headers)
+            user_data = endpoint_response.json()
+            response = {
+                "status": 200,
+                "data": {
+                    "user": user_data
+                },
+                "message": "Success"
+            }
 
-        return jsonify(response)
+            return jsonify(response)
+        except Exception as e:
+            response = {
+                "status": 401,
+                "message": "Unauthorized"
+            }
+
+            return jsonify(response)
 
 
 trending_product_stub = [
@@ -118,11 +138,11 @@ trending_product_stub = [
 def trending_products():
     if request.method == "GET":
         response = {
-            "status": "ok",
+            "status": 200,
             "data": {
                 "trending_product": trending_product_stub
             },
-            "message": ""
+            "message": "Success"
         }
 
         return jsonify(response)

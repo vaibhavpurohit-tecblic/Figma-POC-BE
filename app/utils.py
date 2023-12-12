@@ -6,6 +6,7 @@ from openai import OpenAI
 from config import Config
 from app.models.chats import Chats
 from app.models.messages import Messages
+from app.models.users import Users
 
 client = OpenAI(api_key=Config().API_KEY)
 assistant_id=Config().ASSISTANT_ID
@@ -100,49 +101,61 @@ def delete_user_chat_by_chat_id(userId, chatId, product, db):
 
 
 def generate_ad(prompt):
-    output = client.completions.create(
-        model="gpt-3.5-turbo-instruct",
-        prompt=prompt,
-        max_tokens=256,
-        temperature=0
-    )
-    result = output.choices[0].text
-    return result
+    try:
+        output = client.completions.create(
+            model="gpt-3.5-turbo-instruct",
+            prompt=prompt,
+            max_tokens=256,
+            temperature=0
+        )
+        result = output.choices[0].text
+        return result
+    except:
+        return {
+            "status": 401,
+            "message": "Unauthorized"
+        }
 
 
 def generate_expert_bot_thread(prompt):
-    thread = client.beta.threads.create()
+    try:
+        thread = client.beta.threads.create()
 
-    message = client.beta.threads.messages.create(
-        thread_id=thread.id,
-        role="user",
-        content=prompt
-    )
-    
-    run = client.beta.threads.runs.create(
-        thread_id=thread.id,
-        assistant_id=assistant_id,
-    )
-
-    while run.status != 'completed':
-        run = client.beta.threads.runs.retrieve(
+        message = client.beta.threads.messages.create(
             thread_id=thread.id,
-            run_id=run.id
+            role="user",
+            content=prompt
+        )
+        
+        run = client.beta.threads.runs.create(
+            thread_id=thread.id,
+            assistant_id=assistant_id,
         )
 
-        time.sleep(3)
+        while run.status != 'completed':
+            run = client.beta.threads.runs.retrieve(
+                thread_id=thread.id,
+                run_id=run.id
+            )
 
-    messages = client.beta.threads.messages.list(
-        thread_id=thread.id
-    )
+            time.sleep(3)
 
-    bot_response = ""
+        messages = client.beta.threads.messages.list(
+            thread_id=thread.id
+        )
 
-    for msg in messages.data:
-        if msg.role == 'assistant':
-            bot_response += msg.content[0].text.value + '\n\n'
+        bot_response = ""
 
-    return bot_response
+        for msg in messages.data:
+            if msg.role == 'assistant':
+                bot_response += msg.content[0].text.value
+
+        return bot_response
+    except:
+        return {
+            "status": 401,
+            "message": "Unauthorized"
+        }
 
 
 def get_user_message_by_chat_id(userId, chatId, product):
@@ -221,3 +234,25 @@ def get_user_message_by_message_id(userId, chatId, messageId, product):
     }
 
     return message_details
+
+
+def register_new_user(user_details, db):
+    try:
+        user_id = user_details['id']
+        user_name = user_details['name']
+        user_exist = Users.query.filter_by(id=user_id).first()
+        
+        if not user_exist:
+            user = Users(id=user_id, username=user_name)
+            db.session.add(user)
+            db.session.commit()
+
+        return {
+            "status": 200,
+            "message": "Success"
+        }
+    except Exception as e:
+        return {
+            "status": 401,
+            "message": "Unauthorized"
+        }
