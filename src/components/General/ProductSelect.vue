@@ -42,9 +42,7 @@ function ProductSelectionFunction(product) {
 async function AdCopyChatMessagesAddFunction(data) {
   const result = await AdCopyChatMessagesAddApiFunction(data);
 
-  console.log(result, "product");
-
-  if (result.status == 200) {
+  if (result.status === 200) {
     RedirectPage("/ad-copy?" + result?.data?.message?.chatId);
   }
 }

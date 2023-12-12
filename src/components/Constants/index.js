@@ -1,3 +1,6 @@
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
+
 export function GetLoginFlag() {
   return document?.cookie?.split("is_login=")?.[1] || false;
 }
@@ -26,6 +29,9 @@ export function RedirectPage(link) {
   window.location.href = link;
 }
 
+const $toast = useToast();
+
 export function APIResponseFunction(error) {
+  $toast.error("You did it!", { position: "top-right", duration: 2000 });
   console.log(error);
 }

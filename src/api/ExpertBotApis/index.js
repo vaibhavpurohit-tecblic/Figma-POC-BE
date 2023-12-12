@@ -36,7 +36,7 @@ export async function ExpertBotChatDetailsApiFunction() {
   const result = await axios
     .get("/api/" + GetUserIDFlag() + "/expert-bot" + 1)
     .then((res) => {
-      console.log(res);
+      return res.data;
     })
     .catch((err) => {
       APIResponseFunction(err);
@@ -50,7 +50,7 @@ export async function ExpertBotChatDeleteApiFunction() {
   const result = await axios
     .delete("/api/" + GetUserIDFlag() + "/expert-bot" + 1)
     .then((res) => {
-      console.log(res);
+      return res.data;
     })
     .catch((err) => {
       APIResponseFunction(err);
