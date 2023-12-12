@@ -22,7 +22,12 @@ export async function AdCopyChatCreateApiFunction(data) {
   const result = await axios
     .post("/api/" + GetUserIDFlag() + "/ad-copy", data)
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
       APIResponseFunction(err);
@@ -64,7 +69,12 @@ export async function AdCopyChatMessagesListApiFunction(data) {
   const result = await axios
     .get("/api/" + GetUserIDFlag() + "/ad-copy/" + data.id + "/message")
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
       APIResponseFunction(err);
@@ -78,7 +88,12 @@ export async function AdCopyChatMessagesAddApiFunction(data) {
   const result = await axios
     .post("/api/" + GetUserIDFlag() + "/ad-copy/" + data.id + "/message", data)
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
       APIResponseFunction(err);

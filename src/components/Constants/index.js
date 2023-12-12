@@ -2,11 +2,21 @@ import { useToast } from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
 
 export function GetLoginFlag() {
-  return document?.cookie?.split("is_login=")?.[1] || false;
+  return (
+    document?.cookie
+      ?.split("; ")
+      ?.filter((item) => item.includes("is_login"))?.[0]
+      ?.split("=")?.[1] || false
+  );
 }
 
 export function GetUserIDFlag() {
-  return document?.cookie?.split("userID=")?.[1]?.split(";")?.[0] || 0;
+  return (
+    document?.cookie
+      ?.split("; ")
+      ?.filter((item) => item.includes("userID"))?.[0]
+      ?.split("=")?.[1] || false
+  );
 }
 
 export function ChangeLoginFlag() {
@@ -29,9 +39,16 @@ export function RedirectPage(link) {
   window.location.href = link;
 }
 
-const $toast = useToast();
-
 export function APIResponseFunction(error) {
-  $toast.error("You did it!", { position: "top-right", duration: 2000 });
+  const $toast = useToast();
+
   console.log(error);
+
+  $toast.error(
+    error?.message ? error.message : "Server is Busy Please Try Again",
+    {
+      position: "top-right",
+      duration: 2000,
+    }
+  );
 }

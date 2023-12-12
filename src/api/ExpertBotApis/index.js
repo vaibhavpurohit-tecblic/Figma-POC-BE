@@ -22,7 +22,12 @@ export async function ExpertBotChatCreateApiFunction(data) {
   const result = await axios
     .post("/api/" + GetUserIDFlag() + "/expert-bot", data)
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
       APIResponseFunction(err);
@@ -64,7 +69,12 @@ export async function ExpertBotChatMessagesListApiFunction(data) {
   const result = await axios
     .get("/api/" + GetUserIDFlag() + "/expert-bot/" + data.id + "/message")
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
       APIResponseFunction(err);
@@ -81,7 +91,12 @@ export async function ExpertBotChatMessagesAddApiFunction(data) {
       data
     )
     .then((res) => {
-      return res.data;
+      if (res.data.status === 200) {
+        return res.data;
+      } else {
+        APIResponseFunction(res.data);
+        return {};
+      }
     })
     .catch((err) => {
       APIResponseFunction(err);

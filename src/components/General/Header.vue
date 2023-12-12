@@ -74,16 +74,16 @@ function IfUserLoggedInFunction() {
 async function LogoutFunction() {
   const result = await LogoutApiFunction();
 
-  ChangeLoginFlag();
-  ChangeUserIDFlag();
-  isLoggedIn.value = false;
-  isDropdown.value = false;
-  RedirectPage("/");
+  if (result) {
+    ChangeUserIDFlag();
+    ChangeLoginFlag();
+    isLoggedIn.value = false;
+    isDropdown.value = false;
+    RedirectPage("/");
+  }
 }
 
 function LoginFunction() {
-  // const result = await LoginApiFunction();
-
   const redirectURL = `${window.location.origin}/login`;
 
   RedirectPage(redirectURL);
