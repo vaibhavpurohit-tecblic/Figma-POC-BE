@@ -19,12 +19,25 @@ export function GetUserIDFlag() {
   );
 }
 
+export function GetUserNameFlag() {
+  return (
+    document?.cookie
+      ?.split("; ")
+      ?.filter((item) => item.includes("userName"))?.[0]
+      ?.split("=")?.[1] || "John Smith"
+  );
+}
+
 export function ChangeLoginFlag() {
   document.cookie = "is_login=";
 }
 
 export function ChangeUserIDFlag() {
   document.cookie = "userID=";
+}
+
+export function ChangeUserNameFlag() {
+  document.cookie = "userName=";
 }
 
 export function GetPagePath() {

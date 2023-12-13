@@ -5,8 +5,10 @@ import {
   GetLoginFlag,
   ChangeLoginFlag,
   ChangeUserIDFlag,
+  ChangeUserNameFlag,
   GetPagePath,
   RedirectPage,
+  GetUserNameFlag,
 } from "../Constants/index.js";
 import Sidebar from "./Sidebar.vue";
 
@@ -58,13 +60,17 @@ function SideBarTrigger() {
 
 const isLoggedIn = ref(false);
 
+const userNameField = ref("");
+
 function IfUserLoggedInFunction() {
   if (GetLoginFlag()) {
     isDropdown.value = false;
     isLoggedIn.value = true;
+    userNameField.value = GetUserNameFlag();
   } else {
     isDropdown.value = false;
     isLoggedIn.value = false;
+    userNameField.value = "";
     if (GetPagePath() !== "/") {
       RedirectPage("/");
     }
@@ -76,6 +82,7 @@ async function LogoutFunction() {
 
   if (result) {
     ChangeUserIDFlag();
+    ChangeUserNameFlag();
     ChangeLoginFlag();
     isLoggedIn.value = false;
     isDropdown.value = false;
@@ -175,7 +182,9 @@ onMounted(() => {
             class="box-shadow-header-container p-1 flex pl-9 gap-4 items-center cursor-pointer"
             @click="DropdownTrigger"
           >
-            <p class="text-primary font-normal text-base">John Smith</p>
+            <p class="text-primary font-normal text-base">
+              {{ userNameField }}
+            </p>
             <img
               src="../../assets/logos/downArrow.svg"
               alt="Profile Pic"
