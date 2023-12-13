@@ -1,6 +1,6 @@
 import uuid
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from openai import OpenAI
 
 from config import Config
@@ -100,31 +100,49 @@ def delete_user_chat_by_chat_id(userId, chatId, product, db):
     db.session.commit()
 
 
-def generate_ad(prompt):
+def generate_ad(messageContent, userId, chatId, product):
+    messages = get_role_and_content(userId, chatId, product)
+    
+    if not messages:
+        messageContent = "Write an ad. copy for: " + messageContent
+        
+    messages.append({"role": "user", "content": messageContent})
+
     try:
-        output = client.completions.create(
-            model="gpt-3.5-turbo-instruct",
-            prompt=prompt,
-            max_tokens=256,
-            temperature=0
+        completion = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=messages
         )
-        result = output.choices[0].text
+
+        result = completion.choices[0].message.content
         return result
-    except:
+    except Exception as e:
         return {
             "status": 401,
             "message": "Unauthorized"
         }
 
 
-def generate_expert_bot_thread(prompt):
+def get_role_and_content(userId, chatId, product):
+    past_chat = get_user_message_by_chat_id(userId, chatId, product)
+
+    messages = []
+
+    for message in past_chat:
+        role = 'assistant' if message['author'] == 'bot' else message['author']
+        messages.append({"role": role, "content": message['content']})
+
+    return messages
+
+
+def generate_expert_bot_thread(messageContent):
     try:
         thread = client.beta.threads.create()
 
         message = client.beta.threads.messages.create(
             thread_id=thread.id,
             role="user",
-            content=prompt
+            content=messageContent
         )
         
         run = client.beta.threads.runs.create(
@@ -160,7 +178,7 @@ def generate_expert_bot_thread(prompt):
 
 def get_user_message_by_chat_id(userId, chatId, product):
     chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
-    messages_by_chat_id = Messages.query.filter_by(chatId=chat.id).all()
+    messages_by_chat_id = Messages.query.filter_by(chatId=chat.id).order_by('createdAt').all()
     message_details = []
 
     for message in messages_by_chat_id:
@@ -178,12 +196,19 @@ def get_user_message_by_chat_id(userId, chatId, product):
 def create_user_message_by_chat_id(userId, chatId, messageContent, result, product, db):
     chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
 
+    current_utc_datetime = datetime.now(timezone.utc)
+    one_millisecond = timedelta(milliseconds=1)
+    new_utc_datetime = current_utc_datetime + one_millisecond
+
+    user_time = current_utc_datetime.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    bot_time = new_utc_datetime.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
     user_message = Messages(
         id=str(uuid.uuid4()),
         chatId=chat.id,
         author="user",
         content=messageContent,
-        createdAt=datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+        createdAt=user_time
     )
 
     bot_message = Messages(
@@ -191,7 +216,7 @@ def create_user_message_by_chat_id(userId, chatId, messageContent, result, produ
         chatId=chat.id,
         author="bot",
         content=result,
-        createdAt=datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+        createdAt=bot_time
     )
 
     db.session.add(user_message)
