@@ -4,8 +4,12 @@ import moment from "moment";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
-import { ExpertBotChatMessagesListApiFunction } from "../api/ExpertBotApis/index.js";
-import { GetPageSearch } from "../components/Constants/index.js";
+import {
+  ExpertBotChatMessagesListApiFunction,
+  ExpertBotChatCreateApiFunction,
+  ExpertBotChatMessagesAddApiFunction,
+} from "../api/ExpertBotApis/index.js";
+import { GetPageSearch, RedirectPage } from "../components/Constants/index.js";
 
 const sidebarClose = ref(true);
 
@@ -50,6 +54,32 @@ function CheckPropsFunction() {
       id: GetPageSearch(),
     });
   }
+}
+
+async function ExpertBotChatCreateFunction(title) {
+  const result = await ExpertBotChatCreateApiFunction({
+    messageContent: title,
+  });
+
+  if (result.status === 200) {
+    ExpertBotChatMessagesAddFunction({
+      id: result.data.chat.id,
+      messageContent: result.data.chat.title || "",
+    });
+  }
+}
+
+async function ExpertBotChatMessagesAddFunction(data) {
+  const result = await ExpertBotChatMessagesAddApiFunction(data);
+
+  if (result.status === 200) {
+    RedirectPage("/expert-bot?" + result?.data?.message?.chatId);
+  }
+}
+
+function PreselectedChat(title) {
+  inputLoading.value = true;
+  ExpertBotChatCreateFunction(title);
 }
 
 onMounted(() => CheckPropsFunction());
@@ -201,36 +231,68 @@ onMounted(() => CheckPropsFunction());
             <div class="col-span-1 md:col-span-3">
               <div class="" v-if="propsValue.length === 0 && !inputLoading">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                  <div class="border border-secondary rounded-xl py-3 px-6">
+                  <div
+                    class="border border-secondary rounded-xl py-3 px-6 cursor-pointer"
+                    @click="
+                      () =>
+                        PreselectedChat(
+                          'Process of using zip code data for targeted advertising on Facebook?'
+                        )
+                    "
+                  >
                     <h5 class="text-primary font-medium text-base">
-                      Market Trend
+                      Process of using
                     </h5>
                     <p class="text-primary/[0.5] text-xs font-normal">
-                      Expert Bot market trends and Lorem Ipsum.
+                      zip code data for targeted advertising on Facebook?
                     </p>
                   </div>
-                  <div class="border border-secondary rounded-xl py-3 px-6">
+                  <div
+                    class="border border-secondary rounded-xl py-3 px-6 cursor-pointer"
+                    @click="
+                      () =>
+                        PreselectedChat(
+                          'How can I check and improve the load time of my webpage?'
+                        )
+                    "
+                  >
                     <h5 class="text-primary font-medium text-base">
-                      Market Trend
+                      How can I check
                     </h5>
                     <p class="text-primary/[0.5] text-xs font-normal">
-                      Expert Bot market trends and Lorem Ipsum.
+                      and improve the load time of my webpage?
                     </p>
                   </div>
-                  <div class="border border-secondary rounded-xl py-3 px-6">
+                  <div
+                    class="border border-secondary rounded-xl py-3 px-6 cursor-pointer"
+                    @click="
+                      () =>
+                        PreselectedChat(
+                          'What are the five effective methods for scaling Facebook ads?'
+                        )
+                    "
+                  >
                     <h5 class="text-primary font-medium text-base">
-                      Market Trend
+                      What are the
                     </h5>
                     <p class="text-primary/[0.5] text-xs font-normal">
-                      Expert Bot market trends and Lorem Ipsum.
+                      five effective methods for scaling Facebook ads?
                     </p>
                   </div>
-                  <div class="border border-secondary rounded-xl py-3 px-6">
+                  <div
+                    class="border border-secondary rounded-xl py-3 px-6 cursor-pointer"
+                    @click="
+                      () =>
+                        PreselectedChat(
+                          'How does page load time affect user experience and SEO?'
+                        )
+                    "
+                  >
                     <h5 class="text-primary font-medium text-base">
-                      Market Trend
+                      How does page
                     </h5>
                     <p class="text-primary/[0.5] text-xs font-normal">
-                      Expert Bot market trends and Lorem Ipsum.
+                      load time affect user experience and SEO?
                     </p>
                   </div>
                 </div>
