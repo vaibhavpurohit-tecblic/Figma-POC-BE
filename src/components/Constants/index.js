@@ -24,7 +24,8 @@ export function GetUserNameFlag() {
     document?.cookie
       ?.split("; ")
       ?.filter((item) => item.includes("userName"))?.[0]
-      ?.split("=")?.[1] || "John Smith"
+      ?.split("=")?.[1]
+      ?.replace(/"/g, "") || "John Smith"
   );
 }
 
@@ -56,7 +57,8 @@ export function APIResponseFunction(error) {
   const $toast = useToast();
 
   const messageConvertor = error?.message
-    ? error.message === "Request failed with status code 500"
+    ? error.message === "Request failed with status code 500" ||
+      error.message === "Request failed with status code 503"
       ? "Server is Busy Please Try Again"
       : error.message
     : "Server is Busy Please Try Again";
