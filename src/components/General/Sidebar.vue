@@ -34,7 +34,7 @@ function RedirectLinkFunction() {
 function ChatDataSortingFunction(data) {
   var tempArray = [
     { title: "Today", chat: [] },
-    { title: "Tomorrow", chat: [] },
+    { title: "Yesterday", chat: [] },
     { title: "Past 7 Days", chat: [] },
     { title: "Past 30 Days", chat: [] },
     { title: "Later Than 30 Days", chat: [] },
@@ -49,7 +49,7 @@ function ChatDataSortingFunction(data) {
 
   const currentDate = moment().format("LL");
 
-  const tomorrowDate = moment(moment().subtract(1, "days")).format("LL");
+  const yesterdayDate = moment(moment().subtract(1, "days")).format("LL");
 
   const weekDate = moment(moment().subtract(7, "days")).format("LL");
 
@@ -59,7 +59,7 @@ function ChatDataSortingFunction(data) {
     var tempDate = moment(sortChat[i].createdAt).format("LL");
     if (moment(tempDate).isSame(currentDate)) {
       tempArray[0].chat = [...tempArray[0].chat, sortChat[i]];
-    } else if (moment(tempDate).isSame(tomorrowDate)) {
+    } else if (moment(tempDate).isSame(yesterdayDate)) {
       tempArray[1].chat = [...tempArray[1].chat, sortChat[i]];
     } else if (moment(tempDate).isAfter(weekDate)) {
       tempArray[2].chat = [...tempArray[2].chat, sortChat[i]];
