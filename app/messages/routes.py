@@ -33,15 +33,14 @@ def method_user_message_by_chat_id(userId, chatId):
         return jsonify(response)
     elif request.method == "POST":
         messageContent = request.get_json()['messageContent']
-        prompt = "Write an ad. copy for: " + messageContent
 
         try:
             if product == 'expert-bot':
-                result = generate_expert_bot_thread(prompt)
+                result = generate_expert_bot_thread(messageContent)
             else:
-                result = generate_ad(prompt)
+                result = generate_ad(messageContent, userId, chatId, product)
 
-            message = create_user_message_by_chat_id(userId, chatId, prompt, result, product, db)
+            message = create_user_message_by_chat_id(userId, chatId, messageContent, result, product, db)
 
             response = {
                 "status": 200,

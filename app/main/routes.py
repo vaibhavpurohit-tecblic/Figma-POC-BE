@@ -65,6 +65,7 @@ def authorize():
         }
 
     response.set_cookie('userID', str(user_details["id"]))
+    response.set_cookie('userName', str(user_details["name"]))
 
     return response
 
