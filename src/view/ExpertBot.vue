@@ -66,6 +66,8 @@ async function ExpertBotChatCreateFunction(title) {
       id: result.data.chat.id,
       messageContent: result.data.chat.title || "",
     });
+  } else {
+    window.location.reload();
   }
 }
 
