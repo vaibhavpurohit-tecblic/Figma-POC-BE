@@ -219,7 +219,7 @@ onMounted(() => CheckPropsFunction());
                       <img
                         src="../assets/logos/chatLoading.svg"
                         alt=""
-                        class="h-4 w-10"
+                        class="h-10 w-10"
                       />
                     </div>
                   </div>
