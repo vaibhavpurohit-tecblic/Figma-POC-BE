@@ -44,6 +44,8 @@ async function AdCopyChatMessagesAddFunction(data) {
 
   if (result.status === 200) {
     RedirectPage("/ad-copy?" + result?.data?.message?.chatId);
+  } else {
+    window.location.reload();
   }
 }
 

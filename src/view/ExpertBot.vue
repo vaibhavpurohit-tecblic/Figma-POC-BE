@@ -74,6 +74,8 @@ async function ExpertBotChatMessagesAddFunction(data) {
 
   if (result.status === 200) {
     RedirectPage("/expert-bot?" + result?.data?.message?.chatId);
+  } else {
+    window.location.reload();
   }
 }
 

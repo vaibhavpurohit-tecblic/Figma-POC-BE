@@ -39,6 +39,9 @@ async function AdCopyChatMessagesAddFunction() {
   if (result.status === 200) {
     props.loadingStopFunction();
     textMessage.value = "";
+  } else {
+    props.loadingStopFunction();
+    textMessage.value = "";
   }
 }
 
@@ -52,6 +55,9 @@ async function ExpertBotChatCreateFunction() {
       id: result.data.chat.id,
       messageContent: result.data.chat.title || "",
     });
+  } else {
+    props.loadingStopFunction();
+    textMessage.value = "";
   }
 }
 
