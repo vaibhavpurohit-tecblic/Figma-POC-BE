@@ -6,8 +6,20 @@ from app.utils import get_user_message_by_chat_id, generate_ad, generate_expert_
     get_user_message_by_message_id
 from app.messages import bp
 import logging
+from app.celery_config import celery
 
 logging.basicConfig(level=logging.DEBUG)
+
+
+@celery.task
+def generate_expert_bot_thread_async(messageContent):
+    try:
+        # Your existing code for generate_expert_bot_thread
+        result = generate_expert_bot_thread(messageContent)
+        return result
+    except Exception as e:
+        logging.error(f"An exception occurred: {e}")
+        return {"status": 401, "message": "Unauthorized"}
 
 
 @bp.route('/api/<int:userId>/ad-copy/<chatId>/message', methods=['GET', 'POST'])
@@ -41,7 +53,11 @@ def method_user_message_by_chat_id(userId, chatId):
 
         try:
             if product == 'expert-bot':
-                result = generate_expert_bot_thread(messageContent)
+                # Instead of calling generate_expert_bot_thread directly,
+                # queue the task for background execution
+                result_task = generate_expert_bot_thread_async.apply_async(args=[messageContent])
+                result = result_task.get()
+                # result = generate_expert_bot_thread(messageContent)
             else:
                 result = generate_ad(messageContent, userId, chatId, product)
 
