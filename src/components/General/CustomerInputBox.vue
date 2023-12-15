@@ -82,7 +82,7 @@ function SideBarDataFunction() {
     } else if (GetPagePath() === "/expert-bot") {
       if (GetPageSearch()?.length > 0) {
         ExpertBotChatMessagesAddFunction({
-          id: GetPageSearch()?.slice(1) || "",
+          id: GetPageSearch() || "",
           messageContent: textMessage.value,
         });
       } else {
