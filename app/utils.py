@@ -277,12 +277,16 @@ def register_new_user(user_details, db):
             user = Users(id=user_id, username=user_name)
             db.session.add(user)
             db.session.commit()
+            logging.info(f"Registered New User :: {user_details['name']}")
 
+        # TODO : Return user instance if already existed
+        logging.info(f"User Already Existed :: {user_details['name']}")
         return {
             "status": 200,
             "message": "Success"
         }
     except Exception as e:
+        logging.error(f"ERROR :: Register New User failed :: {e}")
         return {
             "status": 401,
             "message": "Unauthorized"

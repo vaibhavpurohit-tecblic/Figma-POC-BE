@@ -1,5 +1,5 @@
 import os
-
+import logging
 from flask import redirect, session, jsonify, request, Blueprint, url_for
 from app.main import bp
 from authlib.integrations.flask_client import OAuth
@@ -10,6 +10,7 @@ from app import app
 from config import Config
 from app.utils import register_new_user, store_access_token_in_database, retrieve_access_token_from_database
 
+logging.basicConfig(level=logging.DEBUG)
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 
 oauth = OAuth(app)
@@ -67,9 +68,11 @@ def authorize():
         # Store the token in the database associated with the user
         store_access_token_in_database(user_details["id"], token['access_token'])
     except Exception as e:
+        logging.error(f"ERROR :: Authorization endpoint is failing :: {e}")
+
         return {
             "status": 401,
-            "message": "Unauthorized"
+            "message": "Unauthorized to enter OAUTH"
         }
 
     response.set_cookie('userID', str(user_details["id"]))
@@ -98,18 +101,19 @@ def fetch_user_details():
         # API endpoint to fetch user details
         endpoint = 'https://app.staging.zendrop.com/api/oauth-user'
 
-
-        user_id = int(request.cookies.get('userID'))
-
-        # Retrieve the token from the database using the user ID
-        bearer_token = retrieve_access_token_from_database(user_id)
-
-        print("I am bearer value", bearer_token)
-
-        if bearer_token is None:
-            return jsonify({"error": "Bearer token not set. Please authenticate first."})
-
-        # Set up the headers with the Bearer token
+        #
+        # user_id = int(request.cookies.get('userID'))
+        #
+        # # Retrieve the token from the database using the user ID
+        # bearer_token = retrieve_access_token_from_database(user_id)
+        #
+        # print("I am bearer value", bearer_token)
+        #
+        # if bearer_token is None:
+        #     return jsonify({"error": "Bearer token not set. Please authenticate first."})
+        #
+        # # Set up the headers with the Bearer token
+        # headers = {'Authorization': f"Bearer {bearer_token}"}
         headers = {'Authorization': f"Bearer {Config.API_ENDPOINT_ACCESS_TOKEN}"}
 
         try:
@@ -124,13 +128,14 @@ def fetch_user_details():
                 "message": "Success"
             }
 
+            logging.info(f"User Details fetched from Oauth")
             return jsonify(response)
         except Exception as e:
             response = {
                 "status": 401,
                 "message": "Unauthorized"
             }
-
+            logging.error(f"FAILED :: User Details fetched from Oauth: {e}")
             return jsonify(response)
 
 
