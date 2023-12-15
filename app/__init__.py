@@ -55,8 +55,6 @@ def test_page():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_vue(path):
-    print("PATH VAL", path)
-    print("HAHA Serve VUE CALLED")
     if path != '' and os.path.exists("dist/" + path):
         if path.endswith(".js"):
             return send_from_directory('../dist', path, mimetype="application/javascript")
@@ -65,7 +63,6 @@ def serve_vue(path):
         return send_from_directory('../dist', path)
         # return "PATH not exist"
     else:
-        print("ELSE PARTH CALLED")
         return send_from_directory('../dist', 'index.html')
         # return "PATH exist but cant load index"
 
@@ -80,7 +77,6 @@ def api_route():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    print("HAHA CATCH ALL CALLED")
     return send_from_directory('dist', 'index.html')
 
 

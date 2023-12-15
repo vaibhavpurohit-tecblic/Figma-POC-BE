@@ -1,3 +1,5 @@
+import os
+
 from flask import redirect, session, jsonify, request, Blueprint, url_for
 from app.main import bp
 from authlib.integrations.flask_client import OAuth
@@ -49,7 +51,10 @@ def authorize():
     session['oauth_token'] = token
 
     Config.API_ENDPOINT_ACCESS_TOKEN = token['access_token']
+    os.environ["API_ENDPOINT_ACCESS_TOKEN"] = token['access_token']
     print("Authorization Successful")
+    print(f"Config.API_ENDPOINT_ACCESS_TOKEN: {Config.API_ENDPOINT_ACCESS_TOKEN}")
+    print(f"ENV ++++ API_ENDPOINT_ACCESS_TOKEN: {os.environ['API_ENDPOINT_ACCESS_TOKEN']}")
 
     response = redirect('/')
     # response.set_cookie('access_token', Config.API_ENDPOINT_ACCESS_TOKEN)
@@ -74,7 +79,7 @@ def authorize():
 @bp.route('/logout', methods=['GET'])
 def logout():
     session.pop('oauth_token', None)
-    Config.API_ENDPOINT_ACCESS_TOKEN = None
+    # Config.API_ENDPOINT_ACCESS_TOKEN = None
     print("Logout Successful")
 
     response = redirect('/')

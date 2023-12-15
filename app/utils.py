@@ -1,5 +1,6 @@
 import uuid
 import time
+import logging
 from datetime import datetime, timezone, timedelta
 from openai import OpenAI
 
@@ -11,6 +12,8 @@ from app.models.users import Users
 client = OpenAI(api_key=Config().API_KEY)
 assistant_id=Config().ASSISTANT_ID
 EXPERT_BOT = client.beta.assistants.retrieve(assistant_id=assistant_id)
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def get_user_chat_by_user_id(userId, product):
@@ -144,7 +147,7 @@ def generate_expert_bot_thread(messageContent):
             role="user",
             content=messageContent
         )
-        
+
         run = client.beta.threads.runs.create(
             thread_id=thread.id,
             assistant_id=assistant_id,
@@ -155,21 +158,23 @@ def generate_expert_bot_thread(messageContent):
                 thread_id=thread.id,
                 run_id=run.id
             )
-
             time.sleep(3)
 
         messages = client.beta.threads.messages.list(
             thread_id=thread.id
         )
 
-        bot_response = ""
+        bot_response = "".join(
+            msg.content[0].text.value
+            for msg in messages.data
+            if msg.role == 'assistant'
+        )
 
-        for msg in messages.data:
-            if msg.role == 'assistant':
-                bot_response += msg.content[0].text.value
-
+        logging.info(f"Generated Expert Bot Thread for message: {messageContent}")
         return bot_response
-    except:
+    except Exception as e:
+        # Log the exception for further investigation
+        logging.error(f"An exception occurred: {e}")
         return {
             "status": 401,
             "message": "Unauthorized"

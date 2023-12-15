@@ -37,4 +37,4 @@ class Config:
     ASSISTANT_ID = "asst_gDLEqS0GBXwg5AJX1sq96PqA"
     SWAGGER_URL = '/api/docs'
     API_URL = '/static/swagger.json'
-    API_ENDPOINT_ACCESS_TOKEN = None
+    API_ENDPOINT_ACCESS_TOKEN = os.getenv("API_ENDPOINT_ACCESS_TOKEN")

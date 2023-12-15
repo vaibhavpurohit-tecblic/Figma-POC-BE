@@ -5,6 +5,9 @@ from app.extensions import db
 from app.utils import get_user_message_by_chat_id, generate_ad, generate_expert_bot_thread, create_user_message_by_chat_id, \
     get_user_message_by_message_id
 from app.messages import bp
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 @bp.route('/api/<int:userId>/ad-copy/<chatId>/message', methods=['GET', 'POST'])
@@ -24,7 +27,9 @@ def method_user_message_by_chat_id(userId, chatId):
                 "pid": str(uuid.uuid4()),
                 "message": "Success"
             }
+            logging.info(f"GET method_user_message_by_chat_id successful for user {userId}, chat {chatId}")
         except Exception as e:
+            logging.error(f"GET method_user_message_by_chat_id failed: {e}")
             response = {
                 "status": 404,
                 "message": "Not Found"
@@ -51,7 +56,9 @@ def method_user_message_by_chat_id(userId, chatId):
                 "pid": str(uuid.uuid4()),
                 "message": "Success"
             }
+            logging.info(f"POST method_user_message_by_chat_id successful for user {userId}, chat {chatId}")
         except Exception as e:
+            logging.error(f"POST method_user_message_by_chat_id failed: {e}")
             response = {
                 "status": 405,
                 "message": "Method Not Allowed"
