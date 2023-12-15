@@ -8,7 +8,7 @@ import json
 from app.extensions import db
 from app import app
 from config import Config
-from app.utils import register_new_user
+from app.utils import register_new_user, store_access_token_in_database, retrieve_access_token_from_database
 
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
 
@@ -63,6 +63,9 @@ def authorize():
     try:
         user_details = json.loads(fetch_user_details().data.decode('utf-8'))['data']['user']
         register_new_user(user_details, db)
+
+        # Store the token in the database associated with the user
+        store_access_token_in_database(user_details["id"], token['access_token'])
     except Exception as e:
         return {
             "status": 401,
@@ -94,6 +97,17 @@ def fetch_user_details():
     if request.method == "GET":
         # API endpoint to fetch user details
         endpoint = 'https://app.staging.zendrop.com/api/oauth-user'
+
+
+        user_id = int(request.cookies.get('userID'))
+
+        # Retrieve the token from the database using the user ID
+        bearer_token = retrieve_access_token_from_database(user_id)
+
+        print("I am bearer value", bearer_token)
+
+        if bearer_token is None:
+            return jsonify({"error": "Bearer token not set. Please authenticate first."})
 
         # Set up the headers with the Bearer token
         headers = {'Authorization': f"Bearer {Config.API_ENDPOINT_ACCESS_TOKEN}"}

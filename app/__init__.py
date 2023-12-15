@@ -20,7 +20,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 
 # Initialize Flask extensions here
 db.init_app(app)
-# migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
 # Register blueprints here
 from app.main import bp as main_bp

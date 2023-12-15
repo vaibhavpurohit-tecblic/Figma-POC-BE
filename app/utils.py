@@ -8,9 +8,10 @@ from config import Config
 from app.models.chats import Chats
 from app.models.messages import Messages
 from app.models.users import Users
+from app.extensions import db
 
 client = OpenAI(api_key=Config().API_KEY)
-assistant_id=Config().ASSISTANT_ID
+assistant_id = Config().ASSISTANT_ID
 EXPERT_BOT = client.beta.assistants.retrieve(assistant_id=assistant_id)
 
 logging.basicConfig(level=logging.DEBUG)
@@ -105,10 +106,10 @@ def delete_user_chat_by_chat_id(userId, chatId, product, db):
 
 def generate_ad(messageContent, userId, chatId, product):
     messages = get_role_and_content(userId, chatId, product)
-    
+
     if not messages:
         messageContent = "Write an ad. copy for: " + messageContent
-        
+
     messages.append({"role": "user", "content": messageContent})
 
     try:
@@ -271,7 +272,7 @@ def register_new_user(user_details, db):
         user_id = user_details['id']
         user_name = user_details['name']
         user_exist = Users.query.filter_by(id=user_id).first()
-        
+
         if not user_exist:
             user = Users(id=user_id, username=user_name)
             db.session.add(user)
@@ -286,3 +287,32 @@ def register_new_user(user_details, db):
             "status": 401,
             "message": "Unauthorized"
         }
+
+
+def store_access_token_in_database(user_id, access_token):
+    # Check if the user already exists in the database
+    user = Users.query.filter_by(id=user_id).first()
+
+    if user:
+        # If the user exists, update the access token
+        user.access_token = access_token
+        db.session.commit()
+        logging.info(f"Stored Access Token for user: {user_id}")
+    else:
+        # Handle the case where the user does not exist
+        print(f"User with ID {user_id} not found in the database")
+        logging.error(f"USER NOT FOUND: {user_id}")
+
+
+def retrieve_access_token_from_database(user_id):
+    # Retrieve the access token from the database based on the user ID
+    user = Users.query.filter_by(id=user_id).first()
+
+    if user:
+        logging.info(f"Retrieved Access Token :: {user.access_token}")
+        return user.access_token
+    else:
+        # Handle the case where the access token is not found
+        print(f"Access token not found for user with ID {user_id}")
+        logging.error(f"Access token not found for user with ID: {user_id}")
+        return None
