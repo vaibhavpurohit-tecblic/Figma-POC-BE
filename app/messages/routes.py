@@ -15,9 +15,11 @@ logging.basicConfig(level=logging.DEBUG)
 def get_task_status(task_id):
     print("HAHA I AM CALLED")
     task = celery.AsyncResult(task_id)
+    print("Task status", task)
     response_data = {
         'status': task.status,
-        'message': task.info.get('message', ''),
+        # 'message': task.info.get('message', ''),
+        'message': task.info,
         'data': task.result,
     }
     return jsonify(response_data)
@@ -62,7 +64,7 @@ def method_user_message_by_chat_id(userId, chatId):
         return jsonify(response)
     elif request.method == "POST":
         messageContent = request.get_json()['messageContent']
-
+ 
         try:
             if product == 'expert-bot':
                 # Instead of calling generate_expert_bot_thread directly,

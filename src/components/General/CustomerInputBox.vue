@@ -64,13 +64,16 @@ async function ExpertBotChatCreateFunction() {
 async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
-  if (result.status === 200) {
+  if (result.status === 200 || result.status === 202) {
     if (GetPageSearch()?.length > 0) {
       props.loadingStopFunction();
       textMessage.value = "";
     } else {
       RedirectPage("/expert-bot?" + result?.data?.message?.chatId);
     }
+  } else {
+    props.loadingStopFunction();
+    textMessage.value = "";
   }
 }
 

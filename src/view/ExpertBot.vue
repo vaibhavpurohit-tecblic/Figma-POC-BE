@@ -66,13 +66,15 @@ async function ExpertBotChatCreateFunction(title) {
       id: result.data.chat.id,
       messageContent: result.data.chat.title || "",
     });
+  } else {
+    window.location.reload();
   }
 }
 
 async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
-  if (result.status === 200) {
+  if (result.status === 200 || result.status === 202) {
     RedirectPage("/expert-bot?" + result?.data?.message?.chatId);
   } else {
     window.location.reload();
