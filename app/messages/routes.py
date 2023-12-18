@@ -11,6 +11,18 @@ from app.celery_config import celery
 logging.basicConfig(level=logging.DEBUG)
 
 
+@bp.route('/api/task-status/<string:task_id>', methods=['GET'])
+def get_task_status(task_id):
+    print("HAHA I AM CALLED")
+    task = celery.AsyncResult(task_id)
+    response_data = {
+        'status': task.status,
+        'message': task.info.get('message', ''),
+        'data': task.result,
+    }
+    return jsonify(response_data)
+
+
 @celery.task
 def generate_expert_bot_thread_async(messageContent):
     try:
@@ -56,8 +68,21 @@ def method_user_message_by_chat_id(userId, chatId):
                 # Instead of calling generate_expert_bot_thread directly,
                 # queue the task for background execution
                 result_task = generate_expert_bot_thread_async.apply_async(args=[messageContent])
-                result = result_task.get()
+                # result = result_task.get()
                 # result = generate_expert_bot_thread(messageContent)
+
+                # Respond to the client immediately, do not wait for the result
+                response = {
+                    "status": 202,
+                    "data": {
+                        "message": "Task accepted for processing",
+                        "taskId": result_task.id
+                    },
+                    "pid": str(uuid.uuid4()),
+                    "message": "Accepted"
+                }
+                logging.info(f"POST method_user_message_by_chat_id accepted for user {userId}, chat {chatId}")
+                return jsonify(response), 202
             else:
                 result = generate_ad(messageContent, userId, chatId, product)
 

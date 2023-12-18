@@ -22,7 +22,10 @@ export async function ExpertBotChatCreateApiFunction(data) {
   const result = await axios
     .post("/api/" + GetUserIDFlag() + "/expert-bot", data)
     .then((res) => {
-      if (res.data.status === 200) {
+      if (res.data.status === 202) {
+        // The task is accepted for processing, check the task status
+        return checkTaskStatus(res.data.data.taskId);
+      } else if (res.data.status === 200) {
         return res.data;
       } else {
         APIResponseFunction(res.data);
@@ -35,6 +38,30 @@ export async function ExpertBotChatCreateApiFunction(data) {
     });
 
   return result;
+}
+
+async function checkTaskStatus(taskId) {
+  // Polling interval, you can adjust this based on your requirements
+  const pollingInterval = 10000; // 10 seconds
+
+  while (true) {
+    const taskResult = await axios.get(`/api/task-status/${taskId}`)
+      .then((res) => res.data)
+      .catch((err) => {
+        console.error(err);
+        return {};
+      });
+
+    if (taskResult.status === 'SUCCESS') {
+      return taskResult.data;
+    } else if (taskResult.status === 'FAILURE') {
+      console.error("Task failed:", taskResult.message);
+      return {};
+    }
+
+    // Wait for the next polling interval
+    await new Promise(resolve => setTimeout(resolve, pollingInterval));
+  }
 }
 
 export async function ExpertBotChatDetailsApiFunction() {
