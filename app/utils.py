@@ -320,3 +320,72 @@ def retrieve_access_token_from_database(user_id):
         print(f"Access token not found for user with ID {user_id}")
         logging.error(f"Access token not found for user with ID: {user_id}")
         return None
+
+def experimentalResult(userId, chatId, product, messageContent,db):
+        chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
+        
+        current_utc_datetime = datetime.now(timezone.utc)
+        one_millisecond = timedelta(milliseconds=1)
+        new_utc_datetime = current_utc_datetime + one_millisecond
+        new_utc_datetime = current_utc_datetime + one_millisecond
+            
+        bot_time = current_utc_datetime.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+        bot_message = Messages(
+            id=str(uuid.uuid4()),
+            chatId=chat.id,
+            author="bot",
+            content=messageContent,
+            createdAt=bot_time
+        )
+
+
+        db.session.add(bot_message)
+        db.session.commit()
+        
+        print("I AM FROM RESULT")
+        print(bot_message)
+
+        return {
+            "user_message": {
+                "id": bot_message.id,
+                "chatId": bot_message.chatId,
+                "author": bot_message.author,
+                "content": bot_message.content,
+                "createdAt": bot_message.createdAt
+            },
+        }
+
+def experimentalQuestion(userId, chatId, product, messageContent,db):
+        chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
+
+        current_utc_datetime = datetime.now(timezone.utc)
+        one_millisecond = timedelta(milliseconds=1)
+        new_utc_datetime = current_utc_datetime + one_millisecond
+        new_utc_datetime = current_utc_datetime + one_millisecond
+            
+        user_time = current_utc_datetime.replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+        user_message = Messages(
+            id=str(uuid.uuid4()),
+            chatId=chat.id,
+            author="user",
+            content=messageContent,
+            createdAt=user_time
+        )
+
+
+
+        db.session.add(user_message)
+        db.session.commit()
+
+        return {
+            "user_message": {
+                "id": user_message.id,
+                "chatId": user_message.chatId,
+                "author": user_message.author,
+                "content": user_message.content,
+                "createdAt": user_message.createdAt
+            },
+        }
+
+      

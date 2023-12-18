@@ -1,9 +1,10 @@
 import uuid
 from flask import request, jsonify
+from app.models.messages import Messages
 
 from app.extensions import db
 from app.utils import get_user_message_by_chat_id, generate_ad, generate_expert_bot_thread, create_user_message_by_chat_id, \
-    get_user_message_by_message_id
+    get_user_message_by_message_id, experimentalResult, experimentalQuestion
 from app.messages import bp
 import logging
 from app.celery_config import celery
@@ -69,6 +70,8 @@ def method_user_message_by_chat_id(userId, chatId):
             if product == 'expert-bot':
                 # Instead of calling generate_expert_bot_thread directly,
                 # queue the task for background execution
+                experimentalQuestion(userId, chatId, product, messageContent, db)
+
                 result_task = generate_expert_bot_thread_async.apply_async(args=[messageContent])
                 # result = result_task.get()
                 # result = generate_expert_bot_thread(messageContent)
@@ -134,3 +137,36 @@ def method_user_message_by_message_id(userId, chatId, messageId):
             }
 
         return jsonify(response)
+
+
+
+#  -----------------experimental-----------------
+    
+@bp.route('/api/<int:userId>/expert-bot/<chatId>/result', methods=['POST'])
+def method_user_message_by_chat_id_result(userId, chatId):
+    product = 'expert-bot' if 'expert-bot' in request.url else 'ad-copy'
+
+    messageContent = request.get_json()['messageContent']
+    
+    try:
+        message = experimentalResult(userId, chatId, product, messageContent, db)
+        print("HAHAHAHAHAHAHAHAHAAAAAAAA")
+        print(message)
+        response = {
+                "status": 200,
+                "data": {
+                    "message": message["user_message"],
+                },
+                "pid": str(uuid.uuid4()),
+                "message": "Success"
+        }
+        logging.info(f"POST method_user_message_by_chat_id successful for user {userId}, chat {chatId}")
+    except Exception as e:
+        logging.error(f"POST method_user_message_by_chat_id failed: {e}")
+        response = {
+            "status": 405,
+            "message": "Method Not Allowed"
+        }
+
+    return jsonify(response)
+        

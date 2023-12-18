@@ -4,6 +4,8 @@ import { AdCopyChatMessagesAddApiFunction } from "../../api/AdCopyApis/index.js"
 import {
   ExpertBotChatCreateApiFunction,
   ExpertBotChatMessagesAddApiFunction,
+  CheckTaskStatusApiFunction,
+  ExpertBotSendResultApiFunction,
 } from "../../api/ExpertBotApis/index.js";
 import {
   GetPagePath,
@@ -19,6 +21,8 @@ const props = defineProps({
 });
 
 const textMessage = ref("");
+
+const chatId = ref("");
 
 function textMessageChange(e) {
   textMessage.value = e.target.value;
@@ -51,6 +55,7 @@ async function ExpertBotChatCreateFunction() {
   });
 
   if (result.status === 200) {
+    chatId.value = result.data.chat.id;
     ExpertBotChatMessagesAddFunction({
       id: result.data.chat.id,
       messageContent: result.data.chat.title || "",
@@ -65,6 +70,30 @@ async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
   if (result.status === 200 || result.status === 202) {
+    CheckTaskStatusFunction({ id: result?.data?.taskId || 0 });
+  } else {
+    props.loadingStopFunction();
+    textMessage.value = "";
+  }
+}
+
+async function CheckTaskStatusFunction(data) {
+  const result = await CheckTaskStatusApiFunction(data);
+  if (result.status === "SUCCESS") {
+    console.log("here2");
+    ExpertBotSendResultFunction({
+      id: chatId.value,
+      messageContent: result.data || "",
+    });
+  } else {
+    props.loadingStopFunction();
+    textMessage.value = "";
+  }
+}
+
+async function ExpertBotSendResultFunction(data) {
+  const result = await ExpertBotSendResultApiFunction(data);
+  if (result.status === 200) {
     if (GetPageSearch()?.length > 0) {
       props.loadingStopFunction();
       textMessage.value = "";
