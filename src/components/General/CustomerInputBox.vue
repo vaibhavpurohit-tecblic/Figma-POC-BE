@@ -113,6 +113,7 @@ function SideBarDataFunction() {
       AdCopyChatMessagesAddFunction();
     } else if (GetPagePath() === "/expert-bot") {
       if (GetPageSearch()?.length > 0) {
+        chatId.value = GetPageSearch() || "";
         ExpertBotChatMessagesAddFunction({
           id: GetPageSearch() || "",
           messageContent: textMessage.value,
