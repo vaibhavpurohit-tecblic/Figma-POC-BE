@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import MarkdownIt from "markdown-it";
 import moment from "moment";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
@@ -64,6 +65,11 @@ async function AdCopyChatMessagesListFunction(data) {
   } else {
     chatDetails.value = [];
   }
+}
+
+function MarkDownConverter(text) {
+  const md = new MarkdownIt();
+  return md.render(text);
 }
 
 function CheckPropsFunction() {
@@ -148,9 +154,10 @@ onMounted(() => CheckPropsFunction());
                         class="h-14 w-14"
                       />
                       <div class="py-4 px-7 rounded-xl bg-tertiary flex-1">
-                        <p class="text-primary text-sm font-normal">
-                          {{ item.content }}
-                        </p>
+                        <div
+                          class="text-primary text-sm font-normal markdown-container"
+                          v-html="MarkDownConverter(item.content)"
+                        ></div>
                       </div>
                     </div>
                   </div>

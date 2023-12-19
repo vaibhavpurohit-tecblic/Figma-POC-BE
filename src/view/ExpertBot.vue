@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import moment from "moment";
+import MarkdownIt from "markdown-it";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
@@ -128,6 +129,11 @@ async function ExpertBotSendResultFunction(data) {
   }
 }
 
+function MarkDownConverter(text) {
+  const md = new MarkdownIt();
+  return md.render(text);
+}
+
 function PreselectedChat(title) {
   inputLoading.value = true;
   ExpertBotChatCreateFunction(title);
@@ -173,9 +179,10 @@ onMounted(() => CheckPropsFunction());
                       class="h-14 w-14"
                     />
                     <div class="py-4 px-7 rounded-xl bg-tertiary flex-1">
-                      <p class="text-primary text-sm font-normal">
-                        {{ item.content }}
-                      </p>
+                      <div
+                        class="text-primary text-sm font-normal markdown-container"
+                        v-html="MarkDownConverter(item.content)"
+                      ></div>
                     </div>
                   </div>
                 </div>
