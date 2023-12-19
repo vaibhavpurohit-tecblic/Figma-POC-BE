@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "axios": "^1.6.1",
+    "markdown-it": "^14.0.0",
     "moment": "^2.29.4",
     "vite": "^4.4.5",
     "vue": "^3.3.4",

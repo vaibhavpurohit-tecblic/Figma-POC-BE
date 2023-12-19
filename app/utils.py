@@ -104,37 +104,65 @@ def delete_user_chat_by_chat_id(userId, chatId, product, db):
     db.session.commit()
 
 
-def generate_ad(messageContent, userId, chatId, product):
-    messages = get_role_and_content(userId, chatId, product)
-
-    if not messages:
-        messageContent = "Write an ad. copy for: " + messageContent
-
-    messages.append({"role": "user", "content": messageContent})
-
+def generate_ad(messageContent, userId, chatId, product,message):
     try:
-        completion = client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=messages
-        )
+        
+        print(message)
+        
+        # Get the content of the first message or an empty string if it's None
+        first_message_content = message[0].get("content") or ""
 
-        result = completion.choices[0].message.content
-        return result
-    except Exception as e:
-        return {
-            "status": 401,
-            "message": "Unauthorized"
-        }
+        # Create an ad copy by concatenating it with a prefix
+        ad_copy = f"Write an ad copy for: {first_message_content}"
 
+        # Update the content of the first message with the ad copy
+        
+        print (message[0])
+        message[0]["content"] = ad_copy
+
+        # Assign the modified message to the variable 'messages'
+        messages = message
+        
+        print (messages)
+        
+        print (message)
+        
+        # messages.append({"role": "user", "content": messageContent})    
+        
+        
+        try:
+            completion = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=messages
+            )
+            
+            print("here 7")
+
+            result = completion.choices[0].message.content
+            return result
+        except Exception as e:
+            print (e,"e")
+            return {
+                "status": 401,
+                "message": "Unauthorized"
+            }
+    except Exception as e:    
+        print (e,"e")
+        
 
 def get_role_and_content(userId, chatId, product):
+    print("here 7")
+    
     past_chat = get_user_message_by_chat_id(userId, chatId, product)
-
+    print("here 8")
+    
     messages = []
 
+    print("here 9")
     for message in past_chat:
         role = 'assistant' if message['author'] == 'bot' else message['author']
         messages.append({"role": role, "content": message['content']})
+        print("here 10")
 
     return messages
 
@@ -183,8 +211,13 @@ def generate_expert_bot_thread(messageContent):
 
 
 def get_user_message_by_chat_id(userId, chatId, product):
+    print("here 11", userId, chatId, product)
     chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
+    print("here 12")
+    
     messages_by_chat_id = Messages.query.filter_by(chatId=chat.id).order_by('createdAt').all()
+    print("here 13")
+    
     message_details = []
 
     for message in messages_by_chat_id:
@@ -195,6 +228,9 @@ def get_user_message_by_chat_id(userId, chatId, product):
             "content": message.content,
             "createdAt": message.createdAt
         })
+        print("here 14")
+        
+    print("here 15")
 
     return message_details
 
@@ -217,6 +253,8 @@ def create_user_message_by_chat_id(userId, chatId, messageContent, result, produ
         createdAt=user_time
     )
 
+    # Logic to make sure user_message is commited before bot_message.
+    
     bot_message = Messages(
         id=str(uuid.uuid4()),
         chatId=chat.id,

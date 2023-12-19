@@ -1,5 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import MarkdownIt from "markdown-it";
 import moment from "moment";
 import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
@@ -28,13 +29,43 @@ function DropDownLoadingStartFunction() {
 
 const inputLoading = ref(false);
 
+function scrollToElement(title) {
+  var element = document.getElementById(title);
+
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
 function InputLoadingStartFunction() {
   inputLoading.value = true;
+
+  setTimeout(() => {
+    scrollToElement("loading-component");
+  }, 500);
 }
 
 function InputLoadingStopFunction() {
   inputLoading.value = false;
   CheckPropsFunction();
+
+  setTimeout(() => {
+    scrollToElement("last-component");
+  }, 3000);
+}
+
+const loadingViewText = ref("");
+
+const loadingViewTime = ref("");
+
+function UserViewingStartFunction(title) {
+  loadingViewText.value = title;
+  loadingViewTime.value = new Date();
+}
+
+function UserViewingStopFunction() {
+  loadingViewText.value = "";
+  loadingViewTime.value = "";
 }
 
 const initialProduct = ref("");
@@ -45,14 +76,16 @@ async function AdCopyChatMessagesListFunction(data) {
   const result = await AdCopyChatMessagesListApiFunction(data);
 
   if (result.status === 200) {
-    initialProduct.value =
-      result?.data?.messages?.[0]?.content?.split(
-        "Write an ad. copy for:"
-      )?.[1] || "";
+    initialProduct.value = result?.data?.messages?.[0]?.content || "";
     chatDetails.value = result?.data?.messages?.splice(1) || [];
   } else {
     chatDetails.value = [];
   }
+}
+
+function MarkDownConverter(text) {
+  const md = new MarkdownIt();
+  return md.render(text);
 }
 
 function CheckPropsFunction() {
@@ -123,10 +156,13 @@ onMounted(() => CheckPropsFunction());
               </div>
             </div>
             <div class="" v-if="propsValue.length > 0">
-              <div class="" v-for="item in chatDetails" :key="item.id">
+              <div class="" v-for="(item, index) in chatDetails" :key="item.id">
                 <div
                   class="grid grid-cols-1 md:grid-cols-6 mt-5"
                   v-if="item.author === 'bot'"
+                  :id="
+                    chatDetails?.length - 1 === index ? 'last-component' : ''
+                  "
                 >
                   <div class="col-span-1"></div>
                   <div class="col-span-1 md:col-span-3">
@@ -137,9 +173,10 @@ onMounted(() => CheckPropsFunction());
                         class="h-14 w-14"
                       />
                       <div class="py-4 px-7 rounded-xl bg-tertiary flex-1">
-                        <p class="text-primary text-sm font-normal">
-                          {{ item.content }}
-                        </p>
+                        <div
+                          class="text-primary text-sm font-normal markdown-container"
+                          v-html="MarkDownConverter(item.content)"
+                        ></div>
                       </div>
                     </div>
                   </div>
@@ -215,7 +252,54 @@ onMounted(() => CheckPropsFunction());
               </div>
             </div>
             <div class="" v-if="dropdownLoading || inputLoading">
-              <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
+              <div
+                class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                v-if="loadingViewText !== ''"
+              >
+                <div class="col-span-1"></div>
+                <div class="col-span-1 md:col-span-3">
+                  <div class="flex gap-4">
+                    <img
+                      src="../assets/images/ProfilePhoto.png"
+                      alt=""
+                      class="h-14 w-14 rounded-full"
+                    />
+                    <div class="py-4 px-7 rounded-xl flex-1">
+                      <p class="text-primary text-sm font-normal">
+                        {{ loadingViewText }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-1">
+                  <div class="pt-5 pl-4">
+                    <div
+                      class="flex justify-end md:justify-start gap-2 items-center"
+                    >
+                      <img
+                        src="../assets/logos/dateIcon.svg"
+                        alt=""
+                        class="h-3 w-3"
+                      />
+                      <p class="text-xs font-normal text-gray-600 flex-none">
+                        {{ moment(loadingViewTime).format("DD MMM YYYY") }}
+                      </p>
+                      <img
+                        src="../assets/logos/timeIcon.svg"
+                        alt=""
+                        class="h-3 w-3"
+                      />
+                      <p class="text-xs font-normal text-gray-600 flex-none">
+                        {{ moment(loadingViewTime).format("hh:mm A") }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                id="loading-component"
+              >
                 <div class="col-span-1"></div>
                 <div class="col-span-1 md:col-span-3">
                   <div class="flex gap-4">
@@ -249,6 +333,8 @@ onMounted(() => CheckPropsFunction());
                 :loading="inputLoading"
                 :loadingStartFunction="InputLoadingStartFunction"
                 :loadingStopFunction="InputLoadingStopFunction"
+                :loadingUserViewingStartFunction="UserViewingStartFunction"
+                :loadingUserViewingStopFunction="UserViewingStopFunction"
               />
             </div>
           </div>

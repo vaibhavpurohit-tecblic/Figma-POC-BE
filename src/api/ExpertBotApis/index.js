@@ -106,7 +106,7 @@ export async function ExpertBotChatMessagesAddApiFunction(data) {
   return result;
 }
 
-export async function CheckTaskStatusApiFunction(data) {
+export async function CheckExpertBotTaskStatusApiFunction(data) {
   // Polling interval, you can adjust this based on your requirements
   const pollingInterval = 10000; // 10 seconds
 
@@ -114,19 +114,15 @@ export async function CheckTaskStatusApiFunction(data) {
     const taskResult = await axios
       .get("/api/task-status/" + data.id)
       .then((res) => {
-        console.log(res);
-        // res.data;
         return res.data;
       })
       .catch((err) => {
-        console.error(err);
         return {};
       });
 
     if (taskResult.status === "SUCCESS") {
       return taskResult;
     } else if (taskResult.status === "FAILURE") {
-      console.error("Task failed:", taskResult.message);
       return {};
     }
 
