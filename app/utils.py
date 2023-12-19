@@ -105,6 +105,7 @@ def delete_user_chat_by_chat_id(userId, chatId, product, db):
 
 
 def generate_ad(messageContent, userId, chatId, product):
+    print("here 3")
     messages = get_role_and_content(userId, chatId, product)
 
     if not messages:
