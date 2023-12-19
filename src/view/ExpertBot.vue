@@ -32,13 +32,29 @@ function SidebarCloseStopFunction() {
 
 const inputLoading = ref(false);
 
+function scrollToElement(title) {
+  var element = document.getElementById(title);
+
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
 function InputLoadingStartFunction() {
   inputLoading.value = true;
+
+  setTimeout(() => {
+    scrollToElement("loading-component");
+  }, 500);
 }
 
 function InputLoadingStopFunction() {
   inputLoading.value = false;
   CheckPropsFunction();
+
+  setTimeout(() => {
+    scrollToElement("last-component");
+  }, 3000);
 }
 
 const propsValue = ref("");
@@ -165,10 +181,11 @@ onMounted(() => CheckPropsFunction());
             class="h-[calc(100vh-275px)] overflow-auto"
             v-if="propsValue.length > 0 || inputLoading"
           >
-            <div class="" v-for="item in chatDetails" :key="item.id">
+            <div class="" v-for="(item, index) in chatDetails" :key="item.id">
               <div
-                class="grid grid-cols-1 md:grid-cols-6 my-5"
+                class="grid grid-cols-1 md:grid-cols-6 mb-5"
                 v-if="item.author === 'bot'"
+                :id="chatDetails?.length - 1 === index ? 'last-component' : ''"
               >
                 <div class="col-span-1"></div>
                 <div class="col-span-1 md:col-span-3">
@@ -212,7 +229,7 @@ onMounted(() => CheckPropsFunction());
                 </div>
               </div>
               <div
-                class="grid grid-cols-1 md:grid-cols-6"
+                class="grid grid-cols-1 md:grid-cols-6 mb-5"
                 v-if="item.author === 'user'"
               >
                 <div class="col-span-1"></div>
@@ -301,7 +318,10 @@ onMounted(() => CheckPropsFunction());
                   </div>
                 </div>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-6 mt-5">
+              <div
+                class="grid grid-cols-1 md:grid-cols-6 mt-5"
+                id="loading-component"
+              >
                 <div class="col-span-1"></div>
                 <div class="col-span-1 md:col-span-3">
                   <div class="flex gap-4">
