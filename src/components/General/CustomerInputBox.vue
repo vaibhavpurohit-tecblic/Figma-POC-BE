@@ -18,11 +18,22 @@ const props = defineProps({
   loading: Boolean,
   loadingStartFunction: Function,
   loadingStopFunction: Function,
+  loadingUserViewingStartFunction: Function,
+  loadingUserViewingStopFunction: Function,
 });
 
 const textMessage = ref("");
 
 const chatId = ref("");
+
+const viewText = ref("");
+
+function nextStepProgress() {
+  props.loadingUserViewingStopFunction();
+  props.loadingStopFunction();
+  textMessage.value = "";
+  viewText.value = "";
+}
 
 function textMessageChange(e) {
   textMessage.value = e.target.value;
@@ -37,21 +48,19 @@ function clearTextareaOnEnter(e) {
 async function AdCopyChatMessagesAddFunction() {
   const result = await AdCopyChatMessagesAddApiFunction({
     id: GetPageSearch(),
-    messageContent: textMessage.value,
+    messageContent: viewText.value,
   });
 
   if (result.status === 200) {
-    props.loadingStopFunction();
-    textMessage.value = "";
+    nextStepProgress();
   } else {
-    props.loadingStopFunction();
-    textMessage.value = "";
+    nextStepProgress();
   }
 }
 
 async function ExpertBotChatCreateFunction() {
   const result = await ExpertBotChatCreateApiFunction({
-    messageContent: textMessage.value,
+    messageContent: viewText.value,
   });
 
   if (result.status === 200) {
@@ -61,8 +70,7 @@ async function ExpertBotChatCreateFunction() {
       messageContent: result.data.chat.title || "",
     });
   } else {
-    props.loadingStopFunction();
-    textMessage.value = "";
+    nextStepProgress();
   }
 }
 
@@ -72,8 +80,7 @@ async function ExpertBotChatMessagesAddFunction(data) {
   if (result.status === 202) {
     CheckTaskStatusFunction({ id: result?.data?.taskId || 0 });
   } else {
-    props.loadingStopFunction();
-    textMessage.value = "";
+    nextStepProgress();
   }
 }
 
@@ -85,8 +92,7 @@ async function CheckTaskStatusFunction(data) {
       messageContent: result.data || "",
     });
   } else {
-    props.loadingStopFunction();
-    textMessage.value = "";
+    nextStepProgress();
   }
 }
 
@@ -94,28 +100,32 @@ async function ExpertBotSendResultFunction(data) {
   const result = await ExpertBotSendResultApiFunction(data);
   if (result.status === 200) {
     if (GetPageSearch()?.length > 0) {
-      props.loadingStopFunction();
-      textMessage.value = "";
+      nextStepProgress();
     } else {
       RedirectPage("/expert-bot?" + result?.data?.message?.chatId);
     }
   } else {
-    props.loadingStopFunction();
-    textMessage.value = "";
+    nextStepProgress();
   }
 }
 
 function SideBarDataFunction() {
   if (textMessage.value.length > 0 && props.active && !props.loading) {
     props.loadingStartFunction();
+    props.loadingUserViewingStartFunction(textMessage.value);
+    viewText.value = textMessage.value;
+
+    textMessage.value = "";
+
     if (GetPagePath() === "/ad-copy") {
       AdCopyChatMessagesAddFunction();
     } else if (GetPagePath() === "/expert-bot") {
       if (GetPageSearch()?.length > 0) {
         chatId.value = GetPageSearch() || "";
+        console.log(viewText.value, "viewText.value");
         ExpertBotChatMessagesAddFunction({
           id: GetPageSearch() || "",
-          messageContent: textMessage.value,
+          messageContent: viewText.value,
         });
       } else {
         ExpertBotChatCreateFunction();
