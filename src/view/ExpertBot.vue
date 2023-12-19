@@ -9,7 +9,7 @@ import {
   ExpertBotChatMessagesListApiFunction,
   ExpertBotChatCreateApiFunction,
   ExpertBotChatMessagesAddApiFunction,
-  CheckTaskStatusApiFunction,
+  CheckExpertBotTaskStatusApiFunction,
   ExpertBotSendResultApiFunction,
 } from "../api/ExpertBotApis/index.js";
 import {
@@ -109,7 +109,7 @@ async function ExpertBotChatMessagesAddFunction(data) {
 }
 
 async function CheckTaskStatusFunction(data) {
-  const result = await CheckTaskStatusApiFunction(data);
+  const result = await CheckExpertBotTaskStatusApiFunction(data);
   if (result.status === "SUCCESS") {
     ExpertBotSendResultFunction({
       id: chatId.value,

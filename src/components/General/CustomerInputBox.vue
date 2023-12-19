@@ -1,10 +1,14 @@
 <script setup>
 import { ref } from "vue";
-import { AdCopyChatMessagesAddApiFunction } from "../../api/AdCopyApis/index.js";
+import {
+  AdCopyChatMessagesAddApiFunction,
+  CheckAdCopyTaskStatusApiFunction,
+  AdCopySendResultApiFunction,
+} from "../../api/AdCopyApis/index.js";
 import {
   ExpertBotChatCreateApiFunction,
   ExpertBotChatMessagesAddApiFunction,
-  CheckTaskStatusApiFunction,
+  CheckExpertBotTaskStatusApiFunction,
   ExpertBotSendResultApiFunction,
 } from "../../api/ExpertBotApis/index.js";
 import {
@@ -51,6 +55,27 @@ async function AdCopyChatMessagesAddFunction() {
     messageContent: viewText.value,
   });
 
+  if (result.status === 202) {
+    CheckAdCopyTaskStatusFunction({ id: result?.data?.taskId || 0 });
+  } else {
+    nextStepProgress();
+  }
+}
+
+async function CheckAdCopyTaskStatusFunction(data) {
+  const result = await CheckAdCopyTaskStatusApiFunction(data);
+  if (result.status === "SUCCESS") {
+    AdCopySendResultFunction({
+      id: chatId.value,
+      messageContent: result.data || "",
+    });
+  } else {
+    nextStepProgress();
+  }
+}
+
+async function AdCopySendResultFunction(data) {
+  const result = await AdCopySendResultApiFunction(data);
   if (result.status === 200) {
     nextStepProgress();
   } else {
@@ -78,14 +103,14 @@ async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
   if (result.status === 202) {
-    CheckTaskStatusFunction({ id: result?.data?.taskId || 0 });
+    CheckExpertBotTaskStatusFunction({ id: result?.data?.taskId || 0 });
   } else {
     nextStepProgress();
   }
 }
 
-async function CheckTaskStatusFunction(data) {
-  const result = await CheckTaskStatusApiFunction(data);
+async function CheckExpertBotTaskStatusFunction(data) {
+  const result = await CheckExpertBotTaskStatusApiFunction(data);
   if (result.status === "SUCCESS") {
     ExpertBotSendResultFunction({
       id: chatId.value,
@@ -117,12 +142,12 @@ function SideBarDataFunction() {
 
     textMessage.value = "";
 
+    chatId.value = GetPageSearch() || "";
+
     if (GetPagePath() === "/ad-copy") {
       AdCopyChatMessagesAddFunction();
     } else if (GetPagePath() === "/expert-bot") {
       if (GetPageSearch()?.length > 0) {
-        chatId.value = GetPageSearch() || "";
-        console.log(viewText.value, "viewText.value");
         ExpertBotChatMessagesAddFunction({
           id: GetPageSearch() || "",
           messageContent: viewText.value,

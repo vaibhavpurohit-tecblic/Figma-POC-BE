@@ -106,7 +106,7 @@ export async function ExpertBotChatMessagesAddApiFunction(data) {
   return result;
 }
 
-export async function CheckTaskStatusApiFunction(data) {
+export async function CheckExpertBotTaskStatusApiFunction(data) {
   // Polling interval, you can adjust this based on your requirements
   const pollingInterval = 10000; // 10 seconds
 

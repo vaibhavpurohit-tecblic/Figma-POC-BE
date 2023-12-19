@@ -4,6 +4,8 @@ import { ProductListApiFunction } from "../../api/ProductApis/index.js";
 import {
   AdCopyChatCreateApiFunction,
   AdCopyChatMessagesAddApiFunction,
+  CheckAdCopyTaskStatusApiFunction,
+  AdCopySendResultApiFunction,
 } from "../../api/AdCopyApis/index.js";
 import { RedirectPage, ReloadPage } from "../Constants/index.js";
 
@@ -17,6 +19,7 @@ const props = defineProps({
 const isDropdown = ref(false);
 const dropDownList = ref([]);
 const dropDownValue = ref(null);
+const chatId = ref("");
 
 function DropdownTrigger() {
   if (props.active) {
@@ -42,10 +45,31 @@ function ProductSelectionFunction(product) {
 async function AdCopyChatMessagesAddFunction(data) {
   const result = await AdCopyChatMessagesAddApiFunction(data);
 
+  if (result.status === 202) {
+    CheckAdCopyTaskStatusFunction({ id: result?.data?.taskId || 0 });
+  } else {
+    ReloadPage();
+  }
+}
+
+async function CheckAdCopyTaskStatusFunction(data) {
+  const result = await CheckAdCopyTaskStatusApiFunction(data);
+  if (result.status === "SUCCESS") {
+    AdCopySendResultFunction({
+      id: chatId.value,
+      messageContent: result.data || "",
+    });
+  } else {
+    nextStepProgress();
+  }
+}
+
+async function AdCopySendResultFunction(data) {
+  const result = await AdCopySendResultApiFunction(data);
   if (result.status === 200) {
     RedirectPage("/ad-copy?" + result?.data?.message?.chatId);
   } else {
-    ReloadPage();
+    nextStepProgress();
   }
 }
 
@@ -57,6 +81,7 @@ async function ProductDetailsFunction() {
     });
 
     if (result.status === 200) {
+      chatId.value = result.data.chat.id;
       AdCopyChatMessagesAddFunction({
         id: result.data.chat.id,
         messageContent: result.data.chat.title || "",

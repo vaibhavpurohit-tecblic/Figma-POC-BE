@@ -4,7 +4,7 @@ from app.models.messages import Messages
 
 from app.extensions import db
 from app.utils import get_user_message_by_chat_id, generate_ad, generate_expert_bot_thread, create_user_message_by_chat_id, \
-    get_user_message_by_message_id, experimentalResult, experimentalQuestion
+    get_user_message_by_message_id, experimentalResult, experimentalQuestion, get_role_and_content
 from app.messages import bp
 import logging
 from app.celery_config import celery
@@ -38,11 +38,11 @@ def generate_expert_bot_thread_async(messageContent):
     
 
 @celery.task
-def generate_ad_copy_thread_async(messageContent, product, userId, chatId):
+def generate_ad_copy_thread_async(messageContent, product, userId, chatId,message):
     try:
         print("here 2")
         # Your existing code for generate_expert_bot_thread
-        result = generate_ad(messageContent, product, userId, chatId)
+        result = generate_ad(messageContent, product, userId, chatId, message)
         print("========================?>>>>>> one ", result)
         return result
     except Exception as e:
@@ -105,10 +105,14 @@ def method_user_message_by_chat_id(userId, chatId):
             else:
                 print("here 1")
                 experimentalQuestion(userId, chatId, product, messageContent, db)
+                
+                message = get_role_and_content(userId, chatId, product)
+                
+                print("here 2", message)
 
                 # result = generate_ad(messageContent, userId, chatId, product)
-                result = generate_ad_copy_thread_async.apply_async(args=[messageContent, product, userId, chatId])
-                print("------------->>> two", result)
+                result = generate_ad_copy_thread_async.apply_async(args=[messageContent, product, userId, chatId, message])
+                # print("------------->>> two", result)
 
                 response = {
                     "status": 202,
@@ -173,6 +177,7 @@ def method_user_message_by_message_id(userId, chatId, messageId):
 
 #  -----------------experimental-----------------
     
+@bp.route('/api/<int:userId>/ad-copy/<chatId>/result', methods=['POST'])
 @bp.route('/api/<int:userId>/expert-bot/<chatId>/result', methods=['POST'])
 def method_user_message_by_chat_id_result(userId, chatId):
     product = 'expert-bot' if 'expert-bot' in request.url else 'ad-copy'
