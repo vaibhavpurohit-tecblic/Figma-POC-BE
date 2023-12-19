@@ -69,7 +69,7 @@ async function ExpertBotChatCreateFunction() {
 async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
-  if (result.status === 200 || result.status === 202) {
+  if (result.status === 202) {
     CheckTaskStatusFunction({ id: result?.data?.taskId || 0 });
   } else {
     props.loadingStopFunction();
@@ -80,7 +80,6 @@ async function ExpertBotChatMessagesAddFunction(data) {
 async function CheckTaskStatusFunction(data) {
   const result = await CheckTaskStatusApiFunction(data);
   if (result.status === "SUCCESS") {
-    console.log("here2");
     ExpertBotSendResultFunction({
       id: chatId.value,
       messageContent: result.data || "",

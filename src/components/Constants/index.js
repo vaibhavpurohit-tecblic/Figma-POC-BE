@@ -53,6 +53,10 @@ export function RedirectPage(link) {
   window.location.href = link;
 }
 
+export function ReloadPage() {
+  window.location.reload();
+}
+
 export function APIResponseFunction(error) {
   const $toast = useToast();
 

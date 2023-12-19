@@ -11,7 +11,11 @@ import {
   CheckTaskStatusApiFunction,
   ExpertBotSendResultApiFunction,
 } from "../api/ExpertBotApis/index.js";
-import { GetPageSearch, RedirectPage } from "../components/Constants/index.js";
+import {
+  GetPageSearch,
+  RedirectPage,
+  ReloadPage,
+} from "../components/Constants/index.js";
 
 const chatId = ref("");
 
@@ -72,44 +76,38 @@ async function ExpertBotChatCreateFunction(title) {
       messageContent: result.data.chat.title || "",
     });
   } else {
-    // window.location.reload();
+    ReloadPage();
   }
 }
 
 async function ExpertBotChatMessagesAddFunction(data) {
   const result = await ExpertBotChatMessagesAddApiFunction(data);
 
-  if (result.status === 200 || result.status === 202) {
-    console.log("here", result);
+  if (result.status === 202) {
     CheckTaskStatusFunction({ id: result?.data?.taskId || 0 });
-    // RedirectPage("/expert-bot?" + result?.data?.message?.chatId);
   } else {
-    // window.location.reload();
+    ReloadPage();
   }
 }
 
 async function CheckTaskStatusFunction(data) {
   const result = await CheckTaskStatusApiFunction(data);
   if (result.status === "SUCCESS") {
-    console.log("here2");
     ExpertBotSendResultFunction({
       id: chatId.value,
       messageContent: result.data || "",
     });
   } else {
-    // window.location.reload();
+    ReloadPage();
   }
 }
 
 async function ExpertBotSendResultFunction(data) {
   const result = await ExpertBotSendResultApiFunction(data);
   if (result.status === 200) {
-    console.log("here3", result);
-    RedirectPage(
-      "/expert-bot?" + result?.data?.message?.chatId || 0
-    );
+    RedirectPage("/expert-bot?" + result?.data?.message?.chatId || 0);
   } else {
-    // window.location.reload();
+    ReloadPage();
   }
 }
 

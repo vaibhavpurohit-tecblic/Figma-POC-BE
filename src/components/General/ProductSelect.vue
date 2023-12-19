@@ -5,7 +5,7 @@ import {
   AdCopyChatCreateApiFunction,
   AdCopyChatMessagesAddApiFunction,
 } from "../../api/AdCopyApis/index.js";
-import { RedirectPage } from "../Constants/index.js";
+import { RedirectPage, ReloadPage } from "../Constants/index.js";
 
 const props = defineProps({
   active: Boolean,
@@ -45,7 +45,7 @@ async function AdCopyChatMessagesAddFunction(data) {
   if (result.status === 200) {
     RedirectPage("/ad-copy?" + result?.data?.message?.chatId);
   } else {
-    window.location.reload();
+    ReloadPage();
   }
 }
 
