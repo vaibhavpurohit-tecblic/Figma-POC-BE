@@ -35,6 +35,20 @@ def generate_expert_bot_thread_async(messageContent):
     except Exception as e:
         logging.error(f"An exception occurred: {e}")
         return {"status": 401, "message": "Unauthorized"}
+    
+
+@celery.task
+def generate_ad_copy_thread_async(messageContent, product, userId, chatId):
+    try:
+        print("here 2")
+        # Your existing code for generate_expert_bot_thread
+        result = generate_ad(messageContent, product, userId, chatId)
+        print("========================?>>>>>> one ", result)
+        return result
+    except Exception as e:
+        logging.error(f"An exception occurred: {e}")
+        return {"status": 401, "message": "Unauthorized"}
+
 
 
 @bp.route('/api/<int:userId>/ad-copy/<chatId>/message', methods=['GET', 'POST'])
@@ -89,20 +103,37 @@ def method_user_message_by_chat_id(userId, chatId):
                 logging.info(f"POST method_user_message_by_chat_id accepted for user {userId}, chat {chatId}")
                 return jsonify(response), 202
             else:
-                result = generate_ad(messageContent, userId, chatId, product)
+                print("here 1")
+                experimentalQuestion(userId, chatId, product, messageContent, db)
 
-            message = create_user_message_by_chat_id(userId, chatId, messageContent, result, product, db)
+                # result = generate_ad(messageContent, userId, chatId, product)
+                result = generate_ad_copy_thread_async.apply_async(args=[messageContent, product, userId, chatId])
+                print("------------->>> two", result)
 
-            response = {
-                "status": 200,
-                "data": {
-                    "message": message["user_message"],
-                    "responseMessageId": message["responseMessageId"]
-                },
-                "pid": str(uuid.uuid4()),
-                "message": "Success"
-            }
-            logging.info(f"POST method_user_message_by_chat_id successful for user {userId}, chat {chatId}")
+                response = {
+                    "status": 202,
+                    "data": {
+                        "message": "Task accepted for processing",
+                        "taskId": result.id
+                    },
+                    "pid": str(uuid.uuid4()),
+                    "message": "Accepted"
+                }
+                logging.info(f"POST method_user_message_by_chat_id accepted for user {userId}, chat {chatId}")
+                return jsonify(response), 202
+
+            # message = create_user_message_by_chat_id(userId, chatId, messageContent, result, product, db)
+
+            # response = {
+            #     "status": 200,
+            #     "data": {
+            #         "message": message["user_message"],
+            #         "responseMessageId": message["responseMessageId"]
+            #     },
+            #     "pid": str(uuid.uuid4()),
+            #     "message": "Success"
+            # }
+            # logging.info(f"POST method_user_message_by_chat_id successful for user {userId}, chat {chatId}")
         except Exception as e:
             logging.error(f"POST method_user_message_by_chat_id failed: {e}")
             response = {
