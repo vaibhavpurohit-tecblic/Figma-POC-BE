@@ -67,4 +67,15 @@ h6 {
   font-weight: bold;
 }
 
+.markdown-container code {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  text-wrap: wrap;
+  background-color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 10px 12px;
+}
+
 /* Markdown CSS End */
