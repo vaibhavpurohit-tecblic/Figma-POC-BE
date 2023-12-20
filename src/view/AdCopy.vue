@@ -85,7 +85,7 @@ async function AdCopyChatMessagesListFunction(data) {
 
 function MarkDownConverter(text) {
   const md = new MarkdownIt();
-  return md.render(text);
+  return md.render(text.replaceAll("【9†source】",""));
 }
 
 function CheckPropsFunction() {
@@ -172,7 +172,9 @@ onMounted(() => CheckPropsFunction());
                         alt=""
                         class="h-14 w-14"
                       />
-                      <div class="py-4 px-7 rounded-xl bg-tertiary flex-1">
+                      <div
+                        class="py-4 px-7 rounded-xl bg-tertiary flex-1 w-[calc(100%-80px)]"
+                      >
                         <div
                           class="text-primary text-sm font-normal markdown-container"
                           v-html="MarkDownConverter(item.content)"
