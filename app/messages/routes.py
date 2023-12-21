@@ -1,6 +1,7 @@
 import uuid
 from flask import request, jsonify
 from app.models.messages import Messages
+from app.models.chats import Chats
 
 from app.extensions import db
 from app.utils import get_user_message_by_chat_id, generate_ad, generate_expert_bot_thread, create_user_message_by_chat_id, \
@@ -27,10 +28,10 @@ def get_task_status(task_id):
 
 
 @celery.task
-def generate_expert_bot_thread_async(messageContent):
+def generate_expert_bot_thread_async(messageContent, thread_id):
     try:
         # Your existing code for generate_expert_bot_thread
-        result = generate_expert_bot_thread(messageContent)
+        result = generate_expert_bot_thread(messageContent, thread_id)
         return result
     except Exception as e:
         logging.error(f"An exception occurred: {e}")
@@ -86,7 +87,10 @@ def method_user_message_by_chat_id(userId, chatId):
                 # queue the task for background execution
                 experimentalQuestion(userId, chatId, product, messageContent, db)
 
-                result_task = generate_expert_bot_thread_async.apply_async(args=[messageContent])
+                chat = Chats.query.filter_by(userId=userId, id=chatId, product=product).first()
+                thread_id = chat.thread_id
+
+                result_task = generate_expert_bot_thread_async.apply_async(args=[messageContent, thread_id])
                 # result = result_task.get()
                 # result = generate_expert_bot_thread(messageContent)
 
