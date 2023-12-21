@@ -40,7 +40,10 @@ def get_user_chat_by_user_id(userId, product):
 
 
 def create_user_chat_by_user_id(userId, messageContent, product, db):
-    thread_id = create_thread()
+    if product == 'expert-bot':
+        thread_id = client.beta.threads.create().id
+    else:
+        thread_id = ""
 
     chat = Chats(
         id=str(uuid.uuid4()),
@@ -422,7 +425,3 @@ def experimentalQuestion(userId, chatId, product, messageContent,db):
                 "createdAt": user_message.createdAt
             },
         }
-
-def create_thread():
-    thread = client.beta.threads.create()
-    return thread.id
