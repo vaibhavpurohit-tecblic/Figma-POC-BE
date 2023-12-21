@@ -425,3 +425,10 @@ def experimentalQuestion(userId, chatId, product, messageContent,db):
                 "createdAt": user_message.createdAt
             },
         }
+
+
+def update_chat_title(chat_id, new_title):
+    chat = Chats.query.filter_by(id=chat_id).first()
+    chat.title = new_title
+
+    db.session.commit()

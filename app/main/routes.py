@@ -8,7 +8,7 @@ import json
 from app.extensions import db
 from app import app
 from config import Config
-from app.utils import register_new_user, store_access_token_in_database, retrieve_access_token_from_database
+from app.utils import register_new_user, store_access_token_in_database, retrieve_access_token_from_database, update_chat_title
 
 logging.basicConfig(level=logging.DEBUG)
 app.secret_key = 'maverick!@#$%secret'  # Replace with a secret key
@@ -170,6 +170,29 @@ def trending_products():
                 "trending_product": trending_product_stub
             },
             "message": "Success"
+        }
+
+        return jsonify(response)
+    
+
+@bp.route('/api/change_title', methods=["POST"])
+def change_title():
+    if request.method == "POST":
+        chat_id = request.get_json()['chat_id']
+        new_title = request.get_json()['new_title']
+        
+        update_chat_title(chat_id, new_title)
+
+        response = {
+            "status": 200,
+            "message": "Success"
+        }
+
+        return jsonify(response)
+    else:
+        response = {
+            "status": 405,
+            "message": "Method Not Allowed"
         }
 
         return jsonify(response)
