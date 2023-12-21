@@ -4,8 +4,17 @@ import {
   GetPagePath,
   GetPageSearch,
   RedirectPage,
+  ReloadPage,
 } from "../Constants/index.js";
 import DeleteModal from "./DeleteModal.vue";
+import {
+  AdCopyChatTitleChangeApiFunction,
+  AdCopyChatDeleteApiFunction,
+} from "../../api/AdCopyApis/index.js";
+import {
+  ExpertBotChatTitleChangeApiFunction,
+  ExpertBotChatDeleteApiFunction,
+} from "../../api/ExpertBotApis/index.js";
 
 const props = defineProps({
   title: String,
@@ -46,7 +55,39 @@ function TitleChangeFunction(e) {
   changeTitle.value = e.target.value;
 }
 
-function EditTitle() {}
+async function AdCopyTitleChangeFunction() {
+  const result = await AdCopyChatTitleChangeApiFunction({
+    chat_id: GetPageSearch(),
+    new_title: changeTitle.value,
+  });
+
+  if (result.status === 200) {
+    ReloadPage();
+  } else {
+    ReloadPage();
+  }
+}
+
+async function ExpertBotTitleChangeFunction() {
+  const result = await ExpertBotChatTitleChangeApiFunction({
+    chat_id: GetPageSearch(),
+    new_title: changeTitle.value,
+  });
+
+  if (result.status === 200) {
+    ReloadPage();
+  } else {
+    ReloadPage();
+  }
+}
+
+function EditTitle() {
+  if (GetPagePath() === "/ad-copy") {
+    AdCopyTitleChangeFunction();
+  } else if (GetPagePath() === "/expert-bot") {
+    ExpertBotTitleChangeFunction();
+  }
+}
 
 const deleteModalActive = ref(false);
 
@@ -58,7 +99,37 @@ function DeleteModalFlagCloseChange() {
   deleteModalActive.value = false;
 }
 
-function DeleteChatFunction() {}
+async function AdCopyDeleteFunction() {
+  const result = await AdCopyChatDeleteApiFunction({
+    id: GetPageSearch(),
+  });
+
+  if (result.status === 200) {
+    RedirectPage(GetPagePath());
+  } else {
+    ReloadPage();
+  }
+}
+
+async function ExpertBotDeleteFunction() {
+  const result = await ExpertBotChatDeleteApiFunction({
+    id: GetPageSearch(),
+  });
+
+  if (result.status === 200) {
+    RedirectPage(GetPagePath());
+  } else {
+    ReloadPage();
+  }
+}
+
+function DeleteChatFunction() {
+  if (GetPagePath() === "/ad-copy") {
+    AdCopyDeleteFunction();
+  } else if (GetPagePath() === "/expert-bot") {
+    ExpertBotDeleteFunction();
+  }
+}
 
 onMounted(() => CheckIfIdMatch());
 </script>
