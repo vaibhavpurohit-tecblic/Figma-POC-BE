@@ -14,6 +14,7 @@ class Chats(db.Model):
     lastMessageId = db.Column(db.String)
     messages = db.Column(db.Integer)
     product = db.Column(db.String)
+    thread_id = db.Column(db.String)
 
     __tablename__ = 'chats'
 

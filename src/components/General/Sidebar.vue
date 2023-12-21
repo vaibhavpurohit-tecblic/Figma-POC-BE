@@ -58,15 +58,25 @@ function ChatDataSortingFunction(data) {
   for (let i = 0; i < sortChat.length; i++) {
     var tempDate = moment(sortChat[i].createdAt).format("LL");
     if (moment(tempDate).isSame(currentDate)) {
-      tempArray[0].chat = [...tempArray[0].chat, sortChat[i]];
+      if (sortChat[i]?.status !== "closed") {
+        tempArray[0].chat = [...tempArray[0].chat, sortChat[i]];
+      }
     } else if (moment(tempDate).isSame(yesterdayDate)) {
-      tempArray[1].chat = [...tempArray[1].chat, sortChat[i]];
+      if (sortChat[i]?.status !== "closed") {
+        tempArray[1].chat = [...tempArray[1].chat, sortChat[i]];
+      }
     } else if (moment(tempDate).isAfter(weekDate)) {
-      tempArray[2].chat = [...tempArray[2].chat, sortChat[i]];
+      if (sortChat[i]?.status !== "closed") {
+        tempArray[2].chat = [...tempArray[2].chat, sortChat[i]];
+      }
     } else if (moment(tempDate).isAfter(monthDate)) {
-      tempArray[3].chat = [...tempArray[3].chat, sortChat[i]];
+      if (sortChat[i]?.status !== "closed") {
+        tempArray[3].chat = [...tempArray[3].chat, sortChat[i]];
+      }
     } else {
-      tempArray[4].chat = [...tempArray[4].chat, sortChat[i]];
+      if (sortChat[i]?.status !== "closed") {
+        tempArray[4].chat = [...tempArray[4].chat, sortChat[i]];
+      }
     }
   }
 

@@ -51,9 +51,23 @@ export async function AdCopyChatDetailsApiFunction() {
   return result;
 }
 
-export async function AdCopyChatDeleteApiFunction() {
+export async function AdCopyChatTitleChangeApiFunction(data) {
   const result = await axios
-    .delete("/api/" + GetUserIDFlag() + "/ad-copy" + 1)
+    .post("/api/change_title", data)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      APIResponseFunction(err);
+      return {};
+    });
+
+  return result;
+}
+
+export async function AdCopyChatDeleteApiFunction(data) {
+  const result = await axios
+    .delete("/api/" + GetUserIDFlag() + "/ad-copy/" + data.id)
     .then((res) => {
       return res.data;
     })

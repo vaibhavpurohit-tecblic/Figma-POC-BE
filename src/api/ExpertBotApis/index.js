@@ -51,9 +51,23 @@ export async function ExpertBotChatDetailsApiFunction() {
   return result;
 }
 
-export async function ExpertBotChatDeleteApiFunction() {
+export async function ExpertBotChatTitleChangeApiFunction(data) {
   const result = await axios
-    .delete("/api/" + GetUserIDFlag() + "/expert-bot" + 1)
+    .post("/api/change_title", data)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      APIResponseFunction(err);
+      return {};
+    });
+
+  return result;
+}
+
+export async function ExpertBotChatDeleteApiFunction(data) {
+  const result = await axios
+    .delete("/api/" + GetUserIDFlag() + "/expert-bot/" + data.id)
     .then((res) => {
       return res.data;
     })
