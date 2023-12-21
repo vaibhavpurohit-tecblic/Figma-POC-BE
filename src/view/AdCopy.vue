@@ -85,7 +85,18 @@ async function AdCopyChatMessagesListFunction(data) {
 
 function MarkDownConverter(text) {
   const md = new MarkdownIt();
-  return md.render(text.replaceAll("【9†source】",""));
+  return md.render(
+    text
+      .replaceAll("【1†source】", "")
+      .replaceAll("【2†source】", "")
+      .replaceAll("【3†source】", "")
+      .replaceAll("【4†source】", "")
+      .replaceAll("【5†source】", "")
+      .replaceAll("【6†source】", "")
+      .replaceAll("【7†source】", "")
+      .replaceAll("【8†source】", "")
+      .replaceAll("【9†source】", "")
+  );
 }
 
 function CheckPropsFunction() {
