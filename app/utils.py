@@ -40,6 +40,8 @@ def get_user_chat_by_user_id(userId, product):
 
 
 def create_user_chat_by_user_id(userId, messageContent, product, db):
+    thread_id = create_thread()
+
     chat = Chats(
         id=str(uuid.uuid4()),
         userId=userId,
@@ -52,7 +54,8 @@ def create_user_chat_by_user_id(userId, messageContent, product, db):
         answeredAt=None,
         closedAt=None,
         lastMessageId=None,
-        product=product
+        product=product,
+        thread_id=thread_id
     )
 
     db.session.add(chat)
@@ -132,7 +135,7 @@ def generate_ad(messageContent, userId, chatId, product,message):
         
         try:
             completion = client.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model="gpt-4",
                 messages=messages
             )
             
@@ -167,37 +170,31 @@ def get_role_and_content(userId, chatId, product):
     return messages
 
 
-def generate_expert_bot_thread(messageContent):
+def generate_expert_bot_thread(messageContent, thread_id):
     try:
-        thread = client.beta.threads.create()
-
         message = client.beta.threads.messages.create(
-            thread_id=thread.id,
+            thread_id=thread_id,
             role="user",
             content=messageContent
         )
 
         run = client.beta.threads.runs.create(
-            thread_id=thread.id,
+            thread_id=thread_id,
             assistant_id=assistant_id,
         )
 
         while run.status != 'completed':
             run = client.beta.threads.runs.retrieve(
-                thread_id=thread.id,
+                thread_id=thread_id,
                 run_id=run.id
             )
             time.sleep(3)
 
         messages = client.beta.threads.messages.list(
-            thread_id=thread.id
+            thread_id=thread_id
         )
 
-        bot_response = "".join(
-            msg.content[0].text.value
-            for msg in messages.data
-            if msg.role == 'assistant'
-        )
+        bot_response = messages.data[0].content[0].text.value
 
         logging.info(f"Generated Expert Bot Thread for message: {messageContent}")
         return bot_response
@@ -426,4 +423,6 @@ def experimentalQuestion(userId, chatId, product, messageContent,db):
             },
         }
 
-      
+def create_thread():
+    thread = client.beta.threads.create()
+    return thread.id
