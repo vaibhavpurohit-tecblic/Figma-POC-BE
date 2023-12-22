@@ -37,9 +37,9 @@ export async function ExpertBotChatCreateApiFunction(data) {
   return result;
 }
 
-export async function ExpertBotChatDetailsApiFunction() {
+export async function ExpertBotChatDetailsApiFunction(data) {
   const result = await axios
-    .get("/api/" + GetUserIDFlag() + "/expert-bot" + 1)
+    .get("/api/" + GetUserIDFlag() + "/expert-bot/" + data.id)
     .then((res) => {
       return res.data;
     })

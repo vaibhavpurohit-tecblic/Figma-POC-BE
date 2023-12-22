@@ -119,7 +119,12 @@ def generate_ad(messageContent, userId, chatId, product,message):
         first_message_content = message[0].get("content") or ""
 
         # Create an ad copy by concatenating it with a prefix
-        ad_copy = f"Write an ad copy for: {first_message_content}"
+        ad_copy = f"""
+            Imagine you are an advertising agency and you are tasked with writing seven advertisements: Banner Advertising, Contextual 
+            Advertising, Social Media Advertising for Twitter, Social Media Advertising for Instagram, Social Media Advertising for Facebook, 
+            Search Engine Marketing Advertising, Native Advertising - for a product to a diverse audience based on its description, consider 
+            specifics of each type of advertisements: {first_message_content}
+        """
 
         # Update the content of the first message with the ad copy
         

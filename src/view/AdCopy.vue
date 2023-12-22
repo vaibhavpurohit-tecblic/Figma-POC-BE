@@ -6,7 +6,10 @@ import Header from "../components/General/Header.vue";
 import Sidebar from "../components/General/Sidebar.vue";
 import ProductSelect from "../components/General/ProductSelect.vue";
 import CustomerInputBox from "../components/General/CustomerInputBox.vue";
-import { AdCopyChatMessagesListApiFunction } from "../api/AdCopyApis/index.js";
+import {
+  AdCopyChatMessagesListApiFunction,
+  AdCopyChatDetailsApiFunction,
+} from "../api/AdCopyApis/index.js";
 import { GetPageSearch } from "../components/Constants/index.js";
 
 const propsValue = ref("");
@@ -76,8 +79,17 @@ async function AdCopyChatMessagesListFunction(data) {
   const result = await AdCopyChatMessagesListApiFunction(data);
 
   if (result.status === 200) {
-    initialProduct.value = result?.data?.messages?.[0]?.content || "";
     chatDetails.value = result?.data?.messages?.splice(1) || [];
+  } else {
+    chatDetails.value = [];
+  }
+}
+
+async function AdCopyChatDetailsFunction(data) {
+  const result = await AdCopyChatDetailsApiFunction(data);
+
+  if (result.status === 200) {
+    initialProduct.value = result?.data?.chat?.title || "";
   } else {
     chatDetails.value = [];
   }
@@ -85,18 +97,17 @@ async function AdCopyChatMessagesListFunction(data) {
 
 function MarkDownConverter(text) {
   const md = new MarkdownIt();
-  return md.render(
-    text
-      .replaceAll("【1†source】", "")
-      .replaceAll("【2†source】", "")
-      .replaceAll("【3†source】", "")
-      .replaceAll("【4†source】", "")
-      .replaceAll("【5†source】", "")
-      .replaceAll("【6†source】", "")
-      .replaceAll("【7†source】", "")
-      .replaceAll("【8†source】", "")
-      .replaceAll("【9†source】", "")
-  );
+
+  let test = text;
+
+  while (test.includes("【")) {
+    let temp =
+      test.substring(0, test.indexOf("【")) +
+      test.substring(test.indexOf("】") + 1);
+
+    test = temp;
+  }
+  return md.render(test);
 }
 
 function CheckPropsFunction() {
@@ -104,6 +115,9 @@ function CheckPropsFunction() {
 
   if (GetPageSearch()?.length > 0) {
     AdCopyChatMessagesListFunction({
+      id: GetPageSearch(),
+    });
+    AdCopyChatDetailsFunction({
       id: GetPageSearch(),
     });
   }
@@ -134,7 +148,7 @@ onMounted(() => CheckPropsFunction());
           <div class="h-[calc(100vh-275px)] overflow-auto">
             <div class="grid grid-cols-1 md:grid-cols-6">
               <div class="col-span-1"></div>
-              <div class="col-span-1 md:col-span-3">
+              <div class="col-span-1 md:col-span-4">
                 <div class="flex flex-col gap-5">
                   <div class="flex gap-4">
                     <img
@@ -176,13 +190,41 @@ onMounted(() => CheckPropsFunction());
                   "
                 >
                   <div class="col-span-1"></div>
-                  <div class="col-span-1 md:col-span-3">
+                  <div class="col-span-1 md:col-span-4">
                     <div class="flex gap-4">
-                      <img
-                        src="../assets/images/roboProfile.png"
-                        alt=""
-                        class="h-14 w-14"
-                      />
+                      <div class="tooltip self-start cursor-pointer">
+                        <img
+                          src="../assets/images/roboProfile.png"
+                          alt=""
+                          class="h-14 w-14"
+                        />
+                        <div class="tooltiptext">
+                          <div
+                            class="flex justify-end md:justify-start gap-2 items-center px-4"
+                          >
+                            <img
+                              src="../assets/logos/dateIcon.svg"
+                              alt=""
+                              class="h-3 w-3"
+                            />
+                            <p
+                              class="text-xs font-bold text-gray-300 flex-none"
+                            >
+                              {{ moment(item.createdAt).format("DD MMM YYYY") }}
+                            </p>
+                            <img
+                              src="../assets/logos/timeIcon.svg"
+                              alt=""
+                              class="h-3 w-3"
+                            />
+                            <p
+                              class="text-xs font-bold text-gray-300 flex-none"
+                            >
+                              {{ moment(item.createdAt).format("hh:mm A") }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                       <div
                         class="py-4 px-7 rounded-xl bg-tertiary flex-1 w-[calc(100%-80px)]"
                       >
@@ -193,43 +235,48 @@ onMounted(() => CheckPropsFunction());
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-1">
-                    <div class="pt-5 pl-4">
-                      <div
-                        class="flex justify-end md:justify-start gap-2 items-center"
-                      >
-                        <img
-                          src="../assets/logos/dateIcon.svg"
-                          alt=""
-                          class="h-3 w-3"
-                        />
-                        <p class="text-xs font-normal text-gray-600 flex-none">
-                          {{ moment(item.createdAt).format("DD MMM YYYY") }}
-                        </p>
-                        <img
-                          src="../assets/logos/timeIcon.svg"
-                          alt=""
-                          class="h-3 w-3"
-                        />
-                        <p class="text-xs font-normal text-gray-600 flex-none">
-                          {{ moment(item.createdAt).format("hh:mm A") }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="col-span-1"></div>
                 </div>
                 <div
                   class="grid grid-cols-1 md:grid-cols-6 mt-5"
                   v-if="item.author === 'user'"
                 >
                   <div class="col-span-1"></div>
-                  <div class="col-span-1 md:col-span-3">
+                  <div class="col-span-1 md:col-span-4">
                     <div class="flex gap-4">
-                      <img
-                        src="../assets/images/ProfilePhoto.png"
-                        alt=""
-                        class="h-14 w-14 rounded-full"
-                      />
+                      <div class="tooltip self-start cursor-pointer">
+                        <img
+                          src="../assets/images/ProfilePhoto.png"
+                          alt=""
+                          class="h-14 w-14 rounded-full"
+                        />
+                        <div class="tooltiptext">
+                          <div
+                            class="flex justify-end md:justify-start gap-2 items-center px-4"
+                          >
+                            <img
+                              src="../assets/logos/dateIcon.svg"
+                              alt=""
+                              class="h-3 w-3"
+                            />
+                            <p
+                              class="text-xs font-bold text-gray-300 flex-none"
+                            >
+                              {{ moment(item.createdAt).format("DD MMM YYYY") }}
+                            </p>
+                            <img
+                              src="../assets/logos/timeIcon.svg"
+                              alt=""
+                              class="h-3 w-3"
+                            />
+                            <p
+                              class="text-xs font-bold text-gray-300 flex-none"
+                            >
+                              {{ moment(item.createdAt).format("hh:mm A") }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
                       <div class="py-4 px-7 rounded-xl flex-1">
                         <p class="text-primary text-sm font-normal">
                           {{ item.content }}
@@ -237,30 +284,7 @@ onMounted(() => CheckPropsFunction());
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-1">
-                    <div class="pt-5 pl-4">
-                      <div
-                        class="flex justify-end md:justify-start gap-2 items-center"
-                      >
-                        <img
-                          src="../assets/logos/dateIcon.svg"
-                          alt=""
-                          class="h-3 w-3"
-                        />
-                        <p class="text-xs font-normal text-gray-600 flex-none">
-                          {{ moment(item.createdAt).format("DD MMM YYYY") }}
-                        </p>
-                        <img
-                          src="../assets/logos/timeIcon.svg"
-                          alt=""
-                          class="h-3 w-3"
-                        />
-                        <p class="text-xs font-normal text-gray-600 flex-none">
-                          {{ moment(item.createdAt).format("hh:mm A") }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                  <div class="col-span-1"></div>
                 </div>
               </div>
             </div>
@@ -270,13 +294,37 @@ onMounted(() => CheckPropsFunction());
                 v-if="loadingViewText !== ''"
               >
                 <div class="col-span-1"></div>
-                <div class="col-span-1 md:col-span-3">
+                <div class="col-span-1 md:col-span-4">
                   <div class="flex gap-4">
-                    <img
-                      src="../assets/images/ProfilePhoto.png"
-                      alt=""
-                      class="h-14 w-14 rounded-full"
-                    />
+                    <div class="tooltip self-start cursor-pointer">
+                      <img
+                        src="../assets/images/ProfilePhoto.png"
+                        alt=""
+                        class="h-14 w-14 rounded-full"
+                      />
+                      <div class="tooltiptext">
+                        <div
+                          class="flex justify-end md:justify-start gap-2 items-center px-4"
+                        >
+                          <img
+                            src="../assets/logos/dateIcon.svg"
+                            alt=""
+                            class="h-3 w-3"
+                          />
+                          <p class="text-xs font-bold text-gray-300 flex-none">
+                            {{ moment(loadingViewTime).format("DD MMM YYYY") }}
+                          </p>
+                          <img
+                            src="../assets/logos/timeIcon.svg"
+                            alt=""
+                            class="h-3 w-3"
+                          />
+                          <p class="text-xs font-bold text-gray-300 flex-none">
+                            {{ moment(loadingViewTime).format("hh:mm A") }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                     <div class="py-4 px-7 rounded-xl flex-1">
                       <p class="text-primary text-sm font-normal">
                         {{ loadingViewText }}
@@ -284,37 +332,14 @@ onMounted(() => CheckPropsFunction());
                     </div>
                   </div>
                 </div>
-                <div class="col-span-1">
-                  <div class="pt-5 pl-4">
-                    <div
-                      class="flex justify-end md:justify-start gap-2 items-center"
-                    >
-                      <img
-                        src="../assets/logos/dateIcon.svg"
-                        alt=""
-                        class="h-3 w-3"
-                      />
-                      <p class="text-xs font-normal text-gray-600 flex-none">
-                        {{ moment(loadingViewTime).format("DD MMM YYYY") }}
-                      </p>
-                      <img
-                        src="../assets/logos/timeIcon.svg"
-                        alt=""
-                        class="h-3 w-3"
-                      />
-                      <p class="text-xs font-normal text-gray-600 flex-none">
-                        {{ moment(loadingViewTime).format("hh:mm A") }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <div class="col-span-1"></div>
               </div>
               <div
                 class="grid grid-cols-1 md:grid-cols-6 mt-5"
                 id="loading-component"
               >
                 <div class="col-span-1"></div>
-                <div class="col-span-1 md:col-span-3">
+                <div class="col-span-1 md:col-span-4">
                   <div class="flex gap-4">
                     <img
                       src="../assets/images/roboProfile.png"
@@ -340,7 +365,7 @@ onMounted(() => CheckPropsFunction());
           </div>
           <div class="grid grid-cols-1 md:grid-cols-6">
             <div class="col-span-1"></div>
-            <div class="col-span-1 md:col-span-3">
+            <div class="col-span-1 md:col-span-4">
               <CustomerInputBox
                 :active="propsValue.length > 0"
                 :loading="inputLoading"
