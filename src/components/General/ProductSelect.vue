@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, ref } from "vue";
-import { ProductListApiFunction } from "../../api/ProductApis/index.js";
+import {
+  ProductListApiFunction,
+  ProductDescriptionApiFunction,
+} from "../../api/ProductApis/index.js";
 import {
   AdCopyChatCreateApiFunction,
   AdCopyChatMessagesAddApiFunction,
@@ -19,6 +22,7 @@ const props = defineProps({
 const isDropdown = ref(false);
 const dropDownList = ref([]);
 const dropDownValue = ref(null);
+const dropDownId = ref(null);
 const chatId = ref("");
 
 function DropdownTrigger() {
@@ -40,6 +44,7 @@ async function ProductListFunction() {
 function ProductSelectionFunction(product) {
   dropDownValue.value = product;
   isDropdown.value = false;
+  dropDownId.value = product?.product?.id;
 }
 
 async function AdCopyChatMessagesAddFunction(data) {
@@ -82,11 +87,19 @@ async function ProductDetailsFunction() {
 
     if (result.status === 200) {
       chatId.value = result.data.chat.id;
-      AdCopyChatMessagesAddFunction({
-        id: result.data.chat.id,
-        messageContent: result.data.chat.title || "",
-      });
+      ProductDesFunction();
     }
+  }
+}
+
+async function ProductDesFunction() {
+  const result = await ProductDescriptionApiFunction({ id: dropDownId.value });
+
+  if (result.product_detail.status === "success") {
+    AdCopyChatMessagesAddFunction({
+      id: chatId.value,
+      messageContent: result.product_detail.data || "",
+    });
   }
 }
 

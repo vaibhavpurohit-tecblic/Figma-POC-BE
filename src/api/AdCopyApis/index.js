@@ -37,9 +37,9 @@ export async function AdCopyChatCreateApiFunction(data) {
   return result;
 }
 
-export async function AdCopyChatDetailsApiFunction() {
+export async function AdCopyChatDetailsApiFunction(data) {
   const result = await axios
-    .get("/api/" + GetUserIDFlag() + "/ad-copy" + 1)
+    .get("/api/" + GetUserIDFlag() + "/ad-copy/" + data.id)
     .then((res) => {
       return res.data;
     })
