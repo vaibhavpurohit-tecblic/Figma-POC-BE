@@ -98,7 +98,9 @@ async function ProductDesFunction() {
   if (result.product_detail.status === "success") {
     AdCopyChatMessagesAddFunction({
       id: chatId.value,
-      messageContent: result.product_detail.data || "",
+      messageContent:
+        (dropDownValue?.value?.product?.name || "") +
+        (result?.product_detail?.data || ""),
     });
   }
 }
