@@ -107,6 +107,11 @@ function MarkDownConverter(text) {
 
     test = temp;
   }
+
+  console.log(text);
+
+  console.log(md.render(test));
+
   return md.render(test);
 }
 
