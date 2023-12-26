@@ -79,6 +79,15 @@ h6 {
   overflow-x: auto;
 }
 
+.markdown-container hr {
+  border: 0px !important;
+}
+
+.markdown-container a {
+  color: #8473ee !important;
+  text-decoration: underline !important;
+}
+
 /* Markdown CSS End */
 
 /* tooltip CSS Start */
