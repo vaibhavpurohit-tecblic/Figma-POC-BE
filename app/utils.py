@@ -125,7 +125,7 @@ def generate_ad(messageContent, userId, chatId, product,message):
             Search Engine Marketing Advertising, Native Advertising - for a product to a diverse audience based on its description, consider 
             specifics of each type of advertisements: {first_message_content}
             
-            Return response in Markdown format without any image and with valid website links.
+            Return response in Markdown format without any image and URL.
         """
 
         # Update the content of the first message with the ad copy
