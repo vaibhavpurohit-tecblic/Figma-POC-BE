@@ -7,6 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+app/model/dataset
+
 node_modules
 dist
 dist-ssr
@@ -22,7 +24,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
 *venv*
 */__pycache__/*
 __pycache__
