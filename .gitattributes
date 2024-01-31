@@ -1,3 +1,4 @@
 
 app/model/j2h_model.keras filter=lfs diff=lfs merge=lfs -text
+app/model/models/login_model.h5 filter=lfs diff=lfs merge=lfs -text
 app/model/dataset.zip filter=lfs diff=lfs merge=lfs -text
