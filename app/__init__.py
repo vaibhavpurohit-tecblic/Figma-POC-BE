@@ -22,7 +22,8 @@ def static_html():
 def gen_html():
     if request.method == "POST":
         json_data = request.get_json(force=True)
-        url = json_data['figma_url']
+        # url = json_data['figma_url']
+        url = "https://www.figma.com/file/3SwOZge1lyBUr2nUZtfGkf/Apricus8?type=design&node-id=68-1225&mode=design&t=xFCZAZO48CJ8Kdq1-0"
         print('Figma url :',url)
 
         json_file, _= generate_json(url)

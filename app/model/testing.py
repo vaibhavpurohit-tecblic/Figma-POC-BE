@@ -1,42 +1,34 @@
 import os
 import json
 import tensorflow as tf
-from zipfile import ZipFile
-from bs4 import BeautifulSoup
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from sklearn.model_selection import train_test_split
-from app.model.config import TRAIN_HTML_DIR, MODEL_PATH
+from bs4 import BeautifulSoup
+from app.model.config import MODEL_PATH, INPUT_JSON_FILE_PATH, OUTPUT_HTML_PATH, HTML_FILES_DIR
 
-# unzipping 
-def unzip_data():
-    folder_name = 'app/model/dataset'
-    extraction_path = 'app/model'
+max_len = 100
 
-    # Get the current directory
-    current_directory = os.getcwd()
-    folder_path = os.path.join(current_directory, folder_name)
-
-    # Check if the folder exists
-    if os.path.exists(folder_path) and os.path.isdir(folder_path):
-        print(f"The folder '{folder_name}' exists in the current directory.")
-    else:
-        print(f"The folder '{folder_path}' does not exist ,we'll create it.")
-        # Open the zip file
-        with ZipFile(f'{folder_path}.zip', 'r') as zip_ref:
-            print('Extracting dataset...')
-
-            # Extract all the files
-            zip_ref.extractall(extraction_path)
-            print('Dataset created at location: ',extraction_path )
-
-# Function to tokenize input JSON file
-def tokenize_input_json(input_json_file_path):
-    with open(input_json_file_path, 'r') as json_file:
+# Function to tokenize JSON file
+def tokenize_json(json_file_path):
+    with open(json_file_path, 'r') as json_file:
         json_data = json.load(json_file)
 
-    tokens = [f'{key} {str(value)}' for key, value in json_data.items()]
+    tokens = []
+    for key, value in json_data.items():
+        tokens.extend([key, str(value)])  # Add key and value as tokens
+
     return ' '.join(tokens)
+
+# Function to tokenize HTML file
+def tokenize_html(html_file_path):
+    with open(html_file_path, 'r', encoding='utf-8') as html_file:
+        html_content = html_file.read()
+
+    # Using BeautifulSoup to extract text content
+    soup = BeautifulSoup(html_content, 'html.parser')
+    text_tokens = soup.stripped_strings
+
+    return ' '.join(text_tokens)
 
 # Function to predict HTML content for a given JSON input
 def predict_html_content_for_json(input_json_tokens, tokenizer, max_len, loaded_model, html_files_dir):
@@ -49,8 +41,7 @@ def predict_html_content_for_json(input_json_tokens, tokenizer, max_len, loaded_
     # Make predictions using the loaded model
     prediction = loaded_model.predict(input_padded_sequences)
 
-    # Assuming binary
-    # Return HTML content classification, check the predicted label
+    # Assuming binary classification, check the predicted label
     predicted_label = 1 if prediction[0][1] > 0.5 else 0
 
     # Determine the corresponding HTML file based on the predicted label
@@ -59,17 +50,14 @@ def predict_html_content_for_json(input_json_tokens, tokenizer, max_len, loaded_
 
     # Read the content of the predicted HTML file
     with open(predicted_html_file_path, 'r', encoding='utf-8') as html_file:
-        predicted_html_content = html_file.read()
+        predicted_html_content = html_file.read() 
 
     return predicted_html_content
 
 # Function to generate HTML file for a given JSON input
 def generate_html_for_json(input_json_file_path, tokenizer, max_len, loaded_model, html_files_dir, output_html_path):
-    # extracting dataset from zip file
-    unzip_data()
-    
     # Tokenize input JSON
-    input_json_tokens = tokenize_input_json(input_json_file_path)
+    input_json_tokens = tokenize_json(input_json_file_path)
 
     # Predict HTML content for the given JSON input
     predicted_html_content = predict_html_content_for_json(input_json_tokens, tokenizer, max_len, loaded_model, html_files_dir)
@@ -81,21 +69,23 @@ def generate_html_for_json(input_json_file_path, tokenizer, max_len, loaded_mode
     return predicted_html_content
 
 def generate_html(json_file_name):
-    # Set paths
-    json_file_path = f'app/output_json/{json_file_name}'
+    # Directory paths for HTML files
+    # html_files_dir = 'dataset/login/train/html'
+    html_files_dir = HTML_FILES_DIR
 
-    json_name_without_ext, _ = os.path.splitext(json_file_name)
-
-    output_html_path = f'app/model/model_output/{json_name_without_ext}.html'
-
-    # Load trained model
+    # Load the model back for predictions
     loaded_model = tf.keras.models.load_model(MODEL_PATH)
 
-    # Load tokenizer
+    # Tokenizer for text data
     tokenizer = Tokenizer()
 
-    # Generate HTML file for a given JSON input
-    html_content = generate_html_for_json(json_file_path, tokenizer, max_len=100, loaded_model=loaded_model, html_files_dir=TRAIN_HTML_DIR, output_html_path=output_html_path)
-    print(f'The HTML file has been generated: {output_html_path}')
+    # Example usage for generating HTML file for a given JSON input
+    # input_json_file_path = 'dataset/login/test/login1.json'
+    input_json_file_path = INPUT_JSON_FILE_PATH
+    # input_json_file_path = 'new.json'
+    # output_html_path = 'output/login/login_output.html'
+    output_html_path = OUTPUT_HTML_PATH
 
+    html_content = generate_html_for_json(input_json_file_path, tokenizer, max_len, loaded_model, html_files_dir, output_html_path)
+    print(f"The HTML file has been generated: {output_html_path}")
     return html_content
