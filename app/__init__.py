@@ -15,7 +15,7 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return "server is running."
-@app.route('/static_html', methods=["GET"])
+@app.route('/dynamic_html', methods=["GET"])
 def static_html():
     return static_html_data
 @app.route('/gen_html', methods=["POST"])
