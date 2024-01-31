@@ -5,6 +5,7 @@ from app.extensions import db
 from app.model.testing import generate_html
 from config import Config
 from app.generate_json import generate_json
+from app.model.static_html import static_html_data
 
 import os
 
@@ -14,7 +15,9 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return "server is running."
-
+@app.route('/static_html', methods=["GET"])
+def static_html():
+    return static_html_data
 @app.route('/gen_html', methods=["POST"])
 def gen_html():
     if request.method == "POST":
@@ -25,7 +28,8 @@ def gen_html():
         json_file, _= generate_json(url)
         print('json file at:', json_file)
         html_content = generate_html(json_file)
-
+        
+        return html_content
         response = {
             "status": 200,
             "message": "Success",
