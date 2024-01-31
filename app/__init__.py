@@ -1,83 +1,50 @@
-from flask import Flask, send_from_directory
-from flask_swagger_ui import get_swaggerui_blueprint
+from flask import Flask, send_from_directory, request, jsonify
+# from flask_swagger_ui import get_swaggerui_blueprint
 from flask_migrate import Migrate
 from app.extensions import db
+from app.model.testing import generate_html
 from config import Config
-from flask_cors import CORS
-from whitenoise import WhiteNoise
+from app.generate_json import generate_json
+from app.model.static_html import static_html_data
+
 import os
 
 app = Flask(__name__)
-# cors = CORS(app)
-cors = CORS(app, resources={r"/*": {"origins": "*", "supports_credentials": True}})
-app.config.from_object(Config)
-
-swaggerui_blueprint = get_swaggerui_blueprint(
-    app.config['SWAGGER_URL'],
-    app.config['API_URL'],
-    config={'app_name': "ZDAI Middleware API"}
-)
-
-# Initialize Flask extensions here
-db.init_app(app)
-migrate = Migrate(app, db)
-
-# Register blueprints here
-from app.main import bp as main_bp
-app.register_blueprint(main_bp)
-
-from app.chats import bp as chat_bp
-app.register_blueprint(chat_bp)
-
-from app.messages import bp as message_bp
-app.register_blueprint(message_bp)
-
-from app.products import bp as product_bp
-app.register_blueprint(product_bp)
-
-from app.models.users import Users
-
-# Create database tables
-with app.app_context():
-    db.create_all()
-
-app.register_blueprint(swaggerui_blueprint)
-
-# add whitenoise
-app.wsgi_app = WhiteNoise(app.wsgi_app, root="app/static/")
 
 
-@app.route('/test/')
-def test_page():
-    return '<h1>Testing the Flask Application Factory Pattern</h1>'
+@app.route('/')
+def index():
+    return "server is running."
+@app.route('/static_html', methods=["GET"])
+def static_html():
+    return static_html_data
+@app.route('/gen_html', methods=["POST"])
+def gen_html():
+    if request.method == "POST":
+        json_data = request.get_json(force=True)
+        # url = json_data['figma_url']
+        url = "https://www.figma.com/file/3SwOZge1lyBUr2nUZtfGkf/Apricus8?type=design&node-id=68-1225&mode=design&t=xFCZAZO48CJ8Kdq1-0"
+        print('Figma url :',url)
 
-# Serve Vue.js static files from the 'dist' directory
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve_vue(path):
-    if path != '' and os.path.exists("dist/" + path):
-        if path.endswith(".js"):
-            return send_from_directory('../dist', path, mimetype="application/javascript")
-        elif path.endswith(".css"):
-            return send_from_directory('../dist', path, mimetype="text/css")
-        return send_from_directory('../dist', path)
-        # return "PATH not exist"
+        json_file, _= generate_json(url)
+        print('json file at:', json_file)
+        html_content = generate_html(json_file)
+        
+        return html_content
+        response = {
+            "status": 200,
+            "message": "Success",
+            "data" : str(html_content)
+        }
+
+        return jsonify(response)
     else:
-        return send_from_directory('../dist', 'index.html')
-        # return "PATH exist but cant load index"
+        response = {
+            "status": 405,
+            "message": "Method Not Allowed"
+        }
 
-
-@app.route('/api')  # Your Flask API routes
-def api_route():
-    # Your API logic here
-    return "API response"
-
-
-# Catch-all route to serve the Vue.js app for all other routes
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return send_from_directory('dist', 'index.html')
+        return jsonify(response)
 
 
 def create_app():
