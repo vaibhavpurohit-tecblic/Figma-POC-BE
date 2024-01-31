@@ -2,113 +2,145 @@ static_html_data = '''<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
-  <style>@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-    @import url("https://fonts.googleapis.com/css?family=Poppins:400");
-    * {
-      -webkit-font-smoothing: antialiased;
-      box-sizing: border-box;
-    }
-    html,
-    body {
-      margin: 0px;
-      height: 100%;
-    }
-    /* a blue color as a generic focus style */
-    button:focus-visible {
-      outline: 2px solid #4a90e2 !important;
-      outline: -webkit-focus-ring-color auto 5px !important;
-    }
-    a {
-      text-decoration: none;
-    }
-    .sign-up-step {
-  background-color: #0a1530;
+    <style>
+      @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+.login {
+  background-color: #ffffff;
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
 }
 
-.sign-up-step .div {
-  background-color: #0a1530;
+.login .overlap-wrapper {
+  background-color: #ffffff;
   width: 1440px;
   height: 1024px;
-  position: relative;
 }
 
-.sign-up-step .frame {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 48px;
-  padding: 24px 40px;
+.login .overlap {
+  position: relative;
+  height: 1024px;
+}
+
+.login .group {
   position: absolute;
-  top: 216px;
-  left: 433px;
-  background-color: #ffffff;
-  box-shadow: 0px 2px 4px -2px #ffffff0f, 0px 4px 8px -2px #ffffff1a;
+  width: 722px;
+  height: 1024px;
+  top: 0;
+  left: 0;
 }
 
-.sign-up-step .frame-2 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
+.login .overlap-group {
+  width: 720px;
+  background-image: url(../rectangle-150.svg);
+  background-size: 100% 100%;
   position: relative;
+  height: 1024px;
+}
+
+.login .rectangle {
+  position: absolute;
+  width: 720px;
+  height: 1024px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 47.79%);
+}
+
+.login .text-wrapper {
+  position: absolute;
+  width: 539px;
+  top: 749px;
+  left: 90px;
+  font-family: var(--display-2-bold-font-family);
+  font-weight: var(--display-2-bold-font-weight);
+  color: #ffffff;
+  font-size: var(--display-2-bold-font-size);
+  text-align: center;
+  letter-spacing: var(--display-2-bold-letter-spacing);
+  line-height: var(--display-2-bold-line-height);
+  font-style: var(--display-2-bold-font-style);
+}
+
+.login .frame {
+  position: absolute;
+  width: 720px;
+  height: 1024px;
+  top: 0;
+  left: 720px;
+  border-right-width: 8px;
+  border-right-style: solid;
+  border-color: var(--primarymain-600);
+}
+
+.login .div {
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  align-items: center;
+  gap: 40px;
+  position: absolute;
+  top: 200px;
+  left: 100px;
+}
+
+.login .div-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
   flex: 0 0 auto;
 }
 
-.sign-up-step .frame-3 {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.sign-up-step .text-wrapper {
+.login .text-wrapper-2 {
   position: relative;
   width: fit-content;
   margin-top: -1px;
-  font-family: var(--body-2-semibold-font-family);
-  font-weight: var(--body-2-semibold-font-weight);
-  color: var(--texttext-black-second);
-  font-size: var(--body-2-semibold-font-size);
-  text-align: center;
-  letter-spacing: var(--body-2-semibold-letter-spacing);
-  line-height: var(--body-2-semibold-line-height);
-  white-space: nowrap;
-  font-style: var(--body-2-semibold-font-style);
-}
-
-.sign-up-step .text-wrapper-2 {
-  position: relative;
-  width: 457px;
-  font-family: var(--heading-2-semibold-font-family);
-  font-weight: var(--heading-2-semibold-font-weight);
-  color: var(--texttext-black);
-  font-size: var(--heading-2-semibold-font-size);
-  text-align: center;
-  letter-spacing: var(--heading-2-semibold-letter-spacing);
-  line-height: var(--heading-2-semibold-line-height);
-  font-style: var(--heading-2-semibold-font-style);
-}
-
-.sign-up-step .text-wrapper-3 {
-  position: relative;
-  align-self: stretch;
   font-family: var(--body-2-regular-font-family);
   font-weight: var(--body-2-regular-font-weight);
   color: var(--texttext-black-second);
   font-size: var(--body-2-regular-font-size);
-  text-align: center;
   letter-spacing: var(--body-2-regular-letter-spacing);
   line-height: var(--body-2-regular-line-height);
+  white-space: nowrap;
   font-style: var(--body-2-regular-font-style);
 }
 
-.sign-up-step .frame-4 {
+.login .text-wrapper-3 {
+  position: relative;
+  width: fit-content;
+  font-family: var(--heading-4-semibold-font-family);
+  font-weight: var(--heading-4-semibold-font-weight);
+  color: var(--texttext-black);
+  font-size: var(--heading-4-semibold-font-size);
+  letter-spacing: var(--heading-4-semibold-letter-spacing);
+  line-height: var(--heading-4-semibold-line-height);
+  white-space: nowrap;
+  font-style: var(--heading-4-semibold-font-style);
+}
+
+.login .frame-2 {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
@@ -117,55 +149,118 @@ static_html_data = '''<!DOCTYPE html>
   flex: 0 0 auto;
 }
 
-.sign-up-step .frame-5 {
+.login .frame-3 {
   display: flex;
-  width: 494px;
-  height: 48px;
-  align-items: center;
-  gap: 8px;
-  padding: 0px 12px;
-  position: relative;
-  background-color: var(--basewhite);
-  border-radius: 8px;
-  border: 1px solid;
-  border-color: var(--neutral-300);
-}
-
-.sign-up-step .text-wrapper-4 {
-  position: relative;
-  flex: 1;
-  font-family: var(--body-2-regular-font-family);
-  font-weight: var(--body-2-regular-font-weight);
-  color: var(--texttext-black);
-  font-size: var(--body-2-regular-font-size);
-  letter-spacing: var(--body-2-regular-letter-spacing);
-  line-height: var(--body-2-regular-line-height);
-  font-style: var(--body-2-regular-font-style);
-}
-
-.sign-up-step .radio-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  width: 520px;
+  align-items: flex-start;
+  gap: 16px;
   position: relative;
   flex: 0 0 auto;
 }
 
-.sign-up-step .radio-button-2 {
+.login .input-label {
   position: relative;
-  width: 20px;
-  height: 20px;
-  background-color: #ffffff;
-  border-radius: 10px;
+  align-self: stretch;
+  margin-top: -1px;
+  font-family: var(--caption-1-regular-font-family);
+  font-weight: var(--caption-1-regular-font-weight);
+  color: var(--texttext-black);
+  font-size: var(--caption-1-regular-font-size);
+  letter-spacing: var(--caption-1-regular-letter-spacing);
+  line-height: var(--caption-1-regular-line-height);
+  font-style: var(--caption-1-regular-font-style);
+}
+
+.login .frame-4 {
+  display: flex;
+  height: 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 0px 12px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  background-color: var(--basewhite);
+  border-radius: 3px;
   border: 1px solid;
   border-color: #cdd4de;
 }
 
-.sign-up-step .button {
+.login .text {
+  position: relative;
+  flex: 1;
+  font-family: var(--caption-1-regular-font-family);
+  font-weight: var(--caption-1-regular-font-weight);
+  color: var(--texttext-black);
+  font-size: var(--caption-1-regular-font-size);
+  letter-spacing: var(--caption-1-regular-letter-spacing);
+  line-height: var(--caption-1-regular-line-height);
+  font-style: var(--caption-1-regular-font-style);
+}
+
+.login .frame-5 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.login .checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  position: relative;
+  border-radius: 6px;
+}
+
+.login .checkbox {
+  width: 20px;
+  height: 20px;
+  background-color: var(--basewhite);
+  border: 1px solid;
+  border-color: #9e9e9e;
+  position: relative;
+  border-radius: 6px;
+}
+
+.login .label {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--caption-1-regular-font-family);
+  font-weight: var(--caption-1-regular-font-weight);
+  color: var(--baseblack);
+  font-size: var(--caption-1-regular-font-size);
+  letter-spacing: var(--caption-1-regular-letter-spacing);
+  line-height: var(--caption-1-regular-line-height);
+  white-space: nowrap;
+  font-style: var(--caption-1-regular-font-style);
+}
+
+.login .text-wrapper-4 {
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--body-2-semibold-font-family);
+  font-weight: var(--body-2-semibold-font-weight);
+  color: var(--secondarymain-500);
+  font-size: var(--body-2-semibold-font-size);
+  letter-spacing: var(--body-2-semibold-letter-spacing);
+  line-height: var(--body-2-semibold-line-height);
+  white-space: nowrap;
+  font-style: var(--body-2-semibold-font-style);
+}
+
+.login .button {
   all: unset;
   box-sizing: border-box;
   display: flex;
-  width: 250px;
+  width: 300px;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -176,13 +271,13 @@ static_html_data = '''<!DOCTYPE html>
   border-radius: 3px;
 }
 
-.sign-up-step .input-text {
+.login .input-text {
   position: relative;
   width: fit-content;
   margin-top: -1px;
   font-family: var(--body-2-semibold-font-family);
   font-weight: var(--body-2-semibold-font-weight);
-  color: #ffffff;
+  color: var(--basewhite);
   font-size: var(--body-2-semibold-font-size);
   letter-spacing: var(--body-2-semibold-letter-spacing);
   line-height: var(--body-2-semibold-line-height);
@@ -190,80 +285,27 @@ static_html_data = '''<!DOCTYPE html>
   font-style: var(--body-2-semibold-font-style);
 }
 
-.sign-up-step .header {
-  position: absolute;
-  width: 1440px;
-  height: 86px;
-  top: 0;
-  left: 0;
-  background-color: #ffffff;
-  border-top-style: none;
-  border-right-style: none;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-left-style: none;
-  border-color: var(--neutral-300);
-}
-
-.sign-up-step .group {
-  position: absolute;
-  width: 52px;
-  height: 50px;
-  top: 18px;
-  left: 100px;
-}
-
-.sign-up-step .overlap-group {
-  position: relative;
-  width: 50px;
-  height: 50px;
-  background-color: #0a1530;
-  border-radius: 25px;
-}
-
-.sign-up-step .text-wrapper-5 {
-  position: absolute;
-  top: 8px;
-  left: 17px;
-  font-family: "Poppins", Helvetica;
-  font-weight: 400;
-  color: #ffffff;
-  font-size: 22px;
-  letter-spacing: -0.22px;
-  line-height: 32.9px;
-  white-space: nowrap;
-}
-
-.sign-up-step .button-2 {
-  all: unset;
-  box-sizing: border-box;
-  display: flex;
-  width: 130px;
+.login .frame-6 {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 9px 16px;
+  gap: 4px;
   position: absolute;
-  top: 24px;
-  left: 1230px;
-  background-color: var(--basewhite);
-  border-radius: 3px;
-  border: 1px solid;
-  border-color: var(--secondarymain-500);
+  top: 970px;
+  left: 235px;
 }
 
-.sign-up-step .input-text-2 {
+.login .text-wrapper-5 {
   position: relative;
   width: fit-content;
   margin-top: -1px;
-  font-family: var(--caption-1-medium-font-family);
-  font-weight: var(--caption-1-medium-font-weight);
-  color: var(--secondarymain-500);
-  font-size: var(--caption-1-medium-font-size);
-  letter-spacing: var(--caption-1-medium-letter-spacing);
-  line-height: var(--caption-1-medium-line-height);
+  font-family: var(--body-2-regular-font-family);
+  font-weight: var(--body-2-regular-font-weight);
+  color: var(--texttext-black);
+  font-size: var(--body-2-regular-font-size);
+  letter-spacing: var(--body-2-regular-letter-spacing);
+  line-height: var(--body-2-regular-line-height);
   white-space: nowrap;
-  font-style: var(--caption-1-medium-font-style);
+  font-style: var(--body-2-regular-font-style);
 }
 :root {
   --basefill-disabled: rgba(237, 237, 237, 1);
@@ -740,6 +782,12 @@ static_html_data = '''<!DOCTYPE html>
   --overline-2-thin-letter-spacing: 1.2px;
   --overline-2-thin-line-height: normal;
   --overline-2-thin-font-style: normal;
+  --text-xs-regular-font-family: "PlusJakarta Sans-Regular", Helvetica;
+  --text-xs-regular-font-weight: 400;
+  --text-xs-regular-font-size: 12px;
+  --text-xs-regular-letter-spacing: 0.12px;
+  --text-xs-regular-line-height: 150%;
+  --text-xs-regular-font-style: normal;
   --xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   --sm: 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
   --md: 0px 2px 4px -2px rgba(16, 24, 40, 0.06), 0px 4px 8px -2px rgba(16, 24, 40, 0.1);
@@ -749,43 +797,52 @@ static_html_data = '''<!DOCTYPE html>
   --3xl: 0px 32px 64px -12px rgba(16, 24, 40, 0.14);
 }
 
-    </style>
+      </style>
   </head>
   <body>
-    <div class="sign-up-step">
-      <div class="div">
-        <div class="frame">
-          <div class="frame-2">
-            <div class="frame-3">
-              <div class="text-wrapper">STEP 3 OF 3</div>
-              <div class="text-wrapper-2">Choose payment method</div>
-              <div class="text-wrapper-3">Your payment is encrypted</div>
-            </div>
-            <div class="frame-4">
-              <div class="frame-5">
-                <div class="text-wrapper-4">E-Wallet</div>
-                <div class="radio-button"><div class="radio-button-2"></div></div>
-              </div>
-              <div class="frame-5">
-                <div class="text-wrapper-4">Credit/Debit Card</div>
-                <div class="radio-button"><div class="radio-button-2"></div></div>
-              </div>
-              <div class="frame-5">
-                <div class="text-wrapper-4">Bank Transfer</div>
-                <div class="radio-button"><div class="radio-button-2"></div></div>
-              </div>
-            </div>
-          </div>
-          <button class="button"><div class="input-text">Next</div></button>
-        </div>
-        <header class="header">
+    <div class="login">
+      <div class="overlap-wrapper">
+        <div class="overlap">
           <div class="group">
-            <div class="overlap-group"><div class="text-wrapper-5">A</div></div>
+            <div class="overlap-group">
+              <div class="rectangle"></div>
+              <p class="text-wrapper">Models, Reports, and Insights Within a Marketplace</p>
+            </div>
           </div>
-          <button class="button-2"><div class="input-text-2">Login</div></button>
-        </header>
+          <div class="frame">
+            <div class="div">
+              <div class="div-2">
+                <div class="text-wrapper-2">Welcome back</div>
+                <div class="text-wrapper-3">Login to your account</div>
+              </div>
+              <div class="frame-2">
+                <div class="frame-3">
+                  <div class="div-2">
+                    <div class="input-label">Email</div>
+                    <div class="frame-4"><div class="text">emily.cameron@mwam.com</div></div>
+                  </div>
+                  <div class="div-2">
+                    <div class="input-label">Password</div>
+                    <div class="frame-4"><div class="text">**********</div></div>
+                  </div>
+                </div>
+                <div class="frame-5">
+                  <div class="checkbox-label">
+                    <div class="checkbox"></div>
+                    <div class="label">Remember me</div>
+                  </div>
+                  <div class="text-wrapper-4">Forgot Password?</div>
+                </div>
+              </div>
+              <button class="button"><div class="input-text">Login</div></button>
+            </div>
+            <div class="frame-6">
+              <div class="text-wrapper-5">Don’t have an account?</div>
+              <div class="text-wrapper-4">Let’s Join Us</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
-</html>
-'''
+</html>'''
