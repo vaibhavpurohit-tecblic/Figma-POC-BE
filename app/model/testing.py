@@ -68,24 +68,41 @@ def generate_html_for_json(input_json_file_path, tokenizer, max_len, loaded_mode
 
     return predicted_html_content
 
-def generate_html(json_file_name):
-    # Directory paths for HTML files
-    # html_files_dir = 'dataset/login/train/html'
-    html_files_dir = HTML_FILES_DIR
+# def generate_html(json_file_name):
+#     # Directory paths for HTML files
+#     # html_files_dir = 'dataset/login/train/html'
+#     html_files_dir = HTML_FILES_DIR
 
-    # Load the model back for predictions
-    loaded_model = tf.keras.models.load_model(MODEL_PATH)
+#     # Load the model back for predictions
+#     loaded_model = tf.keras.models.load_model(MODEL_PATH)
 
-    # Tokenizer for text data
-    tokenizer = Tokenizer()
+#     # Tokenizer for text data
+#     tokenizer = Tokenizer()
 
-    # Example usage for generating HTML file for a given JSON input
-    # input_json_file_path = 'dataset/login/test/login1.json'
-    input_json_file_path = INPUT_JSON_FILE_PATH
-    # input_json_file_path = 'new.json'
-    # output_html_path = 'output/login/login_output.html'
-    output_html_path = OUTPUT_HTML_PATH
+#     # Example usage for generating HTML file for a given JSON input
+#     # input_json_file_path = 'dataset/login/test/login1.json'
+#     input_json_file_path = INPUT_JSON_FILE_PATH
+#     # input_json_file_path = 'new.json'
+#     # output_html_path = 'output/login/login_output.html'
+#     output_html_path = OUTPUT_HTML_PATH
 
-    html_content = generate_html_for_json(input_json_file_path, tokenizer, max_len, loaded_model, html_files_dir, output_html_path)
-    print(f"The HTML file has been generated: {output_html_path}")
-    return html_content
+#     html_content = generate_html_for_json(input_json_file_path, tokenizer, max_len, loaded_model, html_files_dir, output_html_path)
+#     print(f"The HTML file has been generated: {output_html_path}")
+#     return html_content
+
+def generate_html(node_id):
+    directory = "app/output"
+    html  = ""
+
+    for folder in os.listdir(directory):
+        f = os.path.join(directory, folder)
+        print(f)
+        if os.path.isdir(f):
+            if node_id in f:
+                for filename in os.listdir(f):
+                    print(filename)
+                    with open(os.path.join(f, filename), 'r') as f_html:
+                        html = f_html.read()
+
+    return html
+            

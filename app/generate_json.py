@@ -24,15 +24,46 @@ def extract_figma_info(url):
     # Extract the file key
     file_key = None
     path_components = parsed_url.path.split('/')
-    if len(path_components) >= 3:
-        file_key = path_components[2]
+    
+    if 'file' in path_components:
+        file_key = path_components[path_components.index('file') + 1]
+        print(file_key)
 
-    # Extract the node ID
     query_params = parse_qs(parsed_url.query)
     node_id = query_params.get('node-id', [''])[0]
 
     return file_key, node_id
 
+def get_nodes(url):
+    file_key, nodes = extract_figma_info(url)
+    print('file key : ', file_key)
+    print('nodes : ', nodes)
+
+    base_url = f"https://api.figma.com/v1/files/{file_key}"
+
+    # figma_url = generate_figma_url(base_url, nodes, depth)
+    figma_url = generate_figma_url(base_url, nodes)
+
+    headers = {
+        "X-Figma-Token": Config.FIGMA_TOKEN
+    }
+    response = requests.get(figma_url, headers=headers)
+    print('Response Received...')
+
+    if response.status_code == 200:
+        data = response.json()
+        childrens = data['document']['children'][0]['children']
+        data_nodes = []
+        
+        for children in childrens:
+            data_nodes.append({
+                'node_id': children.get('id'),
+                'label': children.get('name')
+            })
+
+        return data_nodes
+    else:
+        print(f"Failed to fetch data: {response.status_code}")
 
 def generate_json(url):
     # nodes = "2608%3A62"
