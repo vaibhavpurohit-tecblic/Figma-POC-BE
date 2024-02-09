@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./desktop-2.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus Jakarta Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Work Sans:wght@400&display=swap"
+    />
+
+    <style>
+      @font-face {
+        :font-family: "Satoshi Variable";
+        src: url("../Satoshi-Regular.otf");
+        font-weight: 400;
+      }
+      @font-face {
+        :font-family: "Satoshi Variable";
+        src: url("../Satoshi-Medium.otf");
+        font-weight: 500;
+      }
+      @font-face {
+        :font-family: "Satoshi Variable";
+        src: url("../Satoshi-Bold.otf");
+        font-weight: 700;
+      }
+      @font-face {
+        :font-family: "SF Pro Text";
+        src: url("../FontsFree-Net-SFProText-Semibold.ttf");
+        font-weight: 600;
+      }
+      .rectangle-icon2 {
+  width: 280px;
+  position: relative;
+  height: 222px;
+  object-fit: cover;
+}
+.your-order-has {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 120%;
+  font-weight: 500;
+}
+.your-order-has-been-successful-wrapper {
+  width: 888px;
+  background-color: var(--neutral-100);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xl);
+  box-sizing: border-box;
+}
+.invoice,
+.order-details {
+  align-self: stretch;
+  position: relative;
+}
+.order-details {
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  font-weight: 500;
+}
+.invoice {
+  letter-spacing: -0.01em;
+}
+.inv20230118mpl2985457662 {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.inv20230118mpl2985457662-wrapper,
+.invoice-parent {
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-start;
+}
+.inv20230118mpl2985457662-wrapper {
+  flex-direction: row;
+  align-items: center;
+  font-size: var(--caption-1-semibold-size);
+  color: var(--text-text-black);
+}
+.invoice-parent {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-9xs);
+}
+.completed,
+.frame-child107 {
+  align-self: stretch;
+  position: relative;
+}
+.completed {
+  font-size: var(--caption-1-semibold-size);
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  color: var(--text-text-black);
+}
+.frame-child107 {
+  width: 1px;
+  border-right: 1px solid var(--divide);
+  box-sizing: border-box;
+}
+.frame-parent86,
+.supervised-group {
+  display: flex;
+  justify-content: flex-start;
+}
+.supervised-group {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-base);
+  font-size: var(--caption-1-semibold-size);
+  color: var(--text-text-black);
+}
+.frame-parent86 {
+  width: 451px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-xs);
+}
+.frame-child108 {
+  align-self: stretch;
+  position: relative;
+  border-top: 5px solid var(--neutral-300);
+  box-sizing: border-box;
+  height: 5px;
+}
+.frame-child109 {
+  width: 100px;
+  position: relative;
+  border-radius: var(--br-5xs);
+  height: 100px;
+  object-fit: cover;
+}
+.supervised13 {
+  position: relative;
+  letter-spacing: -0.01em;
+}
+.supervised-wrapper6 {
+  border-radius: var(--br-xl);
+  background-color: var(--success-main-500);
+  justify-content: center;
+  padding: var(--padding-9xs) var(--padding-5xs);
+}
+.frame-parent90,
+.report-wrapper5,
+.supervised-wrapper6 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.report-wrapper5 {
+  width: 80px;
+  border-radius: var(--br-xl);
+  background-color: var(--warning-main-500);
+  justify-content: center;
+  padding: var(--padding-9xs) var(--padding-5xs);
+  box-sizing: border-box;
+}
+.frame-parent90 {
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.generalized-neural-network2 {
+  align-self: stretch;
+  position: relative;
+  font-size: var(--text-md-normal-size);
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  color: var(--text-text-black);
+}
+.frame-parent89,
+.rectangle-parent9 {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.frame-parent89 {
+  height: 100px;
+  flex-direction: column;
+  gap: var(--gap-5xs);
+}
+.rectangle-parent9 {
+  flex-direction: row;
+  gap: var(--gap-xs);
+}
+.usd-150002 {
+  position: relative;
+  font-size: var(--body-1-regular-size);
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  font-weight: 500;
+  color: var(--text-text-black);
+}
+.frame-parent85,
+.frame-parent87,
+.frame-parent88 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+}
+.frame-parent85,
+.frame-parent87 {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-base);
+  color: var(--base-white);
+}
+.frame-parent85 {
+  justify-content: center;
+  gap: var(--gap-5xl);
+  font-size: var(--small-text-regular-size);
+  color: var(--text-text-black-second);
+}
+.order-details-parent {
+  width: 888px;
+  background-color: var(--base-white);
+  border: 1px solid var(--divide);
+  box-sizing: border-box;
+  padding: var(--padding-5xl);
+  gap: var(--gap-5xl);
+  font-size: var(--body-1-regular-size);
+}
+.frame-parent84,
+.order-details-parent,
+.rectangle-parent8 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.rectangle-parent8 {
+  align-items: center;
+}
+.chevron-down-icon51 {
+  width: 20px;
+  position: relative;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: none;
+}
+.input-text11 {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  font-weight: 500;
+}
+.button41,
+.frame-parent83 {
+  display: flex;
+  align-items: center;
+}
+.button41 {
+  width: 350px;
+  border-radius: var(--br-10xs);
+  background-color: var(--secondary-main-500);
+  flex-direction: row;
+  justify-content: center;
+  padding: var(--padding-sm) var(--padding-base);
+  box-sizing: border-box;
+  gap: var(--gap-5xs);
+  cursor: pointer;
+  font-size: var(--text-md-normal-size);
+  color: var(--base-white);
+}
+.frame-parent83 {
+  position: absolute;
+  top: 0;
+  left: 276px;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--gap-29xl);
+}
+.desktop-2 {
+  width: 100%;
+  position: relative;
+  background-color: var(--base-white);
+  height: 1158px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--heading-6-medium-size);
+  color: var(--text-text-black);
+  font-family: var(--display-1-bold);
+}
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+}
+
+:root {
+  /* fonts */
+  --display-1-bold: "Satoshi Variable";
+  --small-text-regular: "Work Sans";
+  --text-sm-regular: "Plus Jakarta Sans";
+  --font-poppins: Poppins;
+  --text-md-normal: Inter;
+  --font-sf-pro-text: "SF Pro Text";
+
+  /* font sizes */
+  --text-md-normal-size: 16px;
+  --heading-5-medium-size: 24px;
+  --body-1-regular-size: 18px;
+  --small-text-regular-size: 12px;
+  --caption-1-semibold-size: 14px;
+  --font-size-3xl: 22px;
+  --heading-1-semibold-size: 48px;
+  --display-1-bold-size: 72px;
+  --heading-4-medium-size: 28px;
+  --heading-2-semibold-size: 38px;
+  --font-size-23xl: 42px;
+  --display-2-bold-size: 54px;
+  --font-size-31xl: 50px;
+  --heading-6-medium-size: 20px;
+  --heading-3-semibold-size: 32px;
+  --font-size-mid: 17px;
+
+  /* Colors */
+  --base-white: #fff;
+  --neutral-300: #cdd5df;
+  --color-lightgray-100: #c7cbd4;
+  --secondary-surface-50: #ebf1ff;
+  --divide: #e3e8ef;
+  --secondary-border-300: #779dff;
+  --secondary-main-500: #008cdc;
+  --color-gray-100: #fdfdfd;
+  --text-text-black-third: #777;
+  --neutral-800: #202939;
+  --gray-800: #1d2939;
+  --neutral-900: #121826;
+  --gray-900: #101828;
+  --color-gray-200: #0a1530;
+  --text-text-black: #151515;
+  --color-gray-300: #09142f;
+  --primary-pressed-800: #0a1428;
+  --color-gray-400: #111;
+  --color-gray-500: rgba(0, 0, 0, 0.5);
+  --color-gray-600: rgba(255, 255, 255, 0.5);
+  --color-gray-700: rgba(255, 255, 255, 0.35);
+  --color-gray-800: rgba(255, 255, 255, 0.24);
+  --text-text-black-second: #555;
+  --neutral-600: #4b5565;
+  --system-color-charcoal-400: #556575;
+  --warning-main-500: #e0a100;
+  --success-main-500: #16b364;
+  --color-mediumseagreen-100: #10934a;
+  --neutral-400: #9aa3b3;
+  --gray-400: #98a2b3;
+  --base-text-disabled: #9e9e9e;
+  --neutral-sub-sub-main: #999;
+  --base-black: #000;
+  --color-whitesmoke-100: #f8f8f8;
+  --color-whitesmoke-200: #f5f5f5;
+  --neutral-100: #eef2f6;
+  --text-second: #f1f1f1;
+  --base-fill-disabled: #ededed;
+  --gray-200: #eaecf0;
+  --text-tertiary: #ebebeb;
+  --color-darkslateblue-100: #673486;
+  --primary-main-600: #1a3668;
+  --color-indigo: rgba(112, 0, 152, 0.7);
+  --color-mediumblue-100: #0316c7;
+  --color-mediumblue-200: rgba(3, 22, 199, 0.7);
+  --color-dodgerblue: #1073d1;
+  --neutral-700: #364152;
+  --color-mediumslateblue: #5e64ff;
+  --warning-surface-50: #fff8e5;
+  --error-main-500: #f04438;
+  --success-surface-50: #edfcf2;
+
+  /* Gaps */
+  --gap-5xl: 24px;
+  --gap-base: 16px;
+  --gap-61xl: 80px;
+  --gap-5xs: 8px;
+  --gap-xl: 20px;
+  --gap-xs: 12px;
+  --gap-9xs: 4px;
+  --gap-181xl: 200px;
+  --gap-29xl: 48px;
+  --gap-37xl: 56px;
+  --gap-21xl: 40px;
+  --gap-11xs: 2px;
+  --gap-8xs: 5px;
+  --gap-45xl: 64px;
+  --gap-13xl: 32px;
+  --gap-17xl: 36px;
+  --gap-154xl: 173px;
+
+  /* Paddings */
+  --padding-5xl: 24px;
+  --padding-sm: 14px;
+  --padding-base: 16px;
+  --padding-mini: 15px;
+  --padding-3xs: 10px;
+  --padding-9xs: 4px;
+  --padding-5xs: 8px;
+  --padding-xs: 12px;
+  --padding-6xs: 7px;
+  --padding-131xl: 150px;
+  --padding-45xl: 64px;
+  --padding-29xl: 48px;
+  --padding-13xl: 32px;
+  --padding-xl: 20px;
+  --padding-4xs: 9px;
+  --padding-21xl: 40px;
+  --padding-181xl: 200px;
+  --padding-81xl: 100px;
+
+  /* Border radiuses */
+  --br-3xs: 10px;
+  --br-mini: 15px;
+  --br-10xs: 3px;
+  --br-9xs: 4px;
+  --br-xl: 20px;
+  --br-7xs: 6px;
+  --br-5xs: 8px;
+  --br-31xl: 50px;
+  --br-6xs: 7px;
+  --br-3xl: 22px;
+  --br-47xl-6: 66.6px;
+  --br-mid-6: 17.6px;
+  --br-base: 16px;
+  --br-29xl-5: 48.5px;
+  --br-smi-8: 12.8px;
+  --br-12xs: 1px;
+
+  /* Effects */
+  --xl: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
+    0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+  --xs: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  --border-all-corner: 0px 0px 0px 1px #d5dce1;
+  --sm: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="desktop-2">
+      <div class="frame-parent83">
+        <div class="rectangle-parent8">
+          <img
+            class="rectangle-icon2"
+            alt=""
+            src="../rectangle1@2x.png"
+          />
+
+          <div class="frame-parent84">
+            <div class="your-order-has-been-successful-wrapper">
+              <div class="your-order-has">Your order has been successfully</div>
+            </div>
+            <div class="order-details-parent">
+              <div class="order-details">Order Details</div>
+              <div class="frame-parent85">
+                <div class="frame-parent86">
+                  <div class="invoice-parent">
+                    <div class="invoice">Invoice</div>
+                    <div class="inv20230118mpl2985457662-wrapper">
+                      <div class="inv20230118mpl2985457662">
+                        INV/20230118/MPL/2985457662
+                      </div>
+                    </div>
+                  </div>
+                  <div class="invoice-parent">
+                    <div class="invoice">Status</div>
+                    <div class="completed">Completed</div>
+                  </div>
+                  <div class="invoice-parent">
+                    <div class="invoice">Transaction Date</div>
+                    <div class="completed">24 Jan 2023, 10:00 AM</div>
+                  </div>
+                  <div class="invoice-parent">
+                    <div class="invoice">Models Type</div>
+                    <div class="supervised-group">
+                      <div class="inv20230118mpl2985457662">Supervised</div>
+                      <div class="frame-child107"></div>
+                      <div class="inv20230118mpl2985457662">Models</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="frame-child108"></div>
+                <div class="frame-parent87">
+                  <div class="frame-parent88">
+                    <div class="rectangle-parent9">
+                      <img
+                        class="frame-child109"
+                        alt=""
+                        src="../rectangle-1522@2x.png"
+                      />
+
+                      <div class="frame-parent89">
+                        <div class="frame-parent90">
+                          <div class="supervised-wrapper6">
+                            <div class="supervised13">Supervised</div>
+                          </div>
+                          <div class="report-wrapper5">
+                            <div class="supervised13">Report</div>
+                          </div>
+                        </div>
+                        <div class="generalized-neural-network2">
+                          Generalized Neural Network (GRNN)
+                        </div>
+                      </div>
+                    </div>
+                    <div class="usd-150002">USD$ 15,000</div>
+                  </div>
+                  <div class="frame-parent88">
+                    <div class="rectangle-parent9">
+                      <img
+                        class="frame-child109"
+                        alt=""
+                        src="../rectangle-1522@2x.png"
+                      />
+
+                      <div class="frame-parent89">
+                        <div class="frame-parent90">
+                          <div class="supervised-wrapper6">
+                            <div class="supervised13">Supervised</div>
+                          </div>
+                          <div class="report-wrapper5">
+                            <div class="supervised13">Report</div>
+                          </div>
+                        </div>
+                        <div class="generalized-neural-network2">
+                          GRNN - Energy Futures January 2022 Monthly Report
+                        </div>
+                      </div>
+                    </div>
+                    <div class="usd-150002">USD$ 4,500</div>
+                  </div>
+                  <div class="frame-parent88">
+                    <div class="rectangle-parent9">
+                      <img
+                        class="frame-child109"
+                        alt=""
+                        src="../rectangle-1522@2x.png"
+                      />
+
+                      <div class="frame-parent89">
+                        <div class="frame-parent90">
+                          <div class="supervised-wrapper6">
+                            <div class="supervised13">Supervised</div>
+                          </div>
+                          <div class="report-wrapper5">
+                            <div class="supervised13">Report</div>
+                          </div>
+                        </div>
+                        <div class="generalized-neural-network2">
+                          SVR - Vector Regression February 2022 Monthly Report
+                        </div>
+                      </div>
+                    </div>
+                    <div class="usd-150002">USD$ 5,000</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="button41" id="buttonContainer">
+          <img
+            class="chevron-down-icon51"
+            alt=""
+            src="../chevrondown4.svg"
+          />
+
+          <div class="input-text11">Home</div>
+          <img
+            class="chevron-down-icon51"
+            alt=""
+            src="../chevrondown4.svg"
+          />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var buttonContainer = document.getElementById("buttonContainer");
+      if (buttonContainer) {
+        buttonContainer.addEventListener("click", function (e) {
+          window.location.href = "./home-after-login.html";
+        });
+      }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" href="./global.css" />
+  <link rel="stylesheet" href="./desktop-3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus Jakarta Sans:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work Sans:wght@400&display=swap" />
+
+  <style>
+    body {
+      margin: 0;
+      line-height: normal;
+    }
+
+    .popup-overlay {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      inset: 0;
+    }
+
+    :root {
+      /* fonts */
+      --display-1-bold: "Satoshi Variable";
+      --text-sm-regular: "Plus Jakarta Sans";
+      --text-md-normal: Inter;
+      --font-poppins: Poppins;
+      --font-sf-pro-text: "SF Pro Text";
+      --small-text-regular: "Work Sans";
+
+      /* font sizes */
+      --text-md-normal-size: 16px;
+      --caption-1-semibold-size: 14px;
+      --small-text-regular-size: 12px;
+      --body-1-regular-size: 18px;
+      --display-1-bold-size: 72px;
+      --heading-4-medium-size: 28px;
+      --heading-2-semibold-size: 38px;
+      --heading-1-semibold-size: 48px;
+      --font-size-3xl: 22px;
+      --font-size-23xl: 42px;
+      --display-2-bold-size: 54px;
+      --font-size-31xl: 50px;
+      --heading-5-medium-size: 24px;
+      --heading-6-medium-size: 20px;
+      --heading-3-semibold-size: 32px;
+      --font-size-mid: 17px;
+
+      /* Colors */
+      --base-white: #fff;
+      --secondary-border-300: #779dff;
+      --secondary-main-500: #008cdc;
+      --color-whitesmoke-100: #f8f8f8;
+      --color-whitesmoke-200: #f5f5f5;
+      --neutral-100: #eef2f6;
+      --text-second: #f1f1f1;
+      --base-fill-disabled: #ededed;
+      --gray-200: #eaecf0;
+      --text-tertiary: #ebebeb;
+      --color-gray-100: #fdfdfd;
+      --text-text-black-third: #777;
+      --neutral-800: #202939;
+      --gray-800: #1d2939;
+      --neutral-900: #121826;
+      --gray-900: #101828;
+      --color-gray-200: #0a1530;
+      --text-text-black: #151515;
+      --color-gray-300: #09142f;
+      --primary-pressed-800: #0a1428;
+      --color-gray-400: #111;
+      --color-gray-500: rgba(0, 0, 0, 0.5);
+      --color-gray-600: rgba(255, 255, 255, 0.5);
+      --color-gray-700: rgba(255, 255, 255, 0.35);
+      --color-gray-800: rgba(255, 255, 255, 0.24);
+      --neutral-300: #cdd5df;
+      --color-lightgray-100: #c7cbd4;
+      --warning-main-500: #e0a100;
+      --neutral-400: #9aa3b3;
+      --gray-400: #98a2b3;
+      --base-text-disabled: #9e9e9e;
+      --neutral-sub-sub-main: #999;
+      --color-darkslateblue-100: #673486;
+      --primary-main-600: #1a3668;
+      --color-indigo: rgba(112, 0, 152, 0.7);
+      --color-mediumblue-100: #0316c7;
+      --color-mediumblue-200: rgba(3, 22, 199, 0.7);
+      --success-main-500: #16b364;
+      --color-mediumseagreen-100: #10934a;
+      --base-black: #000;
+      --text-text-black-second: #555;
+      --neutral-600: #4b5565;
+      --secondary-surface-50: #ebf1ff;
+      --divide: #e3e8ef;
+      --color-dodgerblue: #1073d1;
+      --neutral-700: #364152;
+      --color-mediumslateblue: #5e64ff;
+      --warning-surface-50: #fff8e5;
+      --system-color-charcoal-400: #556575;
+      --error-main-500: #f04438;
+      --success-surface-50: #edfcf2;
+
+      /* Gaps */
+      --gap-29xl: 48px;
+      --gap-5xs: 8px;
+      --gap-61xl: 80px;
+      --gap-xs: 12px;
+      --gap-9xs: 4px;
+      --gap-base: 16px;
+      --gap-5xl: 24px;
+      --gap-37xl: 56px;
+      --gap-21xl: 40px;
+      --gap-11xs: 2px;
+      --gap-181xl: 200px;
+      --gap-8xs: 5px;
+      --gap-45xl: 64px;
+      --gap-13xl: 32px;
+      --gap-xl: 20px;
+      --gap-17xl: 36px;
+      --gap-154xl: 173px;
+
+      /* Paddings */
+      --padding-sm: 14px;
+      --padding-base: 16px;
+      --padding-5xl: 24px;
+      --padding-13xl: 32px;
+      --padding-xs: 12px;
+      --padding-9xs: 4px;
+      --padding-5xs: 8px;
+      --padding-131xl: 150px;
+      --padding-45xl: 64px;
+      --padding-29xl: 48px;
+      --padding-3xs: 10px;
+      --padding-6xs: 7px;
+      --padding-xl: 20px;
+      --padding-4xs: 9px;
+      --padding-21xl: 40px;
+      --padding-181xl: 200px;
+      --padding-mini: 15px;
+      --padding-81xl: 100px;
+
+      /* Border radiuses */
+      --br-10xs: 3px;
+      --br-xl: 20px;
+      --br-31xl: 50px;
+      --br-3xs: 10px;
+      --br-7xs: 6px;
+      --br-mini: 15px;
+      --br-6xs: 7px;
+      --br-3xl: 22px;
+      --br-47xl-6: 66.6px;
+      --br-mid-6: 17.6px;
+      --br-5xs: 8px;
+      --br-9xs: 4px;
+      --br-base: 16px;
+      --br-29xl-5: 48.5px;
+      --br-smi-8: 12.8px;
+      --br-12xs: 1px;
+
+      /* Effects */
+      --xl: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
+        0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+      --xs: 0px 1px 2px rgba(16, 24, 40, 0.05);
+      --border-all-corner: 0px 0px 0px 1px #d5dce1;
+      --sm: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+    }
+
+    @font-face {
+      : font-family: "Satoshi Variable";
+      src: url("../Satoshi-Regular.otf");
+      font-weight: 400;
+    }
+
+    @font-face {
+      : font-family: "Satoshi Variable";
+      src: url("../Satoshi-Medium.otf");
+      font-weight: 500;
+    }
+
+    @font-face {
+      : font-family: "Satoshi Variable";
+      src: url("../Satoshi-Bold.otf");
+      font-weight: 700;
+    }
+
+    @font-face {
+      : font-family: "SF Pro Text";
+      src: url("../FontsFree-Net-SFProText-Semibold.ttf");
+      font-weight: 600;
+    }
+
+    .rectangle-icon {
+      width: 280px;
+      position: relative;
+      height: 222px;
+      object-fit: cover;
+    }
+
+    .you-have-successfully-subscrib {
+      width: 296.6px;
+      position: relative;
+      height: 19.3px;
+    }
+
+    .you-have-successfully-subscrib-wrapper {
+      width: 888px;
+      background-color: var(--neutral-100);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-5xl);
+      box-sizing: border-box;
+    }
+
+    .frame-wrapper,
+    .rectangle-parent {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .rectangle-parent {
+      align-items: center;
+    }
+
+    .chevron-down-icon {
+      width: 20px;
+      position: relative;
+      height: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .input-text {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-weight: 500;
+    }
+
+    .button {
+      width: 350px;
+      border-radius: var(--br-10xs);
+      background-color: var(--secondary-main-500);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-sm) var(--padding-base);
+      box-sizing: border-box;
+      gap: var(--gap-5xs);
+      cursor: pointer;
+    }
+
+    .desktop-3,
+    .frame-parent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .frame-parent {
+      gap: var(--gap-29xl);
+    }
+
+    .desktop-3 {
+      width: 100%;
+      position: relative;
+      background-color: var(--base-white);
+      height: 1158px;
+      overflow: hidden;
+      padding: 383px 0;
+      box-sizing: border-box;
+      text-align: left;
+      font-size: var(--text-md-normal-size);
+      color: var(--base-white);
+      font-family: var(--display-1-bold);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="desktop-3">
+    <div class="frame-parent">
+      <div class="rectangle-parent">
+        <img class="rectangle-icon" alt="" src="../rectangle@2x.png" />
+
+        <div class="frame-wrapper">
+          <div class="you-have-successfully-subscrib-wrapper">
+            <img class="you-have-successfully-subscrib" alt="" src="../you-have-successfully-subscribed.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="button" id="buttonContainer">
+        <img class="chevron-down-icon" alt="" src="../chevrondown.svg" />
+
+        <div class="input-text">Continue</div>
+        <img class="chevron-down-icon" alt="" src="../chevrondown.svg" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var buttonContainer = document.getElementById("buttonContainer");
+    if (buttonContainer) {
+      buttonContainer.addEventListener("click", function (e) {
+        window.location.href = "./home-after-login.html";
+      });
+    }
+  </script>
+</body>
+
+</html>

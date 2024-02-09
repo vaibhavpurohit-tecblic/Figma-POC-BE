@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./profile-detail.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus Jakarta Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Work Sans:wght@400&display=swap"
+    />
+
+    <style>
+      @font-face {
+        font-family: "Satoshi Variable";
+        src: url("/public/Satoshi-Regular.otf");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Satoshi Variable";
+        src: url("/public/Satoshi-Medium.otf");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: "Satoshi Variable";
+        src: url("/public/Satoshi-Bold.otf");
+        font-weight: 700;
+      }
+      @font-face {
+        font-family: "SF Pro Text";
+        src: url("/public/FontsFree-Net-SFProText-Semibold.ttf");
+        font-weight: 600;
+      }
+      body {
+  margin: 0;
+  line-height: normal;
+}
+
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+}
+
+:root {
+  /* fonts */
+  --text-md-normal: Inter;
+  --display-1-bold: "Satoshi Variable";
+  --font-poppins: Poppins;
+  --text-sm-regular: "Plus Jakarta Sans";
+  --font-sf-pro-text: "SF Pro Text";
+  --small-text-regular: "Work Sans";
+
+  /* font sizes */
+  --text-md-normal-size: 16px;
+  --body-1-regular-size: 18px;
+  --heading-1-semibold-size: 48px;
+  --font-size-3xl: 22px;
+  --caption-1-semibold-size: 14px;
+  --small-text-regular-size: 12px;
+  --heading-2-semibold-size: 38px;
+  --display-1-bold-size: 72px;
+  --heading-4-medium-size: 28px;
+  --font-size-23xl: 42px;
+  --display-2-bold-size: 54px;
+  --font-size-31xl: 50px;
+  --heading-5-medium-size: 24px;
+  --heading-6-medium-size: 20px;
+  --heading-3-semibold-size: 32px;
+  --font-size-mid: 17px;
+
+  /* Colors */
+  --color-gray-100: #fdfdfd;
+  --text-text-black-third: #777;
+  --neutral-800: #202939;
+  --gray-800: #1d2939;
+  --neutral-900: #121826;
+  --gray-900: #101828;
+  --color-gray-200: #0a1530;
+  --text-text-black: #151515;
+  --color-gray-300: #09142f;
+  --primary-pressed-800: #0a1428;
+  --color-gray-400: #111;
+  --color-gray-500: rgba(0, 0, 0, 0.5);
+  --color-gray-600: rgba(255, 255, 255, 0.5);
+  --color-gray-800: rgba(255, 255, 255, 0.24);
+  --color-gray-700: rgba(255, 255, 255, 0.35);
+  --neutral-400: #9aa3b3;
+  --gray-400: #98a2b3;
+  --base-text-disabled: #9e9e9e;
+  --neutral-sub-sub-main: #999;
+  --color-whitesmoke-100: #f8f8f8;
+  --color-whitesmoke-200: #f5f5f5;
+  --neutral-100: #eef2f6;
+  --text-second: #f1f1f1;
+  --base-fill-disabled: #ededed;
+  --gray-200: #eaecf0;
+  --text-tertiary: #ebebeb;
+  --base-white: #fff;
+  --neutral-300: #cdd5df;
+  --color-lightgray-100: #c7cbd4;
+  --color-darkslateblue-100: #673486;
+  --primary-main-600: #1a3668;
+  --warning-main-500: #e0a100;
+  --text-text-black-second: #555;
+  --neutral-600: #4b5565;
+  --secondary-border-300: #779dff;
+  --secondary-main-500: #008cdc;
+  --color-indigo: rgba(112, 0, 152, 0.7);
+  --color-mediumblue-100: #0316c7;
+  --color-mediumblue-200: rgba(3, 22, 199, 0.7);
+  --success-main-500: #16b364;
+  --color-mediumseagreen-100: #10934a;
+  --base-black: #000;
+  --secondary-surface-50: #ebf1ff;
+  --divide: #e3e8ef;
+  --color-dodgerblue: #1073d1;
+  --neutral-700: #364152;
+  --color-mediumslateblue: #5e64ff;
+  --warning-surface-50: #fff8e5;
+  --system-color-charcoal-400: #556575;
+  --error-main-500: #f04438;
+  --success-surface-50: #edfcf2;
+
+  /* Gaps */
+  --gap-181xl: 200px;
+  --gap-61xl: 80px;
+  --gap-base: 16px;
+  --gap-xs: 12px;
+  --gap-9xs: 4px;
+  --gap-21xl: 40px;
+  --gap-5xs: 8px;
+  --gap-11xs: 2px;
+  --gap-29xl: 48px;
+  --gap-5xl: 24px;
+  --gap-37xl: 56px;
+  --gap-8xs: 5px;
+  --gap-45xl: 64px;
+  --gap-13xl: 32px;
+  --gap-xl: 20px;
+  --gap-17xl: 36px;
+  --gap-154xl: 173px;
+
+  /* Paddings */
+  --padding-5xl: 24px;
+  --padding-131xl: 150px;
+  --padding-45xl: 64px;
+  --padding-29xl: 48px;
+  --padding-3xs: 10px;
+  --padding-6xs: 7px;
+  --padding-5xs: 8px;
+  --padding-xs: 12px;
+  --padding-base: 16px;
+  --padding-9xs: 4px;
+  --padding-4xs: 9px;
+  --padding-13xl: 32px;
+  --padding-sm: 14px;
+  --padding-xl: 20px;
+  --padding-21xl: 40px;
+  --padding-181xl: 200px;
+  --padding-mini: 15px;
+  --padding-81xl: 100px;
+
+  /* Border radiuses */
+  --br-31xl: 50px;
+  --br-10xs: 3px;
+  --br-xl: 20px;
+  --br-5xs: 8px;
+  --br-3xs: 10px;
+  --br-7xs: 6px;
+  --br-mini: 15px;
+  --br-6xs: 7px;
+  --br-3xl: 22px;
+  --br-47xl-6: 66.6px;
+  --br-mid-6: 17.6px;
+  --br-9xs: 4px;
+  --br-base: 16px;
+  --br-29xl-5: 48.5px;
+  --br-smi-8: 12.8px;
+  --br-12xs: 1px;
+
+  /* Effects */
+  --xl: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
+    0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+  --xs: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  --border-all-corner: 0px 0px 0px 1px #d5dce1;
+  --sm: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+}
+
+    .profile-detail-child {
+  position: absolute;
+  height: 69.47%;
+  width: 89.22%;
+  top: -1.28%;
+  right: 20.38%;
+  bottom: 31.81%;
+  left: -9.6%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.frame-icon13 {
+  position: absolute;
+  top: -301px;
+  left: 1119px;
+  width: 978.4px;
+  height: 759.8px;
+  overflow: hidden;
+  opacity: 0.15;
+}
+.profile-details {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 120%;
+  font-weight: 500;
+}
+.frame-child582,
+.input-label24 {
+  align-self: stretch;
+  position: relative;
+}
+.frame-child582 {
+  border-top: 1px solid var(--neutral-300);
+  box-sizing: border-box;
+  height: 1px;
+}
+.input-label24 {
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.chevron-down-icon176 {
+  width: 20px;
+  position: relative;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: none;
+}
+.text198,
+.text199 {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.text198 {
+  flex: 1;
+}
+.text199 {
+  width: 115px;
+  text-align: right;
+  display: none;
+}
+.chevron-down-parent33 {
+  align-self: stretch;
+  border-radius: var(--br-10xs);
+  background-color: var(--base-white);
+  border: 1px solid var(--neutral-300);
+  box-sizing: border-box;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--padding-xs);
+  gap: var(--gap-5xs);
+}
+.helper27 {
+  width: 318px;
+  position: relative;
+  font-size: var(--small-text-regular-size);
+  letter-spacing: 0.01em;
+  line-height: 150%;
+  font-family: var(--text-sm-regular);
+  display: none;
+  height: 18px;
+  flex-shrink: 0;
+}
+.input-field23 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-9xs);
+}
+.mwam-is-a1 {
+  margin: 0;
+}
+.text200 {
+  width: 115px;
+  position: relative;
+  font-size: var(--caption-1-semibold-size);
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  color: var(--text-text-black);
+  text-align: right;
+  display: none;
+}
+.chevron-down-parent34 {
+  align-self: stretch;
+  border-radius: var(--br-10xs);
+  background-color: var(--base-white);
+  border: 1px solid var(--neutral-300);
+  box-sizing: border-box;
+  height: 148px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs);
+  gap: var(--gap-5xs);
+  font-size: var(--text-md-normal-size);
+  color: var(--text-text-black-second);
+}
+.chevron-down-icon181,
+.flags-icon3 {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.flags-icon3 {
+  width: 21px;
+  border-radius: var(--br-10xs);
+  height: 15px;
+}
+.chevron-down-icon181 {
+  width: 18px;
+  height: 18px;
+}
+.flags-parent1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.div36,
+.input-contact3 {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.input-contact3 {
+  flex: 1;
+  color: var(--text-text-black-second);
+}
+.text201 {
+  width: 115px;
+  position: relative;
+  line-height: 150%;
+  font-family: var(--text-sm-regular);
+  color: var(--neutral-400);
+  text-align: right;
+  display: none;
+}
+.chevron-down-parent35 {
+  align-self: stretch;
+  border-radius: var(--br-10xs);
+  background-color: var(--base-white);
+  border: 1px solid var(--neutral-300);
+  box-sizing: border-box;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--padding-xs);
+  gap: var(--gap-5xs);
+}
+.helper29 {
+  width: 40px;
+  position: relative;
+  font-size: var(--small-text-regular-size);
+  letter-spacing: 0.01em;
+  line-height: 150%;
+  font-family: var(--text-sm-regular);
+  color: var(--neutral-700);
+  display: none;
+  height: 18px;
+  flex-shrink: 0;
+}
+.input-field-parent5,
+.profile-details-parent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.input-field-parent5 {
+  align-items: flex-start;
+  gap: var(--gap-base);
+  font-size: var(--caption-1-semibold-size);
+}
+.profile-details-parent {
+  align-items: center;
+  gap: var(--gap-5xl);
+}
+.input-text50 {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  font-weight: 500;
+}
+.button150,
+.frame-parent374 {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+.button150 {
+  width: 250px;
+  border-radius: var(--br-10xs);
+  background-color: var(--secondary-main-500);
+  flex-direction: row;
+  justify-content: center;
+  padding: var(--padding-sm) var(--padding-base);
+  gap: var(--gap-5xs);
+  font-size: var(--text-md-normal-size);
+  color: var(--base-white);
+}
+.frame-parent374 {
+  position: absolute;
+  top: 126px;
+  left: 274px;
+  background-color: var(--base-white);
+  box-shadow: 0 4px 8px -2px rgba(255, 255, 255, 0.1),
+    0 2px 4px -2px rgba(255, 255, 255, 0.06);
+  width: 900px;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--padding-5xl) var(--padding-21xl);
+  gap: var(--gap-29xl);
+  color: var(--text-text-black);
+}
+.apricus814,
+.heading20 {
+  position: relative;
+  letter-spacing: -0.03em;
+  line-height: 120%;
+  font-weight: 500;
+}
+.heading20 {
+  align-self: stretch;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.button-base130 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-family: var(--display-1-bold);
+}
+.text209 {
+  position: relative;
+  line-height: 24px;
+  font-weight: 500;
+}
+.button-base133 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.button151,
+.footer-link100 {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.button151 {
+  display: flex;
+  align-items: flex-start;
+}
+.footer-link100 {
+  display: none;
+  align-items: center;
+}
+.footer-links-column20,
+.footer-links10 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.footer-links10 {
+  align-self: stretch;
+  gap: var(--gap-xs);
+  font-size: var(--text-md-normal-size);
+  color: var(--gray-200);
+  font-family: var(--text-md-normal);
+}
+.footer-links-column20 {
+  width: 200px;
+  gap: var(--gap-base);
+}
+.heading21,
+.text214 {
+  align-self: stretch;
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  font-family: var(--display-1-bold);
+}
+.heading21 {
+  font-size: var(--body-1-regular-size);
+  font-weight: 500;
+  color: var(--base-white);
+}
+.text214 {
+  color: var(--text-tertiary);
+}
+.footer-link105 {
+  width: 73px;
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.footer-links-column-parent8,
+.footer-links-column21 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.footer-links-column21 {
+  width: 200px;
+  flex-direction: column;
+  gap: var(--gap-base);
+  font-size: var(--text-md-normal-size);
+  color: var(--gray-200);
+  font-family: var(--text-md-normal);
+}
+.footer-links-column-parent8 {
+  flex: 1;
+  flex-direction: row;
+  gap: var(--gap-61xl);
+  font-size: var(--body-1-regular-size);
+}
+.content10,
+.section20 {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.content10 {
+  flex-direction: row;
+  padding: 0 var(--padding-131xl);
+  gap: var(--gap-181xl);
+}
+.section20 {
+  flex-direction: column;
+  padding: var(--padding-45xl) 0 var(--padding-29xl);
+}
+.footer-text10 {
+  align-self: stretch;
+  position: relative;
+  line-height: 24px;
+  display: inline-block;
+  height: 24px;
+  flex-shrink: 0;
+}
+.footer10,
+.section21 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.section21 {
+  align-self: stretch;
+  background-color: var(--gray-900);
+  align-items: center;
+  padding: var(--padding-5xl) var(--padding-131xl);
+  font-size: var(--text-md-normal-size);
+  color: var(--gray-400);
+  font-family: var(--text-md-normal);
+}
+.footer10 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--gray-800);
+  width: 1440px;
+  align-items: flex-start;
+  font-size: var(--heading-1-semibold-size);
+}
+.group-child18 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background-color: var(--color-gray-200);
+  width: 50px;
+  height: 50px;
+}
+.a19 {
+  position: absolute;
+  top: 8px;
+  left: 16.9px;
+  letter-spacing: -0.01em;
+  line-height: 150%;
+}
+.ellipse-parent18 {
+  position: absolute;
+  top: 18px;
+  left: 100px;
+  width: 50px;
+  height: 50px;
+  font-size: var(--font-size-3xl);
+  font-family: var(--font-poppins);
+}
+.homebar-child10 {
+  width: 4px;
+  position: relative;
+  border-radius: 50%;
+  height: 4px;
+}
+.homebar12 {
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs);
+  box-sizing: border-box;
+  gap: var(--gap-9xs);
+  cursor: pointer;
+}
+.homebar-parent10 {
+  position: absolute;
+  top: 20px;
+  left: 206px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: var(--text-text-black-third);
+}
+.search-icon18 {
+  width: 24px;
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.searchbar12 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-6xs) var(--padding-5xs);
+  gap: var(--gap-9xs);
+  cursor: pointer;
+}
+.mail-icon14 {
+  width: 20px;
+  position: relative;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.searchbar-parent10 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+}
+.frame-child583 {
+  width: 1px;
+  position: relative;
+  border-right: 1px solid var(--neutral-300);
+  box-sizing: border-box;
+  height: 21px;
+}
+.user-wrapper9 {
+  border-radius: var(--br-31xl);
+  background-color: var(--neutral-100);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-3xs);
+}
+.profilebar11 {
+  align-items: center;
+  gap: var(--gap-9xs);
+}
+.frame-parent375,
+.profile-container,
+.profilebar11 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.frame-parent375 {
+  position: absolute;
+  top: 23px;
+  right: 80px;
+  align-items: center;
+  gap: var(--gap-base);
+}
+.profile-container {
+  align-self: stretch;
+  align-items: flex-start;
+  padding: var(--padding-base);
+  gap: var(--gap-5xs);
+}
+.frame-parent376,
+.header19 {
+  position: absolute;
+  background-color: var(--base-white);
+  box-sizing: border-box;
+}
+.frame-parent376 {
+  top: 79px;
+  left: 1110px;
+  border-radius: var(--br-5xs);
+  box-shadow: var(--xl);
+  border: 1px solid var(--neutral-300);
+  width: 250px;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs);
+  color: var(--text-text-black);
+}
+.header19 {
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid var(--neutral-300);
+  width: 1440px;
+  height: 86px;
+  font-size: var(--text-md-normal-size);
+}
+.profile-detail1 {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-gray-300);
+  height: 1291px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--heading-3-semibold-size);
+  color: var(--base-white);
+  font-family: var(--display-1-bold);
+}
+.group-child19 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  background-color: var(--color-gray-200);
+  width: 50px;
+  height: 50px;
+}
+.a20 {
+  position: absolute;
+  top: 8px;
+  left: 16.9px;
+  letter-spacing: -0.01em;
+  line-height: 150%;
+}
+.ellipse-parent19 {
+  position: absolute;
+  top: 18px;
+  left: 100px;
+  width: 50px;
+  height: 50px;
+  font-size: var(--font-size-3xl);
+  font-family: var(--font-poppins);
+}
+.categories20 {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  font-weight: 500;
+}
+.homebar-child11 {
+  width: 4px;
+  position: relative;
+  border-radius: 50%;
+  height: 4px;
+}
+.homebar13 {
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-5xs);
+  box-sizing: border-box;
+  gap: var(--gap-9xs);
+  cursor: pointer;
+}
+.homebar-parent11 {
+  position: absolute;
+  top: 20px;
+  left: 206px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  color: var(--text-text-black-third);
+}
+.search-icon19 {
+  width: 24px;
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.searchbar13 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-6xs) var(--padding-5xs);
+  gap: var(--gap-9xs);
+  cursor: pointer;
+}
+.mail-icon15 {
+  width: 20px;
+  position: relative;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.searchbar-parent11 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-base);
+}
+.frame-child584 {
+  width: 1px;
+  position: relative;
+  border-right: 1px solid var(--neutral-300);
+  box-sizing: border-box;
+  height: 21px;
+}
+.frame-parent377,
+.profilebar12,
+.user-wrapper10 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.user-wrapper10 {
+  border-radius: var(--br-31xl);
+  background-color: var(--neutral-100);
+  justify-content: center;
+  padding: var(--padding-3xs);
+}
+.frame-parent377,
+.profilebar12 {
+  justify-content: flex-start;
+  gap: var(--gap-9xs);
+}
+.frame-parent377 {
+  position: absolute;
+  top: 23px;
+  right: 80px;
+  gap: var(--gap-base);
+}
+.profile3 {
+  flex: 1;
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.profile-parent1 {
+  cursor: pointer;
+}
+.profile-parent1,
+.sign-out-parent1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-base);
+  gap: var(--gap-5xs);
+}
+.frame-parent378,
+.header20 {
+  background-color: var(--base-white);
+  box-sizing: border-box;
+}
+.frame-parent378 {
+  position: absolute;
+  top: 79px;
+  left: 1110px;
+  border-radius: var(--br-5xs);
+  box-shadow: var(--xl);
+  border: 1px solid var(--neutral-300);
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-xs);
+  color: var(--text-text-black);
+}
+.header20 {
+  width: 1440px;
+  position: relative;
+  border-bottom: 1px solid var(--neutral-300);
+  height: 86px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  text-align: left;
+  font-size: var(--text-md-normal-size);
+  color: var(--base-white);
+  font-family: var(--display-1-bold);
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="profile-detail1">
+      <img class="profile-detail-child" alt="" src="../group.svg" />
+
+      <img class="frame-icon13" alt="" src="../frame.svg" />
+
+      <div class="frame-parent374">
+        <div class="profile-details-parent">
+          <div class="profile-details">Profile Details</div>
+          <div class="frame-child582"></div>
+          <div class="input-field-parent5">
+            <div class="input-field23">
+              <div class="input-label24">Store Name*</div>
+              <div class="chevron-down-parent33">
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+
+                <div class="text198">MWAM</div>
+                <div class="text199">Text</div>
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+              </div>
+              <div class="helper27">Helper</div>
+            </div>
+            <div class="input-field23">
+              <div class="input-label24">Store Description*</div>
+              <div class="chevron-down-parent34">
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+
+                <div class="text198">
+                  <p class="mwam-is-a1">
+                    MWAM is a leading provider of alternative investment
+                    solutions, operating as a single team across the globe, we
+                    are dedicated to creating long-term relationships with our
+                    clients built on trust and integrity. We define our culture
+                    as one of continuous innovation and a quest for improvement.
+                  </p>
+                  <p class="mwam-is-a1">
+                    We instinctively strive to do things differently, with fresh
+                    thinking that we believe enables us to create proprietary
+                    value and maximise the benefits to our clients.
+                  </p>
+                </div>
+                <div class="text200">Text</div>
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+              </div>
+              <div class="helper27">Helper</div>
+            </div>
+            <div class="input-field23">
+              <div class="input-label24">Manager Contact*</div>
+              <div class="chevron-down-parent35">
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+
+                <div class="flags-parent1">
+                  <img class="flags-icon3" alt="" src="../flags.svg" />
+
+                  <img
+                    class="chevron-down-icon181"
+                    alt=""
+                    src="../chevrondown.svg"
+                  />
+                </div>
+                <div class="div36">+65</div>
+                <div class="input-contact3">123123123123123</div>
+                <div class="text201">Text</div>
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+              </div>
+              <div class="helper29">Helper</div>
+            </div>
+            <div class="input-field23">
+              <div class="input-label24">Email*</div>
+              <div class="chevron-down-parent33">
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+
+                <div class="text198">emily.cameron@mwam.com</div>
+                <div class="text199">Text</div>
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+              </div>
+              <div class="helper27">Helper</div>
+            </div>
+            <div class="input-field23">
+              <div class="input-label24">Password*</div>
+              <div class="chevron-down-parent33">
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+
+                <div class="text198">*************</div>
+                <div class="text199">Text</div>
+                <img
+                  class="chevron-down-icon176"
+                  alt=""
+                  src="../chevrondown.svg"
+                />
+              </div>
+              <div class="helper27">Helper</div>
+            </div>
+          </div>
+        </div>
+        <div class="button150">
+          <img
+            class="chevron-down-icon176"
+            alt=""
+            src="../chevrondown.svg"
+          />
+
+          <div class="input-text50">Edit</div>
+          <img
+            class="chevron-down-icon176"
+            alt=""
+            src="../chevrondown.svg"
+          />
+        </div>
+      </div>
+      <div class="footer10">
+        <div class="section20">
+          <div class="content10">
+            <div class="apricus814">Apricus8</div>
+            <div class="footer-links-column-parent8">
+              <div class="footer-links-column20">
+                <div class="heading20">Link</div>
+                <div class="footer-links10">
+                  <div class="button-base130">
+                    <div class="div36">Home</div>
+                  </div>
+                  <div class="button-base130">
+                    <div class="div36">Models</div>
+                  </div>
+                  <div class="button-base130">
+                    <div class="div36">Report Selling</div>
+                  </div>
+                  <div class="footer-link100">
+                    <div class="button151">
+                      <div class="button-base133">
+                        <div class="text209">Additional</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer-link100">
+                    <div class="button151">
+                      <div class="button-base133">
+                        <div class="text209">Additional</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer-link100">
+                    <div class="button151">
+                      <div class="button-base133">
+                        <div class="text209">Additional</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer-link100">
+                    <div class="button151">
+                      <div class="button-base133">
+                        <div class="text209">Additional</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer-link100">
+                    <div class="button151">
+                      <div class="button-base133">
+                        <div class="text209">Additional</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-links-column21">
+                <div class="heading21">Singapore Office</div>
+                <div class="text214">
+                  2 PEREIRA ROAD #07-01, 2CONNECTT@TS, Singapore (368024)
+                </div>
+                <div class="footer-link105">
+                  <div class="button151">
+                    <div class="button-base133">
+                      <div class="text209">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link105">
+                  <div class="button151">
+                    <div class="button-base133">
+                      <div class="text209">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link105">
+                  <div class="button151">
+                    <div class="button-base133">
+                      <div class="text209">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link105">
+                  <div class="button151">
+                    <div class="button-base133">
+                      <div class="text209">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link105">
+                  <div class="button151">
+                    <div class="button-base133">
+                      <div class="text209">Additional</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section21">
+          <div class="footer-text10">© 2023 Apricus8. All rights reserved.</div>
+        </div>
+      </div>
+      <div class="header19">
+        <div class="ellipse-parent18">
+          <div class="group-child18"></div>
+          <div class="a19">A</div>
+        </div>
+        <div class="homebar-parent10">
+          <div class="homebar12" id="homeBarContainer">
+            <div class="input-text50">Home</div>
+            <div class="homebar-child10"></div>
+          </div>
+          <div class="homebar12" id="modelBarContainer">
+            <div class="input-text50">Models</div>
+            <div class="homebar-child10"></div>
+          </div>
+          <div class="homebar12" id="reportBarContainer">
+            <div class="input-text50">Report Selling</div>
+            <div class="homebar-child10"></div>
+          </div>
+        </div>
+        <div class="frame-parent375">
+          <div class="searchbar-parent10">
+            <div class="searchbar12" id="searchBarContainer">
+              <img class="search-icon18" alt="" src="../search.svg" />
+
+              <div class="homebar-child10"></div>
+            </div>
+            <div class="searchbar12" id="cartBarContainer">
+              <img
+                class="search-icon18"
+                alt=""
+                src="../shoppingcart1.svg"
+              />
+
+              <div class="homebar-child10"></div>
+            </div>
+            <div class="searchbar12" id="favBarContainer">
+              <img class="search-icon18" alt="" src="../heart.svg" />
+
+              <div class="homebar-child10"></div>
+            </div>
+            <div class="searchbar12" id="chatBarContainer">
+              <img class="mail-icon14" alt="" src="../mail.svg" />
+
+              <div class="homebar-child10"></div>
+            </div>
+          </div>
+          <div class="frame-child583"></div>
+          <div class="profilebar11" id="profileBarContainer">
+            <div class="user-wrapper9">
+              <img class="mail-icon14" alt="" src="../user.svg" />
+            </div>
+            <img class="mail-icon14" alt="" src="../chevrondown.svg" />
+          </div>
+        </div>
+        <div class="frame-parent376">
+          <div class="profile-container">
+            <div class="text198">Profile</div>
+            <img class="mail-icon14" alt="" src="../chevronright.svg" />
+          </div>
+          <div class="profile-container">
+            <div class="text198">History Purchase</div>
+            <img class="mail-icon14" alt="" src="../chevronright.svg" />
+          </div>
+          <div class="profile-container">
+            <div class="text198">Merchant Models</div>
+            <img class="mail-icon14" alt="" src="../chevronright.svg" />
+          </div>
+          <div class="profile-container">
+            <div class="text198">Sign Out</div>
+            <img class="mail-icon14" alt="" src="../chevronright.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="headerContainer" class="popup-overlay" style="display: none">
+      <div class="header20">
+        <div class="ellipse-parent19">
+          <div class="group-child19"></div>
+          <div class="a20">A</div>
+        </div>
+        <div class="homebar-parent11">
+          <div class="homebar13" id="popuphomeBarContainer">
+            <div class="categories20">Home</div>
+            <div class="homebar-child11"></div>
+          </div>
+          <div class="homebar13" id="popupmodelBarContainer">
+            <div class="categories20">Models</div>
+            <div class="homebar-child11"></div>
+          </div>
+          <div class="homebar13" id="popupreportBarContainer">
+            <div class="categories20">Report Selling</div>
+            <div class="homebar-child11"></div>
+          </div>
+        </div>
+        <div class="frame-parent377">
+          <div class="searchbar-parent11">
+            <div class="searchbar13" id="popupsearchBarContainer">
+              <img class="search-icon19" alt="" src="../search.svg" />
+
+              <div class="homebar-child11"></div>
+            </div>
+            <div class="searchbar13" id="popupcartBarContainer">
+              <img
+                class="search-icon19"
+                alt=""
+                src="../shoppingcart1.svg"
+              />
+
+              <div class="homebar-child11"></div>
+            </div>
+            <div class="searchbar13" id="popupfavBarContainer">
+              <img class="search-icon19" alt="" src="../heart.svg" />
+
+              <div class="homebar-child11"></div>
+            </div>
+            <div class="searchbar13" id="popupchatBarContainer">
+              <img class="mail-icon15" alt="" src="../mail.svg" />
+
+              <div class="homebar-child11"></div>
+            </div>
+          </div>
+          <div class="frame-child584"></div>
+          <div class="profilebar12">
+            <div class="user-wrapper10">
+              <img class="mail-icon15" alt="" src="../user.svg" />
+            </div>
+            <img class="mail-icon15" alt="" src="../chevrondown.svg" />
+          </div>
+        </div>
+        <div class="frame-parent378">
+          <div class="profile-parent1" id="popupframeContainer">
+            <div class="profile3">Profile</div>
+            <img class="mail-icon15" alt="" src="../chevronright.svg" />
+          </div>
+          <div class="profile-parent1" id="popupframeContainer1">
+            <div class="profile3">History Purchase</div>
+            <img class="mail-icon15" alt="" src="../chevronright.svg" />
+          </div>
+          <div class="profile-parent1" id="popupframeContainer2">
+            <div class="profile3">Merchant Models</div>
+            <img class="mail-icon15" alt="" src="../chevronright.svg" />
+          </div>
+          <div class="sign-out-parent1">
+            <div class="profile3">Sign Out</div>
+            <img class="mail-icon15" alt="" src="../chevronright.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var popuphomeBarContainer = document.getElementById("popuphomeBarContainer");
+      if (popuphomeBarContainer) {
+        popuphomeBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./home-after-login.html";
+        });
+      }
+      
+      var popupmodelBarContainer = document.getElementById("popupmodelBarContainer");
+      if (popupmodelBarContainer) {
+        popupmodelBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./product-listing.html";
+        });
+      }
+      
+      var popupreportBarContainer = document.getElementById(
+        "popupreportBarContainer"
+      );
+      if (popupreportBarContainer) {
+        popupreportBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./product-listing1.html";
+        });
+      }
+      
+      var popupsearchBarContainer = document.getElementById(
+        "popupsearchBarContainer"
+      );
+      if (popupsearchBarContainer) {
+        popupsearchBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./search.html";
+        });
+      }
+      
+      var popupcartBarContainer = document.getElementById("popupcartBarContainer");
+      if (popupcartBarContainer) {
+        popupcartBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./cart2.html";
+        });
+      }
+      
+      var popupfavBarContainer = document.getElementById("popupfavBarContainer");
+      if (popupfavBarContainer) {
+        popupfavBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./favorite.html";
+        });
+      }
+      
+      var popupchatBarContainer = document.getElementById("popupchatBarContainer");
+      if (popupchatBarContainer) {
+        popupchatBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./cart.html";
+        });
+      }
+      
+      var popupframeContainer = document.getElementById("popupframeContainer");
+      if (popupframeContainer) {
+        popupframeContainer.addEventListener("click", function (e) {
+          window.location.href = "./profile-detail.html";
+        });
+      }
+      
+      var popupframeContainer1 = document.getElementById("popupframeContainer1");
+      if (popupframeContainer1) {
+        popupframeContainer1.addEventListener("click", function (e) {
+          window.location.href = "./history-purchase.html";
+        });
+      }
+      
+      var popupframeContainer2 = document.getElementById("popupframeContainer2");
+      if (popupframeContainer2) {
+        popupframeContainer2.addEventListener("click", function (e) {
+          window.location.href = "./merchant-product-listing.html";
+        });
+      }
+      
+      var homeBarContainer = document.getElementById("homeBarContainer");
+      if (homeBarContainer) {
+        homeBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./home-after-login.html";
+        });
+      }
+      
+      var modelBarContainer = document.getElementById("modelBarContainer");
+      if (modelBarContainer) {
+        modelBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./product-listing.html";
+        });
+      }
+      
+      var reportBarContainer = document.getElementById("reportBarContainer");
+      if (reportBarContainer) {
+        reportBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./product-listing1.html";
+        });
+      }
+      
+      var searchBarContainer = document.getElementById("searchBarContainer");
+      if (searchBarContainer) {
+        searchBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./search.html";
+        });
+      }
+      
+      var cartBarContainer = document.getElementById("cartBarContainer");
+      if (cartBarContainer) {
+        cartBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./cart2.html";
+        });
+      }
+      
+      var favBarContainer = document.getElementById("favBarContainer");
+      if (favBarContainer) {
+        favBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./favorite.html";
+        });
+      }
+      
+      var chatBarContainer = document.getElementById("chatBarContainer");
+      if (chatBarContainer) {
+        chatBarContainer.addEventListener("click", function (e) {
+          window.location.href = "./cart.html";
+        });
+      }
+      
+      var profileBarContainer = document.getElementById("profileBarContainer");
+      if (profileBarContainer) {
+        profileBarContainer.addEventListener("click", function () {
+          var popup = document.getElementById("headerContainer");
+          if (!popup) return;
+          var popupStyle = popup.style;
+          if (popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+      
+          var onClick =
+            popup.onClick ||
+            function (e) {
+              if (e.target === popup && popup.hasAttribute("closable")) {
+                popupStyle.display = "none";
+              }
+            };
+          popup.addEventListener("click", onClick);
+        });
+      }
+      </script>
+  </body>
+</html>
