@@ -56,14 +56,30 @@ def get_nodes(url):
         data_nodes = []
         
         for children in childrens:
-            data_nodes.append({
-                'node_id': children.get('id'),
-                'label': children.get('name')
-            })
+            is_screen = check_if_valid_screen(children.get('id'))
+
+            if is_screen:
+                data_nodes.append({
+                    'node_id': children.get('id'),
+                    'label': children.get('name')
+                })
 
         return data_nodes
     else:
         print(f"Failed to fetch data: {response.status_code}")
+
+def check_if_valid_screen(node_id):
+    directory = "app/output"
+    is_screen = False          
+    
+    for folder in os.listdir(directory):
+        f = os.path.join(directory, folder)
+        
+        if os.path.isdir(f):
+            if node_id in f:
+                return True
+
+    return is_screen  
 
 def generate_json(url):
     # nodes = "2608%3A62"
