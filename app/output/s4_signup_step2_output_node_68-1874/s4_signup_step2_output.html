@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-  <style>
-    @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+    <style>
+      @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
 @import url("https://fonts.googleapis.com/css?family=Poppins:400");
 * {
   -webkit-font-smoothing: antialiased;
@@ -13,6 +13,8 @@ html,
 body {
   margin: 0px;
   height: 100%;
+  display: flex;
+  background-color: #0a1530;
 }
 /* a blue color as a generic focus style */
 button:focus-visible {
@@ -21,11 +23,6 @@ button:focus-visible {
 }
 a {
   text-decoration: none;
-}
-@font-face {
-  font-family: "Satoshi Variable-Regular";
-  src: url("https://anima-uploads.s3.amazonaws.com/projects/633545afb256316589372687/fonts/satoshi-variable.ttf")
-    format("truetype");
 }
 .sign-up-step {
   background-color: #0a1530;
@@ -48,34 +45,31 @@ a {
 
 .sign-up-step .frame {
   position: absolute;
-  width: 1204px;
+  width: 1323px;
   height: 1024px;
   top: 0;
-  left: 236px;
+  left: 117px;
 }
 
 .sign-up-step .div {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  width: 700px;
   align-items: center;
   gap: 48px;
   padding: 24px 40px;
   position: absolute;
-  top: 143px;
-  left: 370px;
+  top: 216px;
+  left: 228px;
   background-color: #ffffff;
   box-shadow: 0px 2px 4px -2px #ffffff0f, 0px 4px 8px -2px #ffffff1a;
 }
 
 .sign-up-step .frame-2 {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
   position: relative;
-  align-self: stretch;
-  width: 100%;
   flex: 0 0 auto;
 }
 
@@ -103,7 +97,7 @@ a {
   font-style: var(--body-2-semibold-font-style);
 }
 
-.sign-up-step .p {
+.sign-up-step .text-wrapper-2 {
   position: relative;
   width: 457px;
   font-family: var(--heading-2-semibold-font-family);
@@ -117,20 +111,44 @@ a {
 }
 
 .sign-up-step .frame-4 {
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 32px;
   position: relative;
-  align-self: stretch;
-  width: 100%;
   flex: 0 0 auto;
 }
 
-.sign-up-step .div-2 {
+.sign-up-step .frame-5 {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  width: 280px;
+  height: 330px;
+  align-items: center;
+  gap: 56px;
+  padding: 24px;
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: var(--neutral-300);
+  box-shadow: var(--xs);
+}
+
+.sign-up-step .frame-6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  flex: 1;
+  align-self: stretch;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.sign-up-step .frame-7 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 4px;
   position: relative;
   align-self: stretch;
@@ -138,136 +156,88 @@ a {
   flex: 0 0 auto;
 }
 
-.sign-up-step .text-wrapper-2 {
-  position: relative;
-  align-self: stretch;
-  margin-top: -1px;
-  font-family: var(--caption-1-regular-font-family);
-  font-weight: var(--caption-1-regular-font-weight);
-  color: var(--texttext-black);
-  font-size: var(--caption-1-regular-font-size);
-  letter-spacing: var(--caption-1-regular-letter-spacing);
-  line-height: var(--caption-1-regular-line-height);
-  font-style: var(--caption-1-regular-font-style);
-}
-
-.sign-up-step .frame-5 {
-  display: flex;
-  height: 44px;
-  align-items: center;
-  gap: 8px;
-  padding: 0px 12px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 3px;
-  border: 1px solid;
-  border-color: #cdd4de;
-}
-
 .sign-up-step .text-wrapper-3 {
   position: relative;
-  flex: 1;
+  width: fit-content;
+  margin-top: -1px;
   font-family: var(--caption-1-regular-font-family);
   font-weight: var(--caption-1-regular-font-weight);
   color: var(--texttext-black-second);
   font-size: var(--caption-1-regular-font-size);
-  letter-spacing: var(--caption-1-regular-letter-spacing);
-  line-height: var(--caption-1-regular-line-height);
-  font-style: var(--caption-1-regular-font-style);
-}
-
-.sign-up-step .frame-6 {
-  display: flex;
-  height: 40px;
-  align-items: center;
-  gap: 8px;
-  padding: 0px 12px;
-  position: relative;
-  align-self: stretch;
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 3px;
-  border: 1px solid;
-  border-color: #cdd4de;
-}
-
-.sign-up-step .frame-7 {
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.sign-up-step .flags {
-  position: relative;
-  width: 21px;
-  height: 15px;
-}
-
-.sign-up-step .chevron-down {
-  position: relative;
-  width: 18px;
-  height: 18px;
-}
-
-.sign-up-step .text-wrapper-4 {
-  position: relative;
-  width: fit-content;
-  font-family: var(--caption-1-regular-font-family);
-  font-weight: var(--caption-1-regular-font-weight);
-  color: var(--texttext-black);
-  font-size: var(--caption-1-regular-font-size);
+  text-align: center;
   letter-spacing: var(--caption-1-regular-letter-spacing);
   line-height: var(--caption-1-regular-line-height);
   white-space: nowrap;
   font-style: var(--caption-1-regular-font-style);
 }
 
-.sign-up-step .by-signing-up-i {
+.sign-up-step .text-wrapper-4 {
   position: relative;
-  align-self: stretch;
-  font-family: "Satoshi Variable-Regular", Helvetica;
-  font-weight: 400;
-  color: transparent;
-  font-size: 16px;
-  letter-spacing: -0.32px;
-  line-height: 22.4px;
+  width: fit-content;
+  font-family: var(--heading-4-medium-font-family);
+  font-weight: var(--heading-4-medium-font-weight);
+  color: var(--texttext-black);
+  font-size: var(--heading-4-medium-font-size);
+  text-align: center;
+  letter-spacing: var(--heading-4-medium-letter-spacing);
+  line-height: var(--heading-4-medium-line-height);
+  white-space: nowrap;
+  font-style: var(--heading-4-medium-font-style);
 }
 
-.sign-up-step .span {
-  color: #151515;
-  font-family: var(--body-2-regular-font-family);
-  font-style: var(--body-2-regular-font-style);
-  font-weight: var(--body-2-regular-font-weight);
-  letter-spacing: var(--body-2-regular-letter-spacing);
-  line-height: var(--body-2-regular-line-height);
-  font-size: var(--body-2-regular-font-size);
+.sign-up-step .frame-8 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.sign-up-step .frame-9 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.sign-up-step .check-circle {
+  position: relative;
+  width: 20px;
+  height: 20px;
 }
 
 .sign-up-step .text-wrapper-5 {
-  font-family: var(--body-2-semibold-font-family);
-  font-weight: var(--body-2-semibold-font-weight);
-  color: #008cdc;
-  font-style: var(--body-2-semibold-font-style);
-  letter-spacing: var(--body-2-semibold-letter-spacing);
-  line-height: var(--body-2-semibold-line-height);
-  font-size: var(--body-2-semibold-font-size);
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--body-2-regular-font-family);
+  font-weight: var(--body-2-regular-font-weight);
+  color: var(--texttext-black);
+  font-size: var(--body-2-regular-font-size);
+  text-align: center;
+  letter-spacing: var(--body-2-regular-letter-spacing);
+  line-height: var(--body-2-regular-line-height);
+  white-space: nowrap;
+  font-style: var(--body-2-regular-font-style);
 }
 
 .sign-up-step .button {
   all: unset;
   box-sizing: border-box;
+  padding: 12px 16px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: var(--primarymain-600);
   display: flex;
-  width: 250px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 16px;
-  position: relative;
-  flex: 0 0 auto;
-  background-color: var(--infomain-500);
   border-radius: 3px;
 }
 
@@ -275,12 +245,53 @@ a {
   position: relative;
   width: fit-content;
   margin-top: -1px;
-  font-family: var(--body-2-semibold-font-family);
-  font-weight: var(--body-2-semibold-font-weight);
+  font-family: var(--caption-1-medium-font-family);
+  font-weight: var(--caption-1-medium-font-weight);
   color: #ffffff;
+  font-size: var(--caption-1-medium-font-size);
+  letter-spacing: var(--caption-1-medium-letter-spacing);
+  line-height: var(--caption-1-medium-line-height);
+  white-space: nowrap;
+  font-style: var(--caption-1-medium-font-style);
+}
+
+.sign-up-step .frame-10 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.sign-up-step .button-2 {
+  all: unset;
+  box-sizing: border-box;
+  width: 250px;
+  padding: 14px 16px;
+  position: relative;
+  flex: 0 0 auto;
+  background-color: #ededed;
+  border: 1px solid;
+  border-color: #9e9e9e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 3px;
+}
+
+.sign-up-step .input-text-2 {
+  color: #9e9e9e;
   font-size: var(--body-2-semibold-font-size);
   letter-spacing: var(--body-2-semibold-letter-spacing);
   line-height: var(--body-2-semibold-line-height);
+  position: relative;
+  width: fit-content;
+  margin-top: -1px;
+  font-family: var(--body-2-semibold-font-family);
+  font-weight: var(--body-2-semibold-font-weight);
   white-space: nowrap;
   font-style: var(--body-2-semibold-font-style);
 }
@@ -329,34 +340,34 @@ a {
   white-space: nowrap;
 }
 
-.sign-up-step .button-2 {
+.sign-up-step .button-3 {
   all: unset;
   box-sizing: border-box;
-  display: flex;
   width: 130px;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
   padding: 9px 16px;
   position: absolute;
   top: 24px;
   left: 1230px;
   background-color: var(--basewhite);
-  border-radius: 3px;
   border: 1px solid;
   border-color: var(--secondarymain-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 3px;
 }
 
-.sign-up-step .input-text-2 {
+.sign-up-step .input-text-3 {
+  color: var(--secondarymain-500);
+  font-size: var(--caption-1-medium-font-size);
+  letter-spacing: var(--caption-1-medium-letter-spacing);
+  line-height: var(--caption-1-medium-line-height);
   position: relative;
   width: fit-content;
   margin-top: -1px;
   font-family: var(--caption-1-medium-font-family);
   font-weight: var(--caption-1-medium-font-weight);
-  color: var(--secondarymain-500);
-  font-size: var(--caption-1-medium-font-size);
-  letter-spacing: var(--caption-1-medium-letter-spacing);
-  line-height: var(--caption-1-medium-line-height);
   white-space: nowrap;
   font-style: var(--caption-1-medium-font-style);
 }
@@ -415,17 +426,6 @@ a {
   --infomain-500: rgba(0, 140, 220, 1);
   --infoborder-300: rgba(119, 157, 255, 1);
   --infopressed-800: rgba(46, 69, 127, 1);
-  --red: rgba(249, 57, 57, 1);
-  --yellow: rgba(255, 218, 44, 1);
-  --orange: rgba(255, 108, 45, 1);
-  --red-wine: rgba(175, 1, 13, 1);
-  --green: rgba(36, 159, 88, 1);
-  --brown: rgba(174, 106, 62, 1);
-  --blue: rgba(62, 203, 248, 1);
-  --navy-blue: rgba(26, 71, 184, 1);
-  --black: rgba(21, 21, 21, 1);
-  --golden: rgba(212, 175, 44, 1);
-  --white: rgba(255, 255, 255, 1);
   --price-list-font-family: "SatoshiVariable-Medium", Helvetica;
   --price-list-font-weight: 500;
   --price-list-font-size: 16px;
@@ -846,12 +846,6 @@ a {
   --overline-2-thin-letter-spacing: 1.2px;
   --overline-2-thin-line-height: normal;
   --overline-2-thin-font-style: normal;
-  --text-xs-regular-font-family: "PlusJakarta Sans-Regular", Helvetica;
-  --text-xs-regular-font-weight: 400;
-  --text-xs-regular-font-size: 12px;
-  --text-xs-regular-letter-spacing: 0.12px;
-  --text-xs-regular-line-height: 150%;
-  --text-xs-regular-font-style: normal;
   --xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   --sm: 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
   --md: 0px 2px 4px -2px rgba(16, 24, 40, 0.06), 0px 4px 8px -2px rgba(16, 24, 40, 0.1);
@@ -861,7 +855,7 @@ a {
   --3xl: 0px 32px 64px -12px rgba(16, 24, 40, 0.14);
 }
 
-  </style>
+    </style>
   </head>
   <body>
     <div class="sign-up-step">
@@ -871,53 +865,70 @@ a {
           <div class="div">
             <div class="frame-2">
               <div class="frame-3">
-                <div class="text-wrapper">STEP 1 OF 3</div>
-                <p class="p">Fill the data to start your membership</p>
+                <div class="text-wrapper">STEP 2 OF 3</div>
+                <div class="text-wrapper-2">Choose your plan</div>
               </div>
               <div class="frame-4">
-                <div class="div-2">
-                  <div class="text-wrapper-2">First Name*</div>
-                  <div class="frame-5"><div class="text-wrapper-3">First name</div></div>
-                </div>
-                <div class="div-2">
-                  <div class="text-wrapper-2">Last Name*</div>
-                  <div class="frame-5"><div class="text-wrapper-3">Last name</div></div>
-                </div>
-                <div class="div-2">
-                  <div class="text-wrapper-2">Manager Contact*</div>
+                <div class="frame-5">
                   <div class="frame-6">
                     <div class="frame-7">
-                      <img class="flags" src="flags.svg" />
-                      <img class="chevron-down" src="chevron-down-115.svg" />
+                      <div class="text-wrapper-3">BRONZE</div>
+                      <div class="text-wrapper-4">$500</div>
                     </div>
-                    <div class="text-wrapper-4">+65</div>
-                    <div class="text-wrapper-3">Input contact</div>
+                    <div class="frame-8">
+                      <div class="frame-9">
+                        <img class="check-circle" src="check-circle-5.svg" />
+                        <div class="text-wrapper-5">Commodity Trading Advisors</div>
+                      </div>
+                      <div class="frame-9">
+                        <img class="check-circle" src="check-circle-4.svg" />
+                        <div class="text-wrapper-5">Prop Trading Desks</div>
+                      </div>
+                    </div>
                   </div>
+                  <button class="button"><div class="input-text">Choose Plan</div></button>
                 </div>
-                <div class="div-2">
-                  <div class="text-wrapper-2">Email*</div>
-                  <div class="frame-5"><div class="text-wrapper-3">Email</div></div>
+                <div class="frame-5">
+                  <div class="frame-6">
+                    <div class="frame-7">
+                      <div class="text-wrapper-3">SILVER</div>
+                      <div class="text-wrapper-4">$1000</div>
+                    </div>
+                    <div class="frame-8">
+                      <div class="frame-10">
+                        <img class="check-circle" src="check-circle-3.svg" />
+                        <div class="text-wrapper-5">Consumer Goods Companies</div>
+                      </div>
+                      <div class="frame-10">
+                        <img class="check-circle" src="check-circle-2.svg" />
+                        <div class="text-wrapper-5">Research Houses</div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="button"><div class="input-text">Choose Plan</div></button>
                 </div>
-                <div class="div-2">
-                  <div class="text-wrapper-2">Password*</div>
-                  <div class="frame-5"><div class="text-wrapper-3">Password</div></div>
+                <div class="frame-5">
+                  <div class="frame-6">
+                    <div class="frame-7">
+                      <div class="text-wrapper-3">GOLD</div>
+                      <div class="text-wrapper-4">$2000</div>
+                    </div>
+                    <div class="frame-10">
+                      <img class="check-circle" src="check-circle-1.svg" />
+                      <div class="text-wrapper-5">Banks &amp; Funds</div>
+                    </div>
+                  </div>
+                  <button class="button"><div class="input-text">Choose Plan</div></button>
                 </div>
               </div>
-              <p class="by-signing-up-i">
-                <span class="span">By signing up, I agree to the Apricus8 </span>
-                <span class="text-wrapper-5">Terms of Service</span>
-                <span class="span"> and </span>
-                <span class="text-wrapper-5">Privacy Policy</span>
-                <span class="span">.</span>
-              </p>
             </div>
-            <button class="button"><div class="input-text">Next</div></button>
+            <button class="button-2"><div class="input-text-2">Next</div></button>
           </div>
           <header class="header">
             <div class="group">
               <div class="overlap-group"><div class="text-wrapper-6">A</div></div>
             </div>
-            <button class="button-2"><div class="input-text-2">Login</div></button>
+            <button class="button-3"><div class="input-text-3">Login</div></button>
           </header>
         </div>
       </div>

@@ -56,11 +56,12 @@ def get_nodes(url):
         data_nodes = []
         
         for children in childrens:
-            is_screen = check_if_valid_screen(children.get('id'))
+            children_id = children.get('id').replace(':', '-')
+            is_screen = check_if_valid_screen(children_id)
 
             if is_screen:
                 data_nodes.append({
-                    'node_id': children.get('id'),
+                    'node_id': children_id,
                     'label': children.get('name')
                 })
 

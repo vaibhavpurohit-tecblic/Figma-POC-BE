@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-    @import url("https://fonts.googleapis.com/css?family=Poppins:400");
 
     * {
       -webkit-font-smoothing: antialiased;
@@ -20,11 +19,7 @@
       margin: 0px;
       height: 100%;
     }
-  body {
-        display: flex;
-        
-        background-color: #0a1530;
-      }
+
     /* a blue color as a generic focus style */
     button:focus-visible {
       outline: 2px solid #4a90e2 !important;
@@ -35,190 +30,65 @@
       text-decoration: none;
     }
 
-    .forgot-password {
-      background-color: #0a1530;
+    .loading-payment {
+      background-color: #ffffff;
       display: flex;
       flex-direction: row;
       justify-content: center;
       width: 100%;
     }
 
-    .forgot-password .overlap-wrapper {
-      background-color: #0a1530;
+    .loading-payment .div {
+      background-color: #ffffff;
       width: 1440px;
       height: 1024px;
-    }
-
-    .forgot-password .overlap {
       position: relative;
-      height: 1024px;
     }
 
-    .forgot-password .frame {
+    .loading-payment .rectangle {
       position: absolute;
-      width: 1109px;
-      height: 1024px;
-      top: 0;
-      left: 0;
+      width: 400px;
+      height: 400px;
+      top: 112px;
+      left: 520px;
+      object-fit: cover;
     }
 
-    .forgot-password .div {
-      display: flex;
+    .loading-payment .frame {
+      display: inline-flex;
       flex-direction: column;
-      width: 700px;
       align-items: center;
-      gap: 48px;
-      padding: 24px 40px;
+      gap: 16px;
       position: absolute;
-      top: 236px;
-      left: 370px;
-      background-color: #ffffff;
-      box-shadow: 0px 2px 4px -2px #ffffff0f, 0px 4px 8px -2px #ffffff1a;
+      top: 512px;
+      left: 515px;
     }
 
-    .forgot-password .text-wrapper {
+    .loading-payment .text-wrapper {
       position: relative;
-      width: 457px;
+      width: fit-content;
       margin-top: -1px;
-      font-family: var(--heading-4-semibold-font-family);
-      font-weight: var(--heading-4-semibold-font-weight);
+      font-family: var(--body-1-regular-font-family);
+      font-weight: var(--body-1-regular-font-weight);
       color: var(--texttext-black);
-      font-size: var(--heading-4-semibold-font-size);
-      text-align: center;
-      letter-spacing: var(--heading-4-semibold-letter-spacing);
-      line-height: var(--heading-4-semibold-line-height);
-      font-style: var(--heading-4-semibold-font-style);
+      font-size: var(--body-1-regular-font-size);
+      letter-spacing: var(--body-1-regular-letter-spacing);
+      line-height: var(--body-1-regular-line-height);
+      white-space: nowrap;
+      font-style: var(--body-1-regular-font-style);
     }
 
-    .forgot-password .password-reset-has {
+    .loading-payment .p {
       position: relative;
-      align-self: stretch;
-      font-family: var(--body-2-regular-font-family);
-      font-weight: var(--body-2-regular-font-weight);
+      width: fit-content;
+      font-family: var(--body-1-regular-font-family);
+      font-weight: var(--body-1-regular-font-weight);
       color: var(--texttext-black-second);
-      font-size: var(--body-2-regular-font-size);
-      text-align: center;
-      letter-spacing: var(--body-2-regular-letter-spacing);
-      line-height: var(--body-2-regular-line-height);
-      font-style: var(--body-2-regular-font-style);
-    }
-
-    .forgot-password .button {
-      all: unset;
-      box-sizing: border-box;
-      display: flex;
-      width: 250px;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 14px 16px;
-      position: relative;
-      flex: 0 0 auto;
-      background-color: var(--infomain-500);
-      border-radius: 3px;
-    }
-
-    .forgot-password .input-text {
-      position: relative;
-      width: fit-content;
-      margin-top: -1px;
-      font-family: var(--body-2-semibold-font-family);
-      font-weight: var(--body-2-semibold-font-weight);
-      color: #ffffff;
-      font-size: var(--body-2-semibold-font-size);
-      letter-spacing: var(--body-2-semibold-letter-spacing);
-      line-height: var(--body-2-semibold-line-height);
+      font-size: var(--body-1-regular-font-size);
+      letter-spacing: var(--body-1-regular-letter-spacing);
+      line-height: var(--body-1-regular-line-height);
       white-space: nowrap;
-      font-style: var(--body-2-semibold-font-style);
-    }
-
-    .forgot-password .text-wrapper-2 {
-      position: relative;
-      width: fit-content;
-      font-family: var(--body-2-semibold-font-family);
-      font-weight: var(--body-2-semibold-font-weight);
-      color: var(--secondarymain-500);
-      font-size: var(--body-2-semibold-font-size);
-      letter-spacing: var(--body-2-semibold-letter-spacing);
-      line-height: var(--body-2-semibold-line-height);
-      white-space: nowrap;
-      font-style: var(--body-2-semibold-font-style);
-    }
-
-    .forgot-password .header {
-      position: absolute;
-      width: 1440px;
-      height: 86px;
-      top: 0;
-      left: 0;
-      background-color: #ffffff;
-      border-top-style: none;
-      border-right-style: none;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-      border-left-style: none;
-      border-color: var(--neutral-300);
-    }
-
-    .forgot-password .group {
-      position: absolute;
-      width: 52px;
-      height: 50px;
-      top: 18px;
-      left: 100px;
-    }
-
-    .forgot-password .overlap-group {
-      position: relative;
-      width: 50px;
-      height: 50px;
-      background-color: #0a1530;
-      border-radius: 25px;
-    }
-
-    .forgot-password .text-wrapper-3 {
-      position: absolute;
-      top: 8px;
-      left: 17px;
-      font-family: "Poppins", Helvetica;
-      font-weight: 400;
-      color: #ffffff;
-      font-size: 22px;
-      letter-spacing: -0.22px;
-      line-height: 32.9px;
-      white-space: nowrap;
-    }
-
-    .forgot-password .button-2 {
-      all: unset;
-      box-sizing: border-box;
-      display: flex;
-      width: 130px;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 9px 16px;
-      position: absolute;
-      top: 24px;
-      left: 1230px;
-      background-color: var(--basewhite);
-      border-radius: 3px;
-      border: 1px solid;
-      border-color: var(--secondarymain-500);
-    }
-
-    .forgot-password .input-text-2 {
-      position: relative;
-      width: fit-content;
-      margin-top: -1px;
-      font-family: var(--caption-1-medium-font-family);
-      font-weight: var(--caption-1-medium-font-weight);
-      color: var(--secondarymain-500);
-      font-size: var(--caption-1-medium-font-size);
-      letter-spacing: var(--caption-1-medium-letter-spacing);
-      line-height: var(--caption-1-medium-line-height);
-      white-space: nowrap;
-      font-style: var(--caption-1-medium-font-style);
+      font-style: var(--body-1-regular-font-style);
     }
 
     :root {
@@ -273,9 +143,6 @@
       --errorborder-300: rgba(253, 162, 155, 1);
       --errorsurface-50: rgba(254, 243, 242, 1);
       --errormain-500: rgba(240, 68, 56, 1);
-      --infomain-500: rgba(0, 140, 220, 1);
-      --infoborder-300: rgba(119, 157, 255, 1);
-      --infopressed-800: rgba(46, 69, 127, 1);
       --price-list-font-family: "SatoshiVariable-Medium", Helvetica;
       --price-list-font-weight: 500;
       --price-list-font-size: 16px;
@@ -708,31 +575,12 @@
 </head>
 
 <body>
-  <div class="forgot-password">
-    <div class="overlap-wrapper">
-      <div class="overlap">
-        <img class="frame" src="frame.svg" />
-        <div class="div">
-          <div class="text-wrapper">Forgot Password</div>
-          <p class="password-reset-has">
-            Password reset has been sent to your email, please check your email. If you don&#39;t get reset password,
-            click resend reset password below
-          </p>
-          <button class="button">
-            <div class="input-text">Resend Password</div>
-          </button>
-          <div class="text-wrapper-2">Back to Login</div>
-        </div>
-        <header class="header">
-          <div class="group">
-            <div class="overlap-group">
-              <div class="text-wrapper-3">A</div>
-            </div>
-          </div>
-          <button class="button-2">
-            <div class="input-text-2">Login</div>
-          </button>
-        </header>
+  <div class="loading-payment">
+    <div class="div">
+      <img class="rectangle" src="rectangle.gif" />
+      <div class="frame">
+        <p class="text-wrapper">We are processing your payment...</p>
+        <p class="p">Please do not click back, stop or the refresh your page</p>
       </div>
     </div>
   </div>
