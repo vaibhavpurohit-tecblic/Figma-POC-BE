@@ -1,0 +1,2999 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <link rel="stylesheet" href="./global.css" />
+  <link rel="stylesheet" href="./detail-service.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus Jakarta Sans:wght@400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work Sans:wght@400&display=swap" />
+
+  <style>
+    body {
+      margin: 0;
+      line-height: normal;
+    }
+
+    .popup-overlay {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      inset: 0;
+    }
+
+    :root {
+      /* fonts */
+      --display-1-bold: "Satoshi Variable";
+      --text-sm-regular: "Plus Jakarta Sans";
+      --text-md-normal: Inter;
+      --font-poppins: Poppins;
+      --font-sf-pro-text: "SF Pro Text";
+      --small-text-regular: "Work Sans";
+
+      /* font sizes */
+      --text-md-normal-size: 16px;
+      --caption-1-semibold-size: 14px;
+      --small-text-regular-size: 12px;
+      --body-1-regular-size: 18px;
+      --display-1-bold-size: 72px;
+      --heading-4-medium-size: 28px;
+      --heading-2-semibold-size: 38px;
+      --heading-1-semibold-size: 48px;
+      --font-size-3xl: 22px;
+      --font-size-23xl: 42px;
+      --display-2-bold-size: 54px;
+      --font-size-31xl: 50px;
+      --heading-5-medium-size: 24px;
+      --heading-6-medium-size: 20px;
+      --heading-3-semibold-size: 32px;
+      --font-size-mid: 17px;
+
+      /* Colors */
+      --base-white: #fff;
+      --secondary-border-300: #779dff;
+      --secondary-main-500: #008cdc;
+      --color-whitesmoke-100: #f8f8f8;
+      --color-whitesmoke-200: #f5f5f5;
+      --neutral-100: #eef2f6;
+      --text-second: #f1f1f1;
+      --base-fill-disabled: #ededed;
+      --gray-200: #eaecf0;
+      --text-tertiary: #ebebeb;
+      --color-gray-100: #fdfdfd;
+      --text-text-black-third: #777;
+      --neutral-800: #202939;
+      --gray-800: #1d2939;
+      --neutral-900: #121826;
+      --gray-900: #101828;
+      --color-gray-200: #0a1530;
+      --text-text-black: #151515;
+      --color-gray-300: #09142f;
+      --primary-pressed-800: #0a1428;
+      --color-gray-400: #111;
+      --color-gray-500: rgba(0, 0, 0, 0.5);
+      --color-gray-600: rgba(255, 255, 255, 0.5);
+      --color-gray-700: rgba(255, 255, 255, 0.35);
+      --color-gray-800: rgba(255, 255, 255, 0.24);
+      --neutral-300: #cdd5df;
+      --color-lightgray-100: #c7cbd4;
+      --warning-main-500: #e0a100;
+      --neutral-400: #9aa3b3;
+      --gray-400: #98a2b3;
+      --base-text-disabled: #9e9e9e;
+      --neutral-sub-sub-main: #999;
+      --color-darkslateblue-100: #673486;
+      --primary-main-600: #1a3668;
+      --color-indigo: rgba(112, 0, 152, 0.7);
+      --color-mediumblue-100: #0316c7;
+      --color-mediumblue-200: rgba(3, 22, 199, 0.7);
+      --success-main-500: #16b364;
+      --color-mediumseagreen-100: #10934a;
+      --base-black: #000;
+      --text-text-black-second: #555;
+      --neutral-600: #4b5565;
+      --secondary-surface-50: #ebf1ff;
+      --divide: #e3e8ef;
+      --color-dodgerblue: #1073d1;
+      --neutral-700: #364152;
+      --color-mediumslateblue: #5e64ff;
+      --warning-surface-50: #fff8e5;
+      --system-color-charcoal-400: #556575;
+      --error-main-500: #f04438;
+      --success-surface-50: #edfcf2;
+
+      /* Gaps */
+      --gap-29xl: 48px;
+      --gap-5xs: 8px;
+      --gap-61xl: 80px;
+      --gap-xs: 12px;
+      --gap-9xs: 4px;
+      --gap-base: 16px;
+      --gap-5xl: 24px;
+      --gap-37xl: 56px;
+      --gap-21xl: 40px;
+      --gap-11xs: 2px;
+      --gap-181xl: 200px;
+      --gap-8xs: 5px;
+      --gap-45xl: 64px;
+      --gap-13xl: 32px;
+      --gap-xl: 20px;
+      --gap-17xl: 36px;
+      --gap-154xl: 173px;
+
+      /* Paddings */
+      --padding-sm: 14px;
+      --padding-base: 16px;
+      --padding-5xl: 24px;
+      --padding-13xl: 32px;
+      --padding-xs: 12px;
+      --padding-9xs: 4px;
+      --padding-5xs: 8px;
+      --padding-131xl: 150px;
+      --padding-45xl: 64px;
+      --padding-29xl: 48px;
+      --padding-3xs: 10px;
+      --padding-6xs: 7px;
+      --padding-xl: 20px;
+      --padding-4xs: 9px;
+      --padding-21xl: 40px;
+      --padding-181xl: 200px;
+      --padding-mini: 15px;
+      --padding-81xl: 100px;
+
+      /* Border radiuses */
+      --br-10xs: 3px;
+      --br-xl: 20px;
+      --br-31xl: 50px;
+      --br-3xs: 10px;
+      --br-7xs: 6px;
+      --br-mini: 15px;
+      --br-6xs: 7px;
+      --br-3xl: 22px;
+      --br-47xl-6: 66.6px;
+      --br-mid-6: 17.6px;
+      --br-5xs: 8px;
+      --br-9xs: 4px;
+      --br-base: 16px;
+      --br-29xl-5: 48.5px;
+      --br-smi-8: 12.8px;
+      --br-12xs: 1px;
+
+      /* Effects */
+      --xl: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
+        0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+      --xs: 0px 1px 2px rgba(16, 24, 40, 0.05);
+      --border-all-corner: 0px 0px 0px 1px #d5dce1;
+      --sm: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+    }
+
+    @font-face {
+      : font-family: "Satoshi Variable";
+      src: url("../Satoshi-Regular.otf");
+      font-weight: 400;
+    }
+
+    @font-face {
+      : font-family: "Satoshi Variable";
+      src: url("../Satoshi-Medium.otf");
+      font-weight: 500;
+    }
+
+    @font-face {
+      : font-family: "Satoshi Variable";
+      src: url("../Satoshi-Bold.otf");
+      font-weight: 700;
+    }
+
+    @font-face {
+      : font-family: "SF Pro Text";
+      src: url("../FontsFree-Net-SFProText-Semibold.ttf");
+      font-weight: 600;
+    }
+
+    .detail-service-child,
+    .group-child14 {
+      position: absolute;
+      top: 522px;
+      left: -65px;
+      width: 1570.1px;
+      height: 1272.9px;
+    }
+
+    .group-child14 {
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      background-color: var(--color-gray-200);
+      width: 50px;
+      height: 50px;
+    }
+
+    .a15 {
+      position: absolute;
+      top: 8px;
+      left: 16.9px;
+      letter-spacing: -0.01em;
+      line-height: 150%;
+    }
+
+    .ellipse-parent14 {
+      position: absolute;
+      top: 18px;
+      left: 100px;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+
+    .homebar-child6 {
+      width: 4px;
+      position: relative;
+      border-radius: 50%;
+      height: 4px;
+    }
+
+    .homebar8 {
+      width: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-5xs);
+      box-sizing: border-box;
+      gap: var(--gap-9xs);
+      cursor: pointer;
+    }
+
+    .modelbar-child6 {
+      width: 4px;
+      position: relative;
+      border-radius: 50%;
+      background-color: var(--primary-main-600);
+      height: 4px;
+    }
+
+    .modelbar8 {
+      width: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-5xs);
+      box-sizing: border-box;
+      gap: var(--gap-9xs);
+      cursor: pointer;
+      color: var(--primary-main-600);
+    }
+
+    .homebar-parent6 {
+      position: absolute;
+      top: 20px;
+      left: 206px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      font-size: var(--text-md-normal-size);
+      color: var(--text-text-black-third);
+      font-family: var(--display-1-bold);
+    }
+
+    .search-icon12 {
+      width: 24px;
+      position: relative;
+      height: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .searchbar8 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-6xs) var(--padding-5xs);
+      gap: var(--gap-9xs);
+      cursor: pointer;
+    }
+
+    .mail-icon10 {
+      width: 20px;
+      position: relative;
+      height: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .searchbar-parent6 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-base);
+    }
+
+    .frame-child351 {
+      width: 1px;
+      position: relative;
+      border-right: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      height: 21px;
+    }
+
+    .frame-parent251,
+    .profilebar7,
+    .user-wrapper5 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .user-wrapper5 {
+      border-radius: var(--br-31xl);
+      background-color: var(--neutral-100);
+      justify-content: center;
+      padding: var(--padding-3xs);
+    }
+
+    .frame-parent251,
+    .profilebar7 {
+      justify-content: flex-start;
+      gap: var(--gap-9xs);
+    }
+
+    .frame-parent251 {
+      position: absolute;
+      top: 23px;
+      right: 80px;
+      gap: var(--gap-base);
+    }
+
+    .header15 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: var(--base-white);
+      border-bottom: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      width: 1440px;
+      height: 86px;
+      overflow: hidden;
+      font-family: var(--font-poppins);
+    }
+
+    .chevron-down-icon150 {
+      width: 18px;
+      position: relative;
+      height: 18px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .button101 {
+      border-radius: var(--br-10xs);
+      background-color: var(--primary-main-600);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-4xs) var(--padding-base);
+      gap: var(--gap-5xs);
+      cursor: pointer;
+      font-size: var(--caption-1-semibold-size);
+      color: var(--base-white);
+    }
+
+    .frame-child352 {
+      width: 400px;
+      position: relative;
+      border-radius: var(--br-7xs);
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .supervised25 {
+      position: relative;
+      letter-spacing: -0.01em;
+    }
+
+    .supervised-wrapper12 {
+      border-radius: var(--br-xl);
+      background-color: var(--success-main-500);
+      justify-content: center;
+      padding: var(--padding-9xs) var(--padding-5xs);
+    }
+
+    .frame-parent254,
+    .models-wrapper2,
+    .supervised-wrapper12 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .models-wrapper2 {
+      width: 80px;
+      border-radius: var(--br-xl);
+      background-color: var(--warning-main-500);
+      justify-content: center;
+      padding: var(--padding-9xs) var(--padding-5xs);
+      box-sizing: border-box;
+    }
+
+    .frame-parent254 {
+      justify-content: flex-start;
+      gap: var(--gap-5xs);
+      font-size: var(--small-text-regular-size);
+    }
+
+    .generalised-neural-networks {
+      line-height: 120%;
+      color: var(--text-text-black);
+    }
+
+    .a-new-neural,
+    .generalised-neural-networks,
+    .usd-150004 {
+      align-self: stretch;
+      position: relative;
+      letter-spacing: -0.02em;
+    }
+
+    .usd-150004 {
+      line-height: 120%;
+      font-weight: 500;
+      color: var(--text-text-black);
+    }
+
+    .a-new-neural {
+      font-size: var(--text-md-normal-size);
+      line-height: 140%;
+      color: var(--text-text-black-second);
+    }
+
+    .chevron-down-icon151 {
+      width: 20px;
+      position: relative;
+      height: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .button102,
+    .heart-wrapper {
+      border-radius: var(--br-10xs);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button102 {
+      width: 250px;
+      background-color: var(--secondary-main-500);
+      padding: var(--padding-xs) var(--padding-base);
+      gap: var(--gap-5xs);
+    }
+
+    .heart-wrapper {
+      width: 44px;
+      border: 1px solid var(--secondary-main-500);
+      height: 44px;
+      padding: var(--padding-5xs);
+    }
+
+    .button-parent3 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-5xs);
+    }
+
+    .frame-child353 {
+      width: 1px;
+      position: relative;
+      border-right: 1px solid var(--divide);
+      box-sizing: border-box;
+      height: 31px;
+    }
+
+    .button103 {
+      cursor: pointer;
+    }
+
+    .button103,
+    .button104 {
+      width: 120px;
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-4xs) var(--padding-base);
+      gap: var(--gap-5xs);
+    }
+
+    .button-parent4,
+    .frame-parent255 {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .button-parent4 {
+      align-items: flex-start;
+      gap: var(--gap-xs);
+      color: var(--text-text-black);
+    }
+
+    .frame-parent255 {
+      align-self: stretch;
+      align-items: center;
+      gap: var(--gap-5xl);
+      font-size: var(--caption-1-semibold-size);
+    }
+
+    .seller {
+      width: 456px;
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .button105,
+    .mwam-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .button105 {
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--neutral-300);
+      justify-content: center;
+      padding: var(--padding-4xs) var(--padding-base);
+      gap: var(--gap-5xs);
+      cursor: pointer;
+      font-size: var(--caption-1-semibold-size);
+    }
+
+    .mwam-container {
+      justify-content: flex-start;
+      gap: var(--gap-base);
+    }
+
+    .seller-parent {
+      flex-direction: column;
+      gap: var(--gap-5xs);
+      font-size: var(--text-md-normal-size);
+      color: var(--text-text-black);
+    }
+
+    .frame-parent252,
+    .rectangle-parent18,
+    .seller-parent {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .frame-parent252 {
+      align-self: stretch;
+      flex: 1;
+      flex-direction: column;
+      gap: var(--gap-xs);
+    }
+
+    .rectangle-parent18 {
+      width: 1080px;
+      height: 399px;
+      flex-direction: row;
+      gap: var(--gap-5xl);
+      font-size: var(--heading-6-medium-size);
+      color: var(--base-white);
+    }
+
+    .an-innovative-neural,
+    .description {
+      align-self: stretch;
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .description {
+      font-weight: 500;
+    }
+
+    .an-innovative-neural {
+      color: var(--text-text-black-second);
+    }
+
+    .description-parent {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-5xs);
+    }
+
+    .frame-child354 {
+      align-self: stretch;
+      position: relative;
+      border-top: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      height: 1px;
+    }
+
+    .customer-reviews {
+      width: 1080px;
+      display: inline-block;
+    }
+
+    .customer-reviews,
+    .reviews-from-marketplace {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-weight: 500;
+    }
+
+    .frame-child355 {
+      width: 15px;
+      position: relative;
+      height: 15px;
+    }
+
+    .star-parent54 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-11xs);
+    }
+
+    .reviews {
+      position: relative;
+      font-size: var(--caption-1-semibold-size);
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      color: var(--text-text-black-second);
+      text-align: justify;
+    }
+
+    .reviews-from-marketplace-parent {
+      flex: 1;
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--divide);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-5xl) var(--padding-base);
+      gap: var(--gap-5xs);
+    }
+
+    .customer-reviews1,
+    .share-your-thoughts {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .customer-reviews1 {
+      font-size: var(--text-md-normal-size);
+      font-weight: 500;
+    }
+
+    .share-your-thoughts {
+      color: var(--text-text-black-second);
+    }
+
+    .button106,
+    .customer-reviews-group {
+      border-radius: var(--br-10xs);
+      display: flex;
+      align-items: center;
+    }
+
+    .button106 {
+      align-self: stretch;
+      background-color: var(--secondary-main-500);
+      flex-direction: row;
+      justify-content: center;
+      padding: var(--padding-4xs) var(--padding-base);
+      gap: var(--gap-5xs);
+      color: var(--base-white);
+    }
+
+    .customer-reviews-group {
+      background-color: var(--base-white);
+      border: 1px solid var(--divide);
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: var(--padding-base) var(--padding-5xl);
+      gap: var(--gap-9xs);
+      font-size: var(--caption-1-semibold-size);
+    }
+
+    .frame-parent257 {
+      width: 528px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-base);
+    }
+
+    .rectangle14,
+    .rectangle15 {
+      position: absolute;
+      background-color: var(--color-dodgerblue);
+    }
+
+    .rectangle14 {
+      top: 5.5px;
+      left: 9.6px;
+      border-radius: var(--br-smi-8);
+      width: 12.8px;
+      height: 12.8px;
+    }
+
+    .rectangle15 {
+      top: 21.5px;
+      left: -8.2px;
+      border-radius: 48.46px;
+      width: 48.5px;
+      height: 48.5px;
+    }
+
+    .avatar-user-35-wrapper,
+    .avatar-user-357 {
+      background-color: var(--base-white);
+      overflow: hidden;
+    }
+
+    .avatar-user-357 {
+      position: absolute;
+      top: 1.5px;
+      left: 2px;
+      border-radius: var(--br-base);
+      width: 32px;
+      height: 32px;
+    }
+
+    .avatar-user-35-wrapper {
+      width: 35px;
+      position: relative;
+      height: 35px;
+      flex-shrink: 0;
+    }
+
+    .hypo-munich {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .frame-child360 {
+      width: 10px;
+      position: relative;
+      height: 10px;
+    }
+
+    .hypo-munich-parent {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: var(--gap-9xs);
+    }
+
+    .frame-parent261 {
+      align-self: stretch;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--gap-5xs);
+    }
+
+    .great-work {
+      align-self: stretch;
+      position: relative;
+      font-size: var(--caption-1-semibold-size);
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      color: var(--text-text-black-second);
+    }
+
+    .frame-parent259,
+    .frame-parent260 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .frame-parent260 {
+      align-self: stretch;
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--divide);
+      box-sizing: border-box;
+      height: 116px;
+      padding: var(--padding-base);
+      gap: var(--gap-5xs);
+    }
+
+    .frame-parent259 {
+      flex: 1;
+      gap: var(--gap-5xl);
+    }
+
+    .frame-parent258 {
+      align-self: stretch;
+      flex-direction: row;
+      gap: var(--gap-5xl);
+      text-align: justify;
+    }
+
+    .frame-parent256,
+    .frame-parent258,
+    .frame-wrapper2 {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .frame-parent256 {
+      flex: 1;
+      flex-direction: column;
+      gap: var(--gap-base);
+    }
+
+    .frame-wrapper2 {
+      width: 1080px;
+      flex-direction: row;
+    }
+
+    .chevron-left-icon {
+      width: 18px;
+      position: relative;
+      height: 18px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .chevron-left-wrapper {
+      width: 35px;
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--divide);
+      box-sizing: border-box;
+      height: 35px;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-5xs);
+    }
+
+    .chevron-left-wrapper,
+    .frame-parent270,
+    .wrapper1 {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .wrapper1 {
+      width: 35px;
+      border-radius: var(--br-10xs);
+      background-color: var(--secondary-main-500);
+      border: 1px solid var(--divide);
+      box-sizing: border-box;
+      height: 35px;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-5xs);
+      color: var(--base-white);
+    }
+
+    .frame-parent270 {
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-9xs);
+    }
+
+    .chevron-left-icon1 {
+      width: 18px;
+      position: relative;
+      height: 18px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transform: rotate(-180deg);
+    }
+
+    .chevron-left-container,
+    .frame-parent269 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chevron-left-container {
+      width: 35px;
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--divide);
+      box-sizing: border-box;
+      height: 35px;
+      padding: var(--padding-5xs);
+      transform: rotate(180deg);
+    }
+
+    .frame-parent269 {
+      width: 1080px;
+      gap: var(--gap-xs);
+      text-align: justify;
+      color: var(--neutral-sub-sub-main);
+    }
+
+    .customer-reviews-parent {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-base);
+    }
+
+    .related-models {
+      width: 1040px;
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-weight: 500;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .arrow-left-wrapper {
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--secondary-main-500);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-5xs);
+    }
+
+    .arrow-left-icon3 {
+      width: 24px;
+      position: relative;
+      height: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transform: rotate(-180deg);
+    }
+
+    .arrow-left-container {
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--secondary-main-500);
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-5xs);
+      transform: rotate(180deg);
+    }
+
+    .related-models-parent {
+      align-self: stretch;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-service-child54 {
+      align-self: stretch;
+      position: relative;
+      max-width: 100%;
+      overflow: hidden;
+      height: 150px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    .product-wrapper54 {
+      width: 80px;
+      border-radius: var(--br-xl);
+      background-color: var(--warning-main-500);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-9xs) var(--padding-5xs);
+      box-sizing: border-box;
+      font-size: var(--small-text-regular-size);
+    }
+
+    .amazon-linux-2107,
+    .amazon-linux-2108 {
+      position: relative;
+      letter-spacing: -0.02em;
+    }
+
+    .amazon-linux-2107 {
+      width: 246px;
+      font-size: var(--heading-6-medium-size);
+      line-height: 120%;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .amazon-linux-2108 {
+      align-self: stretch;
+      flex: 1;
+      line-height: 140%;
+      color: var(--text-tertiary);
+      display: -webkit-inline-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+    }
+
+    .frame-parent274 {
+      align-self: stretch;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-5xs);
+    }
+
+    .usd-5000-parent54 {
+      align-self: stretch;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--body-1-regular-size);
+    }
+
+    .card-service56,
+    .frame-parent273 {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .frame-parent273 {
+      align-self: stretch;
+      background-color: var(--neutral-800);
+      backdrop-filter: blur(12px);
+      height: 259px;
+      justify-content: center;
+      padding: var(--padding-xs) var(--padding-base);
+      gap: var(--gap-xs);
+    }
+
+    .card-service56 {
+      width: 294px;
+      border-radius: var(--br-10xs);
+      border: 0.5px solid var(--base-white);
+      overflow: hidden;
+      flex-shrink: 0;
+      justify-content: flex-start;
+    }
+
+    .amazon-linux-2110 {
+      align-self: stretch;
+      flex: 1;
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      color: var(--text-tertiary);
+      display: -webkit-inline-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
+
+    .card-service-parent12 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-5xl);
+    }
+
+    .frame-wrapper3 {
+      width: 1080px;
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      font-size: var(--caption-1-semibold-size);
+      color: var(--base-white);
+    }
+
+    .button-parent2,
+    .frame-parent271 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .frame-parent271 {
+      align-self: stretch;
+      height: 473px;
+      gap: var(--gap-5xl);
+    }
+
+    .button-parent2 {
+      position: absolute;
+      top: 126px;
+      left: 80px;
+      background-color: var(--base-white);
+      backdrop-filter: blur(15px);
+      width: 1280px;
+      overflow: hidden;
+      padding: var(--padding-21xl) var(--padding-81xl);
+      box-sizing: border-box;
+      gap: var(--gap-21xl);
+      font-size: var(--text-md-normal-size);
+      color: var(--text-text-black);
+    }
+
+    .apricus810 {
+      position: relative;
+      letter-spacing: -0.03em;
+      line-height: 120%;
+      font-weight: 500;
+    }
+
+    .button-base78 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-tertiary);
+      font-family: var(--display-1-bold);
+    }
+
+    .text137 {
+      position: relative;
+      line-height: 24px;
+      font-weight: 500;
+    }
+
+    .button-base81 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button107,
+    .footer-link60 {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    .button107 {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .footer-link60 {
+      display: none;
+      align-items: center;
+    }
+
+    .footer-links-column12,
+    .footer-links6 {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .footer-links6 {
+      align-self: stretch;
+      gap: var(--gap-xs);
+      font-size: var(--text-md-normal-size);
+      color: var(--gray-200);
+      font-family: var(--text-md-normal);
+    }
+
+    .footer-links-column12 {
+      width: 200px;
+      gap: var(--gap-base);
+    }
+
+    .heading13,
+    .text142 {
+      align-self: stretch;
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-family: var(--display-1-bold);
+    }
+
+    .heading13 {
+      font-size: var(--body-1-regular-size);
+      font-weight: 500;
+      color: var(--base-white);
+    }
+
+    .text142 {
+      color: var(--text-tertiary);
+    }
+
+    .footer-link65 {
+      width: 73px;
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .footer-links-column-parent4,
+    .footer-links-column13 {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .footer-links-column13 {
+      width: 200px;
+      flex-direction: column;
+      gap: var(--gap-base);
+      font-size: var(--text-md-normal-size);
+      color: var(--gray-200);
+      font-family: var(--text-md-normal);
+    }
+
+    .footer-links-column-parent4 {
+      flex: 1;
+      flex-direction: row;
+      gap: var(--gap-61xl);
+      font-size: var(--body-1-regular-size);
+    }
+
+    .content6,
+    .section12 {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .content6 {
+      flex-direction: row;
+      padding: 0 var(--padding-131xl);
+      gap: var(--gap-181xl);
+    }
+
+    .section12 {
+      flex-direction: column;
+      padding: var(--padding-45xl) 0 var(--padding-29xl);
+    }
+
+    .footer-text6 {
+      align-self: stretch;
+      position: relative;
+      line-height: 24px;
+      display: inline-block;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .footer6,
+    .section13 {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .section13 {
+      align-self: stretch;
+      background-color: var(--gray-900);
+      align-items: center;
+      padding: var(--padding-5xl) var(--padding-131xl);
+      font-size: var(--text-md-normal-size);
+      color: var(--gray-400);
+      font-family: var(--text-md-normal);
+    }
+
+    .footer6 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background-color: var(--gray-800);
+      width: 1440px;
+      align-items: flex-start;
+      font-size: var(--heading-1-semibold-size);
+    }
+
+    .detail-service {
+      width: 100%;
+      position: relative;
+      background-color: var(--color-gray-300);
+      height: 2317px;
+      overflow: hidden;
+      text-align: left;
+      font-size: var(--font-size-3xl);
+      color: var(--base-white);
+      font-family: var(--display-1-bold);
+    }
+
+    .purchase-models1 {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 120%;
+      font-weight: 500;
+      z-index: 0;
+    }
+
+    .frame-child401 {
+      align-self: stretch;
+      position: relative;
+      border-top: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      height: 1px;
+      z-index: 1;
+    }
+
+    .frame-child402 {
+      width: 250px;
+      position: relative;
+      border-radius: var(--br-7xs);
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .supervised26 {
+      position: relative;
+      letter-spacing: -0.01em;
+    }
+
+    .supervised-wrapper13 {
+      border-radius: var(--br-xl);
+      background-color: var(--success-main-500);
+      justify-content: center;
+      padding: var(--padding-9xs) var(--padding-5xs);
+    }
+
+    .frame-parent283,
+    .models-wrapper3,
+    .supervised-wrapper13 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .models-wrapper3 {
+      width: 80px;
+      border-radius: var(--br-xl);
+      background-color: var(--warning-main-500);
+      justify-content: center;
+      padding: var(--padding-9xs) var(--padding-5xs);
+      box-sizing: border-box;
+    }
+
+    .frame-parent283 {
+      justify-content: flex-start;
+      gap: var(--gap-5xs);
+      font-size: var(--small-text-regular-size);
+      color: var(--base-white);
+    }
+
+    .generalised-neural-network {
+      line-height: 120%;
+    }
+
+    .a-new-neural1,
+    .generalised-neural-network,
+    .usd-150005 {
+      align-self: stretch;
+      position: relative;
+      letter-spacing: -0.02em;
+    }
+
+    .a-new-neural1 {
+      font-size: var(--caption-1-semibold-size);
+      line-height: 140%;
+      color: var(--text-text-black-second);
+    }
+
+    .usd-150005 {
+      line-height: 120%;
+      font-weight: 500;
+    }
+
+    .frame-parent282 {
+      width: 369px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: var(--gap-5xs);
+    }
+
+    .rectangle-parent19 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-5xl);
+      font-size: var(--heading-5-medium-size);
+    }
+
+    .checkbox14,
+    .square9 {
+      width: 20px;
+      height: 20px;
+    }
+
+    .square9 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: var(--br-7xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--base-text-disabled);
+      box-sizing: border-box;
+    }
+
+    .checkbox14 {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .terms-of-service1 {
+      font-weight: 500;
+      color: var(--secondary-main-500);
+    }
+
+    .label4 {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .checkbox-label4 {
+      align-self: stretch;
+      border-radius: var(--br-7xs);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--gap-5xs);
+      color: var(--base-black);
+    }
+
+    .chevron-down-icon161 {
+      width: 20px;
+      position: relative;
+      height: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .input-text47 {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-weight: 500;
+    }
+
+    .button117,
+    .frame-parent281 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button117 {
+      width: 250px;
+      border-radius: var(--br-10xs);
+      background-color: var(--secondary-main-500);
+      flex-direction: row;
+      padding: var(--padding-sm) var(--padding-base);
+      box-sizing: border-box;
+      gap: var(--gap-5xs);
+      cursor: pointer;
+      color: var(--base-white);
+    }
+
+    .frame-parent281 {
+      flex-direction: column;
+      gap: var(--gap-5xl);
+      z-index: 2;
+      font-size: var(--caption-1-semibold-size);
+    }
+
+    .x-icon {
+      width: 24px;
+      position: absolute;
+      margin: 0 !important;
+      top: 31px;
+      left: 643px;
+      height: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+      z-index: 3;
+    }
+
+    .purchase-models-group {
+      position: absolute;
+      top: 156px;
+      left: 375px;
+      background-color: var(--base-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--padding-5xl);
+      gap: var(--gap-5xl);
+    }
+
+    .pop-up-purchase,
+    .write-a-review1 {
+      position: relative;
+      font-size: var(--heading-3-semibold-size);
+    }
+
+    .pop-up-purchase {
+      width: 1440px;
+      background-color: var(--color-gray-500);
+      height: 1024px;
+      overflow: hidden;
+      max-width: 90%;
+      max-height: 90%;
+      text-align: left;
+      color: var(--text-text-black);
+      font-family: var(--display-1-bold);
+    }
+
+    .write-a-review1 {
+      letter-spacing: -0.02em;
+      line-height: 120%;
+      font-weight: 500;
+      z-index: 0;
+    }
+
+    .frame-child403 {
+      align-self: stretch;
+      position: relative;
+      border-top: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      height: 1px;
+      z-index: 1;
+    }
+
+    .generalised-neural-networks1 {
+      font-size: var(--text-md-normal-size);
+      font-weight: 500;
+    }
+
+    .generalised-neural-networks1,
+    .rating {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .frame-child404 {
+      width: 24px;
+      position: relative;
+      border-radius: var(--br-12xs);
+      height: 24px;
+    }
+
+    .rating-parent,
+    .star-parent63 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-9xs);
+    }
+
+    .rating-parent {
+      flex-direction: column;
+      gap: var(--gap-5xs);
+      text-align: center;
+      color: var(--text-text-black-second);
+    }
+
+    .chevron-down-icon163 {
+      width: 20px;
+      position: relative;
+      height: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .text148,
+    .text149 {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .text148 {
+      flex: 1;
+    }
+
+    .text149 {
+      width: 115px;
+      text-align: right;
+      display: none;
+    }
+
+    .chevron-down-parent29 {
+      align-self: stretch;
+      border-radius: var(--br-10xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      height: 44px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 var(--padding-xs);
+      gap: var(--gap-5xs);
+    }
+
+    .helper23 {
+      width: 318px;
+      position: relative;
+      font-size: var(--small-text-regular-size);
+      letter-spacing: 0.01em;
+      line-height: 150%;
+      font-family: var(--text-sm-regular);
+      display: none;
+    }
+
+    .input-field19 {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-9xs);
+    }
+
+    .textarea-label {
+      align-self: stretch;
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .textarea-placeholder {
+      position: absolute;
+      height: calc(100% - 12px);
+      width: calc(100% - 24px);
+      top: 6px;
+      left: 12px;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      display: inline-block;
+    }
+
+    .resizer-icon {
+      position: absolute;
+      right: 4px;
+      bottom: 4px;
+      width: 8px;
+      height: 8px;
+    }
+
+    .textarea-field {
+      align-self: stretch;
+      flex: 1;
+      position: relative;
+      border-radius: var(--br-7xs);
+      background-color: var(--base-white);
+      border: 1px solid var(--neutral-300);
+      overflow: hidden;
+    }
+
+    .textarea-label1 {
+      width: 240px;
+      position: relative;
+      font-size: var(--small-text-regular-size);
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-family: var(--text-sm-regular);
+      color: var(--neutral-700);
+      display: none;
+    }
+
+    .generalised-neural-networks-g-parent,
+    .textarea {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .textarea {
+      width: 584px;
+      height: 108px;
+      gap: var(--gap-9xs);
+    }
+
+    .generalised-neural-networks-g-parent {
+      gap: var(--gap-base);
+      z-index: 2;
+    }
+
+    .input-text48 {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-weight: 500;
+    }
+
+    .button118 {
+      width: 200px;
+      border-radius: var(--br-10xs);
+      background-color: var(--secondary-main-500);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-xs) var(--padding-base);
+      box-sizing: border-box;
+      gap: var(--gap-5xs);
+      cursor: pointer;
+      z-index: 3;
+      color: var(--base-white);
+    }
+
+    .x-icon1 {
+      width: 24px;
+      position: absolute;
+      margin: 0 !important;
+      top: 31px;
+      left: 584px;
+      height: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+      z-index: 4;
+    }
+
+    .write-a-review-group {
+      position: absolute;
+      top: 150px;
+      left: 374px;
+      background-color: var(--base-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--padding-5xl);
+      gap: var(--gap-5xl);
+    }
+
+    .pop-up-purchase1 {
+      width: 1440px;
+      position: relative;
+      background-color: var(--color-gray-500);
+      height: 1024px;
+      overflow: hidden;
+      max-width: 90%;
+      max-height: 90%;
+      text-align: left;
+      font-size: var(--caption-1-semibold-size);
+      color: var(--text-text-black);
+      font-family: var(--display-1-bold);
+    }
+
+    .group-child19 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      background-color: var(--color-gray-200);
+      width: 50px;
+      height: 50px;
+    }
+
+    .a20 {
+      position: absolute;
+      top: 8px;
+      left: 16.9px;
+      letter-spacing: -0.01em;
+      line-height: 150%;
+    }
+
+    .ellipse-parent19 {
+      position: absolute;
+      top: 18px;
+      left: 100px;
+      width: 50px;
+      height: 50px;
+      font-size: var(--font-size-3xl);
+      font-family: var(--font-poppins);
+    }
+
+    .categories20 {
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+      font-weight: 500;
+    }
+
+    .homebar-child11 {
+      width: 4px;
+      position: relative;
+      border-radius: 50%;
+      height: 4px;
+    }
+
+    .homebar13 {
+      width: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-5xs);
+      box-sizing: border-box;
+      gap: var(--gap-9xs);
+      cursor: pointer;
+    }
+
+    .homebar-parent11 {
+      position: absolute;
+      top: 20px;
+      left: 206px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      color: var(--text-text-black-third);
+    }
+
+    .search-icon19 {
+      width: 24px;
+      position: relative;
+      height: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .searchbar13 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-6xs) var(--padding-5xs);
+      gap: var(--gap-9xs);
+      cursor: pointer;
+    }
+
+    .mail-icon15 {
+      width: 20px;
+      position: relative;
+      height: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .searchbar-parent11 {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--gap-base);
+    }
+
+    .frame-child584 {
+      width: 1px;
+      position: relative;
+      border-right: 1px solid var(--neutral-300);
+      box-sizing: border-box;
+      height: 21px;
+    }
+
+    .frame-parent377,
+    .profilebar12,
+    .user-wrapper10 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .user-wrapper10 {
+      border-radius: var(--br-31xl);
+      background-color: var(--neutral-100);
+      justify-content: center;
+      padding: var(--padding-3xs);
+    }
+
+    .frame-parent377,
+    .profilebar12 {
+      justify-content: flex-start;
+      gap: var(--gap-9xs);
+    }
+
+    .frame-parent377 {
+      position: absolute;
+      top: 23px;
+      right: 80px;
+      gap: var(--gap-base);
+    }
+
+    .profile3 {
+      flex: 1;
+      position: relative;
+      letter-spacing: -0.02em;
+      line-height: 140%;
+    }
+
+    .profile-parent1 {
+      cursor: pointer;
+    }
+
+    .profile-parent1,
+    .sign-out-parent1 {
+      align-self: stretch;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-base);
+      gap: var(--gap-5xs);
+    }
+
+    .frame-parent378,
+    .header20 {
+      background-color: var(--base-white);
+      box-sizing: border-box;
+    }
+
+    .frame-parent378 {
+      position: absolute;
+      top: 79px;
+      left: 1110px;
+      border-radius: var(--br-5xs);
+      box-shadow: var(--xl);
+      border: 1px solid var(--neutral-300);
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: var(--padding-xs);
+      color: var(--text-text-black);
+    }
+
+    .header20 {
+      width: 1440px;
+      position: relative;
+      border-bottom: 1px solid var(--neutral-300);
+      height: 86px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: auto;
+      text-align: left;
+      font-size: var(--text-md-normal-size);
+      color: var(--base-white);
+      font-family: var(--display-1-bold);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="detail-service">
+    <img class="detail-service-child" alt="" src="../group-14.svg" />
+
+    <div class="header15">
+      <div class="ellipse-parent14" id="groupContainer">
+        <div class="group-child14"></div>
+        <div class="a15">A</div>
+      </div>
+      <div class="homebar-parent6">
+        <div class="homebar8" id="homeBarContainer">
+          <div class="reviews-from-marketplace">Home</div>
+          <div class="homebar-child6"></div>
+        </div>
+        <div class="modelbar8" id="modelBarContainer">
+          <div class="reviews-from-marketplace">Models</div>
+          <div class="modelbar-child6"></div>
+        </div>
+        <div class="homebar8" id="reportBarContainer">
+          <div class="reviews-from-marketplace">Report Selling</div>
+          <div class="homebar-child6"></div>
+        </div>
+      </div>
+      <div class="frame-parent251">
+        <div class="searchbar-parent6">
+          <div class="searchbar8" id="searchBarContainer">
+            <img class="search-icon12" alt="" src="../search.svg" />
+
+            <div class="homebar-child6"></div>
+          </div>
+          <div class="searchbar8" id="cartBarContainer">
+            <img class="search-icon12" alt="" src="../shoppingcart.svg" />
+
+            <div class="homebar-child6"></div>
+          </div>
+          <div class="searchbar8" id="favBarContainer">
+            <img class="search-icon12" alt="" src="../heart.svg" />
+
+            <div class="homebar-child6"></div>
+          </div>
+          <div class="searchbar8" id="chatBarContainer">
+            <img class="mail-icon10" alt="" src="../mail.svg" />
+
+            <div class="homebar-child6"></div>
+          </div>
+        </div>
+        <div class="frame-child351"></div>
+        <div class="profilebar7" id="profileBarContainer">
+          <div class="user-wrapper5">
+            <img class="mail-icon10" alt="" src="../user.svg" />
+          </div>
+          <img class="mail-icon10" alt="" src="../chevrondown.svg" />
+        </div>
+      </div>
+    </div>
+    <div class="button-parent2">
+      <div class="button101" id="buttonContainer">
+        <img class="chevron-left-icon" alt="" src="../arrowleft.svg" />
+
+        <div class="reviews-from-marketplace">Back</div>
+        <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+      </div>
+      <div class="rectangle-parent18">
+        <img class="frame-child352" alt="" src="../rectangle-152@2x.png" />
+
+        <div class="frame-parent252">
+          <div class="frame-parent252">
+            <div class="frame-parent254">
+              <div class="supervised-wrapper12">
+                <div class="supervised25">Supervised</div>
+              </div>
+              <div class="models-wrapper2">
+                <div class="supervised25">Models</div>
+              </div>
+            </div>
+            <div class="generalised-neural-networks">
+              Generalised Neural Networks (GRNN)
+            </div>
+            <div class="usd-150004">USD$ 15,000</div>
+            <div class="a-new-neural">
+              A new neural network approach proposed for Modelling time series
+              associated with energy commodities prices.
+            </div>
+            <div class="frame-parent255">
+              <div class="button-parent3">
+                <div class="button102" id="buttonContainer">
+                  <img class="chevron-down-icon151" alt="" src="../chevrondown.svg" />
+
+                  <div class="reviews-from-marketplace">Add to Cart</div>
+                  <img class="chevron-down-icon151" alt="" src="../chevrondown.svg" />
+                </div>
+                <div class="heart-wrapper">
+                  <img class="search-icon12" alt="" src="../heart.svg" />
+                </div>
+              </div>
+              <div class="frame-child353"></div>
+              <div class="button-parent4">
+                <div class="button103" id="buttonContainer">
+                  <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+
+                  <div class="reviews-from-marketplace">View report</div>
+                  <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+                </div>
+                <div class="button104">
+                  <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+
+                  <div class="reviews-from-marketplace">View algorithm</div>
+                  <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="seller-parent">
+            <div class="seller">Seller</div>
+            <div class="mwam-container">
+              <div class="hypo-munich">MWAM</div>
+              <div class="button105" id="buttonContainer">
+                <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+
+                <div class="reviews-from-marketplace">Visit Me</div>
+                <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="description-parent">
+        <div class="description">Description</div>
+        <div class="an-innovative-neural">
+          An innovative neural network Models & approach developed for applied
+          time series forecasting of energy commodities forward prices.
+        </div>
+      </div>
+      <div class="frame-child354"></div>
+      <div class="customer-reviews-parent">
+        <div class="customer-reviews">Customer Reviews</div>
+        <div class="frame-wrapper2">
+          <div class="frame-parent256">
+            <div class="frame-parent257">
+              <div class="reviews-from-marketplace-parent">
+                <div class="reviews-from-marketplace">
+                  Reviews from Marketplace
+                </div>
+                <div class="star-parent54">
+                  <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                  <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                  <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                  <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                  <img class="frame-child355" alt="" src="../star-5.svg" />
+                </div>
+                <div class="reviews">(4 Reviews)</div>
+              </div>
+              <div class="customer-reviews-group">
+                <div class="customer-reviews1">Customer Reviews</div>
+                <div class="share-your-thoughts">
+                  Share your thoughts about this Models
+                </div>
+                <div class="button106" id="buttonContainer">
+                  <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+
+                  <div class="reviews-from-marketplace">Write a Review</div>
+                  <img class="chevron-down-icon150" alt="" src="../chevrondown.svg" />
+                </div>
+              </div>
+            </div>
+            <div class="frame-parent258">
+              <div class="frame-parent259">
+                <div class="frame-parent260">
+                  <div class="frame-parent261">
+                    <div class="avatar-user-35-wrapper">
+                      <div class="avatar-user-357">
+                        <div class="rectangle14"></div>
+                        <div class="rectangle15"></div>
+                      </div>
+                    </div>
+                    <div class="hypo-munich-parent">
+                      <div class="hypo-munich">HYPO Munich</div>
+                      <div class="star-parent54">
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-5.svg" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="great-work">
+                    Great work & quite brilliant analysis, We’ll subscribe
+                    ASAP.
+                  </div>
+                </div>
+                <div class="frame-parent260">
+                  <div class="frame-parent261">
+                    <div class="avatar-user-35-wrapper">
+                      <div class="avatar-user-357">
+                        <div class="rectangle14"></div>
+                        <div class="rectangle15"></div>
+                      </div>
+                    </div>
+                    <div class="hypo-munich-parent">
+                      <div class="hypo-munich">Axrail</div>
+                      <div class="star-parent54">
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-5.svg" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="great-work">
+                    I appreciate the great insights and analysis provided in
+                    the article about the technology's impact on society
+                  </div>
+                </div>
+              </div>
+              <div class="frame-parent259">
+                <div class="frame-parent260">
+                  <div class="frame-parent261">
+                    <div class="avatar-user-35-wrapper">
+                      <div class="avatar-user-357">
+                        <div class="rectangle14"></div>
+                        <div class="rectangle15"></div>
+                      </div>
+                    </div>
+                    <div class="hypo-munich-parent">
+                      <div class="hypo-munich">Unilever SG</div>
+                      <div class="star-parent54">
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-5.svg" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="great-work">
+                    This review provides great insights and analysis, making
+                    it easy to determine whether this technology is right for
+                    you.
+                  </div>
+                </div>
+                <div class="frame-parent260">
+                  <div class="frame-parent261">
+                    <div class="avatar-user-35-wrapper">
+                      <div class="avatar-user-357">
+                        <div class="rectangle14"></div>
+                        <div class="rectangle15"></div>
+                      </div>
+                    </div>
+                    <div class="hypo-munich-parent">
+                      <div class="hypo-munich">Neste SG</div>
+                      <div class="star-parent54">
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-1.svg" />
+
+                        <img class="frame-child360" alt="" src="../star-5.svg" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="great-work">
+                    Impressive technology with great insights and analysis
+                    provided in the article
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-parent269">
+          <div class="chevron-left-wrapper">
+            <img class="chevron-left-icon" alt="" src="../chevronleft.svg" />
+          </div>
+          <div class="frame-parent270">
+            <div class="wrapper1">
+              <div class="hypo-munich">1</div>
+            </div>
+            <div class="chevron-left-wrapper">
+              <div class="hypo-munich">2</div>
+            </div>
+            <div class="chevron-left-wrapper">
+              <div class="hypo-munich">3</div>
+            </div>
+          </div>
+          <div class="chevron-left-container">
+            <img class="chevron-left-icon1" alt="" src="../chevronleft.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="frame-child354"></div>
+      <div class="frame-parent271">
+        <div class="related-models-parent">
+          <div class="related-models">Related Models</div>
+          <div class="searchbar-parent6">
+            <div class="arrow-left-wrapper">
+              <img class="search-icon12" alt="" src="../arrowleft.svg" />
+            </div>
+            <div class="arrow-left-container">
+              <img class="arrow-left-icon3" alt="" src="../arrowleft.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="frame-wrapper3">
+          <div class="card-service-parent12">
+            <div class="card-service56">
+              <img class="card-service-child54" alt="" src="../rectangle-149@2x.png" />
+
+              <div class="frame-parent273">
+                <div class="frame-parent274">
+                  <div class="product-wrapper54">
+                    <div class="supervised25">Models</div>
+                  </div>
+                  <div class="related-models-parent">
+                    <div class="hypo-munich">by Gundam Singapore</div>
+                    <div class="star-parent54">
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-5.svg" />
+                    </div>
+                  </div>
+                  <div class="amazon-linux-2107">Q-Learning</div>
+                  <div class="amazon-linux-2108">
+                    Model Description: Dynamics of multiagent Q-Learning
+                    applied to Mean Reversion commodities strategies.
+                  </div>
+                </div>
+                <div class="usd-5000-parent54">
+                  <div class="reviews-from-marketplace">USD$ 30,000</div>
+                  <img class="search-icon12" alt="" src="../heart.svg" />
+                </div>
+              </div>
+            </div>
+            <div class="card-service56">
+              <img class="card-service-child54" alt="" src="../rectangle-149@2x.png" />
+
+              <div class="frame-parent273">
+                <div class="frame-parent274">
+                  <div class="product-wrapper54">
+                    <div class="supervised25">Models</div>
+                  </div>
+                  <div class="related-models-parent">
+                    <div class="hypo-munich">by RonnieQ Commodities</div>
+                    <div class="star-parent54">
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-5.svg" />
+                    </div>
+                  </div>
+                  <div class="amazon-linux-2107">
+                    State-Action-Reward-State-Action (SARSA)
+                  </div>
+                  <div class="amazon-linux-2110">
+                    Model Description: Deep Reinforcement Learning applied to
+                    commodities futures
+                  </div>
+                </div>
+                <div class="usd-5000-parent54">
+                  <div class="reviews-from-marketplace">USD$ 35,000</div>
+                  <img class="search-icon12" alt="" src="../heart.svg" />
+                </div>
+              </div>
+            </div>
+            <div class="card-service56">
+              <img class="card-service-child54" alt="" src="../rectangle-149@2x.png" />
+
+              <div class="frame-parent273">
+                <div class="frame-parent274">
+                  <div class="product-wrapper54">
+                    <div class="supervised25">Models</div>
+                  </div>
+                  <div class="related-models-parent">
+                    <div class="hypo-munich">by Neste Research</div>
+                    <div class="star-parent54">
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-5.svg" />
+                    </div>
+                  </div>
+                  <div class="amazon-linux-2107">
+                    Deep Q Network (DQN) applied to commodities
+                  </div>
+                  <div class="amazon-linux-2110">
+                    Model Description: DQN applied to commodities futures &
+                    fixed income.
+                  </div>
+                </div>
+                <div class="usd-5000-parent54">
+                  <div class="reviews-from-marketplace">USD$ 35,000</div>
+                  <img class="search-icon12" alt="" src="../heart.svg" />
+                </div>
+              </div>
+            </div>
+            <div class="card-service56">
+              <img class="card-service-child54" alt="" src="../rectangle-149@2x.png" />
+
+              <div class="frame-parent273">
+                <div class="frame-parent274">
+                  <div class="product-wrapper54">
+                    <div class="supervised25">Models</div>
+                  </div>
+                  <div class="related-models-parent">
+                    <div class="hypo-munich">by MCAM Research</div>
+                    <div class="star-parent54">
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-1.svg" />
+
+                      <img class="frame-child355" alt="" src="../star-5.svg" />
+                    </div>
+                  </div>
+                  <div class="amazon-linux-2107">
+                    Deep Deterministic Policy Gradient
+                  </div>
+                  <div class="amazon-linux-2110">
+                    Model Description: LSTM-DDPG Models for Trading with
+                    variable Positions & Risk Management
+                  </div>
+                </div>
+                <div class="usd-5000-parent54">
+                  <div class="reviews-from-marketplace">USD$ 50,000</div>
+                  <img class="search-icon12" alt="" src="../heart.svg" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer6">
+      <div class="section12">
+        <div class="content6">
+          <div class="apricus810">Apricus8</div>
+          <div class="footer-links-column-parent4">
+            <div class="footer-links-column12">
+              <div class="description">Link</div>
+              <div class="footer-links6">
+                <div class="button-base78">
+                  <div class="hypo-munich">Home</div>
+                </div>
+                <div class="button-base78">
+                  <div class="hypo-munich">Models</div>
+                </div>
+                <div class="button-base78">
+                  <div class="hypo-munich">Report Selling</div>
+                </div>
+                <div class="footer-link60">
+                  <div class="button107">
+                    <div class="button-base81">
+                      <div class="text137">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link60">
+                  <div class="button107">
+                    <div class="button-base81">
+                      <div class="text137">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link60">
+                  <div class="button107">
+                    <div class="button-base81">
+                      <div class="text137">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link60">
+                  <div class="button107">
+                    <div class="button-base81">
+                      <div class="text137">Additional</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-link60">
+                  <div class="button107">
+                    <div class="button-base81">
+                      <div class="text137">Additional</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="footer-links-column13">
+              <div class="heading13">Singapore Office</div>
+              <div class="text142">
+                2 PEREIRA ROAD #07-01, 2CONNECTT@TS, Singapore (368024)
+              </div>
+              <div class="footer-link65">
+                <div class="button107">
+                  <div class="button-base81">
+                    <div class="text137">Additional</div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-link65">
+                <div class="button107">
+                  <div class="button-base81">
+                    <div class="text137">Additional</div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-link65">
+                <div class="button107">
+                  <div class="button-base81">
+                    <div class="text137">Additional</div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-link65">
+                <div class="button107">
+                  <div class="button-base81">
+                    <div class="text137">Additional</div>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-link65">
+                <div class="button107">
+                  <div class="button-base81">
+                    <div class="text137">Additional</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section13">
+        <div class="footer-text6">© 2023 Apricus8. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="headerContainer" class="popup-overlay" style="display: none">
+    <div class="header20">
+      <div class="ellipse-parent19">
+        <div class="group-child19"></div>
+        <div class="a20">A</div>
+      </div>
+      <div class="homebar-parent11">
+        <div class="homebar13" id="popuphomeBarContainer">
+          <div class="categories20">Home</div>
+          <div class="homebar-child11"></div>
+        </div>
+        <div class="homebar13" id="popupmodelBarContainer">
+          <div class="categories20">Models</div>
+          <div class="homebar-child11"></div>
+        </div>
+        <div class="homebar13" id="popupreportBarContainer">
+          <div class="categories20">Report Selling</div>
+          <div class="homebar-child11"></div>
+        </div>
+      </div>
+      <div class="frame-parent377">
+        <div class="searchbar-parent11">
+          <div class="searchbar13" id="popupsearchBarContainer">
+            <img class="search-icon19" alt="" src="../search.svg" />
+
+            <div class="homebar-child11"></div>
+          </div>
+          <div class="searchbar13" id="popupcartBarContainer">
+            <img class="search-icon19" alt="" src="../shoppingcart.svg" />
+
+            <div class="homebar-child11"></div>
+          </div>
+          <div class="searchbar13" id="popupfavBarContainer">
+            <img class="search-icon19" alt="" src="../heart.svg" />
+
+            <div class="homebar-child11"></div>
+          </div>
+          <div class="searchbar13" id="popupchatBarContainer">
+            <img class="mail-icon15" alt="" src="../mail.svg" />
+
+            <div class="homebar-child11"></div>
+          </div>
+        </div>
+        <div class="frame-child584"></div>
+        <div class="profilebar12">
+          <div class="user-wrapper10">
+            <img class="mail-icon15" alt="" src="../user.svg" />
+          </div>
+          <img class="mail-icon15" alt="" src="../chevrondown.svg" />
+        </div>
+      </div>
+      <div class="frame-parent378">
+        <div class="profile-parent1" id="popupframeContainer">
+          <div class="profile3">Profile</div>
+          <img class="mail-icon15" alt="" src="../chevronright.svg" />
+        </div>
+        <div class="profile-parent1" id="popupframeContainer1">
+          <div class="profile3">History Purchase</div>
+          <img class="mail-icon15" alt="" src="../chevronright.svg" />
+        </div>
+        <div class="profile-parent1" id="popupframeContainer2">
+          <div class="profile3">Merchant Models</div>
+          <img class="mail-icon15" alt="" src="../chevronright.svg" />
+        </div>
+        <div class="sign-out-parent1">
+          <div class="profile3">Sign Out</div>
+          <img class="mail-icon15" alt="" src="../chevronright.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="popUpPurchase" class="popup-overlay" style="display: none">
+    <div class="pop-up-purchase">
+      <div class="purchase-models-group">
+        <div class="purchase-models1">Purchase Models</div>
+        <div class="frame-child401"></div>
+        <div class="frame-parent281">
+          <div class="rectangle-parent19">
+            <img class="frame-child402" alt="" src="../rectangle-152@2x.png" />
+
+            <div class="frame-parent282">
+              <div class="frame-parent283">
+                <div class="supervised-wrapper13">
+                  <div class="supervised26">Supervised</div>
+                </div>
+                <div class="models-wrapper3">
+                  <div class="supervised26">Models</div>
+                </div>
+              </div>
+              <div class="generalised-neural-network">
+                Generalised Neural Network (GRNN)
+              </div>
+              <div class="a-new-neural1">
+                A new neural network approach proposed for Modelling time
+                series associated with energy commodities prices.
+              </div>
+              <div class="usd-150005">USD$ 15,000</div>
+            </div>
+          </div>
+          <div class="checkbox-label4">
+            <div class="checkbox14">
+              <div class="square9"></div>
+            </div>
+            <div class="label4">
+              <span>By subscribing to this software, you agree to the Apricus8
+              </span>
+              <span class="terms-of-service1">Terms of Service</span>
+              <span> and </span>
+              <span class="terms-of-service1">Privacy Policy</span>
+              <span>.</span>
+            </div>
+          </div>
+          <div class="button117" id="popupbuttonContainer">
+            <img class="chevron-down-icon161" alt="" src="../chevrondown.svg" />
+
+            <div class="input-text47">Add to Cart</div>
+            <img class="chevron-down-icon161" alt="" src="../chevrondown.svg" />
+          </div>
+        </div>
+        <img class="x-icon" alt="" src="../x.svg" />
+      </div>
+    </div>
+  </div>
+
+  <div id="popUpPurchase" class="popup-overlay" style="display: none">
+    <div class="pop-up-purchase1">
+      <div class="write-a-review-group">
+        <div class="write-a-review1">Write a Review</div>
+        <div class="frame-child403"></div>
+        <div class="generalised-neural-networks-g-parent">
+          <div class="generalised-neural-networks1">
+            Generalised Neural Networks (GRNN)
+          </div>
+          <div class="rating-parent">
+            <div class="rating">Rating*</div>
+            <div class="star-parent63">
+              <img class="frame-child404" alt="" src="../star-5.svg" />
+
+              <img class="frame-child404" alt="" src="../star-5.svg" />
+
+              <img class="frame-child404" alt="" src="../star-5.svg" />
+
+              <img class="frame-child404" alt="" src="../star-5.svg" />
+
+              <img class="frame-child404" alt="" src="../star-6.svg" />
+            </div>
+          </div>
+          <div class="input-field19">
+            <div class="textarea-label">Company Name</div>
+            <div class="chevron-down-parent29">
+              <img class="chevron-down-icon163" alt="" src="../chevrondown.svg" />
+
+              <div class="text148">Unillever SG</div>
+              <div class="text149">Text</div>
+              <img class="chevron-down-icon163" alt="" src="../chevrondown.svg" />
+            </div>
+            <div class="helper23">Helper</div>
+          </div>
+          <div class="textarea">
+            <div class="textarea-label">Review</div>
+            <div class="textarea-field">
+              <div class="textarea-placeholder">
+                This review provides great insights and analysis, making it
+                easy to determine whether this technology is right for you.
+              </div>
+              <img class="resizer-icon" alt="" src="../resizer.svg" />
+            </div>
+            <div class="textarea-label1">Textarea label</div>
+          </div>
+        </div>
+        <div class="button118" id="popupbuttonContainer">
+          <img class="chevron-down-icon163" alt="" src="../chevrondown.svg" />
+
+          <div class="input-text48">Save</div>
+          <img class="chevron-down-icon163" alt="" src="../chevrondown.svg" />
+        </div>
+        <img class="x-icon1" alt="" src="../x.svg" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var popuphomeBarContainer = document.getElementById("popuphomeBarContainer");
+    if (popuphomeBarContainer) {
+      popuphomeBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./home-after-login.html";
+      });
+    }
+
+    var popupmodelBarContainer = document.getElementById("popupmodelBarContainer");
+    if (popupmodelBarContainer) {
+      popupmodelBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./product-listing.html";
+      });
+    }
+
+    var popupreportBarContainer = document.getElementById(
+      "popupreportBarContainer"
+    );
+    if (popupreportBarContainer) {
+      popupreportBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./product-listing1.html";
+      });
+    }
+
+    var popupsearchBarContainer = document.getElementById(
+      "popupsearchBarContainer"
+    );
+    if (popupsearchBarContainer) {
+      popupsearchBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./search.html";
+      });
+    }
+
+    var popupcartBarContainer = document.getElementById("popupcartBarContainer");
+    if (popupcartBarContainer) {
+      popupcartBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./cart2.html";
+      });
+    }
+
+    var popupfavBarContainer = document.getElementById("popupfavBarContainer");
+    if (popupfavBarContainer) {
+      popupfavBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./favorite.html";
+      });
+    }
+
+    var popupchatBarContainer = document.getElementById("popupchatBarContainer");
+    if (popupchatBarContainer) {
+      popupchatBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./cart.html";
+      });
+    }
+
+    var popupframeContainer = document.getElementById("popupframeContainer");
+    if (popupframeContainer) {
+      popupframeContainer.addEventListener("click", function (e) {
+        window.location.href = "./profile-detail.html";
+      });
+    }
+
+    var popupframeContainer1 = document.getElementById("popupframeContainer1");
+    if (popupframeContainer1) {
+      popupframeContainer1.addEventListener("click", function (e) {
+        window.location.href = "./history-purchase.html";
+      });
+    }
+
+    var popupframeContainer2 = document.getElementById("popupframeContainer2");
+    if (popupframeContainer2) {
+      popupframeContainer2.addEventListener("click", function (e) {
+        window.location.href = "./merchant-product-listing.html";
+      });
+    }
+
+    var popupbuttonContainer = document.getElementById("popupbuttonContainer");
+    if (popupbuttonContainer) {
+      popupbuttonContainer.addEventListener("click", function (e) {
+        window.location.href = "./cart2.html";
+      });
+    }
+
+    var popupbuttonContainer = document.getElementById("popupbuttonContainer");
+    if (popupbuttonContainer) {
+      popupbuttonContainer.addEventListener("click", function (e) {
+        window.location.href = "./detail-service.html";
+      });
+    }
+
+    var groupContainer = document.getElementById("groupContainer");
+    if (groupContainer) {
+      groupContainer.addEventListener("click", function (e) {
+        window.location.href = "./search.html";
+      });
+    }
+
+    var homeBarContainer = document.getElementById("homeBarContainer");
+    if (homeBarContainer) {
+      homeBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./home-after-login.html";
+      });
+    }
+
+    var modelBarContainer = document.getElementById("modelBarContainer");
+    if (modelBarContainer) {
+      modelBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./product-listing.html";
+      });
+    }
+
+    var reportBarContainer = document.getElementById("reportBarContainer");
+    if (reportBarContainer) {
+      reportBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./product-listing1.html";
+      });
+    }
+
+    var searchBarContainer = document.getElementById("searchBarContainer");
+    if (searchBarContainer) {
+      searchBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./search.html";
+      });
+    }
+
+    var cartBarContainer = document.getElementById("cartBarContainer");
+    if (cartBarContainer) {
+      cartBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./cart2.html";
+      });
+    }
+
+    var favBarContainer = document.getElementById("favBarContainer");
+    if (favBarContainer) {
+      favBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./favorite.html";
+      });
+    }
+
+    var chatBarContainer = document.getElementById("chatBarContainer");
+    if (chatBarContainer) {
+      chatBarContainer.addEventListener("click", function (e) {
+        window.location.href = "./cart.html";
+      });
+    }
+
+    var profileBarContainer = document.getElementById("profileBarContainer");
+    if (profileBarContainer) {
+      profileBarContainer.addEventListener("click", function () {
+        var popup = document.getElementById("headerContainer");
+        if (!popup) return;
+        var popupStyle = popup.style;
+        if (popupStyle) {
+          popupStyle.display = "flex";
+          popupStyle.zIndex = 100;
+          popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+          popupStyle.alignItems = "center";
+          popupStyle.justifyContent = "center";
+        }
+        popup.setAttribute("closable", "");
+
+        var onClick =
+          popup.onClick ||
+          function (e) {
+            if (e.target === popup && popup.hasAttribute("closable")) {
+              popupStyle.display = "none";
+            }
+          };
+        popup.addEventListener("click", onClick);
+      });
+    }
+
+    var buttonContainer = document.getElementById("buttonContainer");
+    if (buttonContainer) {
+      buttonContainer.addEventListener("click", function (e) {
+        window.location.href = "./categories.html";
+      });
+    }
+
+    var buttonContainer = document.getElementById("buttonContainer");
+    if (buttonContainer) {
+      buttonContainer.addEventListener("click", function () {
+        var popup = document.getElementById("popUpPurchase");
+        if (!popup) return;
+        var popupStyle = popup.style;
+        if (popupStyle) {
+          popupStyle.display = "flex";
+          popupStyle.zIndex = 100;
+          popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+          popupStyle.alignItems = "center";
+          popupStyle.justifyContent = "center";
+        }
+        popup.setAttribute("closable", "");
+
+        var onClick =
+          popup.onClick ||
+          function (e) {
+            if (e.target === popup && popup.hasAttribute("closable")) {
+              popupStyle.display = "none";
+            }
+          };
+        popup.addEventListener("click", onClick);
+      });
+    }
+
+    var buttonContainer = document.getElementById("buttonContainer");
+    if (buttonContainer) {
+      buttonContainer.addEventListener("click", function (e) {
+        window.location.href = "./detail-report.html";
+      });
+    }
+
+    var buttonContainer = document.getElementById("buttonContainer");
+    if (buttonContainer) {
+      buttonContainer.addEventListener("click", function (e) {
+        window.location.href = "./merchant-product-listing.html";
+      });
+    }
+  </script>
+</body>
+
+</html>
