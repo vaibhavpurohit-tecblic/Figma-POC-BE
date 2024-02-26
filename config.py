@@ -39,4 +39,4 @@ class Config:
     # API_URL = '/static/swagger.json'
     # API_ENDPOINT_ACCESS_TOKEN = os.getenv("API_ENDPOINT_ACCESS_TOKEN")
     # FILE_KEY = '5N9Is95rRTnY73yhNfEQC5'
-    FIGMA_TOKEN = 'figd_zvQWW4w8xOttdLPeXrV4apPaeiEM3tFr4or9Fhc6'
+    FIGMA_TOKEN = 'figd_kvaFCNOz2o00C7zQs_XnV4fkw9yHd0DG8n2xOhGR'
