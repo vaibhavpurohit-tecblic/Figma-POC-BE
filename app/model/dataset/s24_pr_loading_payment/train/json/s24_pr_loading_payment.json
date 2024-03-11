@@ -1,0 +1,321 @@
+{
+  "name": "Apricus8",
+  "lastModified": "2023-08-04T02:15:16Z",
+  "thumbnailUrl": "https://s3-alpha.figma.com/thumbnails/6be5bf99-3840-4e70-8631-20bafee81f05?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ4GOSFWCQ53TKG3O%2F20240201%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240201T000000Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=e7fcbfc625ec94194dbd833ab0b5574d5f26e3b5981a4c90002373eb1cc20f72",
+  "version": "5074327897",
+  "role": "viewer",
+  "editorType": "figma",
+  "linkAccess": "view",
+  "nodes": {
+    "286:5807": {
+      "document": {
+        "id": "286:5807",
+        "name": "Loading payment",
+        "type": "FRAME",
+        "scrollBehavior": "SCROLLS",
+        "blendMode": "PASS_THROUGH",
+        "children": [
+          {
+            "id": "286:5806",
+            "name": "Rectangle",
+            "type": "RECTANGLE",
+            "scrollBehavior": "SCROLLS",
+            "blendMode": "PASS_THROUGH",
+            "absoluteBoundingBox": {
+              "x": 29488,
+              "y": 5248,
+              "width": 400,
+              "height": 400
+            },
+            "absoluteRenderBounds": {
+              "x": 29488,
+              "y": 5248,
+              "width": 400,
+              "height": 400
+            },
+            "constraints": {
+              "vertical": "TOP",
+              "horizontal": "LEFT"
+            },
+            "fills": [
+              {
+                "blendMode": "NORMAL",
+                "type": "IMAGE",
+                "scaleMode": "FILL",
+                "imageRef": "c831bc4108841ff8a3cbe8875a13c2db1e811e78",
+                "gifRef": "4d27390e69b2db19e18099bc8e229389ee23f708"
+              }
+            ],
+            "strokes": [],
+            "strokeWeight": 1,
+            "strokeAlign": "INSIDE",
+            "effects": []
+          },
+          {
+            "id": "286:5814",
+            "name": "Frame 50164",
+            "type": "FRAME",
+            "scrollBehavior": "SCROLLS",
+            "blendMode": "PASS_THROUGH",
+            "children": [
+              {
+                "id": "286:5812",
+                "name": "We are processing your payment...",
+                "type": "TEXT",
+                "scrollBehavior": "SCROLLS",
+                "blendMode": "PASS_THROUGH",
+                "absoluteBoundingBox": {
+                  "x": 29557,
+                  "y": 5648,
+                  "width": 262,
+                  "height": 25
+                },
+                "absoluteRenderBounds": {
+                  "x": 29557.26953125,
+                  "y": 5654.0400390625,
+                  "width": 259.62890625,
+                  "height": 16.97412109375
+                },
+                "constraints": {
+                  "vertical": "TOP",
+                  "horizontal": "LEFT"
+                },
+                "layoutAlign": "INHERIT",
+                "layoutGrow": 0,
+                "layoutSizingHorizontal": "HUG",
+                "layoutSizingVertical": "HUG",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.0833333358168602,
+                      "g": 0.0833333358168602,
+                      "b": 0.0833333358168602,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [],
+                "strokeWeight": 1,
+                "strokeAlign": "OUTSIDE",
+                "styles": {
+                  "fill": "13:900",
+                  "text": "9:975"
+                },
+                "effects": [],
+                "characters": "We are processing your payment...",
+                "style": {
+                  "fontFamily": "Satoshi Variable",
+                  "fontPostScriptName": null,
+                  "fontWeight": 400,
+                  "textAutoResize": "WIDTH_AND_HEIGHT",
+                  "fontSize": 18,
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "letterSpacing": -0.36,
+                  "lineHeightPx": 25.19999885559082,
+                  "lineHeightPercent": 103.70370483398438,
+                  "lineHeightPercentFontSize": 140,
+                  "lineHeightUnit": "FONT_SIZE_%"
+                },
+                "layoutVersion": 3,
+                "characterStyleOverrides": [],
+                "styleOverrideTable": {},
+                "lineTypes": [
+                  "NONE"
+                ],
+                "lineIndentations": [
+                  0
+                ]
+              },
+              {
+                "id": "286:5813",
+                "name": "Please do not click back, stop or the refresh your page",
+                "type": "TEXT",
+                "scrollBehavior": "SCROLLS",
+                "blendMode": "PASS_THROUGH",
+                "absoluteBoundingBox": {
+                  "x": 29483,
+                  "y": 5689,
+                  "width": 410,
+                  "height": 25
+                },
+                "absoluteRenderBounds": {
+                  "x": 29484.56640625,
+                  "y": 5694.8779296875,
+                  "width": 407.052734375,
+                  "height": 17.13623046875
+                },
+                "constraints": {
+                  "vertical": "TOP",
+                  "horizontal": "LEFT"
+                },
+                "layoutAlign": "INHERIT",
+                "layoutGrow": 0,
+                "layoutSizingHorizontal": "HUG",
+                "layoutSizingVertical": "HUG",
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.3333333432674408,
+                      "g": 0.3333333432674408,
+                      "b": 0.3333333432674408,
+                      "a": 1
+                    }
+                  }
+                ],
+                "strokes": [],
+                "strokeWeight": 1,
+                "strokeAlign": "OUTSIDE",
+                "styles": {
+                  "fill": "13:926",
+                  "text": "9:975"
+                },
+                "effects": [],
+                "characters": "Please do not click back, stop or the refresh your page",
+                "style": {
+                  "fontFamily": "Satoshi Variable",
+                  "fontPostScriptName": null,
+                  "fontWeight": 400,
+                  "textAutoResize": "WIDTH_AND_HEIGHT",
+                  "fontSize": 18,
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "letterSpacing": -0.36,
+                  "lineHeightPx": 25.19999885559082,
+                  "lineHeightPercent": 103.70370483398438,
+                  "lineHeightPercentFontSize": 140,
+                  "lineHeightUnit": "FONT_SIZE_%"
+                },
+                "layoutVersion": 3,
+                "characterStyleOverrides": [],
+                "styleOverrideTable": {},
+                "lineTypes": [
+                  "NONE"
+                ],
+                "lineIndentations": [
+                  0
+                ]
+              }
+            ],
+            "absoluteBoundingBox": {
+              "x": 29483,
+              "y": 5648,
+              "width": 410,
+              "height": 66
+            },
+            "absoluteRenderBounds": {
+              "x": 29483,
+              "y": 5648,
+              "width": 410,
+              "height": 66
+            },
+            "constraints": {
+              "vertical": "TOP",
+              "horizontal": "LEFT"
+            },
+            "layoutSizingHorizontal": "HUG",
+            "layoutSizingVertical": "HUG",
+            "clipsContent": false,
+            "background": [],
+            "fills": [],
+            "strokes": [],
+            "strokeWeight": 1,
+            "strokeAlign": "INSIDE",
+            "backgroundColor": {
+              "r": 0,
+              "g": 0,
+              "b": 0,
+              "a": 0
+            },
+            "layoutMode": "VERTICAL",
+            "itemSpacing": 16,
+            "counterAxisAlignItems": "CENTER",
+            "layoutWrap": "NO_WRAP",
+            "effects": []
+          }
+        ],
+        "absoluteBoundingBox": {
+          "x": 28968,
+          "y": 5136,
+          "width": 1440,
+          "height": 1024
+        },
+        "absoluteRenderBounds": {
+          "x": 28968,
+          "y": 5136,
+          "width": 1440,
+          "height": 1024
+        },
+        "constraints": {
+          "vertical": "TOP",
+          "horizontal": "LEFT"
+        },
+        "clipsContent": true,
+        "background": [
+          {
+            "blendMode": "NORMAL",
+            "type": "SOLID",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "fills": [
+          {
+            "blendMode": "NORMAL",
+            "type": "SOLID",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        ],
+        "strokes": [],
+        "strokeWeight": 1,
+        "strokeAlign": "INSIDE",
+        "backgroundColor": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        },
+        "effects": []
+      },
+      "components": {},
+      "componentSets": {},
+      "schemaVersion": 0,
+      "styles": {
+        "13:900": {
+          "key": "1f0558e08277046561d14829217fd4ae7d287445",
+          "name": "Text/Text Black",
+          "styleType": "FILL",
+          "remote": false,
+          "description": ""
+        },
+        "9:975": {
+          "key": "922f6e5b0da76ba023aff6cfa04b1dc82fc88ade",
+          "name": "Body 1/Regular",
+          "styleType": "TEXT",
+          "remote": false,
+          "description": ""
+        },
+        "13:926": {
+          "key": "c9cefdb57528079b8a30e1cfdc00227ce00146b3",
+          "name": "Text/Text Black Second",
+          "styleType": "FILL",
+          "remote": false,
+          "description": ""
+        }
+      }
+    }
+  }
+}
