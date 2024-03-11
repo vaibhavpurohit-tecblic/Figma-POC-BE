@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./payment-eghl.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus Jakarta Sans:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Work Sans:wght@400&display=swap"
+    />
+
+    <style>
+      @font-face {
+        :font-family: "Satoshi Variable";
+        src: url("../Satoshi-Regular.otf");
+        font-weight: 400;
+      }
+      @font-face {
+        :font-family: "Satoshi Variable";
+        src: url("../Satoshi-Medium.otf");
+        font-weight: 500;
+      }
+      @font-face {
+        :font-family: "Satoshi Variable";
+        src: url("../Satoshi-Bold.otf");
+        font-weight: 700;
+      }
+      @font-face {
+        :font-family: "SF Pro Text";
+        src: url("../FontsFree-Net-SFProText-Semibold.ttf");
+        font-weight: 600;
+      }
+      body {
+  margin: 0;
+  line-height: normal;
+}
+
+.popup-overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+}
+
+:root {
+  /* fonts */
+  --display-1-bold: "Satoshi Variable";
+  --small-text-regular: "Work Sans";
+  --text-sm-regular: "Plus Jakarta Sans";
+  --font-poppins: Poppins;
+  --text-md-normal: Inter;
+  --font-sf-pro-text: "SF Pro Text";
+
+  /* font sizes */
+  --text-md-normal-size: 16px;
+  --heading-5-medium-size: 24px;
+  --body-1-regular-size: 18px;
+  --small-text-regular-size: 12px;
+  --caption-1-semibold-size: 14px;
+  --font-size-3xl: 22px;
+  --heading-1-semibold-size: 48px;
+  --display-1-bold-size: 72px;
+  --heading-4-medium-size: 28px;
+  --heading-2-semibold-size: 38px;
+  --font-size-23xl: 42px;
+  --display-2-bold-size: 54px;
+  --font-size-31xl: 50px;
+  --heading-6-medium-size: 20px;
+  --heading-3-semibold-size: 32px;
+  --font-size-mid: 17px;
+
+  /* Colors */
+  --base-white: #fff;
+  --neutral-300: #cdd5df;
+  --color-lightgray-100: #c7cbd4;
+  --secondary-surface-50: #ebf1ff;
+  --divide: #e3e8ef;
+  --secondary-border-300: #779dff;
+  --secondary-main-500: #008cdc;
+  --color-gray-100: #fdfdfd;
+  --text-text-black-third: #777;
+  --neutral-800: #202939;
+  --gray-800: #1d2939;
+  --neutral-900: #121826;
+  --gray-900: #101828;
+  --color-gray-200: #0a1530;
+  --text-text-black: #151515;
+  --color-gray-300: #09142f;
+  --primary-pressed-800: #0a1428;
+  --color-gray-400: #111;
+  --color-gray-500: rgba(0, 0, 0, 0.5);
+  --color-gray-600: rgba(255, 255, 255, 0.5);
+  --color-gray-700: rgba(255, 255, 255, 0.35);
+  --color-gray-800: rgba(255, 255, 255, 0.24);
+  --text-text-black-second: #555;
+  --neutral-600: #4b5565;
+  --system-color-charcoal-400: #556575;
+  --warning-main-500: #e0a100;
+  --success-main-500: #16b364;
+  --color-mediumseagreen-100: #10934a;
+  --neutral-400: #9aa3b3;
+  --gray-400: #98a2b3;
+  --base-text-disabled: #9e9e9e;
+  --neutral-sub-sub-main: #999;
+  --base-black: #000;
+  --color-whitesmoke-100: #f8f8f8;
+  --color-whitesmoke-200: #f5f5f5;
+  --neutral-100: #eef2f6;
+  --text-second: #f1f1f1;
+  --base-fill-disabled: #ededed;
+  --gray-200: #eaecf0;
+  --text-tertiary: #ebebeb;
+  --color-darkslateblue-100: #673486;
+  --primary-main-600: #1a3668;
+  --color-indigo: rgba(112, 0, 152, 0.7);
+  --color-mediumblue-100: #0316c7;
+  --color-mediumblue-200: rgba(3, 22, 199, 0.7);
+  --color-dodgerblue: #1073d1;
+  --neutral-700: #364152;
+  --color-mediumslateblue: #5e64ff;
+  --warning-surface-50: #fff8e5;
+  --error-main-500: #f04438;
+  --success-surface-50: #edfcf2;
+
+  /* Gaps */
+  --gap-5xl: 24px;
+  --gap-base: 16px;
+  --gap-61xl: 80px;
+  --gap-5xs: 8px;
+  --gap-xl: 20px;
+  --gap-xs: 12px;
+  --gap-9xs: 4px;
+  --gap-181xl: 200px;
+  --gap-29xl: 48px;
+  --gap-37xl: 56px;
+  --gap-21xl: 40px;
+  --gap-11xs: 2px;
+  --gap-8xs: 5px;
+  --gap-45xl: 64px;
+  --gap-13xl: 32px;
+  --gap-17xl: 36px;
+  --gap-154xl: 173px;
+
+  /* Paddings */
+  --padding-5xl: 24px;
+  --padding-sm: 14px;
+  --padding-base: 16px;
+  --padding-mini: 15px;
+  --padding-3xs: 10px;
+  --padding-9xs: 4px;
+  --padding-5xs: 8px;
+  --padding-xs: 12px;
+  --padding-6xs: 7px;
+  --padding-131xl: 150px;
+  --padding-45xl: 64px;
+  --padding-29xl: 48px;
+  --padding-13xl: 32px;
+  --padding-xl: 20px;
+  --padding-4xs: 9px;
+  --padding-21xl: 40px;
+  --padding-181xl: 200px;
+  --padding-81xl: 100px;
+
+  /* Border radiuses */
+  --br-3xs: 10px;
+  --br-mini: 15px;
+  --br-10xs: 3px;
+  --br-9xs: 4px;
+  --br-xl: 20px;
+  --br-7xs: 6px;
+  --br-5xs: 8px;
+  --br-31xl: 50px;
+  --br-6xs: 7px;
+  --br-3xl: 22px;
+  --br-47xl-6: 66.6px;
+  --br-mid-6: 17.6px;
+  --br-base: 16px;
+  --br-29xl-5: 48.5px;
+  --br-smi-8: 12.8px;
+  --br-12xs: 1px;
+
+  /* Effects */
+  --xl: 0px 20px 24px -4px rgba(16, 24, 40, 0.08),
+    0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+  --xs: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  --border-all-corner: 0px 0px 0px 1px #d5dce1;
+  --sm: 0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06);
+}
+.apricus83 {
+  position: absolute;
+  top: 71px;
+  left: 8px;
+  letter-spacing: -0.03em;
+  line-height: 120%;
+  font-weight: 500;
+}
+.apricus8-wrapper {
+  width: 200px;
+  position: relative;
+  background-color: var(--base-white);
+  height: 200px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.mdioffice-building-outline-icon {
+  width: 18px;
+  position: relative;
+  height: 18px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.mdioffice-building-outline-parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.marcellocultreraapricuseight {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.frame-parent78,
+.frame-parent79 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+  font-size: var(--caption-1-semibold-size);
+}
+.frame-parent78 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-gray-100);
+  border-bottom: 1px solid var(--divide);
+  box-sizing: border-box;
+  width: 1440px;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 var(--padding-181xl);
+  gap: var(--gap-17xl);
+  font-size: var(--heading-1-semibold-size);
+}
+.image-2-icon {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  width: 1040px;
+  height: 43px;
+  object-fit: cover;
+}
+.dollar-sign-icon {
+  width: 20px;
+  position: relative;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.dollar-sign-parent {
+  align-self: stretch;
+  background-color: var(--color-whitesmoke-200);
+  border-bottom: 1px solid var(--divide);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--padding-base) var(--padding-5xl);
+  gap: var(--gap-5xs);
+}
+.order-id {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  font-weight: 500;
+}
+.order-id-parent,
+.tp7-parent {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-xs);
+}
+.order-id-parent {
+  display: flex;
+  justify-content: flex-start;
+}
+.tp7-parent {
+  color: var(--text-text-black-second);
+}
+.frame-parent80,
+.frame-parent81,
+.tp7-parent {
+  display: flex;
+  justify-content: flex-start;
+}
+.frame-parent81 {
+  align-self: stretch;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: var(--padding-base) var(--padding-5xl);
+  gap: var(--gap-5xl);
+  font-size: var(--text-md-normal-size);
+}
+.frame-parent80 {
+  position: absolute;
+  top: 243px;
+  left: 200px;
+  border: 1px solid var(--divide);
+  box-sizing: border-box;
+  width: 1040px;
+  flex-direction: column;
+  align-items: center;
+}
+.eghl-pdpa-policy {
+  position: relative;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+  color: var(--secondary-main-500);
+}
+.by-submitting-the-payment-you-parent,
+.frame-parent82 {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-9xs);
+}
+.frame-parent82 {
+  position: absolute;
+  top: 743px;
+  left: 495px;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-5xs);
+  font-size: var(--text-md-normal-size);
+  color: var(--text-text-black-second);
+}
+.other-payment-methods {
+  position: absolute;
+  top: 488px;
+  left: 200px;
+  letter-spacing: -0.02em;
+  line-height: 140%;
+}
+.image-3-icon,
+.image-4-icon {
+  position: absolute;
+  object-fit: cover;
+}
+.image-3-icon {
+  top: 529px;
+  left: 200px;
+  width: 1040px;
+  height: 198px;
+  cursor: pointer;
+}
+.image-4-icon {
+  top: 826px;
+  left: 0;
+  width: 1440px;
+  height: 60px;
+}
+.usd-24500-wrapper {
+  position: absolute;
+  top: 534px;
+  left: 288px;
+  background-color: var(--color-whitesmoke-100);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-5xs);
+  font-size: var(--text-md-normal-size);
+  color: var(--text-text-black-second);
+}
+.payment-eghl1 {
+  width: 100%;
+  position: relative;
+  background-color: var(--base-white);
+  height: 886px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--body-1-regular-size);
+  color: var(--text-text-black);
+  font-family: var(--display-1-bold);
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="payment-eghl1">
+      <div class="frame-parent78">
+        <div class="apricus8-wrapper">
+          <div class="apricus83">Apricus8</div>
+        </div>
+        <div class="frame-parent79">
+          <div class="mdioffice-building-outline-parent">
+            <img
+              class="mdioffice-building-outline-icon"
+              alt=""
+              src="../mdiofficebuildingoutline.svg"
+            />
+
+            <div class="marcellocultreraapricuseight">Apricus8</div>
+          </div>
+          <div class="mdioffice-building-outline-parent">
+            <img
+              class="mdioffice-building-outline-icon"
+              alt=""
+              src="../mappin.svg"
+            />
+
+            <div class="marcellocultreraapricuseight">
+              2 PEREIRA ROAD #07-01, 2CONNECTT@TS, Singapore (368024)
+            </div>
+          </div>
+          <div class="mdioffice-building-outline-parent">
+            <img
+              class="mdioffice-building-outline-icon"
+              alt=""
+              src="../mail2.svg"
+            />
+
+            <div class="marcellocultreraapricuseight">
+              marcello.cultrera@apricuseight.com
+            </div>
+          </div>
+          <div class="mdioffice-building-outline-parent">
+            <img
+              class="mdioffice-building-outline-icon"
+              alt=""
+              src="../phone.svg"
+            />
+
+            <div class="marcellocultreraapricuseight">+6019-2068065</div>
+          </div>
+          <div class="mdioffice-building-outline-parent">
+            <img
+              class="mdioffice-building-outline-icon"
+              alt=""
+              src="../globe.svg"
+            />
+
+            <div class="marcellocultreraapricuseight">
+              https://apricuseight.com/
+            </div>
+          </div>
+        </div>
+      </div>
+      <img class="image-2-icon" alt="" src="../image-2@2x.png" />
+
+      <div class="frame-parent80">
+        <div class="dollar-sign-parent">
+          <img class="dollar-sign-icon" alt="" src="../dollarsign.svg" />
+
+          <div class="marcellocultreraapricuseight">Payment Details</div>
+        </div>
+        <div class="frame-parent81">
+          <div class="order-id-parent">
+            <div class="order-id">Order ID</div>
+            <div class="order-id">Payment ID</div>
+            <div class="order-id">Payment for</div>
+            <div class="order-id">Total</div>
+          </div>
+          <div class="tp7-parent">
+            <div class="marcellocultreraapricuseight">1675338967TP7</div>
+            <div class="marcellocultreraapricuseight">PYM16753389688YTVY</div>
+            <div class="marcellocultreraapricuseight">-</div>
+            <div class="marcellocultreraapricuseight">USD$ 24,500</div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-parent82">
+        <div class="by-submitting-the-payment-you-parent">
+          <div class="marcellocultreraapricuseight">
+            By submitting the payment, you hereby agree to
+          </div>
+          <div class="eghl-pdpa-policy">eGHL PDPA Policy</div>
+        </div>
+        <div class="eghl-pdpa-policy">Cancel and Return to Apricus8</div>
+      </div>
+      <div class="other-payment-methods">Other Payment Methods</div>
+      <img
+        class="image-3-icon"
+        alt=""
+        src="../image-3@2x.png"
+        id="image3"
+      />
+
+      <img class="image-4-icon" alt="" src="../image-4@2x.png" />
+
+      <div class="usd-24500-wrapper">
+        <div class="marcellocultreraapricuseight">USD$ 24,500</div>
+      </div>
+    </div>
+
+    <script>
+      var image3 = document.getElementById("image3");
+      if (image3) {
+        image3.addEventListener("click", function (e) {
+          window.location.href = "../loading-payment.html";
+        });
+      }
+      </script>
+  </body>
+</html>
