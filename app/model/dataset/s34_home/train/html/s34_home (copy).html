@@ -1,0 +1,2712 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      :root {
+        --basefill-disabled: rgba(237, 237, 237, 1);
+        --basetext-disabled: rgba(158, 158, 158, 1);
+        --baseblack: rgba(0, 0, 0, 1);
+        --basewhite: rgba(255, 255, 255, 1);
+        --texttertiary: rgba(235, 235, 235, 1);
+        --textsecond: rgba(241, 241, 241, 1);
+        --textmain: rgba(255, 255, 255, 1);
+        --texttext-black: rgba(21, 21, 21, 1);
+        --texttext-black-second: rgba(85, 85, 85, 1);
+        --texttext-black-third: rgba(119, 119, 119, 1);
+        --neutral-900: rgba(18, 25, 38, 1);
+        --neutral-800: rgba(32, 41, 57, 1);
+        --neutral-700: rgba(54, 65, 82, 1);
+        --neutral-600: rgba(75, 85, 101, 1);
+        --neutral-500: rgba(105, 117, 134, 1);
+        --neutral-400: rgba(154, 164, 178, 1);
+        --neutral-300: rgba(205, 213, 223, 1);
+        --neutral-200: rgba(227, 232, 239, 1);
+        --neutral-100: rgba(238, 242, 246, 1);
+        --neutral-50: rgba(248, 250, 252, 1);
+        --neutral-25: rgba(252, 252, 253, 1);
+        --primaryfocused-400: rgba(218, 221, 227, 1);
+        --primarypressed-800: rgba(10, 21, 39, 1);
+        --primaryhover-700: rgba(19, 39, 74, 1);
+        --primaryborder-300: rgba(132, 146, 160, 1);
+        --primarysurface-100: rgba(237, 244, 255, 1);
+        --primarymain-600: rgba(26, 54, 104, 1);
+        --secondaryfocused-400: rgba(214, 223, 247, 1);
+        --secondarypressed-800: rgba(46, 69, 127, 1);
+        --secondaryhover-700: rgba(61, 92, 170, 1);
+        --secondaryborder-300: rgba(119, 157, 255, 1);
+        --secondarysurface-50: rgba(235, 241, 255, 1);
+        --secondarymain-500: rgba(0, 140, 220, 1);
+        --successfocused-400: rgba(200, 232, 216, 1);
+        --successpressed-800: rgba(9, 92, 55, 1);
+        --successhover-700: rgba(8, 116, 67, 1);
+        --successborder-300: rgba(115, 226, 163, 1);
+        --successsurface-50: rgba(237, 252, 242, 1);
+        --successmain-500: rgba(22, 179, 100, 1);
+        --warningfocused-400: rgba(241, 228, 196, 1);
+        --warningpressed-800: rgba(112, 80, 0, 1);
+        --warninghover-700: rgba(149, 107, 0, 1);
+        --warningborder-300: rgba(229, 177, 42, 1);
+        --warningsurface-50: rgba(255, 248, 229, 1);
+        --warningmain-500: rgba(224, 161, 0, 1);
+        --errorfocused-400: rgba(244, 210, 207, 1);
+        --errorpressed-800: rgba(145, 32, 24, 1);
+        --errorhover-700: rgba(180, 35, 24, 1);
+        --errorborder-300: rgba(253, 162, 155, 1);
+        --errorsurface-50: rgba(254, 243, 242, 1);
+        --errormain-500: rgba(240, 68, 56, 1);
+        --gray-400: rgba(152, 162, 179, 1);
+        --infomain-500: rgba(0, 140, 220, 1);
+        --gray-900: rgba(16, 24, 40, 1);
+        --gray-800: rgba(29, 41, 57, 1);
+        --infoborder-300: rgba(119, 157, 255, 1);
+        --infopressed-800: rgba(46, 69, 127, 1);
+        --price-list-font-family: "Satoshi Variable", Helvetica;
+        --price-list-font-weight: 500;
+        --price-list-font-size: 16px;
+        --price-list-letter-spacing: -0.32px;
+        --price-list-line-height: 139.9999976158142%;
+        --price-list-font-style: normal;
+        --display-1-bold-font-family: "Satoshi Variable", Helvetica;
+        --display-1-bold-font-weight: 700;
+        --display-1-bold-font-size: 72px;
+        --display-1-bold-letter-spacing: -2.88px;
+        --display-1-bold-line-height: 120.00000476837158%;
+        --display-1-bold-font-style: normal;
+        --display-1-semibold-font-family: "Satoshi Variable", Helvetica;
+        --display-1-semibold-font-weight: 500;
+        --display-1-semibold-font-size: 72px;
+        --display-1-semibold-letter-spacing: -2.88px;
+        --display-1-semibold-line-height: 120.00000476837158%;
+        --display-1-semibold-font-style: normal;
+        --display-1-medium-font-family: "Satoshi Variable", Helvetica;
+        --display-1-medium-font-weight: 500;
+        --display-1-medium-font-size: 72px;
+        --display-1-medium-letter-spacing: -2.88px;
+        --display-1-medium-line-height: 120.00000476837158%;
+        --display-1-medium-font-style: normal;
+        --display-1-regular-font-family: "Satoshi Variable", Helvetica;
+        --display-1-regular-font-weight: 400;
+        --display-1-regular-font-size: 72px;
+        --display-1-regular-letter-spacing: -2.88px;
+        --display-1-regular-line-height: 120.00000476837158%;
+        --display-1-regular-font-style: normal;
+        --display-1-thin-font-family: "Satoshi Variable", Helvetica;
+        --display-1-thin-font-weight: 300;
+        --display-1-thin-font-size: 72px;
+        --display-1-thin-letter-spacing: -2.88px;
+        --display-1-thin-line-height: 120.00000476837158%;
+        --display-1-thin-font-style: normal;
+        --display-2-bold-font-family: "Satoshi Variable", Helvetica;
+        --display-2-bold-font-weight: 700;
+        --display-2-bold-font-size: 54px;
+        --display-2-bold-letter-spacing: -1.62px;
+        --display-2-bold-line-height: 120.00000476837158%;
+        --display-2-bold-font-style: normal;
+        --display-2-semibold-font-family: "Satoshi Variable", Helvetica;
+        --display-2-semibold-font-weight: 500;
+        --display-2-semibold-font-size: 54px;
+        --display-2-semibold-letter-spacing: -1.62px;
+        --display-2-semibold-line-height: 120.00000476837158%;
+        --display-2-semibold-font-style: normal;
+        --display-2-medium-font-family: "Satoshi Variable", Helvetica;
+        --display-2-medium-font-weight: 500;
+        --display-2-medium-font-size: 54px;
+        --display-2-medium-letter-spacing: -1.62px;
+        --display-2-medium-line-height: 120.00000476837158%;
+        --display-2-medium-font-style: normal;
+        --display-2-regular-font-family: "Satoshi Variable", Helvetica;
+        --display-2-regular-font-weight: 400;
+        --display-2-regular-font-size: 54px;
+        --display-2-regular-letter-spacing: -1.62px;
+        --display-2-regular-line-height: 120.00000476837158%;
+        --display-2-regular-font-style: normal;
+        --display-2-thin-font-family: "Satoshi Variable", Helvetica;
+        --display-2-thin-font-weight: 300;
+        --display-2-thin-font-size: 54px;
+        --display-2-thin-letter-spacing: -1.62px;
+        --display-2-thin-line-height: 120.00000476837158%;
+        --display-2-thin-font-style: normal;
+        --heading-1-bold-font-family: "Satoshi Variable", Helvetica;
+        --heading-1-bold-font-weight: 700;
+        --heading-1-bold-font-size: 48px;
+        --heading-1-bold-letter-spacing: -1.44px;
+        --heading-1-bold-line-height: 120.00000476837158%;
+        --heading-1-bold-font-style: normal;
+        --heading-1-semibold-font-family: "Satoshi Variable", Helvetica;
+        --heading-1-semibold-font-weight: 500;
+        --heading-1-semibold-font-size: 48px;
+        --heading-1-semibold-letter-spacing: -1.44px;
+        --heading-1-semibold-line-height: 120.00000476837158%;
+        --heading-1-semibold-font-style: normal;
+        --heading-1-medium-font-family: "Satoshi Variable", Helvetica;
+        --heading-1-medium-font-weight: 500;
+        --heading-1-medium-font-size: 48px;
+        --heading-1-medium-letter-spacing: -1.44px;
+        --heading-1-medium-line-height: 120.00000476837158%;
+        --heading-1-medium-font-style: normal;
+        --heading-1-regular-font-family: "Satoshi Variable", Helvetica;
+        --heading-1-regular-font-weight: 400;
+        --heading-1-regular-font-size: 48px;
+        --heading-1-regular-letter-spacing: -1.44px;
+        --heading-1-regular-line-height: 120.00000476837158%;
+        --heading-1-regular-font-style: normal;
+        --heading-1-thin-font-family: "Satoshi Variable", Helvetica;
+        --heading-1-thin-font-weight: 300;
+        --heading-1-thin-font-size: 48px;
+        --heading-1-thin-letter-spacing: -1.44px;
+        --heading-1-thin-line-height: 120.00000476837158%;
+        --heading-1-thin-font-style: normal;
+        --heading-2-bold-font-family: "Satoshi Variable", Helvetica;
+        --heading-2-bold-font-weight: 700;
+        --heading-2-bold-font-size: 38px;
+        --heading-2-bold-letter-spacing: -0.76px;
+        --heading-2-bold-line-height: 120.00000476837158%;
+        --heading-2-bold-font-style: normal;
+        --heading-2-semibold-font-family: "Satoshi Variable", Helvetica;
+        --heading-2-semibold-font-weight: 500;
+        --heading-2-semibold-font-size: 38px;
+        --heading-2-semibold-letter-spacing: -0.76px;
+        --heading-2-semibold-line-height: 120.00000476837158%;
+        --heading-2-semibold-font-style: normal;
+        --heading-2-medium-font-family: "Satoshi Variable", Helvetica;
+        --heading-2-medium-font-weight: 500;
+        --heading-2-medium-font-size: 38px;
+        --heading-2-medium-letter-spacing: -0.76px;
+        --heading-2-medium-line-height: 120.00000476837158%;
+        --heading-2-medium-font-style: normal;
+        --heading-2-regular-font-family: "Satoshi Variable", Helvetica;
+        --heading-2-regular-font-weight: 400;
+        --heading-2-regular-font-size: 38px;
+        --heading-2-regular-letter-spacing: -0.76px;
+        --heading-2-regular-line-height: 120.00000476837158%;
+        --heading-2-regular-font-style: normal;
+        --heading-2-thin-font-family: "Satoshi Variable", Helvetica;
+        --heading-2-thin-font-weight: 300;
+        --heading-2-thin-font-size: 38px;
+        --heading-2-thin-letter-spacing: -0.76px;
+        --heading-2-thin-line-height: 120.00000476837158%;
+        --heading-2-thin-font-style: normal;
+        --heading-3-bold-font-family: "Satoshi Variable", Helvetica;
+        --heading-3-bold-font-weight: 700;
+        --heading-3-bold-font-size: 32px;
+        --heading-3-bold-letter-spacing: -0.64px;
+        --heading-3-bold-line-height: 120.00000476837158%;
+        --heading-3-bold-font-style: normal;
+        --heading-3-semibold-font-family: "Satoshi Variable", Helvetica;
+        --heading-3-semibold-font-weight: 500;
+        --heading-3-semibold-font-size: 32px;
+        --heading-3-semibold-letter-spacing: -0.64px;
+        --heading-3-semibold-line-height: 120.00000476837158%;
+        --heading-3-semibold-font-style: normal;
+        --heading-3-medium-font-family: "Satoshi Variable", Helvetica;
+        --heading-3-medium-font-weight: 500;
+        --heading-3-medium-font-size: 32px;
+        --heading-3-medium-letter-spacing: -0.64px;
+        --heading-3-medium-line-height: 120.00000476837158%;
+        --heading-3-medium-font-style: normal;
+        --heading-3-regular-font-family: "Satoshi Variable", Helvetica;
+        --heading-3-regular-font-weight: 400;
+        --heading-3-regular-font-size: 32px;
+        --heading-3-regular-letter-spacing: -0.64px;
+        --heading-3-regular-line-height: 120.00000476837158%;
+        --heading-3-regular-font-style: normal;
+        --heading-3-thin-font-family: "Satoshi Variable", Helvetica;
+        --heading-3-thin-font-weight: 300;
+        --heading-3-thin-font-size: 32px;
+        --heading-3-thin-letter-spacing: -0.64px;
+        --heading-3-thin-line-height: 120.00000476837158%;
+        --heading-3-thin-font-style: normal;
+        --heading-4-bold-font-family: "Satoshi Variable", Helvetica;
+        --heading-4-bold-font-weight: 700;
+        --heading-4-bold-font-size: 28px;
+        --heading-4-bold-letter-spacing: -0.56px;
+        --heading-4-bold-line-height: 110.00000238418579%;
+        --heading-4-bold-font-style: normal;
+        --heading-4-semibold-font-family: "Satoshi Variable", Helvetica;
+        --heading-4-semibold-font-weight: 500;
+        --heading-4-semibold-font-size: 28px;
+        --heading-4-semibold-letter-spacing: -0.56px;
+        --heading-4-semibold-line-height: 110.00000238418579%;
+        --heading-4-semibold-font-style: normal;
+        --heading-4-medium-font-family: "Satoshi Variable", Helvetica;
+        --heading-4-medium-font-weight: 500;
+        --heading-4-medium-font-size: 28px;
+        --heading-4-medium-letter-spacing: -0.56px;
+        --heading-4-medium-line-height: 110.00000238418579%;
+        --heading-4-medium-font-style: normal;
+        --heading-4-regular-font-family: "Satoshi Variable", Helvetica;
+        --heading-4-regular-font-weight: 400;
+        --heading-4-regular-font-size: 28px;
+        --heading-4-regular-letter-spacing: -0.56px;
+        --heading-4-regular-line-height: 110.00000238418579%;
+        --heading-4-regular-font-style: normal;
+        --heading-4-thin-font-family: "Satoshi Variable", Helvetica;
+        --heading-4-thin-font-weight: 300;
+        --heading-4-thin-font-size: 28px;
+        --heading-4-thin-letter-spacing: -0.56px;
+        --heading-4-thin-line-height: 110.00000238418579%;
+        --heading-4-thin-font-style: normal;
+        --heading-5-bold-font-family: "Satoshi Variable", Helvetica;
+        --heading-5-bold-font-weight: 700;
+        --heading-5-bold-font-size: 24px;
+        --heading-5-bold-letter-spacing: -0.48px;
+        --heading-5-bold-line-height: 120.00000476837158%;
+        --heading-5-bold-font-style: normal;
+        --heading-5-semibold-font-family: "Satoshi Variable", Helvetica;
+        --heading-5-semibold-font-weight: 500;
+        --heading-5-semibold-font-size: 24px;
+        --heading-5-semibold-letter-spacing: -0.48px;
+        --heading-5-semibold-line-height: 120.00000476837158%;
+        --heading-5-semibold-font-style: normal;
+        --heading-5-medium-font-family: "Satoshi Variable", Helvetica;
+        --heading-5-medium-font-weight: 500;
+        --heading-5-medium-font-size: 24px;
+        --heading-5-medium-letter-spacing: -0.48px;
+        --heading-5-medium-line-height: 120.00000476837158%;
+        --heading-5-medium-font-style: normal;
+        --heading-5-regular-font-family: "Satoshi Variable", Helvetica;
+        --heading-5-regular-font-weight: 400;
+        --heading-5-regular-font-size: 24px;
+        --heading-5-regular-letter-spacing: -0.48px;
+        --heading-5-regular-line-height: 120.00000476837158%;
+        --heading-5-regular-font-style: normal;
+        --heading-5-thin-font-family: "Satoshi Variable", Helvetica;
+        --heading-5-thin-font-weight: 300;
+        --heading-5-thin-font-size: 24px;
+        --heading-5-thin-letter-spacing: -0.48px;
+        --heading-5-thin-line-height: 120.00000476837158%;
+        --heading-5-thin-font-style: normal;
+        --heading-6-bold-font-family: "Satoshi Variable", Helvetica;
+        --heading-6-bold-font-weight: 700;
+        --heading-6-bold-font-size: 20px;
+        --heading-6-bold-letter-spacing: -0.4px;
+        --heading-6-bold-line-height: 120.00000476837158%;
+        --heading-6-bold-font-style: normal;
+        --heading-6-semibold-font-family: "Satoshi Variable", Helvetica;
+        --heading-6-semibold-font-weight: 500;
+        --heading-6-semibold-font-size: 20px;
+        --heading-6-semibold-letter-spacing: -0.4px;
+        --heading-6-semibold-line-height: 120.00000476837158%;
+        --heading-6-semibold-font-style: normal;
+        --heading-6-medium-font-family: "Satoshi Variable", Helvetica;
+        --heading-6-medium-font-weight: 500;
+        --heading-6-medium-font-size: 20px;
+        --heading-6-medium-letter-spacing: -0.4px;
+        --heading-6-medium-line-height: 120.00000476837158%;
+        --heading-6-medium-font-style: normal;
+        --heading-6-regular-font-family: "Satoshi Variable", Helvetica;
+        --heading-6-regular-font-weight: 400;
+        --heading-6-regular-font-size: 20px;
+        --heading-6-regular-letter-spacing: -0.4px;
+        --heading-6-regular-line-height: 120.00000476837158%;
+        --heading-6-regular-font-style: normal;
+        --heading-6-thin-font-family: "Satoshi Variable", Helvetica;
+        --heading-6-thin-font-weight: 300;
+        --heading-6-thin-font-size: 20px;
+        --heading-6-thin-letter-spacing: -0.4px;
+        --heading-6-thin-line-height: 120.00000476837158%;
+        --heading-6-thin-font-style: normal;
+        --body-1-bold-font-family: "Satoshi Variable", Helvetica;
+        --body-1-bold-font-weight: 700;
+        --body-1-bold-font-size: 18px;
+        --body-1-bold-letter-spacing: -0.36px;
+        --body-1-bold-line-height: 139.9999976158142%;
+        --body-1-bold-font-style: normal;
+        --body-1-semibold-font-family: "Satoshi Variable", Helvetica;
+        --body-1-semibold-font-weight: 500;
+        --body-1-semibold-font-size: 18px;
+        --body-1-semibold-letter-spacing: -0.36px;
+        --body-1-semibold-line-height: 139.9999976158142%;
+        --body-1-semibold-font-style: normal;
+        --body-1-medium-font-family: "Satoshi Variable", Helvetica;
+        --body-1-medium-font-weight: 500;
+        --body-1-medium-font-size: 18px;
+        --body-1-medium-letter-spacing: -0.36px;
+        --body-1-medium-line-height: 139.9999976158142%;
+        --body-1-medium-font-style: normal;
+        --body-1-regular-font-family: "Satoshi Variable", Helvetica;
+        --body-1-regular-font-weight: 400;
+        --body-1-regular-font-size: 18px;
+        --body-1-regular-letter-spacing: -0.36px;
+        --body-1-regular-line-height: 139.9999976158142%;
+        --body-1-regular-font-style: normal;
+        --body-1-thin-font-family: "Satoshi Variable", Helvetica;
+        --body-1-thin-font-weight: 300;
+        --body-1-thin-font-size: 18px;
+        --body-1-thin-letter-spacing: -0.36px;
+        --body-1-thin-line-height: 139.9999976158142%;
+        --body-1-thin-font-style: normal;
+        --body-2-bold-font-family: "Satoshi Variable", Helvetica;
+        --body-2-bold-font-weight: 700;
+        --body-2-bold-font-size: 16px;
+        --body-2-bold-letter-spacing: -0.32px;
+        --body-2-bold-line-height: 139.9999976158142%;
+        --body-2-bold-font-style: normal;
+        --body-2-semibold-font-family: "Satoshi Variable", Helvetica;
+        --body-2-semibold-font-weight: 500;
+        --body-2-semibold-font-size: 16px;
+        --body-2-semibold-letter-spacing: -0.32px;
+        --body-2-semibold-line-height: 139.9999976158142%;
+        --body-2-semibold-font-style: normal;
+        --body-2-regular-font-family: "Satoshi Variable", Helvetica;
+        --body-2-regular-font-weight: 400;
+        --body-2-regular-font-size: 16px;
+        --body-2-regular-letter-spacing: -0.32px;
+        --body-2-regular-line-height: 139.9999976158142%;
+        --body-2-regular-font-style: normal;
+        --body-2-thin-font-family: "Satoshi Variable", Helvetica;
+        --body-2-thin-font-weight: 300;
+        --body-2-thin-font-size: 16px;
+        --body-2-thin-letter-spacing: -0.32px;
+        --body-2-thin-line-height: 139.9999976158142%;
+        --body-2-thin-font-style: normal;
+        --caption-1-bold-font-family: "Satoshi Variable", Helvetica;
+        --caption-1-bold-font-weight: 700;
+        --caption-1-bold-font-size: 14px;
+        --caption-1-bold-letter-spacing: -0.28px;
+        --caption-1-bold-line-height: 139.9999976158142%;
+        --caption-1-bold-font-style: normal;
+        --caption-1-semibold-font-family: "Satoshi Variable", Helvetica;
+        --caption-1-semibold-font-weight: 500;
+        --caption-1-semibold-font-size: 14px;
+        --caption-1-semibold-letter-spacing: -0.28px;
+        --caption-1-semibold-line-height: 139.9999976158142%;
+        --caption-1-semibold-font-style: normal;
+        --caption-1-medium-font-family: "Satoshi Variable", Helvetica;
+        --caption-1-medium-font-weight: 500;
+        --caption-1-medium-font-size: 14px;
+        --caption-1-medium-letter-spacing: -0.28px;
+        --caption-1-medium-line-height: 139.9999976158142%;
+        --caption-1-medium-font-style: normal;
+        --caption-1-regular-font-family: "Satoshi Variable", Helvetica;
+        --caption-1-regular-font-weight: 400;
+        --caption-1-regular-font-size: 14px;
+        --caption-1-regular-letter-spacing: -0.28px;
+        --caption-1-regular-line-height: 139.9999976158142%;
+        --caption-1-regular-font-style: normal;
+        --caption-1-thin-font-family: "Satoshi Variable", Helvetica;
+        --caption-1-thin-font-weight: 300;
+        --caption-1-thin-font-size: 14px;
+        --caption-1-thin-letter-spacing: -0.28px;
+        --caption-1-thin-line-height: 139.9999976158142%;
+        --caption-1-thin-font-style: normal;
+        --caption-2-bold-font-family: "Satoshi Variable", Helvetica;
+        --caption-2-bold-font-weight: 700;
+        --caption-2-bold-font-size: 12px;
+        --caption-2-bold-letter-spacing: -0.12px;
+        --caption-2-bold-line-height: normal;
+        --caption-2-bold-font-style: normal;
+        --caption-2-semibold-font-family: "Satoshi Variable", Helvetica;
+        --caption-2-semibold-font-weight: 500;
+        --caption-2-semibold-font-size: 12px;
+        --caption-2-semibold-letter-spacing: -0.12px;
+        --caption-2-semibold-line-height: normal;
+        --caption-2-semibold-font-style: normal;
+        --caption-2-medium-font-family: "Satoshi Variable", Helvetica;
+        --caption-2-medium-font-weight: 500;
+        --caption-2-medium-font-size: 12px;
+        --caption-2-medium-letter-spacing: -0.12px;
+        --caption-2-medium-line-height: normal;
+        --caption-2-medium-font-style: normal;
+        --caption-2-regular-font-family: "Satoshi Variable", Helvetica;
+        --caption-2-regular-font-weight: 400;
+        --caption-2-regular-font-size: 12px;
+        --caption-2-regular-letter-spacing: -0.12px;
+        --caption-2-regular-line-height: normal;
+        --caption-2-regular-font-style: normal;
+        --caption-2-thin-font-family: "Satoshi Variable", Helvetica;
+        --caption-2-thin-font-weight: 300;
+        --caption-2-thin-font-size: 12px;
+        --caption-2-thin-letter-spacing: -0.12px;
+        --caption-2-thin-line-height: normal;
+        --caption-2-thin-font-style: normal;
+        --overline-1-bold-font-family: "Satoshi Variable", Helvetica;
+        --overline-1-bold-font-weight: 700;
+        --overline-1-bold-font-size: 12px;
+        --overline-1-bold-letter-spacing: 1.44px;
+        --overline-1-bold-line-height: normal;
+        --overline-1-bold-font-style: normal;
+        --overline-1-semibold-font-family: "Satoshi Variable", Helvetica;
+        --overline-1-semibold-font-weight: 500;
+        --overline-1-semibold-font-size: 12px;
+        --overline-1-semibold-letter-spacing: 1.44px;
+        --overline-1-semibold-line-height: normal;
+        --overline-1-semibold-font-style: normal;
+        --overline-1-medium-font-family: "Satoshi Variable", Helvetica;
+        --overline-1-medium-font-weight: 500;
+        --overline-1-medium-font-size: 12px;
+        --overline-1-medium-letter-spacing: 1.44px;
+        --overline-1-medium-line-height: normal;
+        --overline-1-medium-font-style: normal;
+        --overline-1-regular-font-family: "Satoshi Variable", Helvetica;
+        --overline-1-regular-font-weight: 400;
+        --overline-1-regular-font-size: 12px;
+        --overline-1-regular-letter-spacing: 1.44px;
+        --overline-1-regular-line-height: normal;
+        --overline-1-regular-font-style: normal;
+        --overline-1-thin-font-family: "Satoshi Variable", Helvetica;
+        --overline-1-thin-font-weight: 300;
+        --overline-1-thin-font-size: 12px;
+        --overline-1-thin-letter-spacing: 1.44px;
+        --overline-1-thin-line-height: normal;
+        --overline-1-thin-font-style: normal;
+        --overline-2-bold-font-family: "Satoshi Variable", Helvetica;
+        --overline-2-bold-font-weight: 700;
+        --overline-2-bold-font-size: 10px;
+        --overline-2-bold-letter-spacing: 1.2px;
+        --overline-2-bold-line-height: normal;
+        --overline-2-bold-font-style: normal;
+        --overline-2-semibold-font-family: "Satoshi Variable", Helvetica;
+        --overline-2-semibold-font-weight: 500;
+        --overline-2-semibold-font-size: 10px;
+        --overline-2-semibold-letter-spacing: 1.2px;
+        --overline-2-semibold-line-height: normal;
+        --overline-2-semibold-font-style: normal;
+        --overline-2-medium-font-family: "Satoshi Variable", Helvetica;
+        --overline-2-medium-font-weight: 500;
+        --overline-2-medium-font-size: 10px;
+        --overline-2-medium-letter-spacing: 1.2px;
+        --overline-2-medium-line-height: normal;
+        --overline-2-medium-font-style: normal;
+        --overline-2-regular-font-family: "Satoshi Variable", Helvetica;
+        --overline-2-regular-font-weight: 400;
+        --overline-2-regular-font-size: 10px;
+        --overline-2-regular-letter-spacing: 1.2px;
+        --overline-2-regular-line-height: normal;
+        --overline-2-regular-font-style: normal;
+        --overline-2-thin-font-family: "Satoshi Variable", Helvetica;
+        --overline-2-thin-font-weight: 300;
+        --overline-2-thin-font-size: 10px;
+        --overline-2-thin-letter-spacing: 1.2px;
+        --overline-2-thin-line-height: normal;
+        --overline-2-thin-font-style: normal;
+        --text-md-normal-font-family: "Inter", Helvetica;
+        --text-md-normal-font-weight: 400;
+        --text-md-normal-font-size: 16px;
+        --text-md-normal-letter-spacing: 0px;
+        --text-md-normal-line-height: 24px;
+        --text-md-normal-font-style: normal;
+        --text-xs-regular-font-family: "Plus Jakarta Sans", Helvetica;
+        --text-xs-regular-font-weight: 400;
+        --text-xs-regular-font-size: 12px;
+        --text-xs-regular-letter-spacing: 0.12px;
+        --text-xs-regular-line-height: 150%;
+        --text-xs-regular-font-style: normal;
+        --xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+        --sm: 0px 1px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
+        --md: 0px 2px 4px -2px rgba(16, 24, 40, 0.06), 0px 4px 8px -2px rgba(16, 24, 40, 0.1);
+        --lg: 0px 4px 6px -2px rgba(16, 24, 40, 0.03), 0px 12px 16px -4px rgba(16, 24, 40, 0.08);
+        --xl: 0px 8px 8px -4px rgba(16, 24, 40, 0.03), 0px 20px 24px -4px rgba(16, 24, 40, 0.08);
+        --2xl: 0px 24px 48px -12px rgba(16, 24, 40, 0.18);
+        --3xl: 0px 32px 64px -12px rgba(16, 24, 40, 0.14);
+        .home {
+          background-color: #09142f;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          width: 100%;
+        }
+        
+        .home .div {
+          background-color: #09142f;
+          overflow: hidden;
+          width: 1440px;
+          height: 4284px;
+          position: relative;
+        }
+        
+        .home .overlap {
+          position: absolute;
+          width: 2798px;
+          height: 3835px;
+          top: 0;
+          left: -679px;
+        }
+        
+        .home .ellipse {
+          position: absolute;
+          width: 1280px;
+          height: 400px;
+          top: 1552px;
+          left: 759px;
+          background-color: #663485;
+          border-radius: 640px/200px;
+          filter: blur(350px);
+          opacity: 0.55;
+        }
+        
+        .home .frame {
+          position: absolute;
+          width: 730px;
+          height: 1207px;
+          top: 2587px;
+          left: 679px;
+        }
+        
+        .home .img {
+          position: absolute;
+          width: 721px;
+          height: 1728px;
+          top: 1355px;
+          left: 1398px;
+        }
+        
+        .home .frame-2 {
+          position: absolute;
+          width: 513px;
+          height: 1661px;
+          top: 0;
+          left: 679px;
+        }
+        
+        .home .frame-3 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 24px;
+          position: absolute;
+          top: 969px;
+          left: 0;
+        }
+        
+        .home .frame-4 {
+          display: inline-flex;
+          align-items: center;
+          gap: 64px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .rectangle {
+          position: relative;
+          width: 103px;
+          height: 282px;
+        }
+        
+        .home .rectangle-2 {
+          position: relative;
+          width: 1106px;
+          height: 320px;
+        }
+        
+        .home .frame-5 {
+          display: inline-flex;
+          align-items: flex-start;
+          gap: 5px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .rectangle-3 {
+          position: relative;
+          width: 18.51px;
+          height: 3px;
+          background-color: var(--basewhite);
+        }
+        
+        .home .rectangle-4 {
+          position: relative;
+          width: 18.51px;
+          height: 3px;
+          background-color: #cdd4de;
+          opacity: 0.15;
+        }
+        
+        .home .frame-6 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 48px;
+          position: absolute;
+          top: 1466px;
+          left: 757px;
+        }
+        
+        .home .categories-FOR-YOU {
+          position: relative;
+          width: 609px;
+          margin-top: -1px;
+          font-family: "Satoshi Variable-Bold", Helvetica;
+          font-weight: 700;
+          color: #ffffff;
+          font-size: 38px;
+          text-align: center;
+          letter-spacing: -0.76px;
+          line-height: 45.6px;
+        }
+        
+        .home .frame-7 {
+          display: flex;
+          width: 1282px;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .supervised {
+          position: relative;
+          width: 380px;
+          height: 450px;
+          border-radius: 10px;
+          overflow: hidden;
+          background-image: url(./../supervised.svg);
+          background-size: cover;
+          background-position: 50% 50%;
+        }
+        
+        .home .overlap-group {
+          position: absolute;
+          width: 329px;
+          height: 92px;
+          top: 165px;
+          left: 29px;
+        }
+        
+        .home .group {
+          position: absolute;
+          width: 130px;
+          height: 27px;
+          top: 14px;
+          left: 197px;
+          transform: rotate(-13.01deg);
+        }
+        
+        .home .overlap-group-2 {
+          position: relative;
+          width: 138px;
+          height: 77px;
+          top: -20px;
+          left: -7px;
+        }
+        
+        .home .ellipse-2 {
+          position: absolute;
+          width: 26px;
+          height: 23px;
+          top: 20px;
+          left: 112px;
+          background-color: #ffffff;
+          border-radius: 12.79px/11.57px;
+          transform: rotate(1.33deg);
+          filter: blur(40px);
+        }
+        
+        .home .ellipse-3 {
+          position: absolute;
+          width: 10px;
+          height: 9px;
+          top: 27px;
+          left: 120px;
+          background-color: #ffffff;
+          border-radius: 5px/4.53px;
+          transform: rotate(1.33deg);
+          filter: blur(3px);
+        }
+        
+        .home .vector {
+          position: absolute;
+          width: 122px;
+          height: 51px;
+          top: 13px;
+          left: 4px;
+          transform: rotate(13.01deg);
+        }
+        
+        .home .text-wrapper {
+          position: absolute;
+          height: 65px;
+          top: 27px;
+          left: 0;
+          font-family: "Poppins", Helvetica;
+          font-weight: 900;
+          color: #ffffff;
+          font-size: 54px;
+          letter-spacing: -1.62px;
+          line-height: 64.8px;
+          white-space: nowrap;
+        }
+        
+        .home .overlap-wrapper {
+          position: absolute;
+          width: 131px;
+          height: 27px;
+          top: 422px;
+          left: 21px;
+          transform: rotate(-7.73deg);
+        }
+        
+        .home .overlap-2 {
+          position: relative;
+          width: 136px;
+          height: 45px;
+          top: -10px;
+          left: -5px;
+        }
+        
+        .home .ellipse-4 {
+          top: 10px;
+          left: 110px;
+          position: absolute;
+          width: 26px;
+          height: 23px;
+          background-color: #ffffff;
+          border-radius: 12.83px/11.53px;
+          transform: rotate(0.81deg);
+          filter: blur(40px);
+        }
+        
+        .home .ellipse-5 {
+          top: 17px;
+          left: 118px;
+          position: absolute;
+          width: 10px;
+          height: 9px;
+          background-color: #ffffff;
+          border-radius: 5.02px/4.51px;
+          transform: rotate(0.81deg);
+          filter: blur(3px);
+        }
+        
+        .home .vector-2 {
+          width: 126px;
+          height: 28px;
+          top: 8px;
+          left: 1px;
+          position: absolute;
+          transform: rotate(7.73deg);
+        }
+        
+        .home .overlap-group-wrapper {
+          position: absolute;
+          width: 131px;
+          height: 27px;
+          top: 25px;
+          left: -49px;
+          transform: rotate(-7.73deg);
+        }
+        
+        .home .overlap-3 {
+          position: relative;
+          width: 86px;
+          height: 51px;
+          top: -3px;
+          left: 45px;
+        }
+        
+        .home .ellipse-6 {
+          top: 3px;
+          left: 60px;
+          position: absolute;
+          width: 26px;
+          height: 23px;
+          background-color: #ffffff;
+          border-radius: 12.83px/11.53px;
+          transform: rotate(0.81deg);
+          filter: blur(40px);
+        }
+        
+        .home .ellipse-7 {
+          top: 10px;
+          left: 68px;
+          position: absolute;
+          width: 10px;
+          height: 9px;
+          background-color: #ffffff;
+          border-radius: 5.02px/4.51px;
+          transform: rotate(0.81deg);
+          filter: blur(3px);
+        }
+        
+        .home .vector-3 {
+          width: 73px;
+          height: 42px;
+          top: 5px;
+          left: 2px;
+          position: absolute;
+          transform: rotate(7.73deg);
+        }
+        
+        .home .unsupervised {
+          position: relative;
+          width: 380px;
+          height: 450px;
+          border-radius: 10px;
+          overflow: hidden;
+          background: linear-gradient(180deg, rgb(56, 83, 68) 49.96%, rgb(6.18, 21.34, 12.92) 100%);
+        }
+        
+        .home .overlap-4 {
+          position: relative;
+          width: 558px;
+          height: 647px;
+          top: -124px;
+          left: -135px;
+        }
+        
+        .home .rectangle-5 {
+          position: absolute;
+          width: 120px;
+          height: 676px;
+          top: -33px;
+          left: 245px;
+          transform: rotate(37.45deg);
+          background: linear-gradient(180deg, rgb(97.27, 126.53, 110.27) 20.36%, rgba(255, 255, 255, 0) 100%);
+        }
+        
+        .home .ellipse-8 {
+          position: absolute;
+          width: 213px;
+          height: 213px;
+          top: 242px;
+          left: 235px;
+          background-color: #0f9249;
+          border-radius: 106.5px;
+          filter: blur(150px);
+          opacity: 0.57;
+        }
+        
+        .home .ellipse-9 {
+          position: absolute;
+          width: 311px;
+          height: 311px;
+          top: 336px;
+          left: 0;
+          background-color: #0216c6;
+          border-radius: 155.5px;
+          filter: blur(150px);
+          opacity: 0.2;
+        }
+        
+        .home .rectangle-6 {
+          position: absolute;
+          width: 120px;
+          height: 471px;
+          top: 22px;
+          left: 131px;
+          border-right-width: 0.5px;
+          border-right-style: solid;
+          border-color: #ffffff80;
+          transform: rotate(37.45deg);
+          box-shadow: 0px 13px 50px #00000080;
+          background: linear-gradient(180deg, rgb(84.15, 113.78, 97.32) 0%, rgba(153.98, 180.72, 165.87, 0) 48.63%);
+        }
+        
+        .home .div-wrapper {
+          position: absolute;
+          width: 356px;
+          height: 103px;
+          top: 298px;
+          left: 149px;
+        }
+        
+        .home .overlap-group-3 {
+          position: relative;
+          width: 352px;
+          height: 103px;
+        }
+        
+        .home .text-wrapper-2 {
+          position: absolute;
+          height: 65px;
+          top: 0;
+          left: 0;
+          font-family: "Poppins", Helvetica;
+          font-weight: 900;
+          color: #ffffff;
+          font-size: 54px;
+          letter-spacing: -1.62px;
+          line-height: 64.8px;
+          white-space: nowrap;
+        }
+        
+        .home .text-wrapper-3 {
+          position: absolute;
+          height: 65px;
+          top: 38px;
+          left: 30px;
+          font-family: "Poppins", Helvetica;
+          font-weight: 900;
+          color: #ffffff;
+          font-size: 54px;
+          letter-spacing: -1.62px;
+          line-height: 64.8px;
+          white-space: nowrap;
+        }
+        
+        .home .reinforcement {
+          position: relative;
+          width: 380px;
+          height: 450px;
+          background-color: #c7cbd4;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        
+        .home .overlap-5 {
+          position: relative;
+          width: 529px;
+          height: 755px;
+          top: -84px;
+          left: -68px;
+        }
+        
+        .home .vector-4 {
+          position: absolute;
+          width: 82px;
+          height: 87px;
+          top: 127px;
+          left: 110px;
+        }
+        
+        .home .ellipse-10 {
+          position: absolute;
+          width: 387px;
+          height: 387px;
+          top: 368px;
+          left: 0;
+          background-color: #0216c6b2;
+          border-radius: 193.5px;
+          filter: blur(250px);
+        }
+        
+        .home .ellipse-11 {
+          position: absolute;
+          width: 309px;
+          height: 309px;
+          top: 0;
+          left: 220px;
+          background-color: #700098b2;
+          border-radius: 154.5px;
+          filter: blur(250px);
+        }
+        
+        .home .group-2 {
+          position: absolute;
+          width: 190px;
+          height: 160px;
+          top: 84px;
+          left: 258px;
+        }
+        
+        .home .group-3 {
+          position: absolute;
+          width: 147px;
+          height: 107px;
+          top: 427px;
+          left: 121px;
+        }
+        
+        .home .vector-5 {
+          position: absolute;
+          width: 2px;
+          height: 167px;
+          top: 215px;
+          left: 206px;
+        }
+        
+        .home .vector-6 {
+          position: absolute;
+          width: 162px;
+          height: 40px;
+          top: 176px;
+          left: 152px;
+        }
+        
+        .home .vector-7 {
+          position: absolute;
+          width: 36px;
+          height: 158px;
+          top: 184px;
+          left: 397px;
+        }
+        
+        .home .vector-8 {
+          position: absolute;
+          width: 93px;
+          height: 134px;
+          top: 367px;
+          left: 268px;
+        }
+        
+        .home .vector-9 {
+          position: absolute;
+          width: 88px;
+          height: 54px;
+          top: 433px;
+          left: 360px;
+        }
+        
+        .home .group-4 {
+          position: absolute;
+          width: 61px;
+          height: 61px;
+          top: 116px;
+          left: 103px;
+        }
+        
+        .home .group-5 {
+          position: absolute;
+          width: 337px;
+          height: 142px;
+          top: 230px;
+          left: 93px;
+        }
+        
+        .home .overlap-group-4 {
+          position: relative;
+          width: 331px;
+          height: 142px;
+        }
+        
+        .home .text-wrapper-4 {
+          position: absolute;
+          height: 50px;
+          top: 0;
+          left: 0;
+          font-family: "Poppins", Helvetica;
+          font-weight: 400;
+          color: #111111;
+          font-size: 42px;
+          letter-spacing: 0;
+          line-height: 50.4px;
+          white-space: nowrap;
+        }
+        
+        .home .text-wrapper-5 {
+          position: absolute;
+          height: 50px;
+          top: 46px;
+          left: 0;
+          font-family: "Poppins", Helvetica;
+          font-weight: 400;
+          color: #111111;
+          font-size: 42px;
+          letter-spacing: 0;
+          line-height: 50.4px;
+          white-space: nowrap;
+        }
+        
+        .home .text-wrapper-6 {
+          position: absolute;
+          height: 50px;
+          top: 92px;
+          left: 0;
+          font-family: "Poppins", Helvetica;
+          font-weight: 400;
+          color: #111111;
+          font-size: 42px;
+          letter-spacing: 0;
+          line-height: 50.4px;
+          white-space: nowrap;
+        }
+        
+        .home .header {
+          position: absolute;
+          width: 1440px;
+          height: 86px;
+          top: 0;
+          left: 679px;
+          background-color: #ffffff;
+          border-top-style: none;
+          border-right-style: none;
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+          border-left-style: none;
+          border-color: #cdd4de;
+        }
+        
+        .home .group-6 {
+          position: absolute;
+          width: 52px;
+          height: 50px;
+          top: 18px;
+          left: 100px;
+        }
+        
+        .home .overlap-group-5 {
+          position: relative;
+          width: 50px;
+          height: 50px;
+          background-color: #0a1530;
+          border-radius: 25px;
+        }
+        
+        .home .text-wrapper-7 {
+          position: absolute;
+          top: 8px;
+          left: 17px;
+          font-family: "Poppins", Helvetica;
+          font-weight: 400;
+          color: #ffffff;
+          font-size: 22px;
+          letter-spacing: -0.22px;
+          line-height: 32.9px;
+          white-space: nowrap;
+        }
+        
+        .home .frame-8 {
+          display: inline-flex;
+          align-items: flex-start;
+          position: absolute;
+          top: 20px;
+          left: 206px;
+        }
+        
+        .home .div-2 {
+          display: flex;
+          flex-direction: column;
+          width: 130px;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 8px;
+          position: relative;
+        }
+        
+        .home .text-wrapper-8 {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--price-list-font-family);
+          font-weight: var(--price-list-font-weight);
+          color: var(--primarymain-600);
+          font-size: var(--price-list-font-size);
+          letter-spacing: var(--price-list-letter-spacing);
+          line-height: var(--price-list-line-height);
+          white-space: nowrap;
+          font-style: var(--price-list-font-style);
+        }
+        
+        .home .ellipse-12 {
+          position: relative;
+          width: 4px;
+          height: 4px;
+          background-color: var(--primarymain-600);
+          border-radius: 2px;
+        }
+        
+        .home .our-service {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--price-list-font-family);
+          font-weight: var(--price-list-font-weight);
+          color: var(--texttext-black-third);
+          font-size: var(--price-list-font-size);
+          letter-spacing: var(--price-list-letter-spacing);
+          line-height: var(--price-list-line-height);
+          white-space: nowrap;
+          font-style: var(--price-list-font-style);
+        }
+        
+        .home .ellipse-13 {
+          position: relative;
+          width: 4px;
+          height: 4px;
+          border-radius: 2px;
+        }
+        
+        .home .frame-9 {
+          display: inline-flex;
+          align-items: center;
+          gap: 16px;
+          position: absolute;
+          top: 24px;
+          left: 914px;
+        }
+        
+        .home .frame-10 {
+          display: inline-flex;
+          align-items: flex-start;
+          gap: 16px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .div-3 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 7px 8px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .img-2 {
+          position: relative;
+          width: 24px;
+          height: 24px;
+        }
+        
+        .home .img-3 {
+          position: relative;
+          width: 20px;
+          height: 20px;
+        }
+        
+        .home .line {
+          position: relative;
+          width: 1px;
+          height: 20px;
+          object-fit: cover;
+        }
+        
+        .home .frame-11 {
+          display: inline-flex;
+          align-items: center;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .frame-12 {
+          display: flex;
+          flex-direction: column;
+          width: 80px;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+          padding: 8px;
+          position: relative;
+        }
+        
+        .home .text-wrapper-9 {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--price-list-font-family);
+          font-weight: var(--price-list-font-weight);
+          color: var(--secondarymain-500);
+          font-size: var(--price-list-font-size);
+          letter-spacing: var(--price-list-letter-spacing);
+          line-height: var(--price-list-line-height);
+          white-space: nowrap;
+          font-style: var(--price-list-font-style);
+        }
+        
+        .home .button {
+          all: unset;
+          box-sizing: border-box;
+          display: flex;
+          width: 130px;
+          padding: 9px 16px;
+          position: relative;
+          background-color: var(--infomain-500);
+          border-radius: 3px;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .input-text {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--caption-1-medium-font-family);
+          font-weight: var(--caption-1-medium-font-weight);
+          color: #ffffff;
+          font-size: var(--caption-1-medium-font-size);
+          letter-spacing: var(--caption-1-medium-letter-spacing);
+          line-height: var(--caption-1-medium-line-height);
+          white-space: nowrap;
+          font-style: var(--caption-1-medium-font-style);
+        }
+        
+        .home .frame-13 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 48px;
+          position: absolute;
+          top: 2160px;
+          left: 759px;
+        }
+        
+        .home .p {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--heading-2-bold-font-family);
+          font-weight: var(--heading-2-bold-font-weight);
+          color: #ffffff;
+          font-size: var(--heading-2-bold-font-size);
+          letter-spacing: var(--heading-2-bold-letter-spacing);
+          line-height: var(--heading-2-bold-line-height);
+          white-space: nowrap;
+          font-style: var(--heading-2-bold-font-style);
+        }
+        
+        .home .frame-14 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 24px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .frame-15 {
+          display: flex;
+          width: 1280px;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 12px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .button-2 {
+          all: unset;
+          box-sizing: border-box;
+          display: flex;
+          width: 250px;
+          padding: 12px 16px;
+          position: relative;
+          background-color: var(--infomain-500);
+          border-radius: 3px;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .button-3 {
+          all: unset;
+          box-sizing: border-box;
+          display: flex;
+          width: 250px;
+          padding: 12px 16px;
+          position: relative;
+          border-radius: 3px;
+          border: 1px solid;
+          border-color: #cdd4de;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .input-text-2 {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--caption-1-medium-font-family);
+          font-weight: var(--caption-1-medium-font-weight);
+          color: var(--textmain);
+          font-size: var(--caption-1-medium-font-size);
+          letter-spacing: var(--caption-1-medium-letter-spacing);
+          line-height: var(--caption-1-medium-line-height);
+          white-space: nowrap;
+          font-style: var(--caption-1-medium-font-style);
+        }
+        
+        .home .frame-16 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 56px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .frame-17 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 40px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .frame-18 {
+          display: flex;
+          width: 1280px;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .text-wrapper-10 {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          opacity: 0.3;
+          font-family: var(--heading-4-semibold-font-family);
+          font-weight: var(--heading-4-semibold-font-weight);
+          color: #ffffff;
+          font-size: var(--heading-4-semibold-font-size);
+          letter-spacing: var(--heading-4-semibold-letter-spacing);
+          line-height: var(--heading-4-semibold-line-height);
+          white-space: nowrap;
+          font-style: var(--heading-4-semibold-font-style);
+        }
+        
+        .home .text-wrapper-11 {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--heading-4-semibold-font-family);
+          font-weight: var(--heading-4-semibold-font-weight);
+          color: #ffffff;
+          font-size: var(--heading-4-semibold-font-size);
+          letter-spacing: var(--heading-4-semibold-letter-spacing);
+          line-height: var(--heading-4-semibold-line-height);
+          white-space: nowrap;
+          font-style: var(--heading-4-semibold-font-style);
+        }
+        
+        .home .frame-19 {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .text-wrapper-12 {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: "Satoshi Variable-Regular", Helvetica;
+          font-weight: 400;
+          color: var(--textsecond);
+          font-size: 16px;
+          letter-spacing: -0.32px;
+          line-height: 22.4px;
+          white-space: nowrap;
+        }
+        
+        .home .frame-20 {
+          display: flex;
+          width: 1280px;
+          align-items: flex-start;
+          gap: 40px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .card-service {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          position: relative;
+          flex: 1;
+          flex-grow: 1;
+          border-radius: 3px;
+          overflow: hidden;
+          border: 0.5px solid;
+          border-color: var(--textmain);
+        }
+        
+        .home .rectangle-7 {
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          height: 150px;
+          object-fit: cover;
+        }
+        
+        .home .frame-21 {
+          display: flex;
+          flex-direction: column;
+          height: 218px;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 12px;
+          padding: 12px 16px;
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          background-color: #ffffff59;
+          backdrop-filter: blur(12px) brightness(100%);
+          -webkit-backdrop-filter: blur(12px) brightness(100%);
+        }
+        
+        .home .frame-22 {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+          position: relative;
+          flex: 1;
+          align-self: stretch;
+          width: 100%;
+          flex-grow: 1;
+        }
+        
+        .home .product-wrapper {
+          display: flex;
+          width: 80px;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 4px 8px;
+          position: relative;
+          flex: 0 0 auto;
+          background-color: var(--warningmain-500);
+          border-radius: 20px;
+        }
+        
+        .home .product {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--caption-2-regular-font-family);
+          font-weight: var(--caption-2-regular-font-weight);
+          color: var(--textmain);
+          font-size: var(--caption-2-regular-font-size);
+          letter-spacing: var(--caption-2-regular-letter-spacing);
+          line-height: var(--caption-2-regular-line-height);
+          font-style: var(--caption-2-regular-font-style);
+        }
+        
+        .home .frame-23 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          flex: 0 0 auto;
+        }
+        
+        .home .by-emily-camerson {
+          position: relative;
+          width: 258px;
+          margin-top: -1px;
+          font-family: var(--caption-1-regular-font-family);
+          font-weight: var(--caption-1-regular-font-weight);
+          color: var(--basewhite);
+          font-size: var(--caption-1-regular-font-size);
+          letter-spacing: var(--caption-1-regular-letter-spacing);
+          line-height: var(--caption-1-regular-line-height);
+          font-style: var(--caption-1-regular-font-style);
+        }
+        
+        .home .frame-24 {
+          display: inline-flex;
+          align-items: flex-start;
+          gap: 2px;
+          position: relative;
+          flex: 0 0 auto;
+          margin-left: -83px;
+        }
+        
+        .home .star {
+          position: relative;
+          width: 14.27px;
+          height: 13.57px;
+        }
+        
+        .home .amazon-linux-AMI {
+          position: relative;
+          align-self: stretch;
+          font-family: var(--body-2-semibold-font-family);
+          font-weight: var(--body-2-semibold-font-weight);
+          color: var(--textmain);
+          font-size: var(--body-2-semibold-font-size);
+          letter-spacing: var(--body-2-semibold-letter-spacing);
+          line-height: var(--body-2-semibold-line-height);
+          font-style: var(--body-2-semibold-font-style);
+        }
+        
+        .home .amazon-linux-is-a {
+          position: relative;
+          flex: 1;
+          align-self: stretch;
+          font-family: var(--caption-1-regular-font-family);
+          font-weight: var(--caption-1-regular-font-weight);
+          color: var(--texttertiary);
+          font-size: var(--caption-1-regular-font-size);
+          letter-spacing: var(--caption-1-regular-letter-spacing);
+          line-height: var(--caption-1-regular-line-height);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          font-style: var(--caption-1-regular-font-style);
+        }
+        
+        .home .USD {
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--body-1-medium-font-family);
+          font-weight: var(--body-1-medium-font-weight);
+          color: var(--textmain);
+          font-size: var(--body-1-medium-font-size);
+          letter-spacing: var(--body-1-medium-letter-spacing);
+          line-height: var(--body-1-medium-line-height);
+          white-space: nowrap;
+          font-style: var(--body-1-medium-font-style);
+        }
+        
+        .home .frame-25 {
+          display: flex;
+          width: 1280px;
+          height: 32px;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+        }
+        
+        .home .amazon-linux-is-a-2 {
+          position: relative;
+          flex: 1;
+          align-self: stretch;
+          font-family: var(--caption-1-regular-font-family);
+          font-weight: var(--caption-1-regular-font-weight);
+          color: var(--texttertiary);
+          font-size: var(--caption-1-regular-font-size);
+          letter-spacing: var(--caption-1-regular-letter-spacing);
+          line-height: var(--caption-1-regular-line-height);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          font-style: var(--caption-1-regular-font-style);
+        }
+        
+        .home .card-service-2 {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          position: relative;
+          flex: 1;
+          align-self: stretch;
+          flex-grow: 1;
+          border-radius: 3px;
+          overflow: hidden;
+          border: 0.5px solid;
+          border-color: var(--textmain);
+        }
+        
+        .home .button-4 {
+          all: unset;
+          box-sizing: border-box;
+          display: flex;
+          width: 200px;
+          padding: 14px 16px;
+          position: relative;
+          flex: 0 0 auto;
+          background-color: var(--basewhite);
+          border-radius: 3px;
+          border: 1px solid;
+          border-color: #cdd4de;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .input-text-3 {
+          font-size: var(--body-2-semibold-font-size);
+          letter-spacing: var(--body-2-semibold-letter-spacing);
+          line-height: var(--body-2-semibold-line-height);
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--body-2-semibold-font-family);
+          font-weight: var(--body-2-semibold-font-weight);
+          color: var(--texttext-black);
+          white-space: nowrap;
+          font-style: var(--body-2-semibold-font-style);
+        }
+        
+        .home .variant {
+          position: absolute;
+          width: 1440px;
+          height: 803px;
+          top: 86px;
+          left: 679px;
+          background-color: #ffffff;
+        }
+        
+        .home .overlap-6 {
+          position: relative;
+          height: 803px;
+          background-image: url(./../rectangle-145.svg);
+          background-size: 100% 100%;
+        }
+        
+        .home .rectangle-8 {
+          position: absolute;
+          width: 1440px;
+          height: 803px;
+          top: 0;
+          left: 0;
+          background: linear-gradient(180deg, rgba(17, 17, 17, 0.81) 0%, rgba(17, 17, 17, 0) 100%);
+        }
+        
+        .home .frame-26 {
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 80px;
+          position: absolute;
+          top: 137px;
+          left: 167px;
+        }
+        
+        .home .frame-27 {
+          display: flex;
+          flex-direction: column;
+          width: 1043px;
+          align-items: center;
+          gap: 16px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .text-wrapper-13 {
+          position: relative;
+          align-self: stretch;
+          margin-top: -1px;
+          font-family: var(--display-1-bold-font-family);
+          font-weight: var(--display-1-bold-font-weight);
+          color: var(--textmain);
+          font-size: var(--display-1-bold-font-size);
+          text-align: center;
+          letter-spacing: var(--display-1-bold-letter-spacing);
+          line-height: var(--display-1-bold-line-height);
+          font-style: var(--display-1-bold-font-style);
+        }
+        
+        .home .our-cloud-based {
+          position: relative;
+          align-self: stretch;
+          font-family: var(--body-1-regular-font-family);
+          font-weight: var(--body-1-regular-font-weight);
+          color: var(--textmain);
+          font-size: var(--body-1-regular-font-size);
+          text-align: center;
+          letter-spacing: var(--body-1-regular-letter-spacing);
+          line-height: var(--body-1-regular-line-height);
+          font-style: var(--body-1-regular-font-style);
+        }
+        
+        .home .frame-28 {
+          display: flex;
+          width: 1107px;
+          align-items: flex-end;
+          gap: 12px;
+          padding: 32px;
+          position: relative;
+          flex: 0 0 auto;
+          background-color: #ffffff3d;
+          backdrop-filter: blur(25px) brightness(100%);
+          -webkit-backdrop-filter: blur(25px) brightness(100%);
+        }
+        
+        .home .input-field {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+          position: relative;
+          flex: 1;
+          flex-grow: 1;
+        }
+        
+        .home .input-label {
+          position: relative;
+          align-self: stretch;
+          margin-top: -1px;
+          font-family: var(--caption-1-regular-font-family);
+          font-weight: var(--caption-1-regular-font-weight);
+          color: var(--textmain);
+          font-size: var(--caption-1-regular-font-size);
+          letter-spacing: var(--caption-1-regular-letter-spacing);
+          line-height: var(--caption-1-regular-line-height);
+          font-style: var(--caption-1-regular-font-style);
+        }
+        
+        .home .frame-29 {
+          display: flex;
+          height: 44px;
+          align-items: center;
+          gap: 8px;
+          padding: 0px 12px;
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          background-color: #ffffff;
+          border-radius: 3px;
+          border: 1px solid;
+          border-color: var(--neutral-300);
+        }
+        
+        .home .text {
+          flex: 1;
+          color: var(--texttext-black);
+          font-size: var(--caption-1-regular-font-size);
+          letter-spacing: var(--caption-1-regular-letter-spacing);
+          line-height: var(--caption-1-regular-line-height);
+          position: relative;
+          font-family: var(--caption-1-regular-font-family);
+          font-weight: var(--caption-1-regular-font-weight);
+          font-style: var(--caption-1-regular-font-style);
+        }
+        
+        .home .frame-30 {
+          display: inline-flex;
+          align-items: flex-start;
+          gap: 8px;
+          position: relative;
+          flex: 0 0 auto;
+        }
+        
+        .home .button-5 {
+          all: unset;
+          box-sizing: border-box;
+          display: flex;
+          width: 100px;
+          padding: 12px 16px;
+          position: relative;
+          background-color: var(--basewhite);
+          border-radius: 3px;
+          border: 1px solid;
+          border-color: #cdd4de;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .input-text-4 {
+          font-size: var(--caption-1-medium-font-size);
+          letter-spacing: var(--caption-1-medium-letter-spacing);
+          line-height: var(--caption-1-medium-line-height);
+          position: relative;
+          width: fit-content;
+          margin-top: -1px;
+          font-family: var(--caption-1-medium-font-family);
+          font-weight: var(--caption-1-medium-font-weight);
+          color: var(--texttext-black);
+          white-space: nowrap;
+          font-style: var(--caption-1-medium-font-style);
+        }
+        
+        .home .button-6 {
+          all: unset;
+          box-sizing: border-box;
+          display: flex;
+          width: 150px;
+          padding: 12px 16px;
+          position: relative;
+          background-color: var(--infomain-500);
+          border-radius: 3px;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .frame-31 {
+          position: absolute;
+          width: 1097px;
+          height: 617px;
+          top: 6469px;
+          left: 1154px;
+        }
+        
+        .home .button-7 {
+          all: unset;
+          box-sizing: border-box;
+          display: flex;
+          width: 150px;
+          padding: 12px 16px;
+          position: absolute;
+          top: 3850px;
+          left: 1210px;
+          background-color: var(--basewhite);
+          border-radius: 3px;
+          border: 1px solid;
+          border-color: #cdd4de;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .footer {
+          display: flex;
+          flex-direction: column;
+          width: 1440px;
+          align-items: flex-start;
+          position: absolute;
+          top: 3969px;
+          left: 0;
+          background-color: var(--gray-800);
+        }
+        
+        .home .section {
+          padding: 64px 0px 48px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 64px;
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          flex: 0 0 auto;
+        }
+        
+        .home .content {
+          display: flex;
+          align-items: center;
+          gap: 200px;
+          padding: 0px 150px;
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          flex: 0 0 auto;
+        }
+        
+        .home .text-wrapper-14 {
+          position: relative;
+          width: fit-content;
+          font-family: var(--heading-1-semibold-font-family);
+          font-weight: var(--heading-1-semibold-font-weight);
+          color: #ffffff;
+          font-size: var(--heading-1-semibold-font-size);
+          letter-spacing: var(--heading-1-semibold-letter-spacing);
+          line-height: var(--heading-1-semibold-line-height);
+          white-space: nowrap;
+          font-style: var(--heading-1-semibold-font-style);
+        }
+        
+        .home .frame-32 {
+          display: flex;
+          align-items: flex-start;
+          gap: 80px;
+          position: relative;
+          flex: 1;
+          flex-grow: 1;
+        }
+        
+        .home .footer-links-column {
+          display: flex;
+          flex-direction: column;
+          width: 200px;
+          align-items: flex-start;
+          gap: 16px;
+          position: relative;
+        }
+        
+        .home .heading {
+          position: relative;
+          align-self: stretch;
+          margin-top: -1px;
+          font-family: var(--body-1-medium-font-family);
+          font-weight: var(--body-1-medium-font-weight);
+          color: var(--textmain);
+          font-size: var(--body-1-medium-font-size);
+          letter-spacing: var(--body-1-medium-letter-spacing);
+          line-height: var(--body-1-medium-line-height);
+          font-style: var(--body-1-medium-font-style);
+        }
+        
+        .home .footer-links {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          flex: 0 0 auto;
+        }
+        
+        .home .button-base {
+          all: unset;
+          box-sizing: border-box;
+          display: inline-flex;
+          position: relative;
+          flex: 0 0 auto;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .text-2 {
+          width: fit-content;
+          margin-top: -1px;
+          color: var(--texttertiary);
+          font-size: var(--body-2-regular-font-size);
+          letter-spacing: var(--body-2-regular-letter-spacing);
+          line-height: var(--body-2-regular-line-height);
+          white-space: nowrap;
+          position: relative;
+          font-family: var(--body-2-regular-font-family);
+          font-weight: var(--body-2-regular-font-weight);
+          font-style: var(--body-2-regular-font-style);
+        }
+        
+        .home .button-base-2 {
+          display: inline-flex;
+          position: relative;
+          flex: 0 0 auto;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        
+        .home .text-3 {
+          align-self: stretch;
+          color: var(--texttertiary);
+          font-size: var(--body-2-regular-font-size);
+          letter-spacing: var(--body-2-regular-letter-spacing);
+          line-height: var(--body-2-regular-line-height);
+          position: relative;
+          font-family: var(--body-2-regular-font-family);
+          font-weight: var(--body-2-regular-font-weight);
+          font-style: var(--body-2-regular-font-style);
+        }
+        
+        .home .footer-text-wrapper {
+          padding: 24px 150px;
+          background-color: var(--gray-900);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 64px;
+          position: relative;
+          align-self: stretch;
+          width: 100%;
+          flex: 0 0 auto;
+        }
+        
+        .home .footer-text {
+          position: relative;
+          align-self: stretch;
+          height: 24px;
+          margin-top: -1px;
+          font-family: var(--text-md-normal-font-family);
+          font-weight: var(--text-md-normal-font-weight);
+          color: var(--gray-400);
+          font-size: var(--text-md-normal-font-size);
+          letter-spacing: var(--text-md-normal-letter-spacing);
+          line-height: var(--text-md-normal-line-height);
+          white-space: nowrap;
+          font-style: var(--text-md-normal-font-style);
+        }
+      }
+      @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,900|Inter:var(--text-md-normal-font-weight)|Plus+Jakarta+Sans:var(--text-xs-regular-font-weight)");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+@font-face {
+  font-family: "Satoshi Variable-Bold";
+  src: url("https://anima-uploads.s3.amazonaws.com/projects/6256567301999579667e0c25/fonts/satoshi-variable.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Satoshi Variable-Regular";
+  src: url("https://anima-uploads.s3.amazonaws.com/projects/633545afb256316589372687/fonts/satoshi-variable.ttf")
+    format("truetype");
+}
+    </style>
+  </head>
+  <body>
+    
+    <div class="home">
+      <div class="div">
+        <div class="overlap">
+          <div class="ellipse"></div>
+          <img class="frame" src="../frame.svg" />
+          <img class="img" src="../frame-2.svg" />
+          <img class="frame-2" src="../frame-3.svg" />
+          <div class="frame-3">
+            <div class="frame-4">
+              <img class="rectangle" src="../rectangle-141.svg" />
+              <img class="rectangle-2" src="../rectangle-140.svg" />
+              <img class="rectangle" src="../rectangle-142.svg" />
+            </div>
+            <div class="frame-5">
+              <div class="rectangle-3"></div>
+              <div class="rectangle-4"></div>
+              <div class="rectangle-4"></div>
+              <div class="rectangle-4"></div>
+            </div>
+          </div>
+          <div class="frame-6">
+            <div class="categories-FOR-YOU">CATEGORIES FOR YOU</div>
+            <div class="frame-7">
+              <div class="supervised">
+                <div class="overlap-group">
+                  <div class="group">
+                    <div class="overlap-group-2">
+                      <div class="ellipse-2"></div>
+                      <div class="ellipse-3"></div>
+                      <img class="vector" src="../vector-26.svg" />
+                    </div>
+                  </div>
+                  <div class="text-wrapper">SUPERVISED</div>
+                </div>
+                <div class="overlap-wrapper">
+                  <div class="overlap-2">
+                    <div class="ellipse-4"></div>
+                    <div class="ellipse-5"></div>
+                    <img class="vector-2" src="../vector-26-1.svg" />
+                  </div>
+                </div>
+                <div class="overlap-group-wrapper">
+                  <div class="overlap-3">
+                    <div class="ellipse-6"></div>
+                    <div class="ellipse-7"></div>
+                    <img class="vector-3" src="../vector-26-2.svg" />
+                  </div>
+                </div>
+              </div>
+              <div class="unsupervised">
+                <div class="overlap-4">
+                  <div class="rectangle-5"></div>
+                  <div class="ellipse-8"></div>
+                  <div class="ellipse-9"></div>
+                  <div class="rectangle-6"></div>
+                  <div class="div-wrapper">
+                    <div class="overlap-group-3">
+                      <div class="text-wrapper-2">UN</div>
+                      <div class="text-wrapper-3">SUPERVISED</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="reinforcement">
+                <div class="overlap-5">
+                  <img class="vector-4" src="../vector-25.svg" />
+                  <div class="ellipse-10"></div>
+                  <div class="ellipse-11"></div>
+                  <img class="group-2" src="../group.png" />
+                  <img class="group-3" src="../group-1.png" />
+                  <img class="vector-5" src="../vector-21.svg" />
+                  <img class="vector-6" src="../vector-20.svg" />
+                  <img class="vector-7" src="../vector-22.svg" />
+                  <img class="vector-8" src="../vector-23.svg" />
+                  <img class="vector-9" src="../vector-24.svg" />
+                  <img class="group-4" src="../group-2.png" />
+                  <div class="group-5">
+                    <div class="overlap-group-4">
+                      <div class="text-wrapper-4">REINFORCEMENT</div>
+                      <div class="text-wrapper-5">LEARNING</div>
+                      <div class="text-wrapper-6">ALGORITHMS</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <header class="header">
+            <div class="group-6">
+              <div class="overlap-group-5"><div class="text-wrapper-7">A</div></div>
+            </div>
+            <div class="frame-8">
+              <div class="div-2">
+                <div class="text-wrapper-8">Home</div>
+                <div class="ellipse-12"></div>
+              </div>
+              <div class="div-2">
+                <div class="our-service">Models</div>
+                <div class="ellipse-13"></div>
+              </div>
+              <div class="div-2">
+                <div class="our-service">Report Selling</div>
+                <div class="ellipse-13"></div>
+              </div>
+            </div>
+            <div class="frame-9">
+              <div class="frame-10">
+                <div class="div-3">
+                  <img class="img-2" src="../search-7.svg" />
+                  <div class="ellipse-13"></div>
+                </div>
+                <div class="div-3">
+                  <img class="img-2" src="../shopping-cart-9.svg" />
+                  <div class="ellipse-13"></div>
+                </div>
+                <div class="div-3">
+                  <img class="img-2" src="../heart-2.svg" />
+                  <div class="ellipse-13"></div>
+                </div>
+                <div class="div-3">
+                  <img class="img-3" src="../mail-11.svg" />
+                  <div class="ellipse-13"></div>
+                </div>
+              </div>
+              <img class="line" src="../line-1-9.svg" />
+              <div class="frame-11">
+                <div class="frame-12"><div class="text-wrapper-9">Login</div></div>
+                <button class="button"><div class="input-text">Sign Up Now</div></button>
+              </div>
+            </div>
+          </header>
+          <div class="frame-13">
+            <p class="p">OUR BEST MODELS FOR YOU</p>
+            <div class="frame-14">
+              <div class="frame-15">
+                <button class="button-2"><div class="input-text">Models</div></button>
+                <button class="button-3"><div class="input-text-2">Report</div></button>
+              </div>
+              <div class="frame-16">
+                <div class="frame-17">
+                  <div class="frame-18">
+                    <div class="frame-10">
+                      <div class="text-wrapper-10">01</div>
+                      <div class="text-wrapper-11">Supervised</div>
+                    </div>
+                    <div class="frame-19">
+                      <div class="text-wrapper-12">View more</div>
+                      <img class="img-3" src="../arrow-right-1.svg" />
+                    </div>
+                  </div>
+                  <div class="frame-20">
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by MWAM</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">Generalized Neural Network (GRNN)</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: A new neural network approach proposed for Modelling time series
+                            associated with energy commodity prices.
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 15,000</div>
+                          <img class="img-2" src="../heart-21.svg" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by Unilever</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">Support Vector Regression (SVR)</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: SVR analysis applied to commodity datasets to predict each commodity’s
+                            price imported and exported for limited countries.
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 15,000</div>
+                          <img class="img-2" src="../heart.svg" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by Procter Singapore</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">Random Forest (RF)</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: A Random Forests Approach to Predicting Energy &amp; weather forward
+                            prices.
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 10,000</div>
+                          <img class="img-2" src="../heart.svg" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by GAR Singapore</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">Gradient Boosting Machine (GBM)</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: Forecasting gold price with the XGBoost algorithm and SHAP interaction
+                            values.
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 10,000</div>
+                          <img class="img-2" src="../heart.svg" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="frame-17">
+                  <div class="frame-25">
+                    <div class="frame-10">
+                      <div class="text-wrapper-10">02</div>
+                      <div class="text-wrapper-11">Unsupervised</div>
+                    </div>
+                    <div class="frame-19">
+                      <div class="text-wrapper-12">View more</div>
+                      <img class="img-3" src="../arrow-right-3.svg" />
+                    </div>
+                  </div>
+                  <div class="frame-20">
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by Goldman Sachs HK</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">K-means Clustering</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: Early-Warning Models of Financial Risk Based On K-Means Clustering
+                            Algorithm.
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 15,000</div>
+                          <img class="img-2" src="../heart-21.svg" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by Morgan Stanley</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">Anomaly Detection</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: Price forecasting &amp; anomaly detection for agricultural commodities in
+                            India.
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 25,000</div>
+                          <img class="img-2" src="../heart.svg" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by Unicredit</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">Principal Component Analysis</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: Pricing Commodity Derivatives Using Principal Component Analysis (PCA).
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 25,000</div>
+                          <img class="img-2" src="../heart.svg" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-service">
+                      <img class="rectangle-7" src="../rectangle-149.png" />
+                      <div class="frame-21">
+                        <div class="frame-22">
+                          <div class="product-wrapper"><div class="product">Models</div></div>
+                          <div class="frame-23">
+                            <div class="by-emily-camerson">by HYPO Munich</div>
+                            <div class="frame-24">
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-4.svg" />
+                              <img class="star" src="../star-5.svg" />
+                            </div>
+                          </div>
+                          <div class="amazon-linux-AMI">Apriori Algorithm</div>
+                          <p class="amazon-linux-is-a">
+                            Model Description: Improved Apriori Algorithm to generate association Rules for Future
+                            Contracts CBOT.
+                          </p>
+                        </div>
+                        <div class="frame-23">
+                          <div class="USD">USD$ 30,000</div>
+                          <img class="img-2" src="../heart.svg" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="frame-17">
+                    <div class="frame-25">
+                      <div class="frame-10">
+                        <div class="text-wrapper-10">03</div>
+                        <div class="text-wrapper-11">Reinforcement Learning Algorithms</div>
+                      </div>
+                      <div class="frame-19">
+                        <div class="text-wrapper-12">View more</div>
+                        <img class="img-3" src="../arrow-right-3.svg" />
+                      </div>
+                    </div>
+                    <div class="frame-20">
+                      <div class="card-service">
+                        <img class="rectangle-7" src="../rectangle-149.png" />
+                        <div class="frame-21">
+                          <div class="frame-22">
+                            <div class="product-wrapper"><div class="product">Models</div></div>
+                            <div class="frame-23">
+                              <div class="by-emily-camerson">by Gundam Singapore</div>
+                              <div class="frame-24">
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-5.svg" />
+                              </div>
+                            </div>
+                            <div class="amazon-linux-AMI">Q-Learning</div>
+                            <p class="amazon-linux-is-a">
+                              Model Description: Dynamics of multiagent Q-Learning applied to Mean Reversion commodities
+                              strategies.
+                            </p>
+                          </div>
+                          <div class="frame-23">
+                            <div class="USD">USD$ 30,000</div>
+                            <img class="img-2" src="../heart-21.svg" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-service">
+                        <img class="rectangle-7" src="../rectangle-149.png" />
+                        <div class="frame-21">
+                          <div class="frame-22">
+                            <div class="product-wrapper"><div class="product">Models</div></div>
+                            <div class="frame-23">
+                              <div class="by-emily-camerson">by RonnieQ Commodities</div>
+                              <div class="frame-24">
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-5.svg" />
+                              </div>
+                            </div>
+                            <div class="amazon-linux-AMI">State-Action-Reward-State-Action (SARSA)</div>
+                            <p class="amazon-linux-is-a-2">
+                              Model Description: Deep Reinforcement Learning applied to commodities futures.
+                            </p>
+                          </div>
+                          <div class="frame-23">
+                            <div class="USD">USD$ 35,000</div>
+                            <img class="img-2" src="../heart.svg" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-service-2">
+                        <img class="rectangle-7" src="../rectangle-149.png" />
+                        <div class="frame-21">
+                          <div class="frame-22">
+                            <div class="product-wrapper"><div class="product">Models</div></div>
+                            <div class="frame-23">
+                              <div class="by-emily-camerson">by Neste Research</div>
+                              <div class="frame-24">
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-5.svg" />
+                              </div>
+                            </div>
+                            <p class="amazon-linux-AMI">Deep Q Network (DQN) applied to commodities</p>
+                            <p class="amazon-linux-is-a-2">
+                              Model Description: DQN applied to commodities futures &amp; fixed income,
+                            </p>
+                          </div>
+                          <div class="frame-23">
+                            <div class="USD">USD$ 35,000</div>
+                            <img class="img-2" src="../heart.svg" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-service-2">
+                        <img class="rectangle-7" src="../rectangle-149.png" />
+                        <div class="frame-21">
+                          <div class="frame-22">
+                            <div class="product-wrapper"><div class="product">Models</div></div>
+                            <div class="frame-23">
+                              <div class="by-emily-camerson">by MCAM Research</div>
+                              <div class="frame-24">
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-4.svg" />
+                                <img class="star" src="../star-5.svg" />
+                              </div>
+                            </div>
+                            <div class="amazon-linux-AMI">Deep Deterministic Policy Gradient</div>
+                            <p class="amazon-linux-is-a">
+                              Model Description: LSTM-DDPG Models for Trading with variable Positions &amp; Risk
+                              Management,
+                            </p>
+                          </div>
+                          <div class="frame-23">
+                            <div class="USD">USD$ 50,000</div>
+                            <img class="img-2" src="../heart.svg" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="button-4"><div class="input-text-3">View More</div></button>
+          </div>
+          <div class="variant">
+            <div class="overlap-6">
+              <div class="rectangle-8"></div>
+              <div class="frame-26">
+                <div class="frame-27">
+                  <p class="text-wrapper-13">Discover the Perfect Models for Your Needs</p>
+                  <p class="our-cloud-based">
+                    our cloud based platform offers the widest set of artificial intelligence and machine learning
+                    functionalities towards the implementation of efficient and insightful models &amp; reports - to a
+                    MarketPlace
+                  </p>
+                </div>
+                <div class="frame-28">
+                  <div class="input-field">
+                    <div class="input-label">Categories</div>
+                    <div class="frame-29">
+                      <div class="text">All categories</div>
+                      <img class="img-3" src="../chevron-down-114.svg" />
+                    </div>
+                  </div>
+                  <div class="input-field">
+                    <div class="input-label">Vendors</div>
+                    <div class="frame-29">
+                      <div class="text">All Vendors</div>
+                      <img class="img-3" src="../chevron-down-115.svg" />
+                    </div>
+                  </div>
+                  <div class="input-field">
+                    <div class="input-label">Pricing Plans</div>
+                    <div class="frame-29">
+                      <div class="text">All Plans</div>
+                      <img class="img-3" src="../chevron-down-116.svg" />
+                    </div>
+                  </div>
+                  <div class="frame-30">
+                    <button class="button-5"><div class="input-text-4">Reset Filter</div></button>
+                    <button class="button-6"><div class="input-text">Find Models</div></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img class="frame-31" src="../frame-1.png" />
+        <button class="button-7">
+          <div class="input-text-4">Back to Top</div>
+          <img class="img-3" src="../arrow-up-1.svg" />
+        </button>
+        <footer class="footer">
+          <div class="section">
+            <div class="content">
+              <div class="text-wrapper-14">Apricus8</div>
+              <div class="frame-32">
+                <div class="footer-links-column">
+                  <div class="heading">Link</div>
+                  <div class="footer-links">
+                    <button class="button-base"><div class="text-2">Home</div></button>
+                    <div class="button-base-2"><div class="text-2">Models</div></div>
+                    <div class="button-base-2"><div class="text-2">Report Selling</div></div>
+                  </div>
+                </div>
+                <div class="footer-links-column">
+                  <div class="heading">Singapore Office</div>
+                  <p class="text-3">2 PEREIRA ROAD #07-01, 2CONNECTT@TS, Singapore (368024)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-text-wrapper"><p class="footer-text">© 2023 Apricus8. All rights reserved.</p></div>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>
